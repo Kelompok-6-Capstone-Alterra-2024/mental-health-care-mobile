@@ -37,4 +37,5 @@ class Neutral {
   static const Color light2 = Color(0xFFDDE5E9);
   static const Color light3 = Color(0xFFFAFAFC);
   static const Color light4 = Color(0xFFFDFDFF);
+  static const Color transparent = Colors.transparent;
 }
