@@ -8,6 +8,7 @@ import 'constant/theme.dart';
 void main() async {
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "MindEase",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
