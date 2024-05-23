@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:mindease/constant/constant.dart';
+
+import '../../../../constant/constant.dart';
 import '../../../../utils/global_components/main_button.dart';
 import '../controllers/home_controller.dart';
-import 'package:gap/gap.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -21,9 +22,7 @@ class HomeView extends GetView<HomeController> {
             Text('Home View'),
             MainButton(
               label: 'Go to Detail',
-              onTap: () {
-                
-              },
+              onTap: () {},
             ),
             Gap(16),
             TextFormField(
