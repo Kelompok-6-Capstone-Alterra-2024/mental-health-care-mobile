@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mindease/app/modules/onboarding/views/welcome_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/login_view.dart';
@@ -41,6 +42,11 @@ class AppPages {
     GetPage(
       name: _Paths.ONBOARDING,
       page: () => OnboardingView(),
+      binding: OnboardingBinding(),
+    ),
+    GetPage(
+      name: _Paths.WELCOME,
+      page: () => const WelcomeView(),
       binding: OnboardingBinding(),
     ),
   ];
