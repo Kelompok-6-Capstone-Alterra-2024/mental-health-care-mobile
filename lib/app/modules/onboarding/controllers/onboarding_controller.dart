@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../model/onboarding_info.dart';
 
 class OnboardingController extends GetxController {
@@ -10,7 +11,7 @@ class OnboardingController extends GetxController {
 
   forwardAction() {
     if (isLastPage) {
-      //go to home page
+      Get.offNamed(Routes.WELCOME);
     } else {
       pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
     }
