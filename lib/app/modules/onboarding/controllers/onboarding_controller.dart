@@ -1,23 +1,41 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../model/onboarding_info.dart';
+
 class OnboardingController extends GetxController {
-  //TODO: Implement OnboardingController
+  var selectedPageIndex = 0.obs;
+  var pageController = PageController();
+  bool get isLastPage => selectedPageIndex.value == items.length - 1;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  forwardAction() {
+    if (isLastPage) {
+      //go to home page
+    } else {
+      pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
+    }
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  List<OnboardingInfo> items = [
+    OnboardingInfo(
+        title: "Bicara dengan Ahli",
+        descriptions:
+            "Dapatkan Dukungan dan Solusi Profesional untuk Kesehatan Mental Anda, Kapan Saja dan Di Mana Saja",
+        image: "assets/images/onboarding1.png"),
+    OnboardingInfo(
+        title: "Bergabung dengan Komunitas",
+        descriptions:
+            "Berbagi Pengalaman, Temukan Dukungan, dan Belajar Bersama dalam Komunitas yang Peduli",
+        image: "assets/images/onboarding2.png"),
+    OnboardingInfo(
+        title: "Temukan Ketenangan",
+        descriptions:
+            "Raih Kedamaian Batin dan Keseimbangan dengan Sesi Meditasi Terpandu",
+        image: "assets/images/onboarding3.png"),
+    // OnboardingInfo(
+    //     title: "Temukan Ketenangan",
+    //     descriptions:
+    //         "Raih Kedamaian Batin dan Keseimbangan dengan Sesi Meditasi Terpandu",
+    //     image: "assets/images/onboarding4.png"),
+  ];
 }
