@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:mindease/constant/theme.dart';
 
+import 'app/modules/splash/bindings/splash_binding.dart';
 import 'app/routes/app_pages.dart';
+import 'constant/theme.dart';
 
-void main() {
+void main() async {
   runApp(
     GetMaterialApp(
       title: "MindEase",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       theme: AppTheme.themeData,
+      initialBinding: SplashBinding(),
     ),
   );
 }
