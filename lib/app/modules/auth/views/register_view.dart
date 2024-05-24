@@ -4,10 +4,10 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/constant.dart';
+import '../../../../utils/global_components/custom_form.dart';
 import '../../../../utils/global_components/main_button.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/auth_controller.dart';
-import 'components/custom_form.dart';
 
 class RegisterView extends GetView<AuthController> {
   const RegisterView({Key? key}) : super(key: key);
