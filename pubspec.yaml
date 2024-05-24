@@ -24,6 +24,10 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
+  assets: 
+    - assets/icons/
+    - assets/images/
+
   fonts: 
     - family: Poppins
       fonts: 
