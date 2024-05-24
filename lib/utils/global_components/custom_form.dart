@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../constant/constant.dart';
+import '../../constant/constant.dart';
 
 // ignore: must_be_immutable
 class CustomForm extends StatelessWidget {
