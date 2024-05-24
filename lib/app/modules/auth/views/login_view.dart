@@ -4,7 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/constant.dart';
-import '../../../../utils/global_components/custom_form.dart';
+import 'components/auth_button.dart';
+import '../../../../utils/global_components/text_input_field.dart';
 import '../../../../utils/global_components/main_button.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/auth_controller.dart';
@@ -54,7 +55,7 @@ class LoginView extends GetView<AuthController> {
             const Gap(10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: CustomForm(
+              child: InputField(
                 title: 'Ketikkan Username',
                 onChanged: controller.setUsername,
               ),
@@ -74,7 +75,7 @@ class LoginView extends GetView<AuthController> {
             Obx(
               () => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 22),
-                child: CustomForm(
+                child: InputField(
                   title: 'Ketikkan Password',
                   onChanged: controller.setPassword,
                   obscureText: controller.obscureText.value,
@@ -120,7 +121,8 @@ class LoginView extends GetView<AuthController> {
             MainButton(
               label: 'Masuk',
               onTap: () {
-                Get.offNamed(Routes.LOGIN);
+                // Implement Login
+                print('Login button tapped');
               },
             ),
             const Gap(32),
@@ -132,74 +134,22 @@ class LoginView extends GetView<AuthController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
+                AuthButton(
+                  svgAssetPath: 'assets/icons/google.svg',
+                  label: 'Google',
                   onTap: () {
                     // Implement Google Sign In
+                    print('Google Sign In button tapped');
                   },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(
-                        color: Neutral.dark3,
-                      ),
-                      color: Neutral.light4,
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: SvgPicture.asset(
-                            'assets/icons/google.svg',
-                            width: 24,
-                            height: 24,
-                          ),
-                        ),
-                        Text(
-                          'Google',
-                          style: semiBold.copyWith(
-                              fontSize: 16, color: Neutral.dark3),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
                 const Gap(20),
-                GestureDetector(
+                AuthButton(
+                  svgAssetPath: 'assets/icons/facebook.svg',
+                  label: 'Facebook',
                   onTap: () {
-                    // Implement Google Sign In
+                    // Implement Facebook Sign In
+                    print('Facebook Sign In button tapped');
                   },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(
-                        color: Neutral.dark3,
-                      ),
-                      color: Neutral.light4,
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: SvgPicture.asset(
-                            'assets/icons/facebook.svg',
-                            width: 24,
-                            height: 24,
-                          ),
-                        ),
-                        Text(
-                          'Facebook',
-                          style: semiBold.copyWith(
-                              fontSize: 16, color: Neutral.dark3),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),
