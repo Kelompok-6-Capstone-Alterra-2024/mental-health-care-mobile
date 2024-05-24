@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  //TODO: Implement AuthController
+  RxString username = ''.obs;
+  RxString password = ''.obs;
+  RxString icon = ''.obs;
+  RxBool obscureText = true.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  validatePassword(String? pwd) {
+    if (pwd!.length < 6) {
+      return 'Password minimal 6 karakter';
+    }
+    return null;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void setUsername(String value) {
+    username.value = value;
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void setPassword(String value) {
+    password.value = value;
   }
-
-  void increment() => count.value++;
 }
