@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../constant/constant.dart';
 
-// ignore: must_be_immutable
-class CustomForm extends StatelessWidget {
+class InputField extends StatelessWidget {
   final String title;
   final void Function(String) onChanged;
-  bool? obscureText;
+  final bool obscureText;
   final Widget? icon;
   final String? Function(String?)? validator;
 
-  CustomForm({
+  const InputField({
     super.key,
     required this.title,
     required this.onChanged,
-    this.obscureText,
+    this.obscureText = false,
     this.icon,
     this.validator,
   });
@@ -23,7 +22,7 @@ class CustomForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator,
-      obscureText: obscureText ?? false,
+      obscureText: obscureText,
       onChanged: onChanged,
       style: regular.copyWith(fontSize: 14, color: Neutral.dark1),
       decoration: primary.copyWith(
@@ -32,10 +31,12 @@ class CustomForm extends StatelessWidget {
           fontSize: 14,
           color: Neutral.dark2,
         ),
-        suffixIcon: Padding(
-          padding: const EdgeInsets.all(10),
-          child: icon,
-        ),
+        suffixIcon: icon != null
+            ? Padding(
+                padding: const EdgeInsets.all(10),
+                child: icon,
+              )
+            : null,
       ),
     );
   }
