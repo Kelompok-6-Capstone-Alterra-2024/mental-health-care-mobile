@@ -26,30 +26,15 @@ class CustomForm extends StatelessWidget {
       obscureText: obscureText ?? false,
       onChanged: onChanged,
       style: regular.copyWith(fontSize: 14, color: Neutral.dark1),
-      decoration: InputDecoration(
-        isDense: false,
-        filled: true,
+      decoration: primary.copyWith(
         hintText: title,
-        hintStyle:
-            const TextStyle(color: Neutral.dark2, fontWeight: FontWeight.w400),
-        fillColor: Neutral.light4,
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-          borderSide: BorderSide(color: Neutral.dark4),
+        hintStyle: regular.copyWith(
+          fontSize: 14,
+          color: Neutral.dark2,
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-          borderSide: BorderSide(color: Neutral.dark1),
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-          borderSide: BorderSide(color: Error.subtle),
-        ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         suffixIcon: Padding(
           padding: const EdgeInsets.all(10),
-          child: icon ?? null,
+          child: icon,
         ),
       ),
     );
