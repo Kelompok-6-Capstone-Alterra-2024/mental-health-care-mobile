@@ -30,6 +30,8 @@ class NavigationView extends GetView<NavigationController> {
             topRight: Radius.circular(36),
           ),
           child: BottomAppBar(
+            surfaceTintColor: Neutral.transparent,
+            shadowColor: Neutral.transparent,
             height: 80,
             color: Neutral.light1,
             elevation: 0,

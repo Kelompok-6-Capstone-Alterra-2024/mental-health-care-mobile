@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/constant/constant.dart';
 import '../controllers/home_controller.dart';
 import 'package:gap/gap.dart';
@@ -43,7 +45,15 @@ class HomeView extends GetView<HomeController> {
                               )
                             ],
                           ),
-                          SvgPicture.asset('assets/icons/Bell.svg')
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.NOTIFICATION);
+                            },
+                            child: SvgPicture.asset(
+                              'assets/icons/Bell.svg',
+                              width: 24,
+                            ),
+                          )
                         ],
                       ),
                       const Gap(32),
@@ -80,19 +90,22 @@ class HomeView extends GetView<HomeController> {
                         child: GetBuilder<HomeController>(
                           id: 'mood',
                           builder: (controller) => ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 7,
-                          itemBuilder: (context, index) {
-                            final isSelected = index == controller.selectedMood.value;
-                            return MoodCard(
-                              onTap: () {
-                                controller.selectMood(index);
-                              },
-                              icon: 'assets/icons/empty-mood.svg',
-                              color: isSelected ? Primary.mainColor : Neutral.transparent,
-                            );
-                          },
-                        ),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 7,
+                            itemBuilder: (context, index) {
+                              final isSelected =
+                                  index == controller.selectedMood.value;
+                              return MoodCard(
+                                onTap: () {
+                                  controller.selectMood(index);
+                                },
+                                icon: 'assets/icons/empty-mood.svg',
+                                color: isSelected
+                                    ? Primary.mainColor
+                                    : Neutral.transparent,
+                              );
+                            },
+                          ),
                         ),
                       ),
                       const Gap(10),
@@ -156,6 +169,7 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: 'therapy',
           shape: const CircleBorder(),
           elevation: 0,
           onPressed: () {},
