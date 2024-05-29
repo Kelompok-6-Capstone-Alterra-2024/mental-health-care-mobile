@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -57,7 +59,7 @@ class RegisterView extends GetView<AuthController> {
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: InputField(
                 title: 'Ketikkan Email',
-                onChanged: controller.setUsername,
+                onChanged: controller.email.call,
               ),
             ),
             const Gap(16),
@@ -76,7 +78,7 @@ class RegisterView extends GetView<AuthController> {
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: InputField(
                 title: 'Ketikkan Username',
-                onChanged: controller.setUsername,
+                onChanged: controller.username.call,
               ),
             ),
             const Gap(16),
@@ -96,7 +98,7 @@ class RegisterView extends GetView<AuthController> {
                 padding: const EdgeInsets.symmetric(horizontal: 22),
                 child: InputField(
                   title: 'Ketikkan Password',
-                  onChanged: controller.setPassword,
+                  onChanged: controller.password.call,
                   obscureText: controller.obscureText.value,
                   validator: (pwd) => controller.validatePassword(pwd),
                   icon: GestureDetector(
@@ -134,7 +136,7 @@ class RegisterView extends GetView<AuthController> {
                 padding: const EdgeInsets.symmetric(horizontal: 22),
                 child: InputField(
                   title: 'Ketikkan konfirmasi password',
-                  onChanged: controller.setPassword,
+                  onChanged: controller.confirmPassword.call,
                   obscureText: controller.obscureText.value,
                   validator: (pwd) => controller.validatePassword(pwd),
                   icon: GestureDetector(
@@ -176,7 +178,7 @@ class RegisterView extends GetView<AuthController> {
                   label: 'Google',
                   onTap: () {
                     // Implement Google Sign In
-                    print('Google Sign In button tapped');
+                    log('Google Sign In button tapped');
                   },
                 ),
                 const Gap(20),
@@ -185,7 +187,7 @@ class RegisterView extends GetView<AuthController> {
                   label: 'Facebook',
                   onTap: () {
                     // Implement Facebook Sign In
-                    print('Facebook Sign In button tapped');
+                    log('Facebook Sign In button tapped');
                   },
                 ),
               ],

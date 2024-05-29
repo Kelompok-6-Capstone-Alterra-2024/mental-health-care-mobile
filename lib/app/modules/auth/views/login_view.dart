@@ -1,14 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/constant.dart';
-import 'components/auth_button.dart';
-import '../../../../utils/global_components/text_input_field.dart';
 import '../../../../utils/global_components/main_button.dart';
+import '../../../../utils/global_components/text_input_field.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/auth_controller.dart';
+import 'components/auth_button.dart';
 
 class LoginView extends GetView<AuthController> {
   const LoginView({Key? key}) : super(key: key);
@@ -57,7 +59,7 @@ class LoginView extends GetView<AuthController> {
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: InputField(
                 title: 'Ketikkan Username',
-                onChanged: controller.setUsername,
+                onChanged: controller.username.call,
               ),
             ),
             const Gap(16),
@@ -77,7 +79,7 @@ class LoginView extends GetView<AuthController> {
                 padding: const EdgeInsets.symmetric(horizontal: 22),
                 child: InputField(
                   title: 'Ketikkan Password',
-                  onChanged: controller.setPassword,
+                  onChanged: controller.password.call,
                   obscureText: controller.obscureText.value,
                   validator: (pwd) => controller.validatePassword(pwd),
                   icon: GestureDetector(
@@ -106,6 +108,7 @@ class LoginView extends GetView<AuthController> {
                 child: GestureDetector(
                   onTap: () {
                     // Implement Forgot Password
+                    Get.offNamed(Routes.FORGET_PASSWORD);
                   },
                   child: Text(
                     'Lupa Password?',
@@ -122,7 +125,7 @@ class LoginView extends GetView<AuthController> {
               label: 'Masuk',
               onTap: () {
                 // Implement Login
-                print('Login button tapped');
+                log('login button tapped');
               },
             ),
             const Gap(32),
@@ -139,7 +142,7 @@ class LoginView extends GetView<AuthController> {
                   label: 'Google',
                   onTap: () {
                     // Implement Google Sign In
-                    print('Google Sign In button tapped');
+                    log('Google Sign In button tapped');
                   },
                 ),
                 const Gap(20),
@@ -148,7 +151,7 @@ class LoginView extends GetView<AuthController> {
                   label: 'Facebook',
                   onTap: () {
                     // Implement Facebook Sign In
-                    print('Facebook Sign In button tapped');
+                    log('Facebook Sign In button tapped');
                   },
                 ),
               ],
