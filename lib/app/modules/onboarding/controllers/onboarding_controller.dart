@@ -33,10 +33,5 @@ class OnboardingController extends GetxController {
         descriptions:
             "Raih Kedamaian Batin dan Keseimbangan dengan Sesi Meditasi Terpandu",
         image: "assets/images/onboarding3.png"),
-    // OnboardingInfo(
-    //     title: "Temukan Ketenangan",
-    //     descriptions:
-    //         "Raih Kedamaian Batin dan Keseimbangan dengan Sesi Meditasi Terpandu",
-    //     image: "assets/images/onboarding4.png"),
   ];
 }
