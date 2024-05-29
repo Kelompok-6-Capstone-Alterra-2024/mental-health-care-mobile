@@ -11,10 +11,11 @@ import 'components/article.dart';
 import 'components/music.dart';
 import 'components/story.dart';
 
-class MeditationView extends GetView<MeditationController> {
+class MeditationView extends StatelessWidget {
   const MeditationView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final MeditationController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -36,7 +37,7 @@ class MeditationView extends GetView<MeditationController> {
         ),
         title: Obx(
           () => Text(
-            '${controller.TabNameTitle}',
+            '${controller.tabNameTitle}',
             style: medium.copyWith(fontSize: 16, color: Primary.darker),
           ),
         ),
@@ -85,33 +86,46 @@ class MeditationView extends GetView<MeditationController> {
           ),
           Gap(26),
           Container(
-            height: 40,
-            width: 377,
-            margin: const EdgeInsets.symmetric(horizontal: 24),
-            // child: DefaultTabController(
-            // length: controller.tabController.length,
-            child: TabBar(
-              controller: controller.tabController,
-              labelColor: Primary.mainColor,
-              labelPadding: EdgeInsets.only(right: 32),
-              unselectedLabelColor: Neutral.dark2,
-              tabAlignment: TabAlignment.start,
-              dividerColor: Neutral.transparent,
-              overlayColor: MaterialStateProperty.all(Neutral.transparent),
-              isScrollable: true,
-              indicatorColor: Primary.mainColor,
-              onTap: (index) {
-                // This function ensures the tab index is updated correctly
-                controller.tabController.animateTo(index);
-              },
-              tabs: List.generate(
-                controller.tabs.length,
-                (index) => Tab(
-                  text: controller.tabs[index],
-                ),
-              ),
-            ),
-            // ),
+            height: 44,
+            width: 389,
+            padding: const EdgeInsets.only(left: 19.5),
+            child: Obx(() => TabBar(
+                  controller: controller.tabController,
+                  labelColor: Primary.mainColor,
+                  labelPadding: EdgeInsets.only(right: 20),
+                  unselectedLabelColor: Neutral.dark2,
+                  dividerColor: Neutral.transparent,
+                  tabAlignment: TabAlignment.start,
+                  overlayColor: MaterialStateProperty.all(Neutral.transparent),
+                  isScrollable: true,
+                  indicatorColor: Primary.mainColor,
+                  onTap: (index) {
+                    controller.tabController.animateTo(index);
+                  },
+                  tabs: List.generate(
+                    controller.tabs.length,
+                    (index) => Tab(
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            controller.getTabIcon(index),
+                            width: 18,
+                            color: controller.currentTab.value == index
+                                ? Primary.mainColor
+                                : Neutral.dark2,
+                          ),
+                          Gap(10),
+                          Text(
+                            '${controller.tabs[index]}',
+                            style: medium.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )),
           ),
           Gap(32),
           Expanded(
