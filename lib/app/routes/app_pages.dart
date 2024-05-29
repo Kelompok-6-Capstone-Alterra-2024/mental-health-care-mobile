@@ -1,13 +1,16 @@
 import 'package:get/get.dart';
-import 'package:mindease/app/modules/onboarding/views/welcome_view.dart';
+import 'package:mindease/app/modules/auth/views/verification_code_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
+import '../modules/auth/views/forget_password_view.dart';
 import '../modules/auth/views/login_view.dart';
+import '../modules/auth/views/new_password_view.dart';
 import '../modules/auth/views/register_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
+import '../modules/onboarding/views/welcome_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -48,6 +51,21 @@ class AppPages {
       name: _Paths.WELCOME,
       page: () => const WelcomeView(),
       binding: OnboardingBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGET_PASSWORD,
+      page: () => const ForgetPasswordView(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.VERIFICATION_CODE,
+      page: () => const VerificationCodeView(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_PASSWORD,
+      page: () => const NewPasswordView(),
+      binding: AuthBinding(),
     ),
   ];
 }
