@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -57,10 +56,7 @@ class ArticleTab extends StatelessWidget {
                       ),
                       Expanded(
                         child: Container(
-                          padding: const EdgeInsets.only(
-                            left: 17,
-                            right: 14,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -75,17 +71,20 @@ class ArticleTab extends StatelessWidget {
                               ),
                               Gap(16),
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SvgPicture.asset(
-                                    'assets/icons/Calendar.svg',
-                                    width: 12,
-                                    color: Neutral.dark3,
-                                  ),
-                                  Gap(8),
                                   Text(
-                                    '12 Mei 2024',
+                                    '3 Jam yang lalu',
                                     style: regular.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 10,
+                                      color: Neutral.dark3,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Bacaan 2 menit',
+                                    style: regular.copyWith(
+                                      fontSize: 10,
                                       color: Neutral.dark3,
                                     ),
                                   ),

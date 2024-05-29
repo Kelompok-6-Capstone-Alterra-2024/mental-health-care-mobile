@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -76,20 +75,17 @@ class StoryTab extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Rina Irawan',
+                                    'By: Rina Irawan',
                                     style: regular.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 10,
                                       color: Neutral.dark3,
                                     ),
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      //
-                                    },
-                                    child: SvgPicture.asset(
-                                      'assets/icons/Heart.svg',
-                                      width: 18,
-                                      color: Neutral.dark1,
+                                  Text(
+                                    '3 Jam yang lalu',
+                                    style: regular.copyWith(
+                                      fontSize: 10,
+                                      color: Neutral.dark3,
                                     ),
                                   ),
                                 ],
