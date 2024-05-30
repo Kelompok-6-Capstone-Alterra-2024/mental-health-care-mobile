@@ -166,8 +166,7 @@ class RegisterView extends GetView<AuthController> {
               MainButton(
                 label: 'Daftar',
                 onTap: () {
-                  // Logic Daftar
-                  // controller.register();
+                  controller.doRegister();
                 },
               ),
               const Gap(32),
