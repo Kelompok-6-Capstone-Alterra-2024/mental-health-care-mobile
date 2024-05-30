@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/constant.dart';
-import '../../../../utils/global_components/main_button.dart';
+import '../../../data/services/auth_service.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -16,20 +16,24 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text('Home View'),
-            MainButton(
-              label: 'Go to Detail',
-              onTap: () {},
-            ),
-            Gap(16),
-            TextFormField(
-              decoration: primary.copyWith(
-                hintText: 'Email',
+            Text(
+              'Token:',
+              style: bold.copyWith(
+                fontSize: 20,
+                color: Neutral.dark1,
               ),
-            )
+            ),
+            const Gap(20),
+            Text(
+              '${AuthService.token}',
+              style: medium.copyWith(
+                fontSize: 18,
+                color: Neutral.dark1,
+              ),
+            ),
           ],
         ),
       ),
