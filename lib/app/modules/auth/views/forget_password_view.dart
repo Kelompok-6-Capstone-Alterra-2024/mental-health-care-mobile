@@ -15,59 +15,65 @@ class ForgetPasswordView extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Gap(100),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Lupa Password?',
-                  style:
-                      semiBold.copyWith(fontSize: 24, color: Primary.mainColor),
+        child: Form(
+          key: controller.formKey,
+          child: Column(
+            children: [
+              const Gap(100),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Lupa Password?',
+                    style: semiBold.copyWith(
+                        fontSize: 24, color: Primary.mainColor),
+                  ),
                 ),
               ),
-            ),
-            const Gap(16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Tidak Perlu Khawatir, Kami Akan Membantu Anda Mengatur Ulang Kata Sandi Anda',
-                  style: regular.copyWith(fontSize: 16, color: Neutral.dark3),
+              const Gap(16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Tidak Perlu Khawatir, Kami Akan Membantu Anda Mengatur Ulang Kata Sandi Anda',
+                    style: regular.copyWith(fontSize: 16, color: Neutral.dark3),
+                  ),
                 ),
               ),
-            ),
-            const Gap(24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Email',
-                  style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
+              const Gap(24),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Email',
+                    style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
+                  ),
                 ),
               ),
-            ),
-            const Gap(10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: InputField(
-                title: 'Ketikkan Email',
-                onChanged: controller.username.call,
+              const Gap(10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22),
+                child: InputField(
+                  title: 'Ketikkan Email',
+                  validator: (email) => controller.validateEmail(email),
+                  onChanged: controller.setEmail,
+                ),
               ),
-            ),
-            const Gap(32),
-            MainButton(
-              label: 'Kirim Code',
-              onTap: () {
-                // Logic Here
-                Get.toNamed(Routes.VERIFICATION_CODE);
-              },
-            ),
-          ],
+              const Gap(32),
+              MainButton(
+                label: 'Kirim Code',
+                onTap: () {
+                  // Logic Here
+                  if (controller.formKey.currentState!.validate()) {
+                    Get.toNamed(Routes.VERIFICATION_CODE);
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
