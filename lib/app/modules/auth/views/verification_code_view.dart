@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 
 import '../../../../constant/constant.dart';
 import '../../../../utils/global_components/main_button.dart';
-import '../../../routes/app_pages.dart';
 import '../controllers/auth_controller.dart';
 
 class VerificationCodeView extends GetView<AuthController> {

@@ -76,7 +76,7 @@ class AuthController extends GetxController
     if (!isSuccess) {
       _showSnackbar(
         title: 'Error',
-        message: 'Login Failed',
+        message: 'Gagal Login',
         color: Color(Error.mainColor.value),
       );
       return;
@@ -84,10 +84,39 @@ class AuthController extends GetxController
 
     _showSnackbar(
       title: 'Success',
-      message: 'Login Success',
+      message: 'Berhasil Login',
       color: Color(Success.mainColor.value),
     );
     Get.offAllNamed(Routes.HOME);
+  }
+
+  Future<void> doRegister() async {
+    bool isValidate = formKey.currentState!.validate();
+    if (!isValidate) {
+      return;
+    }
+
+    bool isSuccess = await AuthService().register(
+      username: username.value,
+      password: password.value,
+      email: email.value,
+    );
+
+    if (!isSuccess) {
+      _showSnackbar(
+        title: 'Error',
+        message: 'Username atau Email sudah terdaftar',
+        color: Color(Error.mainColor.value),
+      );
+      return;
+    }
+
+    _showSnackbar(
+      title: 'Success',
+      message: 'Berhasil Register',
+      color: Color(Success.mainColor.value),
+    );
+    Get.offAllNamed(Routes.LOGIN);
   }
 
   void _showSnackbar({
