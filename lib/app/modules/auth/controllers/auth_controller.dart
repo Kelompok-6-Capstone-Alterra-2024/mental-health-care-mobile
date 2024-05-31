@@ -4,7 +4,7 @@ import 'package:mindease/app/data/services/auth_service.dart';
 import 'package:mindease/constant/constant.dart';
 
 import '../../../routes/app_pages.dart';
-import '../mixins/forget_password_mixin.dart';
+import '../mixins/forgot_password_mixin.dart';
 import '../mixins/verification_code_mixin.dart';
 
 class AuthController extends GetxController

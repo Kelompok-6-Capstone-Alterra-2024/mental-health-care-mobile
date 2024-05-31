@@ -112,7 +112,7 @@ class LoginView extends GetView<AuthController> {
                   child: GestureDetector(
                     onTap: () {
                       // Implement Forgot Password
-                      Get.offNamed(Routes.FORGET_PASSWORD);
+                      Get.offNamed(Routes.FORGOT_PASSWORD);
                     },
                     child: Text(
                       'Lupa Password?',

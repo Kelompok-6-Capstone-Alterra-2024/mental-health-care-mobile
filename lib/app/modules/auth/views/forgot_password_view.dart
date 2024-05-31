@@ -9,8 +9,8 @@ import '../../../../utils/global_components/text_input_field.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/auth_controller.dart';
 
-class ForgetPasswordView extends GetView<AuthController> {
-  const ForgetPasswordView({Key? key}) : super(key: key);
+class ForgotPasswordView extends GetView<AuthController> {
+  const ForgotPasswordView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
