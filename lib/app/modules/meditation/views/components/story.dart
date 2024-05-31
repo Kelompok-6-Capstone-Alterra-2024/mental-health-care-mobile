@@ -24,7 +24,7 @@ class StoryTab extends StatelessWidget {
               height: 112,
               width: 380,
               margin: const EdgeInsets.only(bottom: 16),
-              // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Neutral.dark4,
@@ -56,7 +56,9 @@ class StoryTab extends StatelessWidget {
                       ),
                       Expanded(
                         child: Container(
-                          padding: const EdgeInsets.all(16),
+                          padding: const EdgeInsets.only(
+                            left: 16,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
