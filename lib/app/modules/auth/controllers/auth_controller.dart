@@ -15,6 +15,7 @@ class AuthController extends GetxController
   RxString confirmPassword = ''.obs;
   RxBool obscureText = true.obs;
   RxString icon = ''.obs;
+  RxString passwordError = ''.obs;
 
   final formKey = GlobalKey<FormState>();
 
@@ -41,7 +42,7 @@ class AuthController extends GetxController
 
   validateConfirmPassword(String? pwd) {
     if (pwd != password.value) {
-      return 'Password tidak sama';
+      return 'Password yang kamu masukan berbeda!';
     }
     return null;
   }
@@ -74,11 +75,8 @@ class AuthController extends GetxController
     );
 
     if (!isSuccess) {
-      _showSnackbar(
-        title: 'Error',
-        message: 'Gagal Login',
-        color: Color(Error.mainColor.value),
-      );
+      passwordError.value = 'Password yang anda masukkan salah!';
+      formKey.currentState!.validate();
       return;
     }
 
