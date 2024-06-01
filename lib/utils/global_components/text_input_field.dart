@@ -7,7 +7,9 @@ class InputField extends StatelessWidget {
   final void Function(String) onChanged;
   final bool obscureText;
   final Widget? icon;
+  final Widget? errorIcon;
   final String? Function(String?)? validator;
+  final String? errorText;
 
   const InputField({
     super.key,
@@ -15,7 +17,9 @@ class InputField extends StatelessWidget {
     required this.onChanged,
     this.obscureText = false,
     this.icon,
+    this.errorIcon,
     this.validator,
+    this.errorText,
   });
 
   @override
@@ -34,9 +38,12 @@ class InputField extends StatelessWidget {
         suffixIcon: icon != null
             ? Padding(
                 padding: const EdgeInsets.all(10),
-                child: icon,
+                child: errorText != null && errorText!.isNotEmpty
+                    ? errorIcon
+                    : icon,
               )
             : null,
+        errorText: errorText,
       ),
     );
   }

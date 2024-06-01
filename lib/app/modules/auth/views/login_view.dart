@@ -91,16 +91,18 @@ class LoginView extends GetView<AuthController> {
                         controller.obscureText.value =
                             !controller.obscureText.value;
                       },
-                      child: SizedBox(
-                        width: 10,
-                        height: 20,
-                        child: SvgPicture.asset(
-                          controller.obscureText.value
-                              ? 'assets/icons/eye-closed.svg'
-                              : 'assets/icons/eye-open.svg',
-                        ),
+                      child: SvgPicture.asset(
+                        controller.obscureText.value
+                            ? 'assets/icons/eye-closed.svg'
+                            : 'assets/icons/eye-open.svg',
                       ),
                     ),
+                    errorIcon: SvgPicture.asset(
+                      'assets/icons/error-icon.svg',
+                    ),
+                    errorText: controller.passwordError.value.isEmpty
+                        ? null
+                        : controller.passwordError.value,
                   ),
                 ),
               ),
