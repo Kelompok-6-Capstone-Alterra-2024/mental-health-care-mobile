@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/constant.dart';
-import '../../../data/services/auth_service.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -15,26 +13,21 @@ class HomeView extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text(
-              'Token:',
-              style: bold.copyWith(
-                fontSize: 20,
-                color: Neutral.dark1,
-              ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            controller.logout();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Primary.mainColor,
+          ),
+          child: Text(
+            'Logout',
+            style: medium.copyWith(
+              fontSize: 18,
+              color: Neutral.dark1,
             ),
-            const Gap(20),
-            Text(
-              '${AuthService.token}',
-              style: medium.copyWith(
-                fontSize: 18,
-                color: Neutral.dark1,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
