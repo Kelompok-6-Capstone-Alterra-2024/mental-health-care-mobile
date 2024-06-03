@@ -18,6 +18,7 @@ class AuthController extends GetxController
   RxString passwordError = ''.obs;
 
   final formKey = GlobalKey<FormState>();
+  final registerFormKey = GlobalKey<FormState>();
 
   validateUsername(String? username) {
     if (username!.isEmpty) {
@@ -85,11 +86,11 @@ class AuthController extends GetxController
       message: 'Berhasil Login',
       color: Color(Success.mainColor.value),
     );
-    Get.offAllNamed(Routes.HOME);
+    Get.offAllNamed(Routes.NAVIGATION);
   }
 
   Future<void> doRegister() async {
-    bool isValidate = formKey.currentState!.validate();
+    bool isValidate = registerFormKey.currentState!.validate();
     if (!isValidate) {
       return;
     }
@@ -114,7 +115,7 @@ class AuthController extends GetxController
       message: 'Berhasil Register',
       color: Color(Success.mainColor.value),
     );
-    Get.offAllNamed(Routes.LOGIN);
+    Get.offAllNamed(Routes.NAVIGATION);
   }
 
   void _showSnackbar({

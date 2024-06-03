@@ -11,7 +11,7 @@ class OnboardingController extends GetxController {
 
   forwardAction() {
     if (isLastPage) {
-      Get.offNamed(Routes.WELCOME);
+      Get.toNamed(Routes.WELCOME);
     } else {
       pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
     }

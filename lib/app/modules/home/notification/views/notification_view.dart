@@ -37,15 +37,17 @@ class NotificationView extends GetView<NotificationController> {
             NotificationCard(
               message:
                   'Waktunya untuk konsultasi! Jadwalkan sesi dengan psikiater Anda sekarang untuk mendapatkan dukungan yang Anda butuhkan.',
+                  time: 'baru saja',
               textColor: Neutral.dark1,
               status: Primary.mainColor,
-              backgroundColor: Neutral.light1,
+              backgroundColor: Neutral.light3,
             ),
             NotificationCard(
               message:
                   'Waktunya untuk konsultasi! Jadwalkan sesi dengan psikiater Anda sekarang untuk mendapatkan dukungan yang Anda butuhkan.',
+                  time: '1 jam lalu',
               textColor: Neutral.dark3,
-              status: Neutral.dark4,
+              status: Neutral.dark3,
               backgroundColor: Neutral.light3,
             ),
 

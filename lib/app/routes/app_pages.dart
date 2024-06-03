@@ -1,14 +1,16 @@
 import 'package:get/get.dart';
-import 'package:mindease/app/modules/auth/views/verification_code_view.dart';
 
-import '../modules/home/ai_chat/bindings/ai_chat_binding.dart';
-import '../modules/home/ai_chat/views/ai_chat_view.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/forgot_password_view.dart';
 import '../modules/auth/views/login_view.dart';
 import '../modules/auth/views/new_password_view.dart';
 import '../modules/auth/views/register_view.dart';
+import '../modules/auth/views/verification_code_view.dart';
+import '../modules/home/ai_chat/bindings/ai_chat_binding.dart';
+import '../modules/home/ai_chat/views/ai_chat_view.dart';
 import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/mood_track/add_mood/bindings/add_mood_binding.dart';
+import '../modules/home/mood_track/add_mood/views/add_mood_view.dart';
 import '../modules/home/mood_track/bindings/mood_track_binding.dart';
 import '../modules/home/mood_track/views/mood_track_view.dart';
 import '../modules/home/notification/bindings/notification_binding.dart';
@@ -49,6 +51,13 @@ class AppPages {
           name: _Paths.MOOD_TRACK,
           page: () => const MoodTrackView(),
           binding: MoodTrackBinding(),
+          children: [
+            GetPage(
+              name: _Paths.ADD_MOOD,
+              page: () => const AddMoodView(),
+              binding: AddMoodBinding(),
+            ),
+          ],
         ),
       ],
     ),

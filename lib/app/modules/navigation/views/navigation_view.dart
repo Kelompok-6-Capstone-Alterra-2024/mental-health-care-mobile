@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mindease/constant/constant.dart';
 
 import '../controllers/navigation_controller.dart';
@@ -18,7 +19,9 @@ class NavigationView extends GetView<NavigationController> {
         child: FloatingActionButton(
           // ignore: prefer_const_constructors
           shape: CircleBorder(),
-          onPressed: () {},
+          onPressed: () {
+            GetStorage().erase();
+          },
           backgroundColor: Primary.mainColor,
           child: SvgPicture.asset('assets/icons/Stethoscope.svg'),
         ),
@@ -71,7 +74,7 @@ class NavigationView extends GetView<NavigationController> {
                     icon: SvgPicture.asset(
                       'assets/icons/community_inactive.svg',
                     ),
-                    label: 'Chat',
+                    label: 'Forum',
                   ),
                   const BottomNavigationBarItem(
                     icon: SizedBox(),
@@ -84,7 +87,7 @@ class NavigationView extends GetView<NavigationController> {
                     icon: SvgPicture.asset(
                       'assets/icons/meditation_inactive.svg',
                     ),
-                    label: 'Calendar',
+                    label: 'Meditasi',
                   ),
                   BottomNavigationBarItem(
                     activeIcon: SvgPicture.asset(
@@ -93,7 +96,7 @@ class NavigationView extends GetView<NavigationController> {
                     icon: SvgPicture.asset(
                       'assets/icons/profile_inactive.svg',
                     ),
-                    label: 'Profile',
+                    label: 'Profil',
                   ),
                 ],
                 

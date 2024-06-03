@@ -17,14 +17,14 @@ class LoginView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
         child: Form(
           key: controller.formKey,
           child: Column(
             children: [
-              const Gap(100),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 22),
+                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -126,7 +126,7 @@ class LoginView extends GetView<AuthController> {
                   ),
                 ),
               ),
-              const Gap(60),
+              const Gap(50),
               MainButton(
                 label: 'Masuk',
                 onTap: () {
@@ -161,25 +161,28 @@ class LoginView extends GetView<AuthController> {
                   ),
                 ],
               ),
-              const Gap(170),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Belum punya akun? ',
-                    style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.offNamed(Routes.REGISTER);
-                    },
-                    child: Text(
-                      'Daftar',
-                      style:
-                          bold.copyWith(fontSize: 16, color: Primary.mainColor),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Belum punya akun? ',
+                      style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
                     ),
-                  ),
-                ],
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.REGISTER);
+                      },
+                      child: Text(
+                        'Daftar',
+                        style:
+                            bold.copyWith(fontSize: 16, color: Primary.mainColor),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

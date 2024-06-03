@@ -12,61 +12,63 @@ class WelcomeView extends GetView<OnboardingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              Image.asset(
-                'assets/images/welcome.png',
-                width: Get.width * 1,
-              ),
-              const Gap(20),
-              Text(
-                "Temukan Ketenangan",
-                style: semiBold.copyWith(fontSize: 24, color: Neutral.dark1),
-              ),
-              const Gap(16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Text(
-                  "Raih Kedamaian Batin dan Keseimbangan dengan Sesi Meditasi Terpandu",
-                  style: regular.copyWith(fontSize: 14, color: Neutral.dark3),
-                  textAlign: TextAlign.center,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                const Gap(14),
+                Image.asset(
+                  'assets/images/welcome.png',
                 ),
-              ),
-              const Gap(40),
-              MainButton(
-                  label: 'Masuk',
-                  onTap: () {
-                    Get.offNamed(Routes.LOGIN);
-                  }),
-              const Gap(16),
-              GestureDetector(
-                onTap: () {
-                  // Get.toNamed(Routes.REGISTER);
-                  Get.offNamed(Routes.REGISTER);
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 24),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(
-                      color: Primary.mainColor,
-                    ),
-                    color: Neutral.light4,
-                  ),
+                const Gap(20),
+                Text(
+                  "Temukan Ketenangan",
+                  style: semiBold.copyWith(fontSize: 24, color: Neutral.dark1),
+                ),
+                const Gap(16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
-                    'Daftar',
-                    style: semiBold.copyWith(
-                        fontSize: 16, color: Primary.mainColor),
+                    "Raih Kedamaian Batin dan Keseimbangan dengan Sesi Meditasi Terpandu",
+                    style: regular.copyWith(fontSize: 14, color: Neutral.dark3),
                     textAlign: TextAlign.center,
                   ),
                 ),
-              ),
-            ],
+                const Gap(40),
+                MainButton(
+                    label: 'Masuk',
+                    onTap: () {
+                      Get.toNamed(Routes.LOGIN);
+                    }),
+                const Gap(16),
+                GestureDetector(
+                  onTap: () {
+                    // Get.toNamed(Routes.REGISTER);
+                    Get.toNamed(Routes.REGISTER);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 24),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                        color: Primary.mainColor,
+                      ),
+                      color: Neutral.light4,
+                    ),
+                    child: Text(
+                      'Daftar',
+                      style: semiBold.copyWith(
+                          fontSize: 16, color: Primary.mainColor),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

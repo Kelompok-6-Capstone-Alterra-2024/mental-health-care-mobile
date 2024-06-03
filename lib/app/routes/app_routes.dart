@@ -16,6 +16,7 @@ abstract class Routes {
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const VERIFICATION_CODE = _Paths.VERIFICATION_CODE;
   static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
+  static const ADD_MOOD = _Paths.HOME + _Paths.MOOD_TRACK + _Paths.ADD_MOOD;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const VERIFICATION_CODE = '/verification-code';
   static const NEW_PASSWORD = '/new-password';
+  static const ADD_MOOD = '/add-mood';
 }

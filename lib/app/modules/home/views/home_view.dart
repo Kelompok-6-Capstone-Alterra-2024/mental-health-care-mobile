@@ -83,7 +83,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                     const Gap(10),
                     SizedBox(
-                      height: 110,
+                      height: 100,
                       child: GetBuilder<HomeController>(
                         id: 'mood',
                         builder: (controller) => ListView.builder(
@@ -93,6 +93,9 @@ class HomeView extends GetView<HomeController> {
                             final isSelected =
                                 index == controller.selectedMood.value;
                             return MoodCard(
+                              textColor: isSelected
+                                  ? Primary.mainColor
+                                  : Neutral.dark3,
                               onTap: () {
                                 controller.selectMood(index);
                               },

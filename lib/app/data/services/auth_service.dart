@@ -60,6 +60,13 @@ class AuthService extends GetxService {
       );
 
       if (response.statusCode == 201) {
+        final data = response.data as Map<String, dynamic>;
+        final token = data['data']['token'] as String?;
+        if (token != null) {
+          _storage.write('token', token);
+          Logger().i('Berhasil login');
+          return true;
+        }
         Logger().i('Berhasil membuat akun');
         return true;
       }

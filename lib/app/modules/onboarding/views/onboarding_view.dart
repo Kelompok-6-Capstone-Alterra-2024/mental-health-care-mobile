@@ -24,7 +24,7 @@ class OnboardingView extends GetView<OnboardingController> {
                   Stack(
                     children: [
                       Container(
-                        height: 579,
+                        height: Get.height * 0.66,
                         decoration: const BoxDecoration(
                           color: Primary.subtle,
                           borderRadius: BorderRadius.only(
@@ -34,7 +34,6 @@ class OnboardingView extends GetView<OnboardingController> {
                       ),
                       Container(
                         width: Get.width,
-                        height: 542,
                         decoration: const BoxDecoration(
                           color: Primary.subtle,
                           borderRadius: BorderRadius.only(
@@ -48,7 +47,7 @@ class OnboardingView extends GetView<OnboardingController> {
                       ),
                     ],
                   ),
-                  const Gap(62),
+                  const Gap(50),
                   Text(
                     controller.items[index].title,
                     style:
@@ -70,7 +69,7 @@ class OnboardingView extends GetView<OnboardingController> {
             },
           ),
           Positioned(
-            bottom: 80,
+            bottom: 20,
             left: 0,
             right: 0,
             child: Center(
@@ -83,8 +82,8 @@ class OnboardingView extends GetView<OnboardingController> {
                       (index) => Obx(() {
                         return Container(
                           margin: const EdgeInsets.all(4),
-                          width: 12,
-                          height: 12,
+                          width: 9,
+                          height: 9,
                           decoration: BoxDecoration(
                             color: controller.selectedPageIndex.value == index
                                 ? Primary.mainColor
@@ -95,7 +94,7 @@ class OnboardingView extends GetView<OnboardingController> {
                       }),
                     ),
                   ),
-                  const Gap(32),
+                  const Gap(20),
                   GestureDetector(
                     onTap: () {
                       controller.forwardAction();

@@ -19,13 +19,25 @@ class SplashController extends GetxController {
     _navigateBasedOnToken();
   }
 
-  void _navigateBasedOnToken() {
-    if (token == null || token!.isEmpty) {
-      Future.delayed(const Duration(seconds: 2), () {
+  // void _navigateBasedOnToken() async {
+  //   if (token == null || token!.isEmpty) {
+  //     Future.delayed(const Duration(seconds: 2), () {
+  //       Get.offNamed(Routes.ONBOARDING);
+  //     });
+  //   } else {
+  //     Get.offNamed(Routes.NAVIGATION);
+  //   }
+  // }
+
+  void _navigateBasedOnToken() async {
+    Future.delayed(const Duration(seconds: 2), () {
+      if (token == null || token!.isEmpty) {
         Get.offNamed(Routes.ONBOARDING);
-      });
-    } else {
-      Get.offNamed(Routes.HOME);
-    }
+      } else {
+        Get.offNamed(Routes.NAVIGATION);
+      }
+    });
   }
+
+
 }

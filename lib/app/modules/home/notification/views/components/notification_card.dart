@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../../../../../constant/constant.dart';
 
 class NotificationCard extends StatelessWidget {
   final String message;
+  final String time;
   final Color textColor;
   final Color status;
   final Color backgroundColor;
   const NotificationCard({
     super.key,
     required this.message,
+    required this.time,
     required this.textColor,
     required this.status,
     required this.backgroundColor,
@@ -34,9 +35,9 @@ class NotificationCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 8,
-            backgroundColor: status,
+          Icon(
+            Icons.info_outline,
+            color: status,
           ),
           const Gap(16),
           Expanded(
@@ -44,15 +45,15 @@ class NotificationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Waktunya untuk konsultasi! Jadwalkan sesi dengan psikiater Anda sekarang untuk mendapatkan dukungan yang Anda butuhkan.',
+                  message,
                   style: regular.copyWith(fontSize: 12, color: textColor),
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const Gap(8),
                 Text(
-                  '1 jam yang lalu',
-                  style: semiBold.copyWith(fontSize: 12, color: textColor),
+                  time,
+                  style: semiBold.copyWith(fontSize: 12, color: status),
                 )
               ],
             ),
