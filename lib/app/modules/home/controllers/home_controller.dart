@@ -2,16 +2,20 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
-import '../../../data/services/auth_service.dart';
-import '../../../routes/app_pages.dart';
-
 class HomeController extends GetxController {
-  final _storage = GetStorage();
+  //TODO: Implement HomeController
+  RxInt selectedMood = 0.obs;
 
-  void logout() {
-    AuthService.token = null;
-    _storage.remove('token');
-    Logger().i('Logged out');
-    Get.offAllNamed(Routes.ONBOARDING);
+  void selectMood(int index) {
+    selectedMood.value = index;
+    update(['mood']);
+  }
+
+
+
+  final count = 0.obs;
+  @override
+  void onInit() {
+    super.onInit();
   }
 }
