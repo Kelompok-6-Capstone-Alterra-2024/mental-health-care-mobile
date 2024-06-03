@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/meditation/bindings/meditation_binding.dart';
+import '../modules/meditation/music/views/music_view.dart';
 import '../modules/meditation/views/article_view.dart';
 import '../modules/meditation/views/meditation_view.dart';
-import '../modules/meditation/views/music_view.dart';
 import '../modules/meditation/views/story_view.dart';
 import '../modules/meditation/views/wishlist_view.dart';
 
@@ -26,11 +26,13 @@ class AppPages {
       name: _Paths.MEDITATION,
       page: () => const MeditationView(),
       binding: MeditationBinding(),
-    ),
-    GetPage(
-      name: _Paths.MUSIC,
-      page: () => const MusicView(),
-      binding: MeditationBinding(),
+      children: [
+        GetPage(
+          name: _Paths.MUSIC,
+          page: () => const MusicView(),
+          binding: MeditationBinding(),
+        ),
+      ],
     ),
     GetPage(
       name: _Paths.ARTICLE,
