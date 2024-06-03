@@ -68,7 +68,7 @@ class MeditationView extends StatelessWidget {
             child: TextFormField(
               style: light.copyWith(
                 fontSize: 14,
-                color: Neutral.dark3,
+                color: Neutral.dark1,
               ),
               decoration: searchStyle.copyWith(
                 hintText: 'Temukan meditasimu disini',
@@ -92,7 +92,7 @@ class MeditationView extends StatelessWidget {
             child: Obx(() => TabBar(
                   controller: controller.tabController,
                   labelColor: Primary.mainColor,
-                  labelPadding: EdgeInsets.only(right: 20),
+                  labelPadding: EdgeInsets.only(right: 32),
                   unselectedLabelColor: Neutral.dark2,
                   dividerColor: Neutral.transparent,
                   tabAlignment: TabAlignment.start,
@@ -109,7 +109,8 @@ class MeditationView extends StatelessWidget {
                         children: [
                           SvgPicture.asset(
                             controller.getTabIcon(index),
-                            width: 18,
+                            width: 24,
+                            height: 24,
                             color: controller.currentTab.value == index
                                 ? Primary.mainColor
                                 : Neutral.dark2,

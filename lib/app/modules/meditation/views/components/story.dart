@@ -21,10 +21,8 @@ class StoryTab extends StatelessWidget {
               Get.toNamed(Routes.STORY);
             },
             child: Container(
-              height: 112,
-              width: 380,
               margin: const EdgeInsets.only(bottom: 16),
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Neutral.dark4,
@@ -71,7 +69,7 @@ class StoryTab extends StatelessWidget {
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Gap(15),
+                              Gap(16),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

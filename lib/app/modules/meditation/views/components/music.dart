@@ -35,8 +35,6 @@ class MusicTab extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Container(
-                    height: 94,
-                    width: 377,
                     margin: const EdgeInsets.only(bottom: 9),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 11),
@@ -58,8 +56,8 @@ class MusicTab extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              height: 71,
-                              width: 71,
+                              height: 72,
+                              width: 72,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 image: const DecorationImage(

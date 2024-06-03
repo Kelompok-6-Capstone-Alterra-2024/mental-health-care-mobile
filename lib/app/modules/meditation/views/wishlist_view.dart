@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/constant.dart';
@@ -38,7 +39,129 @@ class WishlistView extends StatelessWidget {
               'assets/icons/Filter.svg',
               width: 24,
             ),
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    height: 247,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 32,
+                      horizontal: 32,
+                    ),
+                    color: Neutral.light4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Filter',
+                          style: semiBold.copyWith(
+                            fontSize: 16,
+                            color: Neutral.dark1,
+                          ),
+                        ),
+                        Gap(11),
+                        Text(
+                          'Pilih kategori meditasi',
+                          style: regular.copyWith(
+                            fontSize: 16,
+                            color: Neutral.dark3,
+                          ),
+                        ),
+                        Gap(16),
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Neutral.light3,
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                  color: Neutral.dark2,
+                                ),
+                              ),
+                              child: Text(
+                                'Musik',
+                                style: medium.copyWith(
+                                  fontSize: 12,
+                                  color: Neutral.dark2,
+                                ),
+                              ),
+                            ),
+                            Gap(8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Neutral.light3,
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                  color: Neutral.dark2,
+                                ),
+                              ),
+                              child: Text(
+                                'Artikel',
+                                style: medium.copyWith(
+                                  fontSize: 12,
+                                  color: Neutral.dark2,
+                                ),
+                              ),
+                            ),
+                            Gap(8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Neutral.light3,
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                  color: Neutral.dark2,
+                                ),
+                              ),
+                              child: Text(
+                                'Cerita Inspiratif',
+                                style: medium.copyWith(
+                                  fontSize: 12,
+                                  color: Neutral.dark2,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Gap(16),
+                        Container(
+                          width: double.infinity,
+                          height: 54,
+                          decoration: BoxDecoration(
+                            color: Primary.mainColor,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text(
+                              'Pilih',
+                              style: semiBold.copyWith(
+                                fontSize: 16,
+                                color: Neutral.light4,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
             padding: const EdgeInsets.only(
               right: 16,
             ),

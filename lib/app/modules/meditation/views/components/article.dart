@@ -21,10 +21,7 @@ class ArticleTab extends StatelessWidget {
           itemCount: 10,
           itemBuilder: (context, index) {
             return Container(
-              height: 123,
-              width: 380,
               margin: const EdgeInsets.only(bottom: 16),
-              // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Neutral.dark4,
@@ -44,7 +41,7 @@ class ArticleTab extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        height: 122,
+                        height: 123,
                         width: 142,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
