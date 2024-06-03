@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mindease/constant/constant.dart';
-import '../../../../utils/global_components/main_button.dart';
+
+import '../../../../constant/constant.dart';
 import '../controllers/home_controller.dart';
-import 'package:gap/gap.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -14,24 +13,21 @@ class HomeView extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text('Home View'),
-            MainButton(
-              label: 'Go to Detail',
-              onTap: () {
-                
-              },
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            controller.logout();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Primary.mainColor,
+          ),
+          child: Text(
+            'Logout',
+            style: medium.copyWith(
+              fontSize: 18,
+              color: Neutral.dark1,
             ),
-            Gap(16),
-            TextFormField(
-              decoration: primary.copyWith(
-                hintText: 'Email',
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );
