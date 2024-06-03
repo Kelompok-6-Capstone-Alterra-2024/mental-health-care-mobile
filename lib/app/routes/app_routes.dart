@@ -6,6 +6,8 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const NAVIGATION = _Paths.NAVIGATION;
   static const NOTIFICATION = _Paths.HOME + _Paths.NOTIFICATION;
+  static const AI_CHAT = _Paths.HOME + _Paths.AI_CHAT;
+  static const MOOD_TRACK = _Paths.HOME + _Paths.MOOD_TRACK;
 }
 
 abstract class _Paths {
@@ -13,4 +15,6 @@ abstract class _Paths {
   static const HOME = '/home';
   static const NAVIGATION = '/navigation';
   static const NOTIFICATION = '/notification';
+  static const AI_CHAT = '/ai-chat';
+  static const MOOD_TRACK = '/mood-track';
 }
