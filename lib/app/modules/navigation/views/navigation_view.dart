@@ -38,60 +38,66 @@ class NavigationView extends GetView<NavigationController> {
             shape: const CircularNotchedRectangle(),
             notchMargin: 4,
             clipBehavior: Clip.antiAlias,
-            child: BottomNavigationBar(
-              currentIndex: controller.selectedIndex.value,
-              onTap: controller.changeIndex,
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Primary.mainColor,
-              unselectedItemColor: Neutral.dark3,
-              elevation: 0,
-              enableFeedback: false,
-              backgroundColor: Neutral.transparent,
-              selectedLabelStyle: regular.copyWith(fontSize: 12),
-              unselectedLabelStyle: regular.copyWith(fontSize: 12),
-              items: [
-                BottomNavigationBarItem(
-                  activeIcon: SvgPicture.asset(
-                    'assets/icons/home_active.svg',
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+              ),
+              child: BottomNavigationBar(
+                currentIndex: controller.selectedIndex.value,
+                onTap: controller.changeIndex,
+                type: BottomNavigationBarType.fixed,
+                selectedItemColor: Primary.mainColor,
+                unselectedItemColor: Neutral.dark3,
+                elevation: 0,
+                enableFeedback: false,
+                backgroundColor: Neutral.transparent,
+                selectedLabelStyle: regular.copyWith(fontSize: 12),
+                unselectedLabelStyle: regular.copyWith(fontSize: 12),
+                items: [
+                  BottomNavigationBarItem(
+                    activeIcon: SvgPicture.asset(
+                      'assets/icons/home_active.svg',
+                    ),
+                    icon: SvgPicture.asset(
+                      'assets/icons/home_inactive.svg',
+                    ),
+                    label: 'Home',
                   ),
-                  icon: SvgPicture.asset(
-                    'assets/icons/home_inactive.svg',
+                  BottomNavigationBarItem(
+                    activeIcon: SvgPicture.asset(
+                      'assets/icons/community_active.svg',
+                    ),
+                    icon: SvgPicture.asset(
+                      'assets/icons/community_inactive.svg',
+                    ),
+                    label: 'Chat',
                   ),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: SvgPicture.asset(
-                    'assets/icons/community_active.svg',
+                  const BottomNavigationBarItem(
+                    icon: SizedBox(),
+                    label: '',
                   ),
-                  icon: SvgPicture.asset(
-                    'assets/icons/community_inactive.svg',
+                  BottomNavigationBarItem(
+                    activeIcon: SvgPicture.asset(
+                      'assets/icons/meditation_active.svg',
+                    ),
+                    icon: SvgPicture.asset(
+                      'assets/icons/meditation_inactive.svg',
+                    ),
+                    label: 'Calendar',
                   ),
-                  label: 'Chat',
-                ),
-                const BottomNavigationBarItem(
-                  icon: SizedBox(),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: SvgPicture.asset(
-                    'assets/icons/meditation_active.svg',
+                  BottomNavigationBarItem(
+                    activeIcon: SvgPicture.asset(
+                      'assets/icons/profile_active.svg',
+                    ),
+                    icon: SvgPicture.asset(
+                      'assets/icons/profile_inactive.svg',
+                    ),
+                    label: 'Profile',
                   ),
-                  icon: SvgPicture.asset(
-                    'assets/icons/meditation_inactive.svg',
-                  ),
-                  label: 'Calendar',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: SvgPicture.asset(
-                    'assets/icons/profile_active.svg',
-                  ),
-                  icon: SvgPicture.asset(
-                    'assets/icons/profile_inactive.svg',
-                  ),
-                  label: 'Profile',
-                ),
-              ],
-              
+                ],
+                
+              ),
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
@@ -16,6 +17,15 @@ class NotificationView extends GetView<NotificationController> {
         title: Text(
           'Notifikasi',
           style: medium.copyWith(fontSize: 16, color: Primary.darker),
+        ),
+        leading: IconButton(
+          icon: SvgPicture.asset(
+            'assets/icons/Chevron.svg',
+            width: 26,
+          ),
+          onPressed: () {
+            Get.back();
+          },
         ),
         centerTitle: true,
       ),

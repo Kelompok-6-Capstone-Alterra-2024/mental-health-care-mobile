@@ -24,6 +24,7 @@ class DoctorCard extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset('assets/images/doctor.png'),
           const Gap(16),
