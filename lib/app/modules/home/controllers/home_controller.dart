@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:logger/logger.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -16,16 +18,4 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

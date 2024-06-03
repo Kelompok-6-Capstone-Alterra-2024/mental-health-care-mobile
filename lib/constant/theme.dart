@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mindease/constant/constant.dart';
+import 'constant.dart';
 
 class AppTheme {
   static ThemeData themeData = ThemeData(
