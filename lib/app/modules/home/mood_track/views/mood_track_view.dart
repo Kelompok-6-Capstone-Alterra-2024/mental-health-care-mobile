@@ -3,10 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mindease/app/modules/home/mood_track/add_mood/data/model/mood_model.dart';
 import 'package:mindease/constant/constant.dart';
 import 'package:mindease/utils/global_components/main_button.dart';
 import 'package:mindease/utils/global_components/main_button_without_padding.dart';
 
+import '../../../../../utils/helper/calendar_icon.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/mood_track_controller.dart';
 
@@ -82,9 +84,10 @@ class MoodTrackView extends GetView<MoodTrackController> {
                     return GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 7,
-                              childAspectRatio: (4 / 5),
-                              mainAxisSpacing: 4),
+                        crossAxisCount: 7,
+                        childAspectRatio: (4 / 5),
+                        mainAxisSpacing: 4,
+                      ),
                       itemCount: totalDays,
                       itemBuilder: (context, index) {
                         if (index < startOffset) {
@@ -93,6 +96,7 @@ class MoodTrackView extends GetView<MoodTrackController> {
                         final day = controller.daysInMonth[index - startOffset];
                         final isSelected =
                             controller.selectedDate.isAtSameMomentAs(day);
+                        final mood = controller.getMoodForDate(day);
                         return GestureDetector(
                           onTap: () {
                             controller.selectDate(day);
@@ -104,7 +108,7 @@ class MoodTrackView extends GetView<MoodTrackController> {
                                 horizontal: 8, vertical: 3),
                             decoration: BoxDecoration(
                               color: isSelected
-                                  ? Neutral.light2
+                                  ? moodStatusColor(mood)
                                   : Neutral.transparent,
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -114,21 +118,16 @@ class MoodTrackView extends GetView<MoodTrackController> {
                                 Container(
                                   padding: const EdgeInsets.all(7),
                                   decoration: BoxDecoration(
-                                    color: Neutral.light2,
+                                    color: moodStatusColor(mood),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: SvgPicture.asset(
-                                    'assets/icons/flat.svg',
-                                    width: 20,
-                                  ),
+                                  child: moodStatusIcon(mood),
                                 ),
                                 Text(
                                   day.day.toString(),
-                                  style: TextStyle(
-                                    color: isSelected
-                                        ? Neutral.dark3
-                                        : Neutral.dark1,
-                                    fontWeight: FontWeight.bold,
+                                  style: semiBold.copyWith(
+                                    fontSize: 12,
+                                    color: Neutral.dark1,
                                   ),
                                 ),
                               ],
@@ -144,7 +143,7 @@ class MoodTrackView extends GetView<MoodTrackController> {
             MainButtonWithoutPadding(
               label: 'Tambah',
               onTap: () {
-                Get.toNamed(Routes.ADD_MOOD);
+                controller.navigatedToAddMood();
               },
             )
           ],

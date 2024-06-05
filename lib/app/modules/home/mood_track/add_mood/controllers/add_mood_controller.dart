@@ -4,19 +4,35 @@ import 'package:get/get.dart';
 import '../data/model/mood_model.dart';
 
 class AddMoodController extends GetxController {
-  //TODO: Implement AddMoodController
+  RxInt selectedMood = 1.obs;
+  RxString note = ''.obs;
+  RxString date = ''.obs;
 
-  RxString selectedMood = ''.obs;
+  void onNote(String value) {
+    note.value = value;
+  }
   
  RxList<Mood> moods = [
-  Mood(name: 'ceria', iconPath: 'assets/icons/Grin.svg', color: Color(0xffF8C6FF)),
-  Mood(name: 'senyum', iconPath: 'assets/icons/Smile.svg', color: Color(0xffcdfcbf)),
-  Mood(name: 'datar', iconPath: 'assets/icons/Meh.svg', color: Color(0xffFBF198)),
-  Mood(name: 'sedih', iconPath: 'assets/icons/Sad.svg', color: Color(0xff9EE2FF)),
-  Mood(name: 'depresi', iconPath: 'assets/icons/depression.svg', color: Color(0xffffebe7)),
+  Mood(moodId: 1, iconPath: 'assets/icons/Grin.svg', color: Color(0xffF8C6FF)),
+  Mood(moodId: 2, iconPath: 'assets/icons/Smile.svg', color: Color(0xffcdfcbf)),
+  Mood(moodId: 3, iconPath: 'assets/icons/Meh.svg', color: Color(0xffFBF198)),
+  Mood(moodId: 4, iconPath: 'assets/icons/Sad.svg', color: Color(0xff9EE2FF)),
+  Mood(moodId: 5, iconPath: 'assets/icons/depression.svg', color: Color(0xffffebe7)),
 ].obs;
 
-  void selectMood(String mood) {
+  void selectMood(int mood) {
     selectedMood.value = mood;
+  }
+
+  void submitMood() {
+    print('Mood: ${selectedMood.value}');
+    print('Note: ${note.value}');
+    print('Date: ${date.value}');
+  }
+
+  @override
+  void onInit() {
+    date.value = Get.arguments['date'];
+    super.onInit();
   }
 }
