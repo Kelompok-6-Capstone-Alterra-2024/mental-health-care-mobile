@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +8,7 @@ class AddMoodController extends GetxController {
   RxInt selectedMood = 1.obs;
   RxString note = ''.obs;
   RxString date = ''.obs;
+  RxString filepath = ''.obs;
 
   void onNote(String value) {
     note.value = value;
@@ -28,6 +30,16 @@ class AddMoodController extends GetxController {
     print('Mood: ${selectedMood.value}');
     print('Note: ${note.value}');
     print('Date: ${date.value}');
+  }
+
+  Future<String> pickFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      final path = result.files.first.name;
+      return path;
+    } else {
+      return '';
+    }
   }
 
   @override

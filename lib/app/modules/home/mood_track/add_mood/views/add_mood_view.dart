@@ -85,25 +85,33 @@ class AddMoodView extends GetView<AddMoodController> {
               style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
             ),
             const Gap(10),
-            Container(
-              height: 200,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Neutral.dark5,
+            GestureDetector(
+              onTap: () {
+                final result = controller.pickFile();
+                result.then((value) {
+                  controller.filepath.value = value;
+                });
+              },
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Neutral.dark5,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset('assets/icons/PhotoCamera.svg'),
-                  Text(
-                    'Tambahkan foto',
-                    style: regular.copyWith(fontSize: 16, color: Neutral.dark3),
-                  )
-                ],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset('assets/icons/PhotoCamera.svg'),
+                    Text(
+                      'Tambahkan foto',
+                      style: regular.copyWith(fontSize: 16, color: Neutral.dark3),
+                    )
+                  ],
+                ),
               ),
             ),
             const Gap(30),
