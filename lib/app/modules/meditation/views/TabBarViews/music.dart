@@ -12,43 +12,38 @@ class MusicTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.toNamed(Routes.MUSIC);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Top Music",
-              style: semiBold.copyWith(
-                fontSize: 16,
-                color: Primary.darker,
-              ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Top Music",
+            style: semiBold.copyWith(
+              fontSize: 16,
+              color: Primary.darker,
             ),
-            const Gap(16),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return MusicCard(
-                    image: 'assets/images/1.png',
-                    title: 'Eternal Serenity',
-                    artist: 'Luna Grace',
-                    like: () {
-                      // like function
-                    },
-                    onTap: () {
-                      Get.toNamed(Routes.MUSIC);
-                    },
-                  );
-                },
-              ),
+          ),
+          const Gap(16),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return MusicCard(
+                  image: 'assets/images/1.png',
+                  title: 'Eternal Serenity',
+                  artist: 'Luna Grace',
+                  like: () {
+                    // like function
+                  },
+                  onTap: () {
+                    Get.toNamed(Routes.MUSIC);
+                  },
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

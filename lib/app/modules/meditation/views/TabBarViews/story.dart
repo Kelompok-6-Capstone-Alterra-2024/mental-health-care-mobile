@@ -1,27 +1,28 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../routes/app_pages.dart';
-import '../components/article_card.dart';
+import '../components/story_card.dart';
 
-class ArticleTab extends StatelessWidget {
-  const ArticleTab({super.key});
+class StoryTab extends StatelessWidget {
+  const StoryTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 23.5),
       child: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return ArticleCard(
-            image: 'assets/images/2.png',
+          return StoryCard(
+            image: 'assets/images/1.png',
             title: 'The Power of Meditation',
-            time: '2 hours ago',
-            readTime: '5 min read',
+            author: 'Luna Grace',
+            time: '5 min',
+            like: () {},
             onTap: () {
-              Get.toNamed(Routes.ARTICLE);
+              Get.toNamed(Routes.STORY);
             },
           );
         },

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../constant/constant.dart';
 import '../controllers/meditation_controller.dart';
-import 'components/story.dart';
+import 'TabBarViews/story.dart';
 
 class StoryView extends StatelessWidget {
   const StoryView({super.key});
