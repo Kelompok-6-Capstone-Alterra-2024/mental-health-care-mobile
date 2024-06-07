@@ -45,7 +45,8 @@ mixin CalendarMixin on GetxController {
       _currentMonth.value = 12;
       _currentYear.value--;
     }
-    updateDaysInMonth();
+    //  _selectedDate.value = DateTime(_currentYear.value, _currentMonth.value, 1);
+    updateDaysInMonth(); 
   }
 
   void goToNextMonth() {
@@ -54,6 +55,7 @@ mixin CalendarMixin on GetxController {
       _currentMonth.value = 1;
       _currentYear.value++;
     }
+    // _selectedDate.value = DateTime(_currentYear.value, _currentMonth.value, 1);
     updateDaysInMonth();
   }
 

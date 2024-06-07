@@ -46,7 +46,10 @@ class MoodTrackView extends GetView<MoodTrackController> {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back),
-                    onPressed: controller.goToPreviousMonth,
+                    onPressed: () {
+                      controller.goToPreviousMonth();
+                      controller.loadMoods();
+                    },
                   ),
                   Obx(() {
                     final monthName = DateFormat.MMMM().format(DateTime(
@@ -58,7 +61,19 @@ class MoodTrackView extends GetView<MoodTrackController> {
                   }),
                   IconButton(
                     icon: const Icon(Icons.arrow_forward),
-                    onPressed: controller.goToNextMonth,
+                    onPressed: () async {
+                      
+                      // final moodId = controller.fetchMoodId(DateTime(controller.currentYear, controller.currentMonth, 1));
+                  
+                      controller.goToNextMonth();
+                      await controller.loadMoods();
+                      // controller.moodId.value = int.parse("10");
+                      // moodId != ''
+                      //           ? controller.moodId.value = int.parse(moodId)
+                      //           : controller.moodId.value = 0;
+                      // print(moodId);
+                      
+                    },
                   ),
                 ],
               ),
@@ -109,7 +124,6 @@ class MoodTrackView extends GetView<MoodTrackController> {
                             moodID != ''
                                 ? controller.moodId.value = int.parse(moodID)
                                 : controller.moodId.value = 0;
-                            print(controller.moodId.value);
                             print(
                                 'Selected date: ${DateFormat.yMMMd().format(day)}');
                           },
@@ -155,13 +169,14 @@ class MoodTrackView extends GetView<MoodTrackController> {
                   future: MoodService().getMoodDetail(controller.moodId.value),
                   builder: (BuildContext context, AsyncSnapshot<MoodDetailsModel> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
+                      return const CircularProgressIndicator(
+                        color: Neutral.light1,
+                      );
                     } else {
                       if (snapshot.hasError) {
                         return const Text('Error');
                       } else {
                         final moodDetails = snapshot.data!.data;
-                        
                         return Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 8),
@@ -186,7 +201,7 @@ class MoodTrackView extends GetView<MoodTrackController> {
                                   ),
                                   const Gap(5),
                                   Text(
-                                    DateFormat.MMMd().format(DateTime.parse(moodDetails.date)),
+                                    DateFormat('EEE dd').format(DateTime.parse(moodDetails.date)),
                                     style: semiBold.copyWith(fontSize: 16),
                                   ),
                                 ],

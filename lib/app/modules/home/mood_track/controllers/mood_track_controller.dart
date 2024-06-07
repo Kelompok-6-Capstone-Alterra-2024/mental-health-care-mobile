@@ -13,19 +13,17 @@ class MoodTrackController extends GetxController  with CalendarMixin {
   RxInt moodId = 0.obs;
   RxList<DataMood> moodData = <DataMood>[].obs;
 
- 
   void navigatedToAddMood() {
     Get.toNamed(Routes.ADD_MOOD,
         arguments: {'date': DateFormat('yyyy-MM-dd').format(selectedDate)});
   }
 
-
-  void loadMoods() async {
-    // final startDate = DateFormat('yyyy-MM-dd').format(DateTime(currentYear, currentMonth, 1));
-    // final endDate = DateFormat('yyyy-MM-dd').format(DateTime(currentYear, currentMonth + 1, 0));
+  Future<void> loadMoods() async {
+    final startDate = DateFormat('yyyy-MM-dd').format(DateTime(currentYear, currentMonth, 1));
+    final endDate = DateFormat('yyyy-MM-dd').format(DateTime(currentYear, currentMonth + 1, 0));
     try {
       final moodModel =
-          await MoodService().getMoodByDate('2024-06-01', '2024-06-05');
+          await MoodService().getMoodByDate(startDate, endDate);
       moods.assignAll(moodModel.data);
       update(['calendar']);
     } catch (e) {

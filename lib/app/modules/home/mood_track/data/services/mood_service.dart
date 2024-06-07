@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:http_parser/src/media_type.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:get_storage/get_storage.dart';
@@ -15,16 +15,43 @@ class MoodService extends GetxService {
   final baseUrl = BaseUrl;
 
   Future<void> addMood(
-      int moodId, String note, String date, File? image) async {
+      {required int moodId,
+      required String note,
+      required String date,
+      File? file}) async {
     try {
+      String fileName = '';
+      MediaType? contentType;
+
+      if (file != null) {
+        fileName = file.path.split('/').last;
+        String fileExtension = fileName.split('.').last.toLowerCase();
+
+        if (fileExtension == 'jpg' || fileExtension == 'jpeg') {
+          contentType = MediaType('image', 'jpeg');
+        } else if (fileExtension == 'png') {
+          contentType = MediaType('image', 'png');
+        } else {
+          throw Exception('File type not supported');
+        }
+      }
+
+      final FormData formData = FormData.fromMap({
+        'mood_type_id': moodId,
+        'message': note,
+        'image': file != null
+            ? await MultipartFile.fromFile(
+                file.path,
+                filename: fileName,
+                contentType: contentType,
+              )
+            : null,
+        'date': date
+      });
+
       final response = await dio.post(
         '$baseUrl/moods',
-        data: {
-          'mood_type_id': moodId,
-          'message': note,
-          'image': image,
-          'date': date
-        },
+        data: formData,
         options: Options(
           contentType: Headers.multipartFormDataContentType,
           headers: {
@@ -62,7 +89,7 @@ class MoodService extends GetxService {
     }
   }
 
-  Future<MoodDetailsModel> getMoodDetail (int moodId) async {
+  Future<MoodDetailsModel> getMoodDetail(int moodId) async {
     try {
       final response = await dio.get(
         '$baseUrl/moods/$moodId',

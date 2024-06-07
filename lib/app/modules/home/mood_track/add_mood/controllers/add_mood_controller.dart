@@ -1,14 +1,21 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mindease/app/modules/home/mood_track/controllers/mood_track_controller.dart';
+import 'package:mindease/app/modules/home/mood_track/data/services/mood_service.dart';
 
+import '../../../../../routes/app_pages.dart';
 import '../data/model/mood_model.dart';
 
 class AddMoodController extends GetxController {
   RxInt selectedMood = 1.obs;
   RxString note = ''.obs;
   RxString date = ''.obs;
-  RxString filepath = ''.obs;
+  Rx<File?> filepath = Rx<File?>(null);
+  RxString fileName = 'Tambahkan Foto'.obs;
+  RxBool isLoading = false.obs;
 
   void onNote(String value) {
     note.value = value;
@@ -26,20 +33,30 @@ class AddMoodController extends GetxController {
     selectedMood.value = mood;
   }
 
-  void submitMood() {
-    print('Mood: ${selectedMood.value}');
-    print('Note: ${note.value}');
-    print('Date: ${date.value}');
+  Future<void> submitMood() async {
+    isLoading.value = true;
+    final moodService = MoodService();
+    await moodService.addMood(
+      moodId: selectedMood.value,
+      note: note.value,
+      date: date.value,
+      file: filepath.value,
+    );
+    // Get.put(MoodTrackController().loadMoods());
+    isLoading.value = false;
+    // Get.back();
+    Get.offAllNamed(Routes.NAVIGATION);
   }
 
-  Future<String> pickFile() async {
-    final result = await FilePicker.platform.pickFiles();
+  void pickFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'jpeg', 'png'],
+    );
     if (result != null) {
-      final path = result.files.first.name;
-      return path;
-    } else {
-      return '';
-    }
+      filepath.value = File(result.files.single.path!);
+      fileName.value = result.files.first.name;
+    } 
   }
 
   @override
@@ -47,4 +64,5 @@ class AddMoodController extends GetxController {
     date.value = Get.arguments['date'];
     super.onInit();
   }
+
 }

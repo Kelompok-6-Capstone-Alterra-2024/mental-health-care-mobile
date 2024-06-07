@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/constant/constant.dart';
 import '../controllers/home_controller.dart';
@@ -90,9 +91,12 @@ class HomeView extends GetView<HomeController> {
                           scrollDirection: Axis.horizontal,
                           itemCount: 7,
                           itemBuilder: (context, index) {
-                            final isSelected =
-                                index == controller.selectedMood.value;
+                            final day = controller.daysInWeek[index];
+                            final isSelected = index == controller.selectedMood;
+                            final moodCheck = controller.getMoodForDate(day);
                             return MoodCard(
+                              day: DateFormat.E().format(day), // Mengisi hari
+                              date: day.day, // Mengisi tanggal
                               textColor: isSelected
                                   ? Primary.mainColor
                                   : Neutral.dark3,
@@ -100,7 +104,7 @@ class HomeView extends GetView<HomeController> {
                                 controller.selectMood(index);
                               },
                               icon: 'assets/icons/empty-mood.svg',
-                              color: isSelected
+                              selectedColor: isSelected
                                   ? Primary.mainColor
                                   : Neutral.transparent,
                             );
@@ -149,12 +153,12 @@ class HomeView extends GetView<HomeController> {
                     SizedBox(
                       height: Get.height * 0.26,
                       child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                        return const DoctorCard();
-                      }),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return const DoctorCard();
+                          }),
                     ),
                     const Gap(20),
                     Row(
@@ -179,7 +183,7 @@ class HomeView extends GetView<HomeController> {
                       itemBuilder: (context, index) {
                         return MusicCard();
                       },
-                      )
+                    )
                   ],
                 ),
               )

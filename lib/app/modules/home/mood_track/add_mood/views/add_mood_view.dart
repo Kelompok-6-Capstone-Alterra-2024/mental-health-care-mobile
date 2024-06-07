@@ -34,35 +34,37 @@ class AddMoodView extends GetView<AddMoodController> {
               style: semiBold.copyWith(fontSize: 24, color: Neutral.dark1),
             ),
             const Gap(10),
-            Container(
-              alignment: AlignmentDirectional.center,
-              height: 60,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: controller.moods.length,
-                itemBuilder: (context, index) {
-                  final mood = controller.moods[index];
-                  return GestureDetector(
-                      onTap: () {
-                        controller.selectMood(mood.moodId);
-                      },
-                      child: Obx(
-                        () => Container(
-                          margin: const EdgeInsets.only(right: 16),
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: controller.selectedMood.value == mood.moodId
-                                ? mood.color
-                                : Neutral.light2,
-                            borderRadius: BorderRadius.circular(20),
+            Center(
+              child: Container(
+                alignment: AlignmentDirectional.center,
+                height: 60,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.moods.length,
+                  itemBuilder: (context, index) {
+                    final mood = controller.moods[index];
+                    return GestureDetector(
+                        onTap: () {
+                          controller.selectMood(mood.moodId);
+                        },
+                        child: Obx(
+                          () => Container(
+                            margin: const EdgeInsets.only(right: 16),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: controller.selectedMood.value == mood.moodId
+                                  ? mood.color
+                                  : Neutral.light2,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: SvgPicture.asset(
+                              mood.iconPath,
+                              width: 40,
+                            ),
                           ),
-                          child: SvgPicture.asset(
-                            mood.iconPath,
-                            width: 40,
-                          ),
-                        ),
-                      ));
-                },
+                        ));
+                  },
+                ),
               ),
             ),
             const Gap(20),
@@ -74,7 +76,8 @@ class AddMoodView extends GetView<AddMoodController> {
             TextFormField(
               onChanged: controller.onNote,
               decoration: primary.copyWith(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
                 hintText: 'Tambahkan catatan',
                 hintStyle: regular.copyWith(fontSize: 16, color: Neutral.dark3),
               ),
@@ -87,10 +90,7 @@ class AddMoodView extends GetView<AddMoodController> {
             const Gap(10),
             GestureDetector(
               onTap: () {
-                final result = controller.pickFile();
-                result.then((value) {
-                  controller.filepath.value = value;
-                });
+                controller.pickFile();
               },
               child: Container(
                 height: 200,
@@ -106,20 +106,35 @@ class AddMoodView extends GetView<AddMoodController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SvgPicture.asset('assets/icons/PhotoCamera.svg'),
-                    Text(
-                      'Tambahkan foto',
-                      style: regular.copyWith(fontSize: 16, color: Neutral.dark3),
-                    )
+                    Obx(() => Text(
+                          controller.fileName.value,
+                          style: regular.copyWith(
+                              fontSize: 16, color: Neutral.dark3),
+                        ))
                   ],
                 ),
               ),
             ),
             const Gap(30),
-            MainButtonWithoutPadding(
-              label: 'Selesai',
+            GestureDetector(
               onTap: () {
                 controller.submitMood();
               },
+              child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Primary.mainColor,
+                  ),
+                  child: Obx(() => controller.isLoading.value
+                      ? const CupertinoActivityIndicator()
+                      : Text(
+                          'Simpan',
+                          style: semiBold.copyWith(
+                              fontSize: 16, color: Neutral.light4),
+                          textAlign: TextAlign.center,
+                        ))),
             )
           ],
         ),
