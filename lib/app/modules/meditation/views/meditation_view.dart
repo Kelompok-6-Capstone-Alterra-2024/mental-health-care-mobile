@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import '../../../../constant/constant.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/meditation_controller.dart';
-import 'components/article.dart';
-import 'components/music.dart';
+import 'TabBarViews/article.dart';
+import 'TabBarViews/music.dart';
 import 'components/story.dart';
 
 class MeditationView extends StatelessWidget {
@@ -18,23 +18,6 @@ class MeditationView extends StatelessWidget {
     final MeditationController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: SvgPicture.asset(
-            'assets/icons/Chevron Left.svg',
-            width: 24,
-          ),
-          constraints: const BoxConstraints(
-            minWidth: 50,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-          padding: const EdgeInsets.only(
-            left: 16,
-          ),
-          splashColor: Neutral.transparent,
-          highlightColor: Neutral.transparent,
-        ),
         title: Obx(
           () => Text(
             '${controller.tabNameTitle}',
@@ -62,7 +45,7 @@ class MeditationView extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Gap(32),
+          const Gap(32),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: TextFormField(
@@ -76,70 +59,68 @@ class MeditationView extends StatelessWidget {
                   'assets/icons/Search.svg',
                   width: 16,
                   height: 16,
-                  color: Neutral.dark3,
                 ),
-                prefixIconConstraints: BoxConstraints(
+                prefixIconConstraints: const BoxConstraints(
                   minWidth: 50,
                 ),
               ),
             ),
           ),
-          Gap(26),
+          const Gap(26),
           Container(
-            height: 44,
-            width: 389,
-            padding: const EdgeInsets.only(left: 19.5),
-            child: Obx(() => TabBar(
-                  controller: controller.tabController,
-                  labelColor: Primary.mainColor,
-                  labelPadding: EdgeInsets.only(right: 32),
-                  unselectedLabelColor: Neutral.dark2,
-                  dividerColor: Neutral.transparent,
-                  tabAlignment: TabAlignment.start,
-                  overlayColor: MaterialStateProperty.all(Neutral.transparent),
-                  isScrollable: true,
-                  indicatorColor: Primary.mainColor,
-                  onTap: (index) {
-                    controller.tabController.animateTo(index);
-                  },
-                  tabs: List.generate(
-                    controller.tabs.length,
-                    (index) => Tab(
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            controller.getTabIcon(index),
-                            width: 24,
-                            height: 24,
-                            color: controller.currentTab.value == index
-                                ? Primary.mainColor
-                                : Neutral.dark2,
+            padding: const EdgeInsets.only(left: 25),
+            child: Obx(
+              () => TabBar(
+                controller: controller.tabController,
+                labelColor: Primary.mainColor,
+                labelPadding: const EdgeInsets.only(right: 32),
+                unselectedLabelColor: Neutral.dark2,
+                dividerColor: Neutral.transparent,
+                tabAlignment: TabAlignment.start,
+                overlayColor: MaterialStateProperty.all(Neutral.transparent),
+                isScrollable: true,
+                indicatorColor: Primary.mainColor,
+                onTap: (index) {
+                  controller.tabController.animateTo(index);
+                },
+                tabs: List.generate(
+                  controller.tabs.length,
+                  (index) => Tab(
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          controller.getTabIcon(index),
+                          width: 24,
+                          height: 24,
+                          color: controller.currentTab.value == index
+                              ? Primary.mainColor
+                              : Neutral.dark2,
+                        ),
+                        const Gap(10),
+                        Text(
+                          '${controller.tabs[index]}',
+                          style: medium.copyWith(
+                            fontSize: 16,
                           ),
-                          Gap(10),
-                          Text(
-                            '${controller.tabs[index]}',
-                            style: medium.copyWith(
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                )),
+                ),
+              ),
+            ),
           ),
-          Gap(32),
+          const Gap(32),
           Expanded(
             child: TabBarView(
               controller: controller.tabController,
               children: [
-                MusicTab(),
-                ArticleTab(),
-                StoryTab(),
+                const MusicTab(),
+                const ArticleTab(),
+                const StoryTab(),
               ],
             ),
           ),
-          Gap(16),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mindease/app/modules/meditation/views/meditation_view.dart';
 
 import '../../home/views/home_view.dart';
 
@@ -11,7 +12,7 @@ class NavigationController extends GetxController {
     const HomeView(),
     const HomeView(),
     const SizedBox(),
-    const HomeView(),
+    const MeditationView(),
     const HomeView(),
   ];
 

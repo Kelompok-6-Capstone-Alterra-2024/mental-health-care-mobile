@@ -16,22 +16,14 @@ class MusicView extends GetView<MusicController> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: SvgPicture.asset(
-            'assets/icons/Chevron Left.svg',
-            width: 24,
+            icon: SvgPicture.asset(
+              'assets/icons/Chevron.svg',
+              width: 26,
+            ),
+            onPressed: () {
+              Get.back();
+            },
           ),
-          constraints: const BoxConstraints(
-            minWidth: 50,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-          padding: const EdgeInsets.only(
-            left: 16,
-          ),
-          splashColor: Neutral.transparent,
-          highlightColor: Neutral.transparent,
-        ),
         title: Obx(
           () => Text(
             '${controller.tabNameTitle}',
