@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../constant/constant.dart';
@@ -17,6 +16,7 @@ class MainButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 24),
         padding: EdgeInsets.symmetric(vertical: 16),
         width: double.infinity,
         decoration: BoxDecoration(
