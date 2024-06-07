@@ -33,7 +33,7 @@ class Neutral {
   static const Color dark2 = Color(0xFF5B5F67);
   static const Color dark3 = Color(0xFF8F90A6);
   static const Color dark4 = Color(0xFFC7C9D9);
-  static const Color light1   = Color(0xFFDDE5E9);
+  static const Color light1 = Color(0xFFDDE5E9);
   static const Color light2 = Color(0xFFDDE5E9);
   static const Color light3 = Color(0xFFFAFAFC);
   static const Color light4 = Color(0xFFFDFDFF);

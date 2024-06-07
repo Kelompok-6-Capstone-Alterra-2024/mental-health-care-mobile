@@ -31,3 +31,19 @@ InputDecoration searchStyle = InputDecoration(
     borderRadius: BorderRadius.circular(20),
   ),
 );
+
+InputDecoration textBoxStyle = InputDecoration(
+  isDense: true,
+  enabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Neutral.dark4, width: 2),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Neutral.dark1, width: 2),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Error.subtle, width: 2),
+    borderRadius: BorderRadius.circular(8),
+  ),
+);

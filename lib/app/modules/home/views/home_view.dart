@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/constant/constant.dart';
 import '../../../../utils/global_components/main_button.dart';
 import '../controllers/home_controller.dart';
@@ -22,7 +23,7 @@ class HomeView extends GetView<HomeController> {
             MainButton(
               label: 'Go to Detail',
               onTap: () {
-                
+                Get.toNamed(Routes.CONSULTATION);
               },
             ),
             Gap(16),
