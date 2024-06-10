@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../forum/views/forum_view.dart';
 import '../../home/views/home_view.dart';
 
 class NavigationController extends GetxController {
@@ -9,7 +10,7 @@ class NavigationController extends GetxController {
 
   final screen = [
     const HomeView(),
-    const HomeView(),
+    const ForumView(),
     const SizedBox(),
     const HomeView(),
     const HomeView(),
@@ -20,10 +21,9 @@ class NavigationController extends GetxController {
   void changeIndex(int index) {
     selectedIndex.value = index;
   }
+
   @override
   void onInit() {
     super.onInit();
   }
-
-
 }
