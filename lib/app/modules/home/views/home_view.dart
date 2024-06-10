@@ -14,6 +14,7 @@ class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
+    controller;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -149,12 +150,12 @@ class HomeView extends GetView<HomeController> {
                     SizedBox(
                       height: Get.height * 0.26,
                       child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                        return const DoctorCard();
-                      }),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return const DoctorCard();
+                          }),
                     ),
                     const Gap(20),
                     Row(
@@ -179,7 +180,7 @@ class HomeView extends GetView<HomeController> {
                       itemBuilder: (context, index) {
                         return MusicCard();
                       },
-                      )
+                    )
                   ],
                 ),
               )
