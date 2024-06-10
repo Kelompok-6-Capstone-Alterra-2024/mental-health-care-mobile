@@ -17,6 +17,10 @@ abstract class Routes {
   static const VERIFICATION_CODE = _Paths.VERIFICATION_CODE;
   static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
   static const ADD_MOOD = _Paths.HOME + _Paths.MOOD_TRACK + _Paths.ADD_MOOD;
+  static const FORUM = _Paths.FORUM;
+  static const DETAIL_FORUM = _Paths.FORUM + _Paths.DETAIL_FORUM;
+  static const COMMENT_FORUM = _Paths.FORUM + _Paths.COMMENT_FORUM;
+  static const POST_FORUM = _Paths.FORUM + _Paths.POST_FORUM;
 }
 
 abstract class _Paths {
@@ -35,4 +39,8 @@ abstract class _Paths {
   static const VERIFICATION_CODE = '/verification-code';
   static const NEW_PASSWORD = '/new-password';
   static const ADD_MOOD = '/add-mood';
+  static const FORUM = '/forum';
+  static const DETAIL_FORUM = '/detail-forum';
+  static const COMMENT_FORUM = '/comment-forum';
+  static const POST_FORUM = '/post-forum';
 }

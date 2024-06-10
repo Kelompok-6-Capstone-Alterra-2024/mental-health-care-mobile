@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mindease/app/modules/forum/detail_forum/views/post_forum_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/forgot_password_view.dart';
@@ -6,6 +7,12 @@ import '../modules/auth/views/login_view.dart';
 import '../modules/auth/views/new_password_view.dart';
 import '../modules/auth/views/register_view.dart';
 import '../modules/auth/views/verification_code_view.dart';
+import '../modules/forum/bindings/forum_binding.dart';
+import '../modules/forum/comment_forum/bindings/comment_forum_binding.dart';
+import '../modules/forum/comment_forum/views/comment_forum_view.dart';
+import '../modules/forum/detail_forum/bindings/detail_forum_binding.dart';
+import '../modules/forum/detail_forum/views/detail_forum_view.dart';
+import '../modules/forum/views/forum_view.dart';
 import '../modules/home/ai_chat/bindings/ai_chat_binding.dart';
 import '../modules/home/ai_chat/views/ai_chat_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -105,6 +112,28 @@ class AppPages {
       name: _Paths.NEW_PASSWORD,
       page: () => const NewPasswordView(),
       binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORUM,
+      page: () => const ForumView(),
+      binding: ForumBinding(),
+      children: [
+        GetPage(
+          name: _Paths.DETAIL_FORUM,
+          page: () => const DetailForumView(),
+          binding: DetailForumBinding(),
+        ),
+        GetPage(
+          name: _Paths.COMMENT_FORUM,
+          page: () => const CommentForumView(),
+          binding: CommentForumBinding(),
+        ),
+        GetPage(
+          name: _Paths.POST_FORUM,
+          page: () => const PostForumView(),
+          binding: DetailForumBinding(),
+        ),
+      ],
     ),
   ];
 }
