@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
+import 'package:mindease/constant/theme.dart';
+import 'package:get_storage/get_storage.dart';
 import 'app/routes/app_pages.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding();
+  await GetStorage.init();
   runApp(
     GetMaterialApp(
-      title: "Application",
+      debugShowCheckedModeBanner: false,
+      title: "MindEase",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
