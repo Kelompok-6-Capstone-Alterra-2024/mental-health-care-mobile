@@ -35,6 +35,8 @@ class HomeController extends GetxController {
 
   void selectDate(DateTime date) {
     _selectedDate.value = date;
+    print(date);
+    update(['mood']);
   }
 
   void selectMood(int index) {
@@ -49,13 +51,22 @@ class HomeController extends GetxController {
     try {
       final moodModel = await MoodService().getMoodByDate(startDate, endDate);
       moods.assignAll(moodModel.data);
+      update(['mood']);
     } catch (e) {
       print(e);
     }
   }
 
   String getMoodForDate(DateTime date) {
-    Mood? mood = moods.firstWhereOrNull((mood) => mood.date.isAtSameMomentAs(date));
+    Mood? mood = moods.firstWhereOrNull(
+      (mood) => isSameDate(mood.date, date)
+    );
     return mood?.moodType.id.toString() ?? '';
+  }
+
+  bool isSameDate(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+           date1.month == date2.month &&
+           date1.day == date2.day;
   }
 }

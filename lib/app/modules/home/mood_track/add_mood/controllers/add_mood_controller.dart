@@ -21,12 +21,12 @@ class AddMoodController extends GetxController {
     note.value = value;
   }
   
- RxList<Mood> moods = [
-  Mood(moodId: 1, iconPath: 'assets/icons/Grin.svg', color: Color(0xffF8C6FF)),
-  Mood(moodId: 2, iconPath: 'assets/icons/Smile.svg', color: Color(0xffcdfcbf)),
-  Mood(moodId: 3, iconPath: 'assets/icons/Meh.svg', color: Color(0xffFBF198)),
-  Mood(moodId: 4, iconPath: 'assets/icons/Sad.svg', color: Color(0xff9EE2FF)),
-  Mood(moodId: 5, iconPath: 'assets/icons/depression.svg', color: Color(0xffffebe7)),
+ RxList<MoodData> moods = [
+  MoodData(moodId: 1, iconPath: 'assets/icons/Grin.svg', color: Color(0xffF8C6FF)),
+  MoodData(moodId: 2, iconPath: 'assets/icons/Smile.svg', color: Color(0xffcdfcbf)),
+  MoodData(moodId: 3, iconPath: 'assets/icons/Meh.svg', color: Color(0xffFBF198)),
+  MoodData(moodId: 4, iconPath: 'assets/icons/Sad.svg', color: Color(0xff9EE2FF)),
+  MoodData(moodId: 5, iconPath: 'assets/icons/depression.svg', color: Color(0xffffebe7)),
 ].obs;
 
   void selectMood(int mood) {

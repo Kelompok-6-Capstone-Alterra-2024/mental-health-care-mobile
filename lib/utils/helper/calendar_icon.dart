@@ -43,6 +43,45 @@ SvgPicture moodStatusIcon(String check) {
   
 }
 
+SvgPicture moodStatusIconBig(String check) {
+  switch (check) {
+    case '1':
+      return SvgPicture.asset(
+        'assets/icons/grin-home.svg',
+        width: 40,
+      );
+    case '2':
+      return SvgPicture.asset(
+        'assets/icons/smile-home.svg',
+        width: 40,
+      );
+    case '3':
+      return SvgPicture.asset(
+        'assets/icons/meh-home.svg',
+        width: 40,
+      );
+    case '4':
+      return SvgPicture.asset(
+        'assets/icons/sad-home.svg',
+        width: 40,
+      );
+    case '5':
+      return SvgPicture.asset(
+        'assets/icons/depression-home.svg',
+        width: 40,
+      );
+    case '':
+      return SvgPicture.asset(
+        'assets/icons/default-home.svg',
+        width: 40,
+      );
+    default:
+      return SvgPicture.asset(
+        'assets/icons/default-home.svg',
+      );
+  }
+}
+
 
 Color moodStatusColor(String check) {
   switch (check) {
