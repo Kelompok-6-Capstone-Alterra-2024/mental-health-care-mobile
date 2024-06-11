@@ -1,0 +1,119 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+
+import 'package:get/get.dart';
+
+import '../../../../constant/constant.dart';
+import '../../../routes/app_pages.dart';
+import '../controllers/profile_controller.dart';
+import 'components/custom_settings_card.dart';
+
+class ProfileView extends GetView<ProfileController> {
+  const ProfileView({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Profil',
+          style: medium.copyWith(fontSize: 16, color: Primary.darker),
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(
+              child: Column(
+                children: [
+                  const Gap(16),
+                  const CircleAvatar(
+                    radius: 50,
+                    backgroundImage:
+                        AssetImage('assets/images/dummy-profile.jpg'),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Bayu Pratama',
+                    style: semiBold.copyWith(fontSize: 24),
+                  ),
+                  Text(
+                    'bayu06@example.com',
+                    style: regular.copyWith(fontSize: 16, color: Neutral.dark3),
+                  ),
+                  const Gap(16),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: Primary.mainColor,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 16),
+                    ),
+                    onPressed: () {
+                      Get.toNamed(Routes.EDIT_PROFILE);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset('assets/icons/Edit2.svg', width: 24),
+                        const Gap(10),
+                        Text('Edit Profil',
+                            style: semiBold.copyWith(
+                                fontSize: 16, color: Neutral.light1)),
+                      ],
+                    ),
+                  ),
+                  const Gap(32),
+                  const Divider(
+                    thickness: 1,
+                    color: Neutral.dark4,
+                  ),
+                ],
+              ),
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/UserCircle.svg',
+              title: 'Pengaturan dan Privasi',
+              onTap: () {
+                Get.toNamed(Routes.SETTING);
+              },
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/PaymentCard.svg',
+              title: 'Transaksi',
+              onTap: () {},
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/DollarCoin.svg',
+              title: 'Poin',
+              onTap: () {},
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/Email.svg',
+              title: 'Ubah Email',
+              onTap: () {
+                Get.toNamed(Routes.CHANGE_EMAIL);
+              },
+            ),
+            const Divider(
+              thickness: 1,
+              color: Neutral.dark4,
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/Help.svg',
+              title: 'Pusat Bantuan',
+              onTap: () {},
+            ),
+            const Divider(
+              thickness: 1,
+              color: Neutral.dark4,
+            ),
+            const Gap(24),
+          ],
+        ),
+      ),
+    );
+  }
+}

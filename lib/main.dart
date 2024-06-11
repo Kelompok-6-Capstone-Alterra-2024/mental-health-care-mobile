@@ -13,6 +13,7 @@ void main() async {
       title: "MindEase",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      theme: AppTheme.themeData,
     ),
   );
 }
