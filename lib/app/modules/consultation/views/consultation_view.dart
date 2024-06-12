@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindease/app/routes/app_pages.dart';
-import 'package:mindease/utils/global_components/main_button.dart';
 
 import '../controllers/consultation_controller.dart';
 import '../../../../constant/constant.dart';
+import 'components/doctor_card.dart';
 
 class ConsultationView extends GetView<ConsultationController> {
   const ConsultationView({Key? key}) : super(key: key);
@@ -26,7 +26,9 @@ class ConsultationView extends GetView<ConsultationController> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(Routes.CHATLIST);
+            },
             icon: SvgPicture.asset('assets/icons/History.svg'),
           ),
         ],
@@ -42,7 +44,7 @@ class ConsultationView extends GetView<ConsultationController> {
               child: Column(
                 children: [
                   TextField(
-                    decoration: searchStyle.copyWith(
+                    decoration: primary.copyWith(
                       hintText: 'Temukan meditasimu disini',
                       hintStyle:
                           regular.copyWith(fontSize: 16, color: Neutral.dark3),
@@ -68,108 +70,16 @@ class ConsultationView extends GetView<ConsultationController> {
                           height: 16, color: Colors.transparent);
                     },
                     itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () => Get.toNamed(Routes.DETAILPSIKIATER),
-                        child: Container(
-                          height: 148,
-                          width: 380,
-                          decoration: BoxDecoration(
-                            boxShadow: [blur8, blur4],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 154.4127,
-                                height: 148,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/Avatar1.png'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Container(
-                                          width: 160,
-                                          child: Text(
-                                            "Dr. Andy Sp.KJ",
-                                            style: semiBold.copyWith(
-                                                fontSize: 16,
-                                                color: Neutral.dark1),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            print('Button Favorite Pressed');
-                                          },
-                                          child: SvgPicture.asset(
-                                            'assets/icons/Heart.svg',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "Sp. Jiwa",
-                                      style: regular.copyWith(
-                                          fontSize: 12, color: Neutral.dark2),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/icons/Suitcase-1.svg',
-                                        ),
-                                        Text(
-                                          "14 Tahun",
-                                          style: semiBold.copyWith(
-                                              fontSize: 12,
-                                              color: Primary.mainColor),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        SvgPicture.asset(
-                                          'assets/icons/Top-1.svg',
-                                        ),
-                                        Text(
-                                          "95 %",
-                                          style: semiBold.copyWith(
-                                              fontSize: 12,
-                                              color: Primary.mainColor),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      "Rp. 150.000",
-                                      style: semiBold.copyWith(
-                                          fontSize: 16, color: Neutral.dark2),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 115, top: 5),
-                                      child: BookButton(
-                                        label: 'Book',
-                                        onTap: () {
-                                          print('Button Gook Pressed');
-                                        },
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      return DoctorCard(
+                        image: 'assets/images/Avatar1.png',
+                        name: 'Dr. Andy Sp.KJ',
+                        title: 'Sp. Jiwa',
+                        yearsofservice: '14 Tahun',
+                        rating: '95%',
+                        price: 'Rp. 150.000',
+                        like: () {},
+                        onTapButton: () => Get.toNamed(Routes.DETAILPSIKIATER),
+                        onTapCard: () => Get.toNamed(Routes.DETAILPSIKIATER),
                       );
                     },
                   ),

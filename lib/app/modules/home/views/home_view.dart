@@ -27,6 +27,13 @@ class HomeView extends GetView<HomeController> {
               },
             ),
             Gap(16),
+            MainButton(
+              label: 'Go to ChatWithDoctor',
+              onTap: () {
+                Get.toNamed(Routes.CHATWITHDOCTOR);
+              },
+            ),
+            Gap(16),
             TextFormField(
               decoration: primary.copyWith(
                 hintText: 'Email',

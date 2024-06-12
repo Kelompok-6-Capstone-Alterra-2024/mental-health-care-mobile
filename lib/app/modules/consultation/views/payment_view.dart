@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,7 +9,7 @@ import 'package:mindease/utils/global_components/main_button.dart';
 import '../controllers/consultation_controller.dart';
 import '../../../../constant/constant.dart';
 
-class PaymentView extends GetView {
+class PaymentView extends GetView<ConsultationController> {
   PaymentView({Key? key}) : super(key: key);
   final SwitchController switchController = Get.put(SwitchController());
   final SelecTabController selecTabController = Get.put(SelecTabController());
@@ -85,7 +86,7 @@ class PaymentView extends GetView {
                                 style: regular.copyWith(
                                     fontSize: 16, color: Neutral.dark2),
                               ),
-                              Divider(),
+                              const Divider(),
                             ],
                           ),
                           const SizedBox(height: 16),
@@ -108,7 +109,7 @@ class PaymentView extends GetView {
                                         style: medium.copyWith(
                                             fontSize: 14, color: Neutral.dark3),
                                       ),
-                                      SizedBox(width: 5),
+                                      const SizedBox(width: 5),
                                       Container(
                                         height: 14,
                                         width: 14,
@@ -152,7 +153,7 @@ class PaymentView extends GetView {
                           const SizedBox(height: 16),
                           Container(
                             width: 380,
-                            height: 72,
+                            height: 74,
                             decoration: BoxDecoration(
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(6),
@@ -161,7 +162,7 @@ class PaymentView extends GetView {
                               boxShadow: [blur8, blur4],
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(20),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -173,10 +174,10 @@ class PaymentView extends GetView {
                                       Text(
                                         '0 Poin',
                                         style: bold.copyWith(
-                                            fontSize: 16,
+                                            fontSize: 12,
                                             color: Primary.mainColor),
                                       ),
-                                      SizedBox(height: 4),
+                                      // SizedBox(height: 4),
                                       Text(
                                         'Saldo Poin',
                                         style: regular.copyWith(
@@ -204,191 +205,49 @@ class PaymentView extends GetView {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          DefaultTabController(
-                            length: 2, // Jumlah tab
-                            child: Container(
-                              width: 380,
-                              height: 155,
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(6),
-                                ),
-                                color: Neutral.light3,
-                                boxShadow: [blur8, blur4],
+                          Container(
+                            width: 380,
+                            height: 72,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(6),
                               ),
-                              child: Column(
+                              color: Neutral.light3,
+                              boxShadow: [blur8, blur4],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Obx(
-                                    () => TabBar(
-                                      labelPadding: const EdgeInsets.all(0),
-                                      dividerHeight: 0,
-                                      indicatorColor: Colors.transparent,
-                                      labelColor: Primary.mainColor,
-                                      unselectedLabelColor: Neutral.dark2,
-                                      labelStyle: medium.copyWith(fontSize: 12),
-                                      unselectedLabelStyle:
-                                          medium.copyWith(fontSize: 12),
-                                      tabs: [
-                                        Tab(
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: selecTabController
-                                                          .selectedTabPayment
-                                                          .value ==
-                                                      1
-                                                  ? Neutral.light3
-                                                  : Neutral.light1,
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(6)),
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                'Uang \nElektronik',
-                                              ),
-                                            ),
-                                          ),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                          'assets/icons/Check-Box.svg'),
+                                      const Gap(20),
+                                      Text(
+                                        'Midtrans',
+                                        style: medium.copyWith(
+                                          fontSize: 16,
+                                          color: Neutral.dark1,
                                         ),
-                                        Tab(
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: selecTabController
-                                                          .selectedTabPayment
-                                                          .value ==
-                                                      2
-                                                  ? Neutral.light3
-                                                  : Neutral.light1,
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(6)),
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                'Kartu Kredit/\ndebit',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                  Expanded(
-                                    child: TabBarView(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 8, right: 8),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Radio(
-                                                        value: 'gopay',
-                                                        groupValue:
-                                                            'selectedPayment',
-                                                        onChanged: (value) {},
-                                                      ),
-                                                      Text(
-                                                        'gopay',
-                                                        style: medium.copyWith(
-                                                            fontSize: 16,
-                                                            color:
-                                                                Neutral.dark1),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Container(
-                                                        height: 18,
-                                                        width: 79,
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          image:
-                                                              DecorationImage(
-                                                            image: AssetImage(
-                                                                'assets/images/new-gopay-logo.png'),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 15,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Radio(
-                                                        value: 'dana',
-                                                        groupValue:
-                                                            'selectedPayment',
-                                                        onChanged: (value) {},
-                                                      ),
-                                                      Text(
-                                                        'Dana',
-                                                        style: medium.copyWith(
-                                                            fontSize: 16,
-                                                            color:
-                                                                Neutral.dark1),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Container(
-                                                        height: 22,
-                                                        width: 79,
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          image:
-                                                              DecorationImage(
-                                                            image: AssetImage(
-                                                                'assets/images/DANA.png'),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 15,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Center(child: Text("Favorites Page")),
-                                      ],
-                                    ),
+                                  const Image(
+                                    image: AssetImage(
+                                        'assets/images/logomidtrans.png'),
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                          SizedBox(height: 16),
-                          MainButton(label: 'Buat Jadwal'),
+                          const SizedBox(height: 60),
+                          MainButton(
+                            label: 'Buat Jadwal',
+                            onTap: () => Get.toNamed(Routes.PAYMENTPROCESSED),
+                          ),
                         ],
                       ),
                     ),

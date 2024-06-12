@@ -35,15 +35,15 @@ InputDecoration searchStyle = InputDecoration(
 InputDecoration textBoxStyle = InputDecoration(
   isDense: true,
   enabledBorder: OutlineInputBorder(
-    borderSide: const BorderSide(color: Neutral.dark4, width: 2),
+    borderSide: const BorderSide(color: Neutral.dark4, width: 1),
     borderRadius: BorderRadius.circular(8),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: const BorderSide(color: Neutral.dark1, width: 2),
+    borderSide: const BorderSide(color: Neutral.dark1, width: 1),
     borderRadius: BorderRadius.circular(8),
   ),
   errorBorder: OutlineInputBorder(
-    borderSide: const BorderSide(color: Error.subtle, width: 2),
+    borderSide: const BorderSide(color: Error.subtle, width: 1),
     borderRadius: BorderRadius.circular(8),
   ),
 );
