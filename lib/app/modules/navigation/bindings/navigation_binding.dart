@@ -16,6 +16,7 @@ class NavigationBinding extends Bindings {
     );
     Get.lazyPut<ForumController>(
       () => ForumController(),
+    );
     Get.lazyPut<MeditationController>(
       () => MeditationController(),
     );

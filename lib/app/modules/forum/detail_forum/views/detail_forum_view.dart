@@ -14,6 +14,7 @@ class DetailForumView extends GetView<DetailForumController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Neutral.light2,
       appBar: AppBar(
         title: Text(
           'TalkLife',
@@ -31,110 +32,125 @@ class DetailForumView extends GetView<DetailForumController> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 44, vertical: 22),
-          child: Column(
-            children: [
-              Row(
+        child: Column(
+          children: [
+            Container( // header top card
+              padding: const EdgeInsets.symmetric(horizontal: 44, vertical: 22),
+              decoration: BoxDecoration(
+                color: Neutral.light4,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  blur4,
+                  blur8,
+                ],
+              ),
+              child: Column(
                 children: [
-                  Container(
-                    width: 72,
-                    height: 72,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/my_forum_cover.png'),
-                        fit: BoxFit.cover,
+                  Row(
+                    children: [
+                      Container(
+                        width: 72,
+                        height: 72,
+                        decoration: BoxDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage(
+                                'assets/images/my_forum_cover.png'),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                      const Gap(20),
+                      Text(
+                        'TalkLife',
+                        style: semiBold.copyWith(
+                            fontSize: 24, color: Neutral.dark1),
+                      ),
+                    ],
                   ),
                   const Gap(20),
                   Text(
-                    'TalkLife',
-                    style:
-                        semiBold.copyWith(fontSize: 24, color: Neutral.dark1),
+                    textAlign: TextAlign.justify,
+                    'Forum yang membantu pengguna dari seluruh indonesia  berbagi pengalaman, mendukung satu sama lain, dan mengatasi tantangan kesehatan mental bersama',
+                    style: regular.copyWith(
+                      fontSize: 12,
+                      color: Neutral.dark2,
+                    ),
+                  ),
+                  const Gap(40),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/member.svg',
+                              width: 24,
+                              height: 24,
+                            ),
+                            const Gap(6),
+                            Text(
+                              'Anggota',
+                              style: medium.copyWith(
+                                  fontSize: 12, color: Neutral.dark3),
+                            ),
+                          ],
+                        ),
+                        const Gap(20),
+                        Column(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/share.svg',
+                              width: 24,
+                              height: 24,
+                            ),
+                            const Gap(6),
+                            Text(
+                              'Bagi',
+                              style: medium.copyWith(
+                                  fontSize: 12, color: Neutral.dark3),
+                            ),
+                          ],
+                        ),
+                        const Gap(20),
+                        Column(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/quit.svg',
+                              width: 24,
+                              height: 24,
+                            ),
+                            const Gap(6),
+                            Text(
+                              'Keluar',
+                              style: medium.copyWith(
+                                  fontSize: 12, color: Neutral.dark3),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              const Gap(20),
-              Text(
-                textAlign: TextAlign.justify,
-                'Forum yang membantu pengguna dari seluruh indonesia  berbagi pengalaman, mendukung satu sama lain, dan mengatasi tantangan kesehatan mental bersama',
-                style: regular.copyWith(
-                  fontSize: 12,
-                  color: Neutral.dark2,
-                ),
-              ),
-              const Gap(40),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/member.svg',
-                          width: 24,
-                          height: 24,
-                        ),
-                        const Gap(6),
-                        Text(
-                          'Anggota',
-                          style: medium.copyWith(
-                              fontSize: 12, color: Neutral.dark3),
-                        ),
-                      ],
-                    ),
-                    const Gap(20),
-                    Column(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/share.svg',
-                          width: 24,
-                          height: 24,
-                        ),
-                        const Gap(6),
-                        Text(
-                          'Bagi',
-                          style: medium.copyWith(
-                              fontSize: 12, color: Neutral.dark3),
-                        ),
-                      ],
-                    ),
-                    const Gap(20),
-                    Column(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/quit.svg',
-                          width: 24,
-                          height: 24,
-                        ),
-                        const Gap(6),
-                        Text(
-                          'Keluar',
-                          style: medium.copyWith(
-                              fontSize: 12, color: Neutral.dark3),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const Gap(40),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return const PostCard();
-                },
-              )
-            ],
-          ),
+            ),
+            const Gap(32),
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return const PostCard();
+              },
+            )
+          ],
         ),
       ),
       floatingActionButton: Container(
-        padding: const EdgeInsets.all(6),
+        margin: const EdgeInsets.only(bottom: 10, right: 16),
+        padding: const EdgeInsets.symmetric(vertical: 4),
         height: 53,
         width: 125,
         decoration: BoxDecoration(

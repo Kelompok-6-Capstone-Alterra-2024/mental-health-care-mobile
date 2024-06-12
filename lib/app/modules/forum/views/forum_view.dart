@@ -20,63 +20,62 @@ class ForumView extends GetView<ForumController> {
           'Daftar Forum',
           style: medium.copyWith(fontSize: 16, color: Primary.darker),
         ),
-        leading: IconButton(
-          icon: SvgPicture.asset(
-            'assets/icons/Chevron.svg',
-            width: 26,
-          ),
-          onPressed: () {},
-        ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Gap(16),
-            TextFormField(
-              style: light.copyWith(fontSize: 14, color: Neutral.dark3),
-              decoration: searchStyle.copyWith(
-                  hintText: 'Temukan Forum',
-                  prefixIcon: SvgPicture.asset(
-                    'assets/icons/Search.svg',
-                    width: 20,
-                  ),
-                  prefixIconConstraints: const BoxConstraints(minWidth: 50)),
-            ),
-            const Gap(32),
-            Text(
-              'Forum Saya',
-              style: semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
-            ),
-            SizedBox(
-              height: Get.height * 0.23,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return MyForumCard(
-                        onTap: () {
-                          Get.toNamed(Routes.DETAIL_FORUM);
-                        },
-                        title: 'TalkLife',
-                        imageUrl: 'assets/images/my_forum_cover.png');
-                  }),
-            ),
-            Text(
-              'Rekomendasi Forum',
-              style: semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return const ForumCard();
-              },
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Gap(16),
+              TextFormField(
+                style: light.copyWith(fontSize: 14, color: Neutral.dark3),
+                decoration: searchStyle.copyWith(
+                    hintText: 'Temukan Forum',
+                    prefixIcon: SvgPicture.asset(
+                      'assets/icons/Search.svg',
+                      width: 20,
+                    ),
+                    prefixIconConstraints: const BoxConstraints(minWidth: 50)),
+              ),
+              const Gap(32),
+              Text(
+                'Forum Saya',
+                style:
+                    semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
+              ),
+              SizedBox(
+                height: Get.height * 0.28,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return MyForumCard(
+                          onTap: () {
+                            Get.toNamed(Routes.DETAIL_FORUM);
+                          },
+                          title: 'TalkLife',
+                          imageUrl: 'assets/images/my_forum_cover.png');
+                    }),
+              ),
+              Gap(16),
+              Text(
+                'Rekomendasi Forum',
+                style:
+                    semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
+              ),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return const ForumCard();
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

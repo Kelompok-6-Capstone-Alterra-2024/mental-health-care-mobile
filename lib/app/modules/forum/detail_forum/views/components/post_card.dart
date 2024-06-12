@@ -12,7 +12,8 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
+      
+      margin: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
       decoration: BoxDecoration(
         color: Neutral.light3,
         borderRadius: BorderRadius.circular(8),
@@ -43,58 +44,60 @@ class PostCard extends StatelessWidget {
             const Gap(10),
             const Divider(color: Neutral.dark3),
             const Gap(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/like.svg',
-                      width: 24,
-                      height: 24,
-                    ),
-                    const Gap(6),
-                    Text(
-                      'Suka',
-                      style:
-                          semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
-                    ),
-                  ],
-                ),
-                const Gap(20),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/comment.svg',
-                      width: 24,
-                      height: 24,
-                    ),
-                    const Gap(6),
-                    Text(
-                      'Komentar',
-                      style:
-                          semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
-                    ),
-                  ],
-                ),
-                const Gap(20),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/share2.svg',
-                      width: 24,
-                      height: 24,
-                    ),
-                    const Gap(6),
-                    Text(
-                      'Bagi',
-                      style:
-                          semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
-                    ),
-                  ],
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/like.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                      const Gap(6),
+                      Text(
+                        'Suka',
+                        style:
+                            semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/comment.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                      const Gap(6),
+                      Text(
+                        'Komentar',
+                        style:
+                            semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/share2.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                      const Gap(6),
+                      Text(
+                        'Bagi',
+                        style:
+                            semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
+            const Gap(10)
           ],
         ),
       ),
