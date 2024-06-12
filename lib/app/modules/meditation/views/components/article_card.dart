@@ -48,8 +48,9 @@ class ArticleCard extends StatelessWidget {
                     width: 142,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/2.png'),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -61,7 +62,7 @@ class ArticleCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Panduan Lengkap untuk Meditasi Harian',
+                            title,
                             style: semiBold.copyWith(
                               fontSize: 16,
                               color: Neutral.dark1,
@@ -71,21 +72,24 @@ class ArticleCard extends StatelessWidget {
                           ),
                           Gap(16),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                '3 Jam yang lalu',
-                                style: regular.copyWith(
-                                  fontSize: 10,
-                                  color: Neutral.dark3,
+                              Expanded(
+                                child: Text(
+                                  time,
+                                  style: regular.copyWith(
+                                    fontSize: 10,
+                                    color: Neutral.dark3,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               Text(
-                                'Bacaan 2 menit',
+                                readTime,
                                 style: regular.copyWith(
                                   fontSize: 10,
                                   color: Neutral.dark3,
                                 ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),

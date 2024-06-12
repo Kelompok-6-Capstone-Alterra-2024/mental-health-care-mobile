@@ -11,11 +11,10 @@ import 'TabBarViews/article.dart';
 import 'TabBarViews/music.dart';
 import 'TabBarViews/story.dart';
 
-class MeditationView extends StatelessWidget {
+class MeditationView extends GetView<MeditationController> {
   const MeditationView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final MeditationController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
         title: Obx(

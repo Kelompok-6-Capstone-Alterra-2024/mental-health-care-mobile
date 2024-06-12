@@ -1,31 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../routes/app_pages.dart';
+import '../../controllers/meditation_controller.dart';
 import '../components/article_card.dart';
 
-class ArticleTab extends StatelessWidget {
-  const ArticleTab({super.key});
+class ArticleTab extends GetView<MeditationController> {
+  const ArticleTab({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return ArticleCard(
-            image: 'assets/images/2.png',
-            title: 'The Power of Meditation',
-            time: '2 hours ago',
-            readTime: '5 min read',
-            onTap: () {
-              Get.toNamed(Routes.ARTICLE);
-            },
+    return Obx(
+      () {
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else if (controller.errorMessage.isNotEmpty) {
+          return Center(child: Text('Error: ${controller.errorMessage}'));
+        } else {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: ListView.builder(
+              itemCount: controller.articles.length,
+              itemBuilder: (context, index) {
+                final article = controller.articles[index];
+                return ArticleCard(
+                  image: article.imageUrl,
+                  title: article.title,
+                  time: article.date.toString(),
+                  readTime: 'bacaan ${article.content.length ~/ 10} menit',
+                  onTap: () {
+                    Get.toNamed(Routes.ARTICLE,
+                        arguments: {'articleID': article.id});
+                    print('Article ID: ${article.id}');
+                  },
+                );
+              },
+            ),
           );
-        },
-      ),
+        }
+      },
     );
   }
 }

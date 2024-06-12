@@ -16,9 +16,10 @@ import '../modules/home/mood_track/views/mood_track_view.dart';
 import '../modules/home/notification/bindings/notification_binding.dart';
 import '../modules/home/notification/views/notification_view.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/meditation/article/bindings/article_binding.dart';
+import '../modules/meditation/article/views/article_view.dart';
 import '../modules/meditation/bindings/meditation_binding.dart';
 import '../modules/meditation/music/views/music_view.dart';
-import '../modules/meditation/views/article_view.dart';
 import '../modules/meditation/views/meditation_view.dart';
 import '../modules/meditation/views/story_view.dart';
 import '../modules/meditation/views/wishlist_view.dart';
@@ -29,7 +30,6 @@ import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/welcome_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
-
 
 part 'app_routes.dart';
 
@@ -123,12 +123,12 @@ class AppPages {
           page: () => const MusicView(),
           binding: MeditationBinding(),
         ),
+        GetPage(
+          name: _Paths.ARTICLE,
+          page: () => const ArticleView(),
+          binding: ArticleBinding(),
+        ),
       ],
-    ),
-    GetPage(
-      name: _Paths.ARTICLE,
-      page: () => const ArticleView(),
-      binding: MeditationBinding(),
     ),
     GetPage(
       name: _Paths.STORY,

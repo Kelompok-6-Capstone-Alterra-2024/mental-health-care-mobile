@@ -5,7 +5,6 @@ abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
   static const MEDITATION = _Paths.MEDITATION;
-  static const ARTICLE = _Paths.ARTICLE;
   static const STORY = _Paths.STORY;
   static const WISHLIST = _Paths.WISHLIST;
   static const MUSIC = _Paths.MEDITATION + _Paths.MUSIC;
@@ -22,6 +21,7 @@ abstract class Routes {
   static const VERIFICATION_CODE = _Paths.VERIFICATION_CODE;
   static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
   static const ADD_MOOD = _Paths.HOME + _Paths.MOOD_TRACK + _Paths.ADD_MOOD;
+  static const ARTICLE = _Paths.MEDITATION + _Paths.ARTICLE;
 }
 
 abstract class _Paths {
@@ -29,7 +29,6 @@ abstract class _Paths {
   static const HOME = '/home';
   static const MEDITATION = '/meditation';
   static const MUSIC = '/music';
-  static const ARTICLE = '/article';
   static const STORY = '/story';
   static const WISHLIST = '/wishlist';
   static const NAVIGATION = '/navigation';
@@ -45,4 +44,5 @@ abstract class _Paths {
   static const VERIFICATION_CODE = '/verification-code';
   static const NEW_PASSWORD = '/new-password';
   static const ADD_MOOD = '/add-mood';
+  static const ARTICLE = '/article';
 }
