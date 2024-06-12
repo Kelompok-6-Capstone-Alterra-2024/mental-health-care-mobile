@@ -83,7 +83,9 @@ class ProfileView extends GetView<ProfileController> {
             CustomSettingCard(
               icon: 'assets/icons/PaymentCard.svg',
               title: 'Transaksi',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(Routes.TRANSACTION);
+              },
             ),
             CustomSettingCard(
               icon: 'assets/icons/DollarCoin.svg',
