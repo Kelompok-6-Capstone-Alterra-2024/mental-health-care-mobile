@@ -88,7 +88,9 @@ class ProfileView extends GetView<ProfileController> {
             CustomSettingCard(
               icon: 'assets/icons/DollarCoin.svg',
               title: 'Poin',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(Routes.POIN);
+              },
             ),
             CustomSettingCard(
               icon: 'assets/icons/Email.svg',

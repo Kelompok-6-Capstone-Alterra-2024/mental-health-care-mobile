@@ -26,7 +26,10 @@ abstract class Routes {
   static const EDIT_PROFILE = _Paths.PROFILE + _Paths.EDIT_PROFILE;
   static const CHANGE_EMAIL = _Paths.PROFILE + _Paths.CHANGE_EMAIL;
   static const SETTING = _Paths.PROFILE + _Paths.SETTING;
-  static const CHANGE_PASSWORD = _Paths.PROFILE + _Paths.SETTING + _Paths.CHANGE_PASSWORD;
+  static const CHANGE_PASSWORD =
+      _Paths.PROFILE + _Paths.SETTING + _Paths.CHANGE_PASSWORD;
+  static const TRANSACTION = _Paths.PROFILE + _Paths.TRANSACTION;
+  static const POIN = _Paths.PROFILE + _Paths.POIN;
 }
 
 abstract class _Paths {
@@ -55,4 +58,6 @@ abstract class _Paths {
   static const CHANGE_EMAIL = '/change-email';
   static const SETTING = '/setting';
   static const CHANGE_PASSWORD = '/change-password';
+  static const TRANSACTION = '/transaction';
+  static const POIN = '/poin';
 }

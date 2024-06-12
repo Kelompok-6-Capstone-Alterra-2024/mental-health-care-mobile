@@ -1,7 +1,4 @@
 import 'package:get/get.dart';
-import 'package:mindease/app/modules/profile/views/screens/change_password_view.dart';
-import 'package:mindease/app/modules/profile/views/screens/edit_profile_view.dart';
-import 'package:mindease/app/modules/profile/views/screens/setting_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/forgot_password_view.dart';
@@ -31,8 +28,15 @@ import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/welcome_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/poin/bindings/poin_binding.dart';
+import '../modules/profile/poin/views/poin_view.dart';
+import '../modules/profile/transaction/bindings/transaction_binding.dart';
+import '../modules/profile/transaction/views/transaction_view.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile/views/screens/change_email_view.dart';
+import '../modules/profile/views/screens/change_password_view.dart';
+import '../modules/profile/views/screens/edit_profile_view.dart';
+import '../modules/profile/views/screens/setting_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -171,6 +175,16 @@ class AppPages {
               binding: ProfileBinding(),
             ),
           ],
+        ),
+        GetPage(
+          name: _Paths.TRANSACTION,
+          page: () => const TransactionView(),
+          binding: TransactionBinding(),
+        ),
+        GetPage(
+          name: _Paths.POIN,
+          page: () => const PoinView(),
+          binding: PoinBinding(),
         ),
       ],
     ),
