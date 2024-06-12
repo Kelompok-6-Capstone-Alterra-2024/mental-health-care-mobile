@@ -28,6 +28,11 @@ class AiChatView extends GetView<AiChatController> {
           },
         ),
         centerTitle: true,
+        actions: [
+          IconButton(onPressed: () {
+            controller.clearMessages();
+          }, icon: Icon(Icons.delete, color: Error.mainColor,))
+        ],
       ),
       body: Column(
         children: [

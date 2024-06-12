@@ -19,8 +19,7 @@ class AiChatController extends GetxController {
   TextEditingController messageController = TextEditingController();
 
   late Timer _timer;
-
-  final count = 0.obs;
+  final storage = GetStorage();
 
   void startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -41,6 +40,7 @@ class AiChatController extends GetxController {
             isMine: false,
           );
           messages.add(parsedMessage);
+          saveMessages();
         },
         onDone: () {
           isConnected.value = false;
@@ -71,14 +71,33 @@ class AiChatController extends GetxController {
       isMine: true,
     );
     messages.add(message);
+    saveMessages();
     channel.sink.add(messageText);
     messageController.clear();
+  }
+
+  void loadMessages() { //load messages from local storage
+    List<dynamic>? storedMessages = storage.read<List<dynamic>>('messages');
+    if (storedMessages != null) {
+      messages.value = storedMessages.map((e) => MessageModel.fromJson(e)).toList();
+    }
+  }
+
+  void saveMessages() { // Save messages to local storage save with json format
+    List<Map<String, dynamic>> messageList = messages.map((e) => e.toJson()).toList();
+    storage.write('messages', messageList);
+  }
+
+  void clearMessages() {
+    messages.clear();
+    storage.remove('messages');
   }
 
   @override
   void onInit() {
     token.value = GetStorage().read('token');
     startTimer();
+    loadMessages();
     connectWebSocket();
     super.onInit();
   }
@@ -97,6 +116,4 @@ class AiChatController extends GetxController {
     Get.closeAllSnackbars(); 
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
