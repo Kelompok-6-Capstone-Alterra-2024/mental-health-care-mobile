@@ -30,6 +30,10 @@ abstract class Routes {
       _Paths.PROFILE + _Paths.SETTING + _Paths.CHANGE_PASSWORD;
   static const TRANSACTION = _Paths.PROFILE + _Paths.TRANSACTION;
   static const POIN = _Paths.PROFILE + _Paths.POIN;
+  static const FORUM = _Paths.FORUM;
+  static const DETAIL_FORUM = _Paths.FORUM + _Paths.DETAIL_FORUM;
+  static const COMMENT_FORUM = _Paths.FORUM + _Paths.COMMENT_FORUM;
+  static const POST_FORUM = _Paths.FORUM + _Paths.POST_FORUM;
 }
 
 abstract class _Paths {
@@ -60,4 +64,8 @@ abstract class _Paths {
   static const CHANGE_PASSWORD = '/change-password';
   static const TRANSACTION = '/transaction';
   static const POIN = '/poin';
+  static const FORUM = '/forum';
+  static const DETAIL_FORUM = '/detail-forum';
+  static const COMMENT_FORUM = '/comment-forum';
+  static const POST_FORUM = '/post-forum';
 }

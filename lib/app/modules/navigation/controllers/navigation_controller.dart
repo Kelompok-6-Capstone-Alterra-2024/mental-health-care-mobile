@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mindease/app/modules/meditation/views/meditation_view.dart';
 import 'package:mindease/app/modules/profile/views/profile_view.dart';
 
+import '../../forum/views/forum_view.dart';
 import '../../home/views/home_view.dart';
 
 class NavigationController extends GetxController {
@@ -11,7 +12,7 @@ class NavigationController extends GetxController {
 
   final screen = [
     const HomeView(),
-    const HomeView(),
+    const ForumView(),
     const SizedBox(),
     const MeditationView(),
     const ProfileView(),
@@ -22,10 +23,9 @@ class NavigationController extends GetxController {
   void changeIndex(int index) {
     selectedIndex.value = index;
   }
+
   @override
   void onInit() {
     super.onInit();
   }
-
-
 }
