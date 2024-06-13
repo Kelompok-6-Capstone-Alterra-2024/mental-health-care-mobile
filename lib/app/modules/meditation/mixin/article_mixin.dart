@@ -9,11 +9,11 @@ mixin ArticleMixin on GetxController {
   var errorMessage = ''.obs;
 
   late ArticleService _articleService;
- 
+
   void fetchArticles() async {
     try {
       isLoading(true);
-      var articleResponse = await _articleService.getAllArticles();
+      var articleResponse = await _articleService.getArticles();
       articles(articleResponse.data);
     } catch (e) {
       errorMessage(e.toString());
