@@ -49,7 +49,8 @@ class MusicCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                      image: AssetImage(image),
+                      image: NetworkImage(
+                          "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
                       fit: BoxFit.cover,
                     ),
                   ),
