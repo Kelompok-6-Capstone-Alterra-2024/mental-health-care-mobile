@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/utils/global_components/main_button.dart';
 
 import '../../../../constant/constant.dart';
@@ -107,7 +108,9 @@ class RatingDoctorView extends GetView<ChatwithdoctorController> {
             Gap(32),
             MainButton(
               label: 'Kirim',
-              onTap: () {},
+              onTap: () {
+                Get.offAllNamed(Routes.CONSULTATION);
+              },
             ),
           ],
         ),

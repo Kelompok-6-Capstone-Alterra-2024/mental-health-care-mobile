@@ -59,3 +59,4 @@ class SwitchController extends GetxController {
     isSwitched.value = value;
   }
 }
+
