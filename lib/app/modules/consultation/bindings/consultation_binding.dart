@@ -10,4 +10,3 @@ class ConsultationBinding extends Bindings {
     );
   }
 }
-

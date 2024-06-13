@@ -21,3 +21,4 @@ class ChatwithdoctorController extends GetxController {
 
   void increment() => count.value++;
 }
+

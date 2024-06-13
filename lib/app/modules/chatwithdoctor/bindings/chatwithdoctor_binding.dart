@@ -10,3 +10,4 @@ class ChatwithdoctorBinding extends Bindings {
     );
   }
 }
+
