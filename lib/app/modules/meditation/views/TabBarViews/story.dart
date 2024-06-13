@@ -1,32 +1,47 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../routes/app_pages.dart';
+import '../../controllers/meditation_controller.dart';
 import '../components/story_card.dart';
 
-class StoryTab extends StatelessWidget {
+class StoryTab extends GetView<MeditationController> {
   const StoryTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 23.5),
-      child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return StoryCard(
-            image: 'assets/images/1.png',
-            title: 'The Power of Meditation',
-            author: 'Luna Grace',
-            time: '5 min',
-            like: () {},
-            onTap: () {
-              Get.toNamed(Routes.STORY);
-            },
+    return Obx(
+      () {
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else if (controller.errorMessage.isNotEmpty) {
+          return Center(child: Text('Error: ${controller.errorMessage}'));
+        } else {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: ListView.builder(
+              itemCount: controller.storys.length,
+              itemBuilder: (context, index) {
+                final storys = controller.storys[index];
+                return StoryCard(
+                  image: storys.imageUrl,
+                  title: storys.title,
+                  author: storys.doctor.name,
+                  time: storys.date.toString(),
+                  onTap: () {
+                    Get.toNamed(Routes.STORY,
+                        arguments: {'storyID': storys.id});
+                    print('Story ID: ${storys.id}');
+                  },
+                  like: () => 'like',
+                );
+              },
+            ),
           );
-        },
-      ),
+        }
+      },
     );
   }
 }
