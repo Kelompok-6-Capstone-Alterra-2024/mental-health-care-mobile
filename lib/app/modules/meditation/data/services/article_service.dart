@@ -11,7 +11,7 @@ class ArticleService {
   final String token = GetStorage().read('token') ?? '';
   final baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
 
-  Future<Articles> getAllArticles() async {
+  Future<Articles> getArticles() async {
     try {
       final response = await _dio.get(
         '$baseUrl/articles?page=1&limit=2',
@@ -36,7 +36,7 @@ class ArticleService {
     }
   }
 
-  Future<Article> getArticleById(int id) async {
+  Future<Article> getArticle(int id) async {
     try {
       final response = await _dio.get(
         '$baseUrl/articles/$id',

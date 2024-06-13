@@ -22,16 +22,16 @@ class ArticleTab extends GetView<MeditationController> {
             child: ListView.builder(
               itemCount: controller.articles.length,
               itemBuilder: (context, index) {
-                final article = controller.articles[index];
+                final articles = controller.articles[index];
                 return ArticleCard(
-                  image: article.imageUrl,
-                  title: article.title,
-                  time: article.date.toString(),
-                  readTime: 'bacaan ${article.content.length ~/ 10} menit',
+                  image: articles.imageUrl,
+                  title: articles.title,
+                  time: articles.date.toString(),
+                  readTime: 'bacaan ${articles.content.length ~/ 10} menit',
                   onTap: () {
                     Get.toNamed(Routes.ARTICLE,
-                        arguments: {'articleID': article.id});
-                    print('Article ID: ${article.id}');
+                        arguments: {'articleID': articles.id});
+                    print('Article ID: ${articles.id}');
                   },
                 );
               },

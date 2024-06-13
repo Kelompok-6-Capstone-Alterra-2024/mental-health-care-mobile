@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
-import 'package:mindease/app/modules/meditation/data/services/article_service.dart';
 
-import '../../data/models/article_model.dart';
+import '../../data/services/article_service.dart';
 
 class ArticleController extends GetxController {
   RxInt articleID = 0.obs;
@@ -11,11 +10,10 @@ class ArticleController extends GetxController {
   RxString articleCreatedAt = ''.obs;
   RxBool isLiked = false.obs;
   RxString doctor = ''.obs;
-  var article = <Data>[].obs;
 
-  Future<void> fetchArticleById() async {
+  Future<void> fetchArticle() async {
     final articleService = ArticleService();
-    await articleService.getArticleById(articleID.value).then(
+    await articleService.getArticle(articleID.value).then(
       (value) {
         articleTitle.value = value.data.title;
         articleContent.value = value.data.content;
@@ -32,7 +30,7 @@ class ArticleController extends GetxController {
     final arg = Get.arguments as Map<String, dynamic>;
     articleID.value = arg['articleID'];
     print('Article ID: ${articleID.value}');
-    fetchArticleById();
+    fetchArticle();
     super.onInit();
   }
 

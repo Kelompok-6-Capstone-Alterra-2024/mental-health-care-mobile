@@ -1,5 +1,5 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
@@ -31,74 +31,80 @@ class ArticleView extends GetView<ArticleController> {
           highlightColor: Neutral.transparent,
         ),
         title: Text(
-          'Meditation View',
+          'Article View',
           style: medium.copyWith(fontSize: 16, color: Primary.darker),
         ),
         centerTitle: true,
       ),
-      body: Container(
+      body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 24.5,
           vertical: 32,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Obx(
-              () => Container(
-                height: 252,
-                width: 379,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
-                    fit: BoxFit.cover,
+        child: Obx(() {
+          if (controller.articleTitle.isEmpty) {
+            return Center(child: CircularProgressIndicator());
+          }
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 252,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Gap(16),
-            Obx(() {
-              return Text(
-                controller.articleTitle.value,
-                style: semiBold.copyWith(
-                  fontSize: 16,
-                  color: Neutral.dark1,
+                const Gap(16),
+                Text(
+                  controller.articleTitle.value,
+                  style: semiBold.copyWith(
+                    fontSize: 16,
+                    color: Neutral.dark1,
+                  ),
                 ),
-              );
-            }),
-            Gap(8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Obx(() {
-                  return Text(
-                    controller.articleCreatedAt.value,
-                    style: regular.copyWith(
-                      fontSize: 12,
-                      color: Primary.mainColor,
+                const Gap(8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      controller.articleCreatedAt.value,
+                      style: regular.copyWith(
+                        fontSize: 12,
+                        color: Primary.mainColor,
+                      ),
                     ),
-                  );
-                }),
-                SvgPicture.asset(
-                  'assets/icons/Heart.svg',
-                  width: 18,
+                    GestureDetector(
+                      onTap: () {
+                        controller.isLiked.value = !controller.isLiked.value;
+                      },
+                      child: SvgPicture.asset(
+                        controller.isLiked.value
+                            ? 'assets/icons/Heart_filled.svg'
+                            : 'assets/icons/Heart.svg',
+                        width: 18,
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(16),
+                Text(
+                  controller.articleContent.value,
+                  style: regular.copyWith(
+                    fontSize: 12,
+                    color: Neutral.dark1,
+                  ),
                 ),
               ],
             ),
-            Gap(16),
-            Obx(() {
-              return Text(
-                controller.articleContent.value,
-                style: regular.copyWith(
-                  fontSize: 12,
-                  color: Neutral.dark1,
-                ),
-              );
-            }),
-          ],
-        ),
+          );
+        }),
       ),
     );
   }
