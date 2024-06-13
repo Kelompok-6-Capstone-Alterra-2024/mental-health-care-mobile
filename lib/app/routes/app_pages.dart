@@ -20,8 +20,9 @@ import '../modules/meditation/article/bindings/article_binding.dart';
 import '../modules/meditation/article/views/article_view.dart';
 import '../modules/meditation/bindings/meditation_binding.dart';
 import '../modules/meditation/music/views/music_view.dart';
+import '../modules/meditation/story/bindings/story_binding.dart';
+import '../modules/meditation/story/views/story_view.dart';
 import '../modules/meditation/views/meditation_view.dart';
-import '../modules/meditation/views/story_view.dart';
 import '../modules/meditation/views/wishlist_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
 import '../modules/navigation/views/navigation_view.dart';
@@ -128,12 +129,12 @@ class AppPages {
           page: () => const ArticleView(),
           binding: ArticleBinding(),
         ),
+        GetPage(
+          name: _Paths.STORY,
+          page: () => const StoryView(),
+          binding: StoryBinding(),
+        ),
       ],
-    ),
-    GetPage(
-      name: _Paths.STORY,
-      page: () => const StoryView(),
-      binding: MeditationBinding(),
     ),
     GetPage(
       name: _Paths.WISHLIST,
