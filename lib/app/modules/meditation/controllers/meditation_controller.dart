@@ -4,9 +4,15 @@ import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
 import '../mixin/article_mixin.dart';
+import '../mixin/music_mixin.dart';
+import '../mixin/story_mixin.dart';
 
 class MeditationController extends GetxController
-    with GetSingleTickerProviderStateMixin, ArticleMixin {
+    with
+        GetSingleTickerProviderStateMixin,
+        ArticleMixin,
+        StoryMixin,
+        MusicMixin {
   late TabController tabController;
   var currentTab = 0.obs;
   List<String> tabs = ['Musik', 'Artikel', 'Cerita Inspiratif'];
@@ -40,7 +46,6 @@ class MeditationController extends GetxController
     tabController.addListener(() {
       currentTab.value = tabController.index;
     });
-    fetchArticles();
   }
 
   @override
