@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mindease/constant/constant.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/navigation_controller.dart';
 
 class NavigationView extends GetView<NavigationController> {
@@ -17,10 +18,9 @@ class NavigationView extends GetView<NavigationController> {
         height: 70,
         width: 70,
         child: FloatingActionButton(
-          // ignore: prefer_const_constructors
           shape: CircleBorder(),
           onPressed: () {
-            GetStorage().erase();
+            Get.toNamed(Routes.CONSULTATION);
           },
           backgroundColor: Primary.mainColor,
           child: SvgPicture.asset('assets/icons/Stethoscope.svg'),

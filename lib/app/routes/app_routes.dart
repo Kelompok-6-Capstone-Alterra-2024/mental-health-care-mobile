@@ -34,6 +34,17 @@ abstract class Routes {
   static const DETAIL_FORUM = _Paths.FORUM + _Paths.DETAIL_FORUM;
   static const COMMENT_FORUM = _Paths.FORUM + _Paths.COMMENT_FORUM;
   static const POST_FORUM = _Paths.FORUM + _Paths.POST_FORUM;
+  static const CONSULTATION = _Paths.CONSULTATION;
+  static const DETAILPSIKIATER = _Paths.CONSULTATION + _Paths.DETAILPSIKIATER;
+  static const FORMCONSULTATION = _Paths.CONSULTATION + _Paths.FORMCONSULTATION;
+  static const PAYMENT = _Paths.CONSULTATION + _Paths.PAYMENT;
+  static const PAYMENTSUCCESS = _Paths.CONSULTATION + _Paths.PAYMENTSUCCESS;
+  static const PAYMENTDECLINED = _Paths.CONSULTATION + _Paths.PAYMENTDECLINED;
+  static const PAYMENTPROCESSED = _Paths.CONSULTATION + _Paths.PAYMENTPROCESSED;
+  static const CHATWITHDOCTOR = _Paths.CONSULTATION + _Paths.CHATLIST + _Paths.CHATWITHDOCTOR;
+  static const DETAILNOTE = _Paths.CONSULTATION + _Paths.DETAILNOTE;
+  static const RATINGDOCTOR = _Paths.CONSULTATION + _Paths.RATINGDOCTOR;
+  static const CHATLIST = _Paths.CONSULTATION + _Paths.CHATLIST;
 }
 
 abstract class _Paths {
@@ -68,4 +79,15 @@ abstract class _Paths {
   static const DETAIL_FORUM = '/detail-forum';
   static const COMMENT_FORUM = '/comment-forum';
   static const POST_FORUM = '/post-forum';
+  static const CONSULTATION = '/consultation';
+  static const DETAILPSIKIATER = '/detailpsikiater';
+  static const FORMCONSULTATION = '/formconsultation';
+  static const PAYMENT = '/payment';
+  static const PAYMENTSUCCESS = '/paymentsuccess';
+  static const PAYMENTDECLINED = '/paymentdeclined';
+  static const PAYMENTPROCESSED = '/paymentprocessed';
+  static const CHATWITHDOCTOR = '/chatwithdoctor';
+  static const DETAILNOTE = '/detailnote';
+  static const RATINGDOCTOR = '/ratingdoctor';
+  static const CHATLIST = '/chatlist';
 }
