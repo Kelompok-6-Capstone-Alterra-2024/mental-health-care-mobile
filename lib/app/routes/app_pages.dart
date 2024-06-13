@@ -34,9 +34,18 @@ import '../modules/navigation/views/navigation_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/welcome_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/poin/bindings/poin_binding.dart';
+import '../modules/profile/poin/views/poin_view.dart';
+import '../modules/profile/transaction/bindings/transaction_binding.dart';
+import '../modules/profile/transaction/views/transaction_view.dart';
+import '../modules/profile/views/profile_view.dart';
+import '../modules/profile/views/screens/change_email_view.dart';
+import '../modules/profile/views/screens/change_password_view.dart';
+import '../modules/profile/views/screens/edit_profile_view.dart';
+import '../modules/profile/views/screens/setting_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
-
 
 part 'app_routes.dart';
 
@@ -168,6 +177,45 @@ class AppPages {
       name: _Paths.WISHLIST,
       page: () => const WishlistView(),
       binding: MeditationBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+      children: [
+        GetPage(
+          name: _Paths.EDIT_PROFILE,
+          page: () => const EditProfileView(),
+          binding: ProfileBinding(),
+        ),
+        GetPage(
+          name: _Paths.CHANGE_EMAIL,
+          page: () => const ChangeEmailView(),
+          binding: ProfileBinding(),
+        ),
+        GetPage(
+          name: _Paths.SETTING,
+          page: () => const SettingView(),
+          binding: ProfileBinding(),
+          children: [
+            GetPage(
+              name: _Paths.CHANGE_PASSWORD,
+              page: () => const ChangePasswordView(),
+              binding: ProfileBinding(),
+            ),
+          ],
+        ),
+        GetPage(
+          name: _Paths.TRANSACTION,
+          page: () => const TransactionView(),
+          binding: TransactionBinding(),
+        ),
+        GetPage(
+          name: _Paths.POIN,
+          page: () => const PoinView(),
+          binding: PoinBinding(),
+        ),
+      ],
     ),
   ];
 }
