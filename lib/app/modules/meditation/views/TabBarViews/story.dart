@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../controllers/meditation_controller.dart';
-import '../components/article_card.dart';
+import '../components/story_card.dart';
 
-class ArticleTab extends GetView<MeditationController> {
-  const ArticleTab({Key? key});
+class StoryTab extends GetView<MeditationController> {
+  const StoryTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +22,20 @@ class ArticleTab extends GetView<MeditationController> {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: ListView.builder(
-              itemCount: controller.articles.length,
+              itemCount: controller.storys.length,
               itemBuilder: (context, index) {
-                final articles = controller.articles[index];
-                return ArticleCard(
-                  image: articles.imageUrl,
-                  title: articles.title,
-                  time: articles.date.toString(),
-                  readTime: 'bacaan ${articles.content.length ~/ 10} menit',
+                final storys = controller.storys[index];
+                return StoryCard(
+                  image: storys.imageUrl,
+                  title: storys.title,
+                  author: storys.doctor.name,
+                  time: storys.date.toString(),
                   onTap: () {
-                    Get.toNamed(Routes.ARTICLE,
-                        arguments: {'articleID': articles.id});
-                    print('Article ID: ${articles.id}');
+                    Get.toNamed(Routes.STORY,
+                        arguments: {'storyID': storys.id});
+                    print('Story ID: ${storys.id}');
                   },
+                  like: () => 'like',
                 );
               },
             ),

@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:logger/logger.dart';
+
+import '../mixin/article_mixin.dart';
+import '../mixin/music_mixin.dart';
+import '../mixin/story_mixin.dart';
 
 class MeditationController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+    with
+        GetSingleTickerProviderStateMixin,
+        ArticleMixin,
+        StoryMixin,
+        MusicMixin {
   late TabController tabController;
   var currentTab = 0.obs;
   List<String> tabs = ['Musik', 'Artikel', 'Cerita Inspiratif'];
-
+  final String token = GetStorage().read('token');
+  final logger = Logger();
   String get tabNameTitle {
     String title = tabs[currentTab.value];
 
@@ -15,15 +26,6 @@ class MeditationController extends GetxController
     } else {
       return title;
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    tabController = TabController(length: 3, vsync: this);
-    tabController.addListener(() {
-      currentTab.value = tabController.index;
-    });
   }
 
   String getTabIcon(int index) {
@@ -38,8 +40,18 @@ class MeditationController extends GetxController
   }
 
   @override
+  void onInit() {
+    super.onInit();
+    tabController = TabController(length: 3, vsync: this);
+    tabController.addListener(() {
+      currentTab.value = tabController.index;
+    });
+  }
+
+  @override
   void onReady() {
     super.onReady();
+    logger.i('Token: $token');
   }
 
   @override

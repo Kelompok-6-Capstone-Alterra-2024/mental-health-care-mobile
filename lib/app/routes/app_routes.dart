@@ -5,8 +5,6 @@ abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
   static const MEDITATION = _Paths.MEDITATION;
-  static const ARTICLE = _Paths.ARTICLE;
-  static const STORY = _Paths.STORY;
   static const WISHLIST = _Paths.WISHLIST;
   static const MUSIC = _Paths.MEDITATION + _Paths.MUSIC;
   static const NAVIGATION = _Paths.NAVIGATION;
@@ -22,6 +20,8 @@ abstract class Routes {
   static const VERIFICATION_CODE = _Paths.VERIFICATION_CODE;
   static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
   static const ADD_MOOD = _Paths.HOME + _Paths.MOOD_TRACK + _Paths.ADD_MOOD;
+  static const ARTICLE = _Paths.MEDITATION + _Paths.ARTICLE;
+  static const STORY = _Paths.MEDITATION + _Paths.STORY;
   static const PROFILE = _Paths.PROFILE;
   static const EDIT_PROFILE = _Paths.PROFILE + _Paths.EDIT_PROFILE;
   static const CHANGE_EMAIL = _Paths.PROFILE + _Paths.CHANGE_EMAIL;
@@ -41,8 +41,6 @@ abstract class _Paths {
   static const HOME = '/home';
   static const MEDITATION = '/meditation';
   static const MUSIC = '/music';
-  static const ARTICLE = '/article';
-  static const STORY = '/story';
   static const WISHLIST = '/wishlist';
   static const NAVIGATION = '/navigation';
   static const NOTIFICATION = '/notification';
@@ -57,6 +55,8 @@ abstract class _Paths {
   static const VERIFICATION_CODE = '/verification-code';
   static const NEW_PASSWORD = '/new-password';
   static const ADD_MOOD = '/add-mood';
+  static const ARTICLE = '/article';
+  static const STORY = '/story';
   static const PROFILE = '/profile';
   static const EDIT_PROFILE = '/edit-profile';
   static const CHANGE_EMAIL = '/change-email';

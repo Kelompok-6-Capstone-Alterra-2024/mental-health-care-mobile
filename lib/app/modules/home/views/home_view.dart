@@ -148,7 +148,7 @@ class HomeView extends GetView<HomeController> {
                     const Gap(20),
                     //doctor card
                     SizedBox(
-                      height: Get.height * 0.26,
+                      height: Get.height * 0.3,
                       child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
