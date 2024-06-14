@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
 import '../../../../../constant/constant.dart';
 
 class MyForumCard extends StatelessWidget {
   final String title;
   final Function()? onTap;
   final String imageUrl;
+
   const MyForumCard({
     super.key,
     required this.title,
@@ -36,7 +36,7 @@ class MyForumCard extends StatelessWidget {
               height: 145,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(imageUrl),
+                  image: NetworkImage(imageUrl),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(8),
@@ -53,10 +53,6 @@ class MyForumCard extends StatelessWidget {
                   title,
                   style: semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
                 ),
-                // Text(
-                //   'TalkLife',
-                //   style: semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
-                // ),
               ],
             ),
           ],

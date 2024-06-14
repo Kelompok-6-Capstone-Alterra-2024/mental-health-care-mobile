@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-
 import 'package:get/get.dart';
-import 'package:mindease/app/modules/forum/views/components/my_forum_card.dart';
-import 'package:mindease/app/routes/app_pages.dart';
 
 import '../../../../constant/constant.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/forum_controller.dart';
+import 'components/my_forum_card.dart';
 import 'components/forum_card.dart';
 
 class ForumView extends GetView<ForumController> {
@@ -46,21 +45,32 @@ class ForumView extends GetView<ForumController> {
                 style:
                     semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
               ),
-              SizedBox(
-                height: Get.height * 0.28,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return MyForumCard(
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (controller.errorMessage.isNotEmpty) {
+                  return Center(child: Text(controller.errorMessage.value));
+                } else {
+                  return SizedBox(
+                    height: Get.height * 0.28,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.joinedForums.length,
+                      itemBuilder: (context, index) {
+                        final forum = controller.joinedForums[index];
+                        return MyForumCard(
                           onTap: () {
                             Get.toNamed(Routes.DETAIL_FORUM);
                           },
-                          title: 'TalkLife',
-                          imageUrl: 'assets/images/my_forum_cover.png');
-                    }),
-              ),
+                          title: forum.name,
+                          imageUrl: forum.imageUrl,
+                        );
+                      },
+                    ),
+                  );
+                }
+              }),
               const Gap(16),
               Text(
                 'Rekomendasi Forum',
