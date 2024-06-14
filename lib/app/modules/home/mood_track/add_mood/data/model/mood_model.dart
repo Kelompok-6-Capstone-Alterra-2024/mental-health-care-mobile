@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Mood {
-  final String name;
+class MoodData {
+  final int moodId;
   final String iconPath;
   final Color color;
 
-  Mood({required this.name, required this.iconPath, required this.color});
+  MoodData({required this.moodId, required this.iconPath, required this.color});
 }

@@ -32,74 +32,76 @@ class NavigationView extends GetView<NavigationController> {
             topLeft: Radius.circular(36),
             topRight: Radius.circular(36),
           ),
-          child: BottomAppBar(
-            surfaceTintColor: Neutral.transparent,
-            shadowColor: Neutral.transparent,
-            height: 80,
-            color: Neutral.light1,
-            elevation: 0,
-            shape: const CircularNotchedRectangle(),
-            notchMargin: 4,
-            clipBehavior: Clip.antiAlias,
-            child: Theme(
-              data: Theme.of(context).copyWith(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-              ),
-              child: BottomNavigationBar(
-                currentIndex: controller.selectedIndex.value,
-                onTap: controller.changeIndex,
-                type: BottomNavigationBarType.fixed,
-                selectedItemColor: Primary.mainColor,
-                unselectedItemColor: Neutral.dark3,
-                elevation: 0,
-                enableFeedback: false,
-                backgroundColor: Neutral.transparent,
-                selectedLabelStyle: regular.copyWith(fontSize: 12),
-                unselectedLabelStyle: regular.copyWith(fontSize: 12),
-                items: [
-                  BottomNavigationBarItem(
-                    activeIcon: SvgPicture.asset(
-                      'assets/icons/home_active.svg',
+          child: Container(
+            child: BottomAppBar(
+              surfaceTintColor: Neutral.transparent,
+              shadowColor: Neutral.transparent,
+              height: 80,
+              color: Neutral.light2,
+              elevation: 0,
+              shape: const CircularNotchedRectangle(),
+              notchMargin: 4,
+              clipBehavior: Clip.none,
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                ),
+                child: BottomNavigationBar(
+                  currentIndex: controller.selectedIndex.value,
+                  onTap: controller.changeIndex,
+                  type: BottomNavigationBarType.fixed,
+                  selectedItemColor: Primary.mainColor,
+                  unselectedItemColor: Neutral.dark3,
+                  elevation: 0,
+                  enableFeedback: false,
+                  backgroundColor: Neutral.transparent,
+                  selectedLabelStyle: regular.copyWith(fontSize: 12),
+                  unselectedLabelStyle: regular.copyWith(fontSize: 12),
+                  items: [
+                    BottomNavigationBarItem(
+                      activeIcon: SvgPicture.asset(
+                        'assets/icons/home_active.svg',
+                      ),
+                      icon: SvgPicture.asset(
+                        'assets/icons/home_inactive.svg',
+                      ),
+                      label: 'Home',
                     ),
-                    icon: SvgPicture.asset(
-                      'assets/icons/home_inactive.svg',
+                    BottomNavigationBarItem(
+                      activeIcon: SvgPicture.asset(
+                        'assets/icons/community_active.svg',
+                      ),
+                      icon: SvgPicture.asset(
+                        'assets/icons/community_inactive.svg',
+                      ),
+                      label: 'Forum',
                     ),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    activeIcon: SvgPicture.asset(
-                      'assets/icons/community_active.svg',
+                    const BottomNavigationBarItem(
+                      icon: SizedBox(),
+                      label: '',
                     ),
-                    icon: SvgPicture.asset(
-                      'assets/icons/community_inactive.svg',
+                    BottomNavigationBarItem(
+                      activeIcon: SvgPicture.asset(
+                        'assets/icons/meditation_active.svg',
+                      ),
+                      icon: SvgPicture.asset(
+                        'assets/icons/meditation_inactive.svg',
+                      ),
+                      label: 'Meditasi',
                     ),
-                    label: 'Forum',
-                  ),
-                  const BottomNavigationBarItem(
-                    icon: SizedBox(),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    activeIcon: SvgPicture.asset(
-                      'assets/icons/meditation_active.svg',
+                    BottomNavigationBarItem(
+                      activeIcon: SvgPicture.asset(
+                        'assets/icons/profile_active.svg',
+                      ),
+                      icon: SvgPicture.asset(
+                        'assets/icons/profile_inactive.svg',
+                      ),
+                      label: 'Profil',
                     ),
-                    icon: SvgPicture.asset(
-                      'assets/icons/meditation_inactive.svg',
-                    ),
-                    label: 'Meditasi',
-                  ),
-                  BottomNavigationBarItem(
-                    activeIcon: SvgPicture.asset(
-                      'assets/icons/profile_active.svg',
-                    ),
-                    icon: SvgPicture.asset(
-                      'assets/icons/profile_inactive.svg',
-                    ),
-                    label: 'Profil',
-                  ),
-                ],
-                
+                  ],
+                  
+                ),
               ),
             ),
           ),
