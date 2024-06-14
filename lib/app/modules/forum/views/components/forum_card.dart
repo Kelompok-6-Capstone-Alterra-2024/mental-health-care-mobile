@@ -4,8 +4,15 @@ import 'package:gap/gap.dart';
 import '../../../../../constant/constant.dart';
 
 class ForumCard extends StatelessWidget {
+  final String title;
+  final String imageUrl;
+  final int numberOfMembers;
+
   const ForumCard({
     super.key,
+    required this.title,
+    required this.imageUrl,
+    required this.numberOfMembers,
   });
 
   @override
@@ -27,8 +34,8 @@ class ForumCard extends StatelessWidget {
             width: 63,
             height: 63,
             decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage('assets/images/forum_cover.png'),
+              image: DecorationImage(
+                image: NetworkImage(imageUrl),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(8),
@@ -47,13 +54,15 @@ class ForumCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        'Mental Health Forum',
+                        title,
                         style: semiBold.copyWith(
                             fontSize: 16, color: Neutral.dark1),
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        print('Join forum');
+                      },
                       child: Container(
                         alignment: Alignment.center,
                         height: 27,
@@ -74,7 +83,7 @@ class ForumCard extends StatelessWidget {
                 ),
                 const Gap(6),
                 Text(
-                  '190 Anggota',
+                  '$numberOfMembers Anggota',
                   style: medium.copyWith(fontSize: 12, color: Neutral.dark3),
                 ),
               ],

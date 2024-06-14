@@ -12,6 +12,7 @@ import 'components/forum_card.dart';
 
 class ForumView extends GetView<ForumController> {
   const ForumView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,20 +61,33 @@ class ForumView extends GetView<ForumController> {
                           imageUrl: 'assets/images/my_forum_cover.png');
                     }),
               ),
-              Gap(16),
+              const Gap(16),
               Text(
                 'Rekomendasi Forum',
                 style:
                     semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
               ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return const ForumCard();
-                },
-              )
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (controller.errorMessage.isNotEmpty) {
+                  return Center(child: Text(controller.errorMessage.value));
+                } else {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: controller.recommendationForums.length,
+                    itemBuilder: (context, index) {
+                      final forum = controller.recommendationForums[index];
+                      return ForumCard(
+                        title: forum.name,
+                        imageUrl: forum.imageUrl,
+                        numberOfMembers: forum.numberOfMembers,
+                      );
+                    },
+                  );
+                }
+              }),
             ],
           ),
         ),
