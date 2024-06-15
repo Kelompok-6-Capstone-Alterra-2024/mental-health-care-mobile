@@ -26,7 +26,7 @@ class RecommendationForumService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('Response data: ${response.data}');
+        logger.i(response.data);
         return RecommendationForumModel.fromJson(response.data);
       } else {
         throw Exception(

@@ -25,7 +25,7 @@ class JoinedForumService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('Response data: ${response.data}');
+        logger.i(response.data);
         return JoinedForumModel.fromJson(response.data);
       } else {
         throw Exception(
