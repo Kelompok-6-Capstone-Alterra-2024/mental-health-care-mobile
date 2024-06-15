@@ -40,7 +40,7 @@ mixin FormConsultationMixin on GetxController {
         consultationId,
         name.value,
         int.parse(age.value),
-        gender.value == true ? 'wanita' : 'laki-laki',
+        gender.value == true ? 'wanita' : 'pria',
         message.value,
         medicalHistory.value);
       if (response.statusCode == 201) {
