@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:mindease/constant/constant.dart';
 
+import '../../../../../../constant/constant.dart';
 import '../../data/models/posts_model.dart';
 
 class PostCard extends StatelessWidget {
@@ -63,32 +63,69 @@ class PostCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildActionItem('Suka', 'assets/icons/like.svg'),
-                _buildActionItem('Komentar', 'assets/icons/comment.svg'),
-                _buildActionItem('Bagi', 'assets/icons/share2.svg'),
+                GestureDetector(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/like.svg',
+                        width: 24,
+                        height: 24,
+                        // color: isLiked ? Colors.red : Neutral.dark1,
+                      ),
+                      const Gap(6),
+                      Text(
+                        'Suka',
+                        style: semiBold.copyWith(
+                          fontSize: 16,
+                          // color: isLiked ? Colors.red : Neutral.dark1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/comment.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                      const Gap(6),
+                      Text(
+                        'Komentar',
+                        style: semiBold.copyWith(
+                            fontSize: 16, color: Neutral.dark1),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/share2.svg',
+                        width: 24,
+                        height: 24,
+                      ),
+                      const Gap(6),
+                      Text(
+                        'Bagi',
+                        style: semiBold.copyWith(
+                            fontSize: 16, color: Neutral.dark1),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
             const Gap(10),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildActionItem(String title, String iconPath) {
-    return Row(
-      children: [
-        SvgPicture.asset(
-          iconPath,
-          width: 24,
-          height: 24,
-        ),
-        const Gap(6),
-        Text(
-          title,
-          style: semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
-        ),
-      ],
     );
   }
 }
