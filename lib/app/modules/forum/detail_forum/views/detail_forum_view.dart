@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -102,8 +100,13 @@ class DetailForumView extends GetView<DetailForumController> {
                                   'Anggota', 'assets/icons/member.svg'),
                               _buildActionItem(
                                   'Bagi', 'assets/icons/share.svg'),
-                              _buildActionItem(
-                                  'Keluar', 'assets/icons/quit.svg'),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.leaveForum();
+                                },
+                                child: _buildActionItem(
+                                    'Keluar', 'assets/icons/quit.svg'),
+                              ),
                             ],
                           ),
                         ),

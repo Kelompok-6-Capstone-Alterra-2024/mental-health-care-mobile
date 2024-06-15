@@ -9,9 +9,9 @@ class PostCard extends StatelessWidget {
   final AllPost postData;
 
   const PostCard({
-    Key? key,
+    super.key,
     required this.postData,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

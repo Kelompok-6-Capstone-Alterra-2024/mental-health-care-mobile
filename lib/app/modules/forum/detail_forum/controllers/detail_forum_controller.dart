@@ -2,16 +2,18 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 
-import 'package:mindease/app/modules/forum/detail_forum/data/models/forum_by_id_model.dart';
-import 'package:mindease/app/modules/forum/detail_forum/data/services/forum_by_id_service.dart';
-
-import '../../../../routes/app_pages.dart';
+import '../../controllers/forum_controller.dart';
+import '../data/models/forum_by_id_model.dart';
+import '../data/services/forum_by_id_service.dart';
 import '../data/models/posts_model.dart';
+import '../data/services/leave_forum_service.dart';
 import '../data/services/posts_service.dart';
 
 class DetailForumController extends GetxController {
   final ForumByIdService _forumByIdService = ForumByIdService();
   final PostService _postService = PostService();
+  final LeaveForumService _leaveForumService = LeaveForumService();
+  final ForumController _forumController = Get.find();
   Rx<ForumByIdModel?> forumById = Rx<ForumByIdModel?>(null);
   RxList<AllPost> posts = RxList<AllPost>([]);
   RxString note = ''.obs;
@@ -78,6 +80,21 @@ class DetailForumController extends GetxController {
       Get.back();
     } catch (e) {
       print('Error posting forum: $e');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void leaveForum() async {
+    isLoading.value = true;
+
+    try {
+      await _leaveForumService.leaveForum(forumById.value!.data.forumId);
+      _forumController.fetchJoinedForums();
+      _forumController.fetchRecommendationForums();
+      Get.back();
+    } catch (e) {
+      print('Error leaving forum: $e');
     } finally {
       isLoading.value = false;
     }
