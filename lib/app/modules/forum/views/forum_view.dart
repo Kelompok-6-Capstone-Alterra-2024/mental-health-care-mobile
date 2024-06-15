@@ -61,7 +61,8 @@ class ForumView extends GetView<ForumController> {
                         final forum = controller.joinedForums[index];
                         return MyForumCard(
                           onTap: () {
-                            Get.toNamed(Routes.DETAIL_FORUM);
+                            Get.toNamed(Routes.DETAIL_FORUM,
+                                arguments: forum.forumId);
                           },
                           title: forum.name,
                           imageUrl: forum.imageUrl,
