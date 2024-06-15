@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http_parser/src/media_type.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:logger/logger.dart';
+import '../models/posts_model.dart';
 
 class PostService {
   final Dio _dio = Dio();
@@ -57,6 +58,24 @@ class PostService {
       _logger.i(response.data);
     } catch (e) {
       _logger.e('Error creating post', error: e);
+      rethrow;
+    }
+  }
+
+  Future<PostsModel> getAllPostsByForumId(int forumId) async {
+    try {
+      final response = await _dio.get(
+        '$_baseUrl/forums/$forumId/posts',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $_token',
+          },
+        ),
+      );
+
+      return PostsModel.fromJson(response.data);
+    } catch (e) {
+      _logger.e('Error getting posts by forum id', error: e);
       rethrow;
     }
   }
