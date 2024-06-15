@@ -24,7 +24,7 @@ class MusicService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('musics response: ${response.data}');
+        logger.i(response.data);
         return Musics.fromJson(response.data);
       } else {
         throw Exception(

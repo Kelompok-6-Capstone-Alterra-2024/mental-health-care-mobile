@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mindease/app/modules/consultation/data/models/doctor_model.dart';
+import 'package:mindease/app/modules/consultation/data/services/doctor_services.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 
 import '../controllers/consultation_controller.dart';
@@ -9,9 +13,11 @@ import '../../../../constant/constant.dart';
 import 'components/doctor_card.dart';
 
 class ConsultationView extends GetView<ConsultationController> {
-  const ConsultationView({Key? key}) : super(key: key);
+  const ConsultationView({super.key});
+
   @override
   Widget build(BuildContext context) {
+    controller;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -19,14 +25,14 @@ class ConsultationView extends GetView<ConsultationController> {
           style: medium.copyWith(fontSize: 16, color: Primary.mainColor),
         ),
         leading: IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/Chevron.svg',
-              width: 26,
-            ),
-            onPressed: () {
-              Get.back();
-            },
+          icon: SvgPicture.asset(
+            'assets/icons/Chevron.svg',
+            width: 26,
           ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -38,7 +44,6 @@ class ConsultationView extends GetView<ConsultationController> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        controller: ScrollController(),
         child: Column(
           children: [
             const SizedBox(height: 16),
@@ -64,28 +69,56 @@ class ConsultationView extends GetView<ConsultationController> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 6,
-                    shrinkWrap: true,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const Divider(
-                          height: 16, color: Colors.transparent);
-                    },
-                    itemBuilder: (context, index) {
-                      return DoctorCard(
-                        image: 'assets/images/Avatar1.png',
-                        name: 'Dr. Andy Sp.KJ',
-                        title: 'Sp. Jiwa',
-                        yearsofservice: '14 Tahun',
-                        rating: '95%',
-                        price: 'Rp. 150.000',
-                        like: () {},
-                        onTapButton: () => Get.toNamed(Routes.DETAILPSIKIATER),
-                        onTapCard: () => Get.toNamed(Routes.DETAILPSIKIATER),
-                      );
-                    },
-                  ),
+                  FutureBuilder<DoctorModel>(
+                      future: DoctorServices().getAllDoctor(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DoctorModel> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return const Center(
+                            child: Text('Terjadi kesalahan'),
+                          );
+                        } else if (!snapshot.hasData || snapshot.data == null || snapshot.data!.data == null || snapshot.data!.data.isEmpty) {
+                          return const Center(
+                            child: Text('Data kosong'),
+                          );
+                        } else {
+                        final doctorList = snapshot.data!.data.toList();
+                        controller.doctorsList.value = doctorList;
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: controller.doctorsList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final doctor = controller.doctorsList[index];
+                              return DoctorCard(
+                                image: 'assets/images/Avatar1.png',
+                                name: doctor.name,
+                                title: doctor.specialist,
+                                yearsofservice: doctor.experience.toString(),
+                                rating: '90',
+                                price: doctor.fee.toString(),
+                                like: () {},
+                                onTapCard: () {
+                                    Get.toNamed(Routes.DETAILPSIKIATER,);
+                                    controller.idDoctor.value = doctor.id;
+                                    controller.nameDoctor.value = doctor.name;
+                                    controller.specialistDoctor.value = doctor.specialist;
+                                    controller.experienceDoctor.value = doctor.experience.toString();
+                                    controller.feeDoctor.value = doctor.fee;
+                                    controller.imageDoctor.value = 'assets/images/Avatar1.png';
+                                    controller.rateDoctor.value = '90';
+                                    controller.locationDoctor.value = doctor.address;
+                                    controller.educationDoctor.value = doctor.almamater;
+                            });
+                            },
+                          );
+                        }
+                      })
                 ],
               ),
             ),
