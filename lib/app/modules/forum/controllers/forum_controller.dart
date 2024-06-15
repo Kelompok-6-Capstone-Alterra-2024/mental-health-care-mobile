@@ -3,6 +3,7 @@ import '../data/models/joined_forum_model.dart';
 import '../data/services/joined_forum_service.dart';
 import '../data/services/recommendation_forum_service.dart';
 import '../data/models/recommendation_forum_model.dart';
+import '../data/services/join_forum_service.dart';
 
 class ForumController extends GetxController {
   var joinedForums = <JoinedForum>[].obs;
@@ -13,6 +14,7 @@ class ForumController extends GetxController {
   final JoinedForumService _joinedForumService = JoinedForumService();
   final RecommendationForumService _recommendationForumService =
       RecommendationForumService();
+  final JoinForumService _joinForumService = JoinForumService();
 
   void fetchJoinedForums() async {
     try {
@@ -34,6 +36,20 @@ class ForumController extends GetxController {
       recommendationForums(forumResponse.data);
     } catch (e) {
       errorMessage(e.toString());
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void joinForum(int forumId) async {
+    try {
+      isLoading(true);
+      await _joinForumService.joinForum(forumId);
+      fetchJoinedForums();
+      fetchRecommendationForums();
+    } catch (e) {
+      errorMessage(e.toString());
+      Get.snackbar('Error', e.toString());
     } finally {
       isLoading(false);
     }

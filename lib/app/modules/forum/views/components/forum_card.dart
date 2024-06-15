@@ -7,12 +7,16 @@ class ForumCard extends StatelessWidget {
   final String title;
   final String imageUrl;
   final int numberOfMembers;
+  final int forumId;
+  final VoidCallback onJoin;
 
   const ForumCard({
     super.key,
     required this.title,
     required this.imageUrl,
     required this.numberOfMembers,
+    required this.forumId,
+    required this.onJoin,
   });
 
   @override
@@ -60,9 +64,7 @@ class ForumCard extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        print('Join forum');
-                      },
+                      onTap: onJoin,
                       child: Container(
                         alignment: Alignment.center,
                         height: 27,

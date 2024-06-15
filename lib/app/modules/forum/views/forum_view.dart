@@ -94,6 +94,10 @@ class ForumView extends GetView<ForumController> {
                         title: forum.name,
                         imageUrl: forum.imageUrl,
                         numberOfMembers: forum.numberOfMembers,
+                        forumId:
+                            forum.forumId, // Pass the forumId to the ForumCard
+                        onJoin: () => controller.joinForum(forum
+                            .forumId), // Pass the forumId to the joinForum method
                       );
                     },
                   );
