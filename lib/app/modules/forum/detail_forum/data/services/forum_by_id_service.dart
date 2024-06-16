@@ -10,7 +10,7 @@ class ForumByIdService {
 
   Future<ForumByIdModel> getForumById(int forumId) async {
     try {
-      final url = '$baseUrl/forums/$forumId'; // Adjust endpoint as per your API
+      final url = '$baseUrl/forums/$forumId';
       final response = await _dio.get(
         url,
         options: Options(

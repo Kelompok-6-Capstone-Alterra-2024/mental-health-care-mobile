@@ -102,7 +102,74 @@ class DetailForumView extends GetView<DetailForumController> {
                                   'Bagi', 'assets/icons/share.svg'),
                               GestureDetector(
                                 onTap: () {
-                                  controller.leaveForum();
+                                  Get.dialog(Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    backgroundColor: Neutral.light4,
+                                    surfaceTintColor: Neutral.transparent,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(19),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            'Keluar Forum ?',
+                                            style: medium.copyWith(
+                                                fontSize: 16,
+                                                color: Neutral.dark1),
+                                          ),
+                                          const Gap(8),
+                                          Text(
+                                            'Apakah kamu yakin? ini tidak bisa dibatalkan',
+                                            style: regular.copyWith(
+                                                fontSize: 14,
+                                                color: Neutral.dark2),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const Gap(16),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Gap(16),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  controller.leaveForum();
+                                                  Get.back();
+                                                },
+                                                child: const Text('Ya, Keluar'),
+                                                style: ElevatedButton.styleFrom(
+                                                  foregroundColor:
+                                                      Neutral.light4,
+                                                  backgroundColor:
+                                                      Error.mainColor,
+                                                  elevation: 0,
+                                                ),
+                                              ),
+                                              const Gap(10),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text('Batalkan'),
+                                                style: ElevatedButton.styleFrom(
+                                                  foregroundColor:
+                                                      Neutral.dark2,
+                                                  backgroundColor:
+                                                      Neutral.light4,
+                                                  elevation: 0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ));
                                 },
                                 child: _buildActionItem(
                                     'Keluar', 'assets/icons/quit.svg'),

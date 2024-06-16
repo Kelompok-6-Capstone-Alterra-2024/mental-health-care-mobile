@@ -48,8 +48,12 @@ class ForumView extends GetView<ForumController> {
               Obx(() {
                 if (controller.isLoading.value) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (controller.errorMessage.isNotEmpty) {
-                  return Center(child: Text(controller.errorMessage.value));
+                } else if (controller.joinedForums.isEmpty) {
+                  return Center(
+                    child: Text('Anda belum bergabung dengan forum apapun!',
+                        style: medium.copyWith(
+                            fontSize: 16, color: Neutral.dark2)),
+                  );
                 } else {
                   return SizedBox(
                     height: Get.height * 0.28,
@@ -81,8 +85,12 @@ class ForumView extends GetView<ForumController> {
               Obx(() {
                 if (controller.isLoading.value) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (controller.errorMessage.isNotEmpty) {
-                  return Center(child: Text(controller.errorMessage.value));
+                } else if (controller.recommendationForums.isEmpty) {
+                  return Center(
+                    child: Text('Anda sudah bergabung dengan semua forum!',
+                        style: medium.copyWith(
+                            fontSize: 16, color: Neutral.dark2)),
+                  );
                 } else {
                   return ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
@@ -94,10 +102,8 @@ class ForumView extends GetView<ForumController> {
                         title: forum.name,
                         imageUrl: forum.imageUrl,
                         numberOfMembers: forum.numberOfMembers,
-                        forumId:
-                            forum.forumId, // Pass the forumId to the ForumCard
-                        onJoin: () => controller.joinForum(forum
-                            .forumId), // Pass the forumId to the joinForum method
+                        forumId: forum.forumId,
+                        onJoin: () => controller.joinForum(forum.forumId),
                       );
                     },
                   );

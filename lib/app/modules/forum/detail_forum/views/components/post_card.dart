@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../constant/constant.dart';
+import '../../../../../routes/app_pages.dart';
 import '../../data/models/posts_model.dart';
 
 class PostCard extends StatelessWidget {
@@ -85,7 +87,9 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.COMMENT_FORUM, arguments: postData.id);
+                  },
                   child: Row(
                     children: [
                       SvgPicture.asset(
