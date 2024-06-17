@@ -21,7 +21,7 @@ class SwitchGender extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8),
@@ -30,7 +30,7 @@ class SwitchGender extends StatelessWidget {
                   child: Chip(
                     labelPadding: const EdgeInsets.symmetric(horizontal: 28),
                     label: Text(
-                      'Pria',
+                      'Laki-laki',
                       style: semiBold.copyWith(
                           fontSize: 16,
                           color: isSwitched
@@ -54,7 +54,7 @@ class SwitchGender extends StatelessWidget {
                   child: Chip(
                     labelPadding: const EdgeInsets.symmetric(horizontal: 28),
                     label: Text(
-                      'Wanita',
+                      'Perempuan',
                       style: semiBold.copyWith(
                           fontSize: 16,
                           color: isSwitched

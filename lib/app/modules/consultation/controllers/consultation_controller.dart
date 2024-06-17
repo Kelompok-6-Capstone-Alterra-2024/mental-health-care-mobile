@@ -33,6 +33,7 @@ class ConsultationController extends GetxController with DetailDoctorMixin, Form
 
   @override
   void onInit() {
+    
     updateDaysInWeek();
     super.onInit();
   }
