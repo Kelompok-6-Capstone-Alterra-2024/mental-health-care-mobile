@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../constant/constant.dart';
-import '../../controllers/meditation_controller.dart';
 import '../controllers/music_controller.dart';
 
 class MusicView extends GetView<MusicController> {
@@ -22,11 +20,9 @@ class MusicView extends GetView<MusicController> {
             Get.back();
           },
         ),
-        title: Obx(
-          () => Text(
-            'Music Meditation',
-            style: medium.copyWith(fontSize: 16, color: Primary.darker),
-          ),
+        title: Text(
+          'Musik Meditasi',
+          style: medium.copyWith(fontSize: 16, color: Primary.darker),
         ),
         centerTitle: true,
       ),
@@ -43,8 +39,8 @@ class MusicView extends GetView<MusicController> {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Image.asset(
-                  'assets/images/1.png',
+                child: Image.network(
+                  controller.imageUrl.value,
                   width: double.infinity,
                   height: 317,
                   fit: BoxFit.cover,
@@ -70,12 +66,12 @@ class MusicView extends GetView<MusicController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Eternal Serenity',
+                        controller.title.value,
                         style: semiBold.copyWith(
                             fontSize: 24, color: Neutral.dark1),
                       ),
                       Text(
-                        'Luna Grace',
+                        controller.artist.value,
                         style: regular.copyWith(
                             fontSize: 16, color: Neutral.dark3),
                       ),
@@ -156,14 +152,17 @@ class MusicView extends GetView<MusicController> {
                       ),
                       IconButton(
                         onPressed: controller.handlePlayPause,
-                        icon: SvgPicture.asset(
-                          'assets/icons/play.svg',
+                        icon: CircleAvatar(
+                          backgroundColor: Color(0xFFC7C9D9),
+                          radius: 40,
+                          child: Icon(
+                            controller.player.playing
+                                ? Icons.pause
+                                : Icons.play_arrow,
+                            size: 50,
+                          ),
                         ),
                         padding: EdgeInsets.zero,
-                        constraints: BoxConstraints(
-                          minWidth: 50,
-                        ),
-                        iconSize: 16,
                         alignment: Alignment.center,
                       ),
                       IconButton(

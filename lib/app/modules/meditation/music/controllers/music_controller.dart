@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:just_audio/just_audio.dart';
 
 class MusicController extends GetxController {
   RxString musicUrl = ''.obs;
   RxString imageUrl = ''.obs;
+  RxString title = ''.obs;
+  RxString artist = ''.obs;
   RxInt minutes = 0.obs;
   RxInt seconds = 0.obs;
   Rx<Duration> position = Duration.zero.obs;
@@ -33,9 +36,10 @@ class MusicController extends GetxController {
     final arg = Get.arguments;
     musicUrl.value = arg['url'];
     imageUrl.value = arg['image'];
+    title.value = arg['title'];
+    artist.value = arg['singer'];
 
-    player.setUrl(
-        "https://res.cloudinary.com/dy2fwknbn/video/upload/v1718380767/uzmyl6go9ozoao6azqfo.mp3");
+    player.setUrl(musicUrl.value);
 
     player.positionStream.listen((p) {
       position.value = p;

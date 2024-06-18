@@ -38,7 +38,9 @@ class MusicTab extends GetView<MeditationController> {
                     Get.toNamed(Routes.MUSIC, arguments: {
                       'musicID': musics.id,
                       'url': musics.musicUrl,
-                      'image': musics.imageUrl
+                      'image': musics.imageUrl,
+                      'title': musics.title,
+                      'singer': musics.singer,
                     });
                   },
                 );
