@@ -14,7 +14,7 @@ class ArticleService {
   Future<Articles> getArticles() async {
     try {
       final response = await _dio.get(
-        '$baseUrl/articles?page=1&limit=2',
+        '$baseUrl/articles?page=1&limit=20',
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ class ArticleService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('Article response: ${response.data}');
+        logger.i(response.data);
         return Articles.fromJson(response.data);
       } else {
         throw Exception(
@@ -49,7 +49,7 @@ class ArticleService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('Article response: ${response.data}');
+        logger.i(response.data);
         return Article.fromJson(response.data);
       } else {
         throw Exception(

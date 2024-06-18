@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
 import '../mixin/article_mixin.dart';
@@ -36,6 +37,19 @@ class MeditationController extends GetxController
       return 'assets/icons/Edit Content.svg';
     } else {
       return 'assets/icons/File.svg';
+    }
+  }
+
+  String formatDateTime(DateTime dateTime) {
+    final now = DateTime.now();
+    final difference = now.difference(dateTime);
+
+    if (difference.inDays >= 1) {
+      return DateFormat('d MMM yyyy').format(dateTime);
+    } else if (difference.inHours >= 1) {
+      return '${difference.inHours} jam yang lalu';
+    } else {
+      return 'Baru saja';
     }
   }
 

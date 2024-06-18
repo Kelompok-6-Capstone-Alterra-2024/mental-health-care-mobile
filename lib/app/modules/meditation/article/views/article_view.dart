@@ -31,7 +31,7 @@ class ArticleView extends GetView<ArticleController> {
           highlightColor: Neutral.transparent,
         ),
         title: Text(
-          'Article View',
+          'Artikel Meditation',
           style: medium.copyWith(fontSize: 16, color: Primary.darker),
         ),
         centerTitle: true,
@@ -42,9 +42,6 @@ class ArticleView extends GetView<ArticleController> {
           vertical: 32,
         ),
         child: Obx(() {
-          if (controller.articleTitle.isEmpty) {
-            return Center(child: CircularProgressIndicator());
-          }
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,15 +52,14 @@ class ArticleView extends GetView<ArticleController> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                      image: NetworkImage(controller.image.value),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 const Gap(16),
                 Text(
-                  controller.articleTitle.value,
+                  controller.title.value,
                   style: semiBold.copyWith(
                     fontSize: 16,
                     color: Neutral.dark1,
@@ -74,7 +70,7 @@ class ArticleView extends GetView<ArticleController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      controller.articleCreatedAt.value,
+                      controller.date.value,
                       style: regular.copyWith(
                         fontSize: 12,
                         color: Primary.mainColor,
@@ -86,7 +82,7 @@ class ArticleView extends GetView<ArticleController> {
                       },
                       child: SvgPicture.asset(
                         controller.isLiked.value
-                            ? 'assets/icons/Heart_filled.svg'
+                            ? 'assets/icons/Union.svg'
                             : 'assets/icons/Heart.svg',
                         width: 18,
                       ),
@@ -95,7 +91,7 @@ class ArticleView extends GetView<ArticleController> {
                 ),
                 const Gap(16),
                 Text(
-                  controller.articleContent.value,
+                  controller.content.value,
                   style: regular.copyWith(
                     fontSize: 12,
                     color: Neutral.dark1,

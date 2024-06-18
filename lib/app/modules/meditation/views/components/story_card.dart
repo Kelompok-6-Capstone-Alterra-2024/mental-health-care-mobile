@@ -51,8 +51,7 @@ class StoryCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                      image: NetworkImage(image),
                       fit: BoxFit.cover,
                     ),
                   ),

@@ -14,7 +14,7 @@ class MusicService {
   Future<Musics> getMusics() async {
     try {
       final response = await _dio.get(
-        '$baseUrl/musics?page=1&limit=2',
+        '$baseUrl/musics?page=1&limit=20',
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ class MusicService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('musics response: ${response.data}');
+        logger.i(response.data);
         return Musics.fromJson(response.data);
       } else {
         throw Exception(
@@ -49,7 +49,7 @@ class MusicService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('Music response: ${response.data}');
+        logger.i(response.data);
         return Music.fromJson(response.data);
       } else {
         throw Exception(

@@ -38,9 +38,6 @@ class StoryView extends GetView<StoryController> {
       ),
       body: Obx(
         () {
-          if (controller.storyTitle.isEmpty) {
-            return Center(child: CircularProgressIndicator());
-          }
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -76,9 +73,8 @@ class StoryView extends GetView<StoryController> {
                               width: 347,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                image: const DecorationImage(
-                                  image: NetworkImage(
-                                      "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                                image: DecorationImage(
+                                  image: NetworkImage(controller.image.value),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -88,7 +84,7 @@ class StoryView extends GetView<StoryController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  controller.storyTitle.value,
+                                  controller.title.value,
                                   textAlign: TextAlign.left,
                                   style: semiBold.copyWith(
                                     fontSize: 16,
@@ -103,7 +99,7 @@ class StoryView extends GetView<StoryController> {
                                     Row(
                                       children: [
                                         Text(
-                                          'By: ${controller.doctor.value}',
+                                          'By: ${controller.author.value}',
                                           style: regular.copyWith(
                                             fontSize: 12,
                                             color: Primary.mainColor,
@@ -111,7 +107,7 @@ class StoryView extends GetView<StoryController> {
                                         ),
                                         Gap(10),
                                         Text(
-                                          controller.storyCreatedAt.value,
+                                          controller.date.value,
                                           style: regular.copyWith(
                                             fontSize: 12,
                                             color: Primary.mainColor,
@@ -126,7 +122,7 @@ class StoryView extends GetView<StoryController> {
                                       },
                                       child: SvgPicture.asset(
                                         controller.isLiked.value
-                                            ? 'assets/icons/Heart_filled.svg'
+                                            ? 'assets/icons/Union.svg'
                                             : 'assets/icons/Heart.svg',
                                         width: 18,
                                       ),
@@ -135,7 +131,7 @@ class StoryView extends GetView<StoryController> {
                                 ),
                                 Gap(16),
                                 Text(
-                                  controller.storyContent.value,
+                                  controller.content.value,
                                   style: regular.copyWith(
                                     fontSize: 15,
                                     color: Neutral.dark1,

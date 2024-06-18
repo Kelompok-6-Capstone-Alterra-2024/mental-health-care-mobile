@@ -1,36 +1,25 @@
 import 'package:get/get.dart';
 
-import '../../data/services/story_service.dart';
-
 class StoryController extends GetxController {
   RxInt storyID = 0.obs;
-  RxString storyTitle = ''.obs;
-  RxString storyContent = ''.obs;
-  RxString storyImage = ''.obs;
-  RxString storyCreatedAt = ''.obs;
+  RxString title = ''.obs;
+  RxString image = ''.obs;
+  RxString content = ''.obs;
+  RxString author = ''.obs;
+  RxString date = ''.obs;
   RxBool isLiked = false.obs;
-  RxString doctor = ''.obs;
 
-  Future<void> fetchstory() async {
-    final storyService = StoryService();
-    await storyService.getStory(storyID.value).then(
-      (value) {
-        storyTitle.value = value.data.title;
-        storyContent.value = value.data.content;
-        storyImage.value = value.data.imageUrl;
-        storyCreatedAt.value = value.data.date.toString();
-        isLiked.value = value.data.isLiked;
-        doctor.value = value.data.doctor.name;
-      },
-    );
-  }
+  final arg = Get.arguments;
 
   @override
   void onInit() {
-    final arg = Get.arguments as Map<String, dynamic>;
-    storyID.value = arg['storyID'];
-    print('story ID: ${storyID.value}');
-    fetchstory();
+    storyID.value = arg['idStory'];
+    title.value = arg['title'];
+    image.value = arg['image'];
+    content.value = arg['content'];
+    author.value = arg['author'];
+    date.value = arg['date'].toString();
+    isLiked.value = arg['like'];
     super.onInit();
   }
 
