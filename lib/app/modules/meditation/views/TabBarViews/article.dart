@@ -30,7 +30,7 @@ class ArticleTab extends GetView<MeditationController> {
                   readTime: 'bacaan ${articles.content.length ~/ 10} menit',
                   onTap: () {
                     Get.toNamed(Routes.ARTICLE,
-                        arguments: {'articleID': articles.id});
+                        arguments: {'articleID': articles.id, 'title': articles.title});
                     print('Article ID: ${articles.id}');
                   },
                 );

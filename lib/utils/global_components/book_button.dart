@@ -4,9 +4,13 @@ import '../../constant/constant.dart';
 
 class BookButton extends StatelessWidget {
   final String label;
+  final Color backgroundColor;
+  final Color textColor;
   final Function()? onTap;
   const BookButton({
     required this.label,
+    required this.backgroundColor,
+    required this.textColor,
     this.onTap,
     super.key,
   });
@@ -21,11 +25,11 @@ class BookButton extends StatelessWidget {
         height: 23,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: Primary.mainColor,
+          color: backgroundColor,
         ),
         child: Text(
           label,
-          style: semiBold.copyWith(fontSize: 12, color: Neutral.light4),
+          style: semiBold.copyWith(fontSize: 12, color: textColor),
           textAlign: TextAlign.center,
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/utils/global_components/main_button.dart';
+import 'package:mindease/utils/global_components/main_button_without_padding.dart';
 
 import '../../controllers/consultation_controller.dart';
 import '../../../../../constant/constant.dart';
@@ -247,9 +248,11 @@ class PaymentView extends GetView<ConsultationController> {
                             ),
                           ),
                           const SizedBox(height: 60),
-                          MainButton(
+                          MainButtonWithoutPadding(
                             label: 'Buat Jadwal',
-                            onTap: () => Get.toNamed(Routes.PAYMENTPROCESSED),
+                            onTap: () {
+                              controller.createPayment();
+                            },
                           ),
                         ],
                       ),

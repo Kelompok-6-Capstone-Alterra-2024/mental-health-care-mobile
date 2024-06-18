@@ -14,7 +14,6 @@ class DoctorCard extends StatelessWidget {
   final String price;
   final Function()? like;
   final Function()? onTapCard;
-  final Function()? onTapButton;
   const DoctorCard({
     super.key,
     required this.image,
@@ -25,7 +24,6 @@ class DoctorCard extends StatelessWidget {
     required this.price,
     this.like,
     this.onTapCard,
-    this.onTapButton,
   });
 
   @override
@@ -33,8 +31,7 @@ class DoctorCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTapCard,
       child: Container(
-        height: 148,
-        width: 380,
+        padding: EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           boxShadow: [blur8, blur4],
           color: Colors.white,
@@ -110,7 +107,7 @@ class DoctorCard extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 115, top: 5),
-                    child: BookButton(label: 'Book', onTap: onTapButton),
+                    child: BookButton(label: 'Book',backgroundColor: Primary.mainColor, textColor: Neutral.light4, onTap: () {}),
                   )
                 ],
               ),
