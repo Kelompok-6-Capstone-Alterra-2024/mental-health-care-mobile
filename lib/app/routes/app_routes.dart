@@ -22,6 +22,18 @@ abstract class Routes {
   static const ADD_MOOD = _Paths.HOME + _Paths.MOOD_TRACK + _Paths.ADD_MOOD;
   static const ARTICLE = _Paths.MEDITATION + _Paths.ARTICLE;
   static const STORY = _Paths.MEDITATION + _Paths.STORY;
+  static const PROFILE = _Paths.PROFILE;
+  static const EDIT_PROFILE = _Paths.PROFILE + _Paths.EDIT_PROFILE;
+  static const CHANGE_EMAIL = _Paths.PROFILE + _Paths.CHANGE_EMAIL;
+  static const SETTING = _Paths.PROFILE + _Paths.SETTING;
+  static const CHANGE_PASSWORD =
+      _Paths.PROFILE + _Paths.SETTING + _Paths.CHANGE_PASSWORD;
+  static const TRANSACTION = _Paths.PROFILE + _Paths.TRANSACTION;
+  static const POIN = _Paths.PROFILE + _Paths.POIN;
+  static const FORUM = _Paths.FORUM;
+  static const DETAIL_FORUM = _Paths.FORUM + _Paths.DETAIL_FORUM;
+  static const COMMENT_FORUM = _Paths.FORUM + _Paths.COMMENT_FORUM;
+  static const POST_FORUM = _Paths.FORUM + _Paths.POST_FORUM;
 }
 
 abstract class _Paths {
@@ -45,4 +57,15 @@ abstract class _Paths {
   static const ADD_MOOD = '/add-mood';
   static const ARTICLE = '/article';
   static const STORY = '/story';
+  static const PROFILE = '/profile';
+  static const EDIT_PROFILE = '/edit-profile';
+  static const CHANGE_EMAIL = '/change-email';
+  static const SETTING = '/setting';
+  static const CHANGE_PASSWORD = '/change-password';
+  static const TRANSACTION = '/transaction';
+  static const POIN = '/poin';
+  static const FORUM = '/forum';
+  static const DETAIL_FORUM = '/detail-forum';
+  static const COMMENT_FORUM = '/comment-forum';
+  static const POST_FORUM = '/post-forum';
 }

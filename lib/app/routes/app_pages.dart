@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mindease/app/modules/forum/detail_forum/views/post_forum_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/forgot_password_view.dart';
@@ -6,6 +7,12 @@ import '../modules/auth/views/login_view.dart';
 import '../modules/auth/views/new_password_view.dart';
 import '../modules/auth/views/register_view.dart';
 import '../modules/auth/views/verification_code_view.dart';
+import '../modules/forum/bindings/forum_binding.dart';
+import '../modules/forum/comment_forum/bindings/comment_forum_binding.dart';
+import '../modules/forum/comment_forum/views/comment_forum_view.dart';
+import '../modules/forum/detail_forum/bindings/detail_forum_binding.dart';
+import '../modules/forum/detail_forum/views/detail_forum_view.dart';
+import '../modules/forum/views/forum_view.dart';
 import '../modules/home/ai_chat/bindings/ai_chat_binding.dart';
 import '../modules/home/ai_chat/views/ai_chat_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -29,6 +36,16 @@ import '../modules/navigation/views/navigation_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/welcome_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/poin/bindings/poin_binding.dart';
+import '../modules/profile/poin/views/poin_view.dart';
+import '../modules/profile/transaction/bindings/transaction_binding.dart';
+import '../modules/profile/transaction/views/transaction_view.dart';
+import '../modules/profile/views/profile_view.dart';
+import '../modules/profile/views/screens/change_email_view.dart';
+import '../modules/profile/views/screens/change_password_view.dart';
+import '../modules/profile/views/screens/edit_profile_view.dart';
+import '../modules/profile/views/screens/setting_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -115,6 +132,28 @@ class AppPages {
       binding: AuthBinding(),
     ),
     GetPage(
+      name: _Paths.FORUM,
+      page: () => const ForumView(),
+      binding: ForumBinding(),
+      children: [
+        GetPage(
+          name: _Paths.DETAIL_FORUM,
+          page: () => const DetailForumView(),
+          binding: DetailForumBinding(),
+        ),
+        GetPage(
+          name: _Paths.COMMENT_FORUM,
+          page: () => const CommentForumView(),
+          binding: CommentForumBinding(),
+        ),
+        GetPage(
+          name: _Paths.POST_FORUM,
+          page: () => const PostForumView(),
+          binding: DetailForumBinding(),
+        ),
+      ],
+    ),
+     GetPage(
       name: _Paths.MEDITATION,
       page: () => const MeditationView(),
       binding: MeditationBinding(),
@@ -140,6 +179,45 @@ class AppPages {
       name: _Paths.WISHLIST,
       page: () => const WishlistView(),
       binding: MeditationBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+      children: [
+        GetPage(
+          name: _Paths.EDIT_PROFILE,
+          page: () => const EditProfileView(),
+          binding: ProfileBinding(),
+        ),
+        GetPage(
+          name: _Paths.CHANGE_EMAIL,
+          page: () => const ChangeEmailView(),
+          binding: ProfileBinding(),
+        ),
+        GetPage(
+          name: _Paths.SETTING,
+          page: () => const SettingView(),
+          binding: ProfileBinding(),
+          children: [
+            GetPage(
+              name: _Paths.CHANGE_PASSWORD,
+              page: () => const ChangePasswordView(),
+              binding: ProfileBinding(),
+            ),
+          ],
+        ),
+        GetPage(
+          name: _Paths.TRANSACTION,
+          page: () => const TransactionView(),
+          binding: TransactionBinding(),
+        ),
+        GetPage(
+          name: _Paths.POIN,
+          page: () => const PoinView(),
+          binding: PoinBinding(),
+        ),
+      ],
     ),
   ];
 }
