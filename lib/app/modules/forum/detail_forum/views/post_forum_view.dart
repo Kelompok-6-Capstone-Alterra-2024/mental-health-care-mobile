@@ -9,6 +9,7 @@ import '../controllers/detail_forum_controller.dart';
 
 class PostForumView extends GetView<DetailForumController> {
   const PostForumView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,9 @@ class PostForumView extends GetView<DetailForumController> {
           Padding(
             padding: const EdgeInsets.only(right: 24),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                controller.postForum();
+              },
               child: Container(
                 alignment: Alignment.center,
                 height: 27,
@@ -55,17 +58,24 @@ class PostForumView extends GetView<DetailForumController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextField(
-              decoration: InputDecoration(
+            const Gap(16),
+            TextField(
+              onChanged: controller.onNote,
+              decoration: const InputDecoration(
                 hintText: 'Apa yang ingin anda bicarakan?',
                 border: InputBorder.none,
               ),
             ),
             const Gap(5),
-            SvgPicture.asset(
-              'assets/icons/upload_photo.svg',
-              width: 24,
-              height: 24,
+            GestureDetector(
+              onTap: () {
+                controller.pickFile();
+              },
+              child: SvgPicture.asset(
+                'assets/icons/upload_photo.svg',
+                width: 24,
+                height: 24,
+              ),
             ),
           ],
         ),
