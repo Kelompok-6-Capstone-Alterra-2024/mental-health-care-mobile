@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../../constant/constant.dart';
 import '../controllers/comment_forum_controller.dart';
+import 'components/comment_card.dart';
 
 class CommentForumView extends GetView<CommentForumController> {
   const CommentForumView({Key? key}) : super(key: key);
@@ -181,6 +182,25 @@ class CommentForumView extends GetView<CommentForumController> {
                       ],
                     ),
                   ),
+                );
+              }
+            }),
+            // Menampilkan komentar menggunakan CommentCard
+            Obx(() {
+              if (controller.isLoadingComments.value) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (controller.comments.value == null) {
+                return const Center(child: Text('No comments available'));
+              } else {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: controller.comments.value!.data.length,
+                  itemBuilder: (context, index) {
+                    final comment = controller.comments.value!.data[index];
+                    return CommentCard(
+                        commentData: comment); // Gunakan CommentCard di sini
+                  },
                 );
               }
             }),
