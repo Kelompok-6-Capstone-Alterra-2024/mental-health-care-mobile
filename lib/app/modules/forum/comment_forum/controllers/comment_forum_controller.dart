@@ -49,6 +49,15 @@ class CommentForumController extends GetxController {
     }
   }
 
+  Future<void> postComment(int postId, String content) async {
+    try {
+      await _commentPostService.postComment(postId, content);
+      fetchComments(postId);
+    } catch (e) {
+      print('Error posting comment: $e');
+    }
+  }
+
   void toggleCommentButton() {
     isCommentClicked.value = !isCommentClicked.value;
   }

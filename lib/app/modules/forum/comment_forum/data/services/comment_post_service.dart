@@ -8,7 +8,7 @@ class CommentPostService {
   final String baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
 
   Future<CommentPostModel> getComments(int postId,
-      {int page = 1, int limit = 3}) async {
+      {int page = 1, int limit = 20}) async {
     try {
       final String url =
           '$baseUrl/posts/$postId/comments?page=$page&limit=$limit';
@@ -30,6 +30,34 @@ class CommentPostService {
       }
     } catch (e) {
       throw Exception('Error loading comments: $e');
+    }
+  }
+
+  Future<void> postComment(int postId, String content) async {
+    try {
+      final String url = '$baseUrl/comments';
+      final Response response = await _dio.post(
+        url,
+        data: {
+          'post_id': postId,
+          'content': content,
+        },
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+
+      if (response.statusCode == 201) {
+        print('Comment posted successfully');
+      } else {
+        throw Exception(
+            'Failed to post comment with status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error posting comment: $e');
     }
   }
 }
