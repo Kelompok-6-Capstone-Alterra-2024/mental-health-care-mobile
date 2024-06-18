@@ -6,13 +6,20 @@ import 'package:gap/gap.dart';
 import '../../../../../constant/constant.dart';
 
 class DoctorCard extends StatelessWidget {
+  final String name;
+  final String experience;
+  final String rating;
   const DoctorCard({
     super.key,
+    required this.name,
+    required this.experience,
+    required this.rating,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(right: 8),
       padding: const EdgeInsets.symmetric(
           horizontal: 10, vertical: 16),
       decoration: BoxDecoration(
@@ -29,13 +36,13 @@ class DoctorCard extends StatelessWidget {
           Image.asset('assets/images/doctor.png'),
           const Gap(16),
           Text(
-            'Dr. Andi Sp.KJ',
+            name,
             style: semiBold.copyWith(
                 fontSize: 16, color: Neutral.dark1),
           ),
           const Gap(16),
           Text(
-            '13Tahun Pengalaman',
+            experience,
             style: regular.copyWith(
                 fontSize: 12, color: Neutral.dark2),
           ),
@@ -45,7 +52,7 @@ class DoctorCard extends StatelessWidget {
             children: [
               SvgPicture.asset('assets/icons/Star.svg'),
               Text(
-                '4.8',
+                rating,
                 style: semiBold.copyWith(
                     fontSize: 12, color: Neutral.dark1),
               ),
@@ -53,7 +60,7 @@ class DoctorCard extends StatelessWidget {
               SvgPicture.asset('assets/icons/Clock.svg'),
               const Gap(5),
               Text(
-                '10:00 - 18:00',
+                '12:00 - 17:00',
                 style: semiBold.copyWith(
                     fontSize: 12, color: Neutral.dark1),
               ),

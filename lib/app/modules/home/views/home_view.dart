@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mindease/app/modules/home/data/model/doctor_available_model.dart';
+import 'package:mindease/app/modules/home/mood_track/mixin/doctor_mixin.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/constant/constant.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../utils/helper/calendar_icon.dart';
 import '../controllers/home_controller.dart';
 import 'package:gap/gap.dart';
+import '../data/services/doctor_available_services.dart';
 import 'components/doctor_card.dart';
 import 'components/mood_card.dart';
 import 'components/music_card.dart';
@@ -93,20 +97,25 @@ class HomeView extends GetView<HomeController> {
                           itemCount: 7,
                           itemBuilder: (context, index) {
                             final day = controller.daysInWeek[index];
-                            final isSelected = controller.selectedDate.isAtSameMomentAs(day);
+                            final isSelected =
+                                controller.selectedDate.isAtSameMomentAs(day);
                             final moodCheck = controller.getMoodForDate(day);
                             final moodColor = moodStatusColor(moodCheck);
                             final icon = moodStatusIconBig(moodCheck);
                             return MoodCard(
                               day: DateFormat.E().format(day), // Mengisi hari
                               date: day.day, // Mengisi tanggal
-                              textColor: isSelected ? Primary.mainColor : Neutral.dark3,
+                              textColor: isSelected
+                                  ? Primary.mainColor
+                                  : Neutral.dark3,
                               onTap: () {
                                 controller.selectDate(day);
                               },
                               icon: icon,
                               iconColor: moodColor,
-                              selectedColor: isSelected ? Primary.mainColor : Colors.transparent,
+                              selectedColor: isSelected
+                                  ? Primary.mainColor
+                                  : Colors.transparent,
                             );
                           },
                         ),
@@ -151,13 +160,36 @@ class HomeView extends GetView<HomeController> {
                     const Gap(20),
                     //doctor card
                     SizedBox(
-                      height: Get.height * 0.3,
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            return const DoctorCard();
+                      height: Get.height * 0.28,
+                      child: FutureBuilder(
+                          future:
+                              DoctorAvailableServices().getAvailableDoctor(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<DoctorAvailableModel> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else {
+                              final doctorAvailable = snapshot.data!.data;
+                              return Skeletonizer(
+                                enabled: snapshot.connectionState ==
+                                    ConnectionState.waiting,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: doctorAvailable.length,
+                                  itemBuilder: (context, index) {
+                                    final doctor = doctorAvailable[index];
+                                    return DoctorCard(
+                                      name: doctor.name,
+                                      experience: '${doctor.experience} tahun',
+                                      rating: '4.5',
+                                    );
+                                  },
+                                ),
+                              );
+                            }
                           }),
                     ),
                     const Gap(20),
