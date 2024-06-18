@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 
 import '../../../../../../constant/constant.dart';
@@ -11,12 +12,18 @@ class RoomChatCard extends StatelessWidget {
   final String name;
   final String specialist;
   final bool isRejected;
+  final String status;
+  final Color bgBadgeStatus;
+  final Color textBadgeStatus;
   final Function()? onTap;
   const RoomChatCard({
     super.key,
     required this.name,
     required this.specialist,
     required this.isRejected,
+    required this.status,
+    required this.bgBadgeStatus,
+    required this.textBadgeStatus,
     this.onTap,
   });
 
@@ -92,7 +99,7 @@ class RoomChatCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Konsultasi Berlangsung',
+                            status,
                             style: semiBold.copyWith(
                               fontSize: 12,
                               color: Neutral.dark2,
@@ -100,6 +107,8 @@ class RoomChatCard extends StatelessWidget {
                           ),
                           BookButton(
                             label: 'chat',
+                            backgroundColor: bgBadgeStatus,
+                            textColor: textBadgeStatus,
                             onTap: () {
                               Get.toNamed(Routes.CHATWITHDOCTOR);
                             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mindease/utils/helper/status_room_chat.dart';
 import '../../../controllers/chatwithdoctor_controller.dart';
 import '../../components/room_chat_card.dart';
 
@@ -40,6 +41,10 @@ class AllRoomsChat extends StatelessWidget {
                   name: info.doctor.name,
                   specialist: info.doctor.specialist,
                   isRejected: info.isRejected,
+                  status: statusRoomChat(info.status),
+                  bgBadgeStatus: bgBadgeStatus(info.status),
+                  textBadgeStatus: textBadgeStatus(info.status),
+                  onTap: controller.onChatStatus(info.status),
                 );
               } else {
                 return const Center(

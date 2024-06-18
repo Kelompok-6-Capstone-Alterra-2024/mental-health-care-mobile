@@ -107,7 +107,7 @@ class DoctorCard extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 115, top: 5),
-                    child: BookButton(label: 'Book', onTap: () {}),
+                    child: BookButton(label: 'Book',backgroundColor: Primary.mainColor, textColor: Neutral.light4, onTap: () {}),
                   )
                 ],
               ),
