@@ -63,6 +63,9 @@ class ForumView extends GetView<ForumController> {
                       itemCount: controller.joinedForums.length,
                       itemBuilder: (context, index) {
                         final forum = controller.joinedForums[index];
+                        List<String> profilePictures = forum.user
+                            .map((user) => user.profilePicture)
+                            .toList();
                         return MyForumCard(
                           onTap: () {
                             Get.toNamed(Routes.DETAIL_FORUM,
@@ -70,6 +73,7 @@ class ForumView extends GetView<ForumController> {
                           },
                           title: forum.name,
                           imageUrl: forum.imageUrl,
+                          profilePictures: profilePictures,
                         );
                       },
                     ),

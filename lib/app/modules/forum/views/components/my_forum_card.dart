@@ -6,12 +6,14 @@ class MyForumCard extends StatelessWidget {
   final String title;
   final Function()? onTap;
   final String imageUrl;
+  final List<String> profilePictures;
 
   const MyForumCard({
     super.key,
     required this.title,
     this.onTap,
     required this.imageUrl,
+    required this.profilePictures,
   });
 
   @override
@@ -52,6 +54,32 @@ class MyForumCard extends StatelessWidget {
                 Text(
                   title,
                   style: semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
+                ),
+                const Gap(10),
+                Stack(
+                  children: [
+                    for (int i = 0; i < profilePictures.length; i++)
+                      Positioned(
+                        left: i * 15.0,
+                        child: CircleAvatar(
+                          radius: 15,
+                          backgroundImage: NetworkImage(profilePictures[0]),
+                        ),
+                      ),
+                    Row(
+                      children: List.generate(
+                        profilePictures.length,
+                        (index) => const CircleAvatar(
+                          radius: 15,
+                          // child: Text(
+                          //   '${profilePictures.length}+',
+                          //   style: semiBold.copyWith(
+                          //       fontSize: 16, color: Neutral.dark1),
+                          // ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
