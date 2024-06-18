@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../../constant/constant.dart';
 import '../../../routes/app_pages.dart';
@@ -108,7 +109,9 @@ class ProfileView extends GetView<ProfileController> {
             CustomSettingCard(
               icon: 'assets/icons/Help.svg',
               title: 'Pusat Bantuan',
-              onTap: () {},
+              onTap: () {
+                print('Hapus Token : ${GetStorage().erase()}');
+              },
             ),
             const Divider(
               thickness: 1,
