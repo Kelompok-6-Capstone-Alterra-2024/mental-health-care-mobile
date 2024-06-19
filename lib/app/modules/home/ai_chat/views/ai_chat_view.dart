@@ -1,114 +1,149 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../../../constant/constant.dart';
 import '../controllers/ai_chat_controller.dart';
 
 class AiChatView extends GetView<AiChatController> {
-  const AiChatView({Key? key}) : super(key: key);
+  const AiChatView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Ai Chat',
-            style: medium.copyWith(fontSize: 16, color: Primary.darker),
+      backgroundColor: Neutral.light1,
+      appBar: AppBar(
+        title: Text(
+          'Ai Chat',
+          style: medium.copyWith(fontSize: 16, color: Primary.darker),
+        ),
+        leading: IconButton(
+          color: Neutral.light4,
+          icon: SvgPicture.asset(
+            'assets/icons/Chevron.svg',
+            width: 26,
           ),
-          leading: IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/Chevron.svg',
-              width: 26,
-            ),
-            onPressed: () {
-              Get.back();
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(onPressed: () {
+            controller.clearMessages();
+          }, icon: Icon(Icons.delete, color: Error.mainColor,))
+        ],
+      ),
+      body: Column(
+        children: [
+          const Gap(8),
+          Obx(
+            () {
+              return controller.isConnected.value
+                  ? Text(
+                      'Terhubung',
+                      style: regular.copyWith(
+                          color: Success.mainColor, fontSize: 12),
+                    )
+                  : Column(
+                      children: [
+                        Text(
+                          'Tidak Terhubung',
+                          style: regular.copyWith(
+                              color: Error.mainColor, fontSize: 12),
+                        ),
+                        Text(
+                          controller.errorMessage.value,
+                          style: regular.copyWith(
+                              color: Neutral.dark1, fontSize: 12),
+                        ),
+                      ],
+                    );
             },
           ),
-          centerTitle: true,
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Bergabung 09:30',
-              style: regular.copyWith(fontSize: 12),
-            ),
-            const Gap(10),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 23, vertical: 1),
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    constraints: BoxConstraints(
-                      maxWidth: Get.width * 0.6,
-                    ),
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(
-                      color: Neutral.light2,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(15),
+          const Gap(4),
+          Text(
+              'Hari ini, ${DateFormat('HH:mm').format(controller.currentTime.value)} WIB',
+              style: regular.copyWith(fontSize: 12, color: Neutral.dark1)),
+          const Gap(16),
+          Expanded(
+            child: Obx(() {
+              return ListView.builder(
+                itemCount: controller.messages.length,
+                itemBuilder: (context, index) {
+                  final message = controller.messages[index];
+                  return Align(
+                    alignment: message.isMine
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: Get.width * 0.8),
+                      padding: const EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
+                      decoration: BoxDecoration(
+                        color: message.isMine
+                            ? Primary.mainColor
+                            : Neutral.light3,
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: Text(
+                        message.text,
+                        style: regular.copyWith(
+                            color: message.isMine
+                                ? Neutral.light1
+                                : Neutral.dark1,
+                            fontSize: 12),
                       ),
                     ),
-                    child: Text(
-                      'Hello, How can I help you sldkfjsdfljklskdjflsddfjlkajsd?',
-                      style:
-                          regular.copyWith(fontSize: 12, color: Neutral.dark1),
-                      maxLines: 4,
+                  );
+                },
+              );
+            }),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Neutral.light3,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 19),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: controller.messageController,
+                    // onSubmitted: (value) {
+                    //   controller.sendMessage(value);
+                    // },
+                    decoration: primary.copyWith(
+                      hintText: 'Tulis pesan',
+                      hintStyle: regular.copyWith(
+                        color: Neutral.dark3,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset(
-                    'assets/images/ai_avatar.png',
-                    width: 40,
-                  ),
-                )
-              ],
-            ),
-            const Gap(10),
-            Column(
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 23, vertical: 1),
-                  alignment: Alignment.centerRight,
+                const Gap(8),
+                GestureDetector(
+                  onTap: () {
+                    controller.sendMessage(controller.messageController.text);
+                  },
                   child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
                       color: Primary.mainColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(0),
-                      ),
+                      shape: BoxShape.circle,
                     ),
-                    child: Text(
-                      'Hello, How can I help you?',
-                      style:
-                          regular.copyWith(fontSize: 12, color: Neutral.light1),
+                    child: SvgPicture.asset(
+                      'assets/icons/Send1.svg',
+                      width: 24,
                     ),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: Image.asset(
-                    'assets/images/ai_avatar.png',
-                    width: 40,
-                  ),
-                )
+                  ),)
               ],
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

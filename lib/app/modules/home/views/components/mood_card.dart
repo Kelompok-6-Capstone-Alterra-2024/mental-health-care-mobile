@@ -6,15 +6,21 @@ import '../../../../../constant/constant.dart';
 
 class MoodCard extends StatelessWidget {
   final Function()? onTap;
-  final String icon;
-  final Color color;
+  final SvgPicture icon;
+  final Color selectedColor;
   final Color textColor;
+  final String day;
+  final int date;
+  final Color iconColor;
   const MoodCard({
     super.key,
     this.onTap,
     required this.icon,
-    required this.color,
+    required this.selectedColor,
     required this.textColor,
+    required this.day,
+    required this.date,
+    required this.iconColor,
   });
 
   @override
@@ -28,7 +34,7 @@ class MoodCard extends StatelessWidget {
             color: Neutral.light4,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: color,
+              color: selectedColor,
               width: 2,
             ),
             boxShadow: [blur4, blur8]),
@@ -38,17 +44,23 @@ class MoodCard extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  'Sen',
-                  style: regular.copyWith(fontSize: 8, color: textColor),
+                  day,
+                  style: regular.copyWith(fontSize: 9, color: textColor),
                 ),
                 const Gap(2),
                 Text(
-                  '12',
+                  date.toString(),
                   style: semiBold.copyWith(fontSize: 16, color: textColor),
                 ),
               ],
             ),
-            SvgPicture.asset(icon)
+            Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: iconColor,
+                  shape: BoxShape.circle,
+                ),
+                child: icon)
           ],
         ),
       ),

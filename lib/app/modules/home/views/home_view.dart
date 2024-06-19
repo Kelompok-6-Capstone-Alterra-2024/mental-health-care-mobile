@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/constant/constant.dart';
+import '../../../../utils/helper/calendar_icon.dart';
 import '../controllers/home_controller.dart';
 import 'package:gap/gap.dart';
 import 'components/doctor_card.dart';
@@ -84,26 +85,28 @@ class HomeView extends GetView<HomeController> {
                     ),
                     const Gap(10),
                     SizedBox(
-                      height: 100,
+                      height: 110,
                       child: GetBuilder<HomeController>(
                         id: 'mood',
                         builder: (controller) => ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: 7,
                           itemBuilder: (context, index) {
-                            final isSelected =
-                                index == controller.selectedMood.value;
+                            final day = controller.daysInWeek[index];
+                            final isSelected = controller.selectedDate.isAtSameMomentAs(day);
+                            final moodCheck = controller.getMoodForDate(day);
+                            final moodColor = moodStatusColor(moodCheck);
+                            final icon = moodStatusIconBig(moodCheck);
                             return MoodCard(
-                              textColor: isSelected
-                                  ? Primary.mainColor
-                                  : Neutral.dark3,
+                              day: DateFormat.E().format(day), // Mengisi hari
+                              date: day.day, // Mengisi tanggal
+                              textColor: isSelected ? Primary.mainColor : Neutral.dark3,
                               onTap: () {
-                                controller.selectMood(index);
+                                controller.selectDate(day);
                               },
-                              icon: 'assets/icons/empty-mood.svg',
-                              color: isSelected
-                                  ? Primary.mainColor
-                                  : Neutral.transparent,
+                              icon: icon,
+                              iconColor: moodColor,
+                              selectedColor: isSelected ? Primary.mainColor : Colors.transparent,
                             );
                           },
                         ),
