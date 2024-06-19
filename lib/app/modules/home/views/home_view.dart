@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mindease/app/modules/home/data/model/allmusic_model.dart';
 import 'package:mindease/app/modules/home/data/model/doctor_available_model.dart';
-import 'package:mindease/app/modules/home/mood_track/mixin/doctor_mixin.dart';
+import 'package:mindease/app/modules/home/data/services/allmusic_services.dart';
+import 'package:mindease/app/modules/home/data/services/inspirational_stories_services.dart';
+import 'package:mindease/app/modules/home/views/components/inspirationalStories_card.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/constant/constant.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../utils/helper/calendar_icon.dart';
 import '../controllers/home_controller.dart';
 import 'package:gap/gap.dart';
+import '../data/model/inspirational_stories_model.dart';
 import '../data/services/doctor_available_services.dart';
 import 'components/doctor_card.dart';
 import 'components/mood_card.dart';
@@ -146,7 +150,7 @@ class HomeView extends GetView<HomeController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Temukan psikiater anda disini',
+                          'Temukan psikiater anda',
                           style: semiBold.copyWith(
                               fontSize: 16, color: Primary.mainColor),
                         ),
@@ -182,6 +186,12 @@ class HomeView extends GetView<HomeController> {
                                   itemBuilder: (context, index) {
                                     final doctor = doctorAvailable[index];
                                     return DoctorCard(
+                                      imageUrl: doctor.profilePicture ==
+                                                  'http://gambar.com' ||
+                                              doctor.profilePicture ==
+                                                  'ini link fotonya'
+                                          ? 'https://www.eyeconsultants.net/wp-content/uploads/2023/10/doctor-happy.jpg'
+                                          : doctor.profilePicture,
                                       name: doctor.name,
                                       experience: '${doctor.experience} tahun',
                                       rating: '4.5',
@@ -197,7 +207,7 @@ class HomeView extends GetView<HomeController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Explor lebih banyak ketenangan',
+                          'Explor lebih ketenangan',
                           style: semiBold.copyWith(
                               fontSize: 16, color: Primary.mainColor),
                         ),
@@ -208,14 +218,74 @@ class HomeView extends GetView<HomeController> {
                         )
                       ],
                     ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 3,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return MusicCard();
+                    FutureBuilder(
+                      future: AllmusicServices().getAllMusic(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<AllMusicModel> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else {
+                          final allMusic = snapshot.data!.data;
+                          return Skeletonizer(
+                            enabled: snapshot.connectionState ==
+                                ConnectionState.waiting,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: allMusic.length,
+                              itemBuilder: (context, index) {
+                                final music = allMusic[index];
+                                return MusicCard(
+                                  title: music.title,
+                                  singer: music.singer,
+                                  imageUrl: music.imageUrl ==
+                                          'http://gambar.com'
+                                      ? 'https://i.discogs.com/BDWHa9KIT-GGjYXnfU35Q5AHMLRmIXzAGbhI0nROKAc/rs:fit/g:sm/q:90/h:535/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTc2MTIw/Mi0xNTAwNzE0MzIx/LTk4NDIuanBlZw.jpeg'
+                                      : music.imageUrl,
+                                );
+                              },
+                            ),
+                          );
+                        }
                       },
-                    )
+                    ),
+                    const Gap(8),
+                    FutureBuilder(
+                        future: InspirationalStoriesServices().getStories(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<AllStories> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else {
+                            final inspirationalStories = snapshot.data!.data;
+                            return Skeletonizer(
+                              enabled: snapshot.connectionState ==
+                                  ConnectionState.waiting,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: inspirationalStories.length,
+                                itemBuilder: (context, index) {
+                                  final stories = inspirationalStories[index];
+                                  return InspirationalstoriesCard(
+                                    image: stories.imageUrl ==
+                                            'http://gambar.com'
+                                        ? '"https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"'
+                                        : stories.imageUrl,
+                                    title: stories.title,
+                                    author: stories.doctor.name,
+                                    time:
+                                        DateFormat.yMMMd().format(stories.date),
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                        })
                   ],
                 ),
               )
