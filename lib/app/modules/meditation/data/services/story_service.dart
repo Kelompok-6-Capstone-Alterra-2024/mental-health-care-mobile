@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
-import 'package:mindease/app/modules/meditation/data/models/story_model.dart';
 
 import '../models/storys_model.dart';
 
@@ -24,7 +23,7 @@ class StoryService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('Storys response: ${response.data}');
+        logger.i(response.data);
         return Storys.fromJson(response.data);
       } else {
         throw Exception(
@@ -36,28 +35,32 @@ class StoryService {
     }
   }
 
-  Future<Story> getStory(int id) async {
+  Future<bool> toggleLikeStatus(int storyId) async {
     try {
-      final response = await _dio.get(
-        '$baseUrl/stories/$id',
+      final response = await _dio.post(
+        '$baseUrl/stories/like',
         options: Options(
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer $token',
           },
         ),
+        data: {
+          'story_id': storyId,
+        },
       );
 
-      if (response.statusCode == 200) {
-        logger.i('Story response: ${response.data}');
-        return Story.fromJson(response.data);
+      if (response.statusCode == 201) {
+        logger.i('Like status toggled successfully: ${response.data}');
+        return true;
       } else {
-        throw Exception(
-            'Failed to load Story with status code: ${response.statusCode}');
+        logger.e(
+            'Failed to toggle like status with status code: ${response.statusCode}');
+        return false;
       }
     } catch (e) {
-      logger.e('Error loading Story: $e');
-      throw Exception('Failed to load Story: $e');
+      logger.e('Error toggling like status: $e');
+      return false;
     }
   }
 }

@@ -38,9 +38,6 @@ abstract class Routes {
   static const DETAILPSIKIATER = _Paths.CONSULTATION + _Paths.DETAILPSIKIATER;
   static const FORMCONSULTATION = _Paths.CONSULTATION + _Paths.FORMCONSULTATION;
   static const PAYMENT = _Paths.CONSULTATION + _Paths.PAYMENT;
-  static const PAYMENTSUCCESS = _Paths.CONSULTATION + _Paths.PAYMENTSUCCESS;
-  static const PAYMENTDECLINED = _Paths.CONSULTATION + _Paths.PAYMENTDECLINED;
-  static const PAYMENTPROCESSED = _Paths.CONSULTATION + _Paths.PAYMENTPROCESSED;
   static const CHATWITHDOCTOR = _Paths.CONSULTATION + _Paths.CHATLIST + _Paths.CHATWITHDOCTOR;
   static const DETAILNOTE = _Paths.CONSULTATION + _Paths.DETAILNOTE;
   static const RATINGDOCTOR = _Paths.CONSULTATION + _Paths.RATINGDOCTOR;
@@ -83,9 +80,6 @@ abstract class _Paths {
   static const DETAILPSIKIATER = '/detailpsikiater';
   static const FORMCONSULTATION = '/formconsultation';
   static const PAYMENT = '/payment';
-  static const PAYMENTSUCCESS = '/paymentsuccess';
-  static const PAYMENTDECLINED = '/paymentdeclined';
-  static const PAYMENTPROCESSED = '/paymentprocessed';
   static const CHATWITHDOCTOR = '/chatwithdoctor';
   static const DETAILNOTE = '/detailnote';
   static const RATINGDOCTOR = '/ratingdoctor';

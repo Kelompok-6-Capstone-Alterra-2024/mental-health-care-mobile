@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
-import '../models/article_model.dart';
 import '../models/articles_model.dart';
 
 class ArticleService {
@@ -14,7 +13,7 @@ class ArticleService {
   Future<Articles> getArticles() async {
     try {
       final response = await _dio.get(
-        '$baseUrl/articles?page=1&limit=2',
+        '$baseUrl/articles?page=1&limit=20',
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +23,7 @@ class ArticleService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('Article response: ${response.data}');
+        logger.i(response.data);
         return Articles.fromJson(response.data);
       } else {
         throw Exception(
@@ -36,28 +35,32 @@ class ArticleService {
     }
   }
 
-  Future<Article> getArticle(int id) async {
+  Future<bool> toggleLikeStatus(int articleId) async {
     try {
-      final response = await _dio.get(
-        '$baseUrl/articles/$id',
+      final response = await _dio.post(
+        '$baseUrl/articles/like',
         options: Options(
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer $token',
           },
         ),
+        data: {
+          'article_id': articleId,
+        },
       );
 
-      if (response.statusCode == 200) {
-        logger.i('Article response: ${response.data}');
-        return Article.fromJson(response.data);
+      if (response.statusCode == 201) {
+        logger.i('Like status toggled successfully: ${response.data}');
+        return true;
       } else {
-        throw Exception(
-            'Failed to load article with status code: ${response.statusCode}');
+        logger.e(
+            'Failed to toggle like status with status code: ${response.statusCode}');
+        return false;
       }
     } catch (e) {
-      logger.e('Error loading article: $e');
-      throw Exception('Failed to load article: $e');
+      logger.e('Error toggling like status: $e');
+      return false;
     }
   }
 }

@@ -28,10 +28,20 @@ class MusicTab extends GetView<MeditationController> {
                   image: musics.imageUrl,
                   title: musics.title,
                   artist: musics.singer,
+                  isLiked: musics.isLiked,
+                  onLikeTap: () {
+                    musics.isLiked = !musics.isLiked;
+                    controller.musics.refresh();
+                  },
                   onTap: () {
-                    Get.toNamed(Routes.MUSIC,
-                        arguments: {'musicID': musics.id});
-                    print('Music ID: ${musics.id}');
+                    Get.toNamed(Routes.MUSIC, arguments: {
+                      'musicID': musics.id,
+                      'url': musics.musicUrl,
+                      'image': musics.imageUrl,
+                      'title': musics.title,
+                      'singer': musics.singer,
+                      'isLiked': musics.isLiked,
+                    });
                   },
                 );
               },
