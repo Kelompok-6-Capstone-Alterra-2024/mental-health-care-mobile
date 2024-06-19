@@ -104,7 +104,7 @@ class CommentForumView extends GetView<CommentForumController> {
                                       width: 24,
                                       height: 24,
                                       color: controller.isLiked.value
-                                          ? Colors.red
+                                          ? Primary.mainColor
                                           : null,
                                     ),
                                     const Gap(6),
@@ -113,7 +113,7 @@ class CommentForumView extends GetView<CommentForumController> {
                                       style: semiBold.copyWith(
                                         fontSize: 16,
                                         color: controller.isLiked.value
-                                            ? Colors.red
+                                            ? Primary.mainColor
                                             : Neutral.dark1,
                                       ),
                                     ),

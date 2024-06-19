@@ -104,13 +104,18 @@ class DetailForumController extends GetxController {
     return posts.any((post) => post.id == postId && post.isLiked);
   }
 
+  void updatePostLikedStatus(int postId, bool isLiked) {
+    final index = posts.indexWhere((post) => post.id == postId);
+    if (index != -1) {
+      posts[index].isLiked = isLiked;
+      posts.refresh();
+    }
+  }
+
   void likePost(int postId) async {
     try {
       await _postService.likePost(postId);
-      final index = posts.indexWhere((post) => post.id == postId);
-      if (index != -1) {
-        posts[index].isLiked = true;
-      }
+      updatePostLikedStatus(postId, true);
     } catch (e) {
       print('Error liking post: $e');
     }

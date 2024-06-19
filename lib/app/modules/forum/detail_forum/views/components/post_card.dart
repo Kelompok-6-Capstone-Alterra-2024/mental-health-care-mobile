@@ -81,7 +81,7 @@ class PostCard extends StatelessWidget {
                           width: 24,
                           height: 24,
                           color: controller.isPostLiked(postData.id)
-                              ? Colors.red
+                              ? Primary.mainColor
                               : null,
                         ),
                         const Gap(6),
@@ -90,7 +90,7 @@ class PostCard extends StatelessWidget {
                           style: semiBold.copyWith(
                             fontSize: 16,
                             color: controller.isPostLiked(postData.id)
-                                ? Colors.red
+                                ? Primary.mainColor
                                 : null,
                           ),
                         ),
