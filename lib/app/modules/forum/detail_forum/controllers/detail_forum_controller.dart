@@ -19,6 +19,7 @@ class DetailForumController extends GetxController {
   RxString note = ''.obs;
   Rx<File?> imageFile = Rx<File?>(null);
   RxBool isLoading = false.obs;
+  RxBool isLiked = false.obs;
 
   void onNote(String value) {
     note.value = value;
@@ -76,7 +77,6 @@ class DetailForumController extends GetxController {
         imageFile: imageFile.value,
       );
       fetchPostsByForumId(forumById.value!.data.forumId);
-      // Get.offNamed(Routes.DETAIL_FORUM, arguments: forumById.value!.data);
       Get.back();
     } catch (e) {
       print('Error posting forum: $e');
@@ -97,6 +97,22 @@ class DetailForumController extends GetxController {
       print('Error leaving forum: $e');
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  bool isPostLiked(int postId) {
+    return posts.any((post) => post.id == postId && post.isLiked);
+  }
+
+  void likePost(int postId) async {
+    try {
+      await _postService.likePost(postId);
+      final index = posts.indexWhere((post) => post.id == postId);
+      if (index != -1) {
+        posts[index].isLiked = true;
+      }
+    } catch (e) {
+      print('Error liking post: $e');
     }
   }
 
