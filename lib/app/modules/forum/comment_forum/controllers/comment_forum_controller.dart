@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+
 import '../data/models/comment_post_model.dart';
 import '../data/models/post_by_id_model.dart';
 import '../data/services/comment_post_service.dart';
 import '../data/services/post_by_id_service.dart';
+import '../../detail_forum/controllers/detail_forum_controller.dart';
 
 class CommentForumController extends GetxController {
   final PostByIdService _postByIdService = PostByIdService();
@@ -30,6 +32,8 @@ class CommentForumController extends GetxController {
       final fetchedPost = await _postByIdService.getPostById(postId);
       post.value = fetchedPost;
       isLiked.value = fetchedPost.data.isLiked;
+      Get.find<DetailForumController>()
+          .updatePostLikedStatus(postId, fetchedPost.data.isLiked);
     } catch (e) {
       print('Error fetching post by id: $e');
     } finally {
@@ -62,6 +66,7 @@ class CommentForumController extends GetxController {
     try {
       await _postByIdService.likePost(postId);
       isLiked.value = true;
+      Get.find<DetailForumController>().updatePostLikedStatus(postId, true);
     } catch (e) {
       print('Error liking post: $e');
     }
