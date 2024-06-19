@@ -93,6 +93,8 @@ class CommentForumView extends GetView<CommentForumController> {
                             GestureDetector(
                               onTap: () {
                                 controller.toggleLikeButton();
+                                controller
+                                    .likePost(controller.post.value!.data.id);
                               },
                               child: Obx(() {
                                 return Row(
@@ -102,7 +104,7 @@ class CommentForumView extends GetView<CommentForumController> {
                                       width: 24,
                                       height: 24,
                                       color: controller.isLiked.value
-                                          ? Primary.mainColor
+                                          ? Colors.red
                                           : null,
                                     ),
                                     const Gap(6),
@@ -111,7 +113,7 @@ class CommentForumView extends GetView<CommentForumController> {
                                       style: semiBold.copyWith(
                                         fontSize: 16,
                                         color: controller.isLiked.value
-                                            ? Primary.mainColor
+                                            ? Colors.red
                                             : Neutral.dark1,
                                       ),
                                     ),
@@ -186,7 +188,6 @@ class CommentForumView extends GetView<CommentForumController> {
                 );
               }
             }),
-            // Menampilkan komentar menggunakan CommentCard
             Obx(() {
               if (controller.isLoadingComments.value) {
                 return const Center(child: CircularProgressIndicator());

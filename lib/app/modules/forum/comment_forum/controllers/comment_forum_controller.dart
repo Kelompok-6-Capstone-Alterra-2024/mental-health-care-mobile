@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../data/models/comment_post_model.dart';
 import '../data/models/post_by_id_model.dart';
 import '../data/services/comment_post_service.dart';
@@ -30,6 +29,7 @@ class CommentForumController extends GetxController {
     try {
       final fetchedPost = await _postByIdService.getPostById(postId);
       post.value = fetchedPost;
+      isLiked.value = fetchedPost.data.isLiked;
     } catch (e) {
       print('Error fetching post by id: $e');
     } finally {
@@ -58,12 +58,24 @@ class CommentForumController extends GetxController {
     }
   }
 
+  Future<void> likePost(int postId) async {
+    try {
+      await _postByIdService.likePost(postId);
+      isLiked.value = true;
+    } catch (e) {
+      print('Error liking post: $e');
+    }
+  }
+
   void toggleCommentButton() {
     isCommentClicked.value = !isCommentClicked.value;
   }
 
   void toggleLikeButton() {
     isLiked.value = !isLiked.value;
+    if (isLiked.value) {
+      likePost(post.value!.data.id);
+    }
   }
 
   void toggleShareButton() {
