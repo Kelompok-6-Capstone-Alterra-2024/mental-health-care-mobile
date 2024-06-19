@@ -1,16 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import '../models/comment_post_model.dart';
 
-import '../models/post_by_id_model.dart';
-
-class PostByIdService {
+class CommentPostService {
   final Dio _dio = Dio();
   final String token = GetStorage().read('token') ?? '';
   final String baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
 
-  Future<PostByIdModel> getPostById(int postId) async {
+  Future<CommentPostModel> getComments(int postId,
+      {int page = 1, int limit = 20}) async {
     try {
-      final String url = '$baseUrl/posts/$postId';
+      final String url =
+          '$baseUrl/posts/$postId/comments?page=$page&limit=$limit';
       final Response response = await _dio.get(
         url,
         options: Options(
@@ -22,23 +23,24 @@ class PostByIdService {
       );
 
       if (response.statusCode == 200) {
-        return PostByIdModel.fromJson(response.data);
+        return CommentPostModel.fromJson(response.data);
       } else {
         throw Exception(
-            'Failed to load post details with status code: ${response.statusCode}');
+            'Failed to load comments with status code: ${response.statusCode}');
       }
     } catch (e) {
-      throw Exception('Error loading post details: $e');
+      throw Exception('Error loading comments: $e');
     }
   }
 
-  Future<void> likePost(int postId) async {
+  Future<void> postComment(int postId, String content) async {
     try {
-      final String url = '$baseUrl/posts/like';
+      final String url = '$baseUrl/comments';
       final Response response = await _dio.post(
         url,
         data: {
           'post_id': postId,
+          'content': content,
         },
         options: Options(
           headers: {
@@ -49,13 +51,13 @@ class PostByIdService {
       );
 
       if (response.statusCode == 201) {
-        print('Post liked successfully');
+        print('Comment posted successfully');
       } else {
         throw Exception(
-            'Failed to like post with status code: ${response.statusCode}');
+            'Failed to post comment with status code: ${response.statusCode}');
       }
     } catch (e) {
-      throw Exception('Error liking post: $e');
+      throw Exception('Error posting comment: $e');
     }
   }
 }

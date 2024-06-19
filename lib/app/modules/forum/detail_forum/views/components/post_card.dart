@@ -5,8 +5,10 @@ import 'package:get/get.dart';
 
 import '../../../../../../constant/constant.dart';
 import '../../../../../routes/app_pages.dart';
+import '../../controllers/detail_forum_controller.dart';
 import '../../data/models/posts_model.dart';
 
+// PostCard
 class PostCard extends StatelessWidget {
   final AllPost postData;
 
@@ -17,6 +19,8 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DetailForumController controller = Get.find();
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
       decoration: BoxDecoration(
@@ -66,24 +70,32 @@ class PostCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/like.svg',
-                        width: 24,
-                        height: 24,
-                        // color: isLiked ? Colors.red : Neutral.dark1,
-                      ),
-                      const Gap(6),
-                      Text(
-                        'Suka',
-                        style: semiBold.copyWith(
-                          fontSize: 16,
-                          // color: isLiked ? Colors.red : Neutral.dark1,
+                  onTap: () {
+                    controller.likePost(postData.id);
+                  },
+                  child: Obx(
+                    () => Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/like.svg',
+                          width: 24,
+                          height: 24,
+                          color: controller.isPostLiked(postData.id)
+                              ? Primary.mainColor
+                              : null,
                         ),
-                      ),
-                    ],
+                        const Gap(6),
+                        Text(
+                          'Suka',
+                          style: semiBold.copyWith(
+                            fontSize: 16,
+                            color: controller.isPostLiked(postData.id)
+                                ? Primary.mainColor
+                                : null,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 GestureDetector(
