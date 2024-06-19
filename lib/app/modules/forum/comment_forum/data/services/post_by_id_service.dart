@@ -31,4 +31,31 @@ class PostByIdService {
       throw Exception('Error loading post details: $e');
     }
   }
+
+  Future<void> likePost(int postId) async {
+    try {
+      final String url = '$baseUrl/posts/like';
+      final Response response = await _dio.post(
+        url,
+        data: {
+          'post_id': postId,
+        },
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+
+      if (response.statusCode == 201) {
+        print('Post liked successfully');
+      } else {
+        throw Exception(
+            'Failed to like post with status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error liking post: $e');
+    }
+  }
 }
