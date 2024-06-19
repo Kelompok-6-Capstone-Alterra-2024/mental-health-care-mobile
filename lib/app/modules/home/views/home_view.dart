@@ -40,10 +40,12 @@ class HomeView extends GetView<HomeController> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Halo Bayu',
-                              style: semiBold.copyWith(
-                                  fontSize: 24, color: Primary.mainColor),
+                            Obx(
+                              () => Text(
+                                'Halo ${controller.name.value}!',
+                                style: semiBold.copyWith(
+                                    fontSize: 24, color: Primary.mainColor),
+                              ),
                             ),
                             const Gap(8),
                             Text(
@@ -144,7 +146,9 @@ class HomeView extends GetView<HomeController> {
                     ),
                     const Gap(20),
                     //carousel section
-                    Image.asset('assets/images/carousel.png'),
+                    GestureDetector(
+                        onTap: () => controller.changeIndex(1),
+                        child: Image.asset('assets/images/carousel.png')),
                     const Gap(30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,10 +158,15 @@ class HomeView extends GetView<HomeController> {
                           style: semiBold.copyWith(
                               fontSize: 16, color: Primary.mainColor),
                         ),
-                        Text(
-                          'Lihat Semua',
-                          style: semiBold.copyWith(
-                              fontSize: 12, color: Neutral.dark3),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(Routes.CONSULTATION);
+                          },
+                          child: Text(
+                            'Lihat Semua',
+                            style: semiBold.copyWith(
+                                fontSize: 12, color: Neutral.dark3),
+                          ),
                         )
                       ],
                     ),
@@ -211,10 +220,15 @@ class HomeView extends GetView<HomeController> {
                           style: semiBold.copyWith(
                               fontSize: 16, color: Primary.mainColor),
                         ),
-                        Text(
-                          'Lihat Semua',
-                          style: semiBold.copyWith(
-                              fontSize: 12, color: Neutral.dark3),
+                        GestureDetector(
+                          onTap: () {
+                            controller.changeIndex(3);
+                          },
+                          child: Text(
+                            'Lihat Semua',
+                            style: semiBold.copyWith(
+                                fontSize: 12, color: Neutral.dark3),
+                          ),
                         )
                       ],
                     ),
@@ -228,15 +242,16 @@ class HomeView extends GetView<HomeController> {
                               child: CircularProgressIndicator());
                         } else {
                           final allMusic = snapshot.data!.data;
+                          controller.allMusic.assignAll(allMusic);
                           return Skeletonizer(
                             enabled: snapshot.connectionState ==
                                 ConnectionState.waiting,
                             child: ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: allMusic.length,
+                              itemCount: controller.allMusic.length,
                               itemBuilder: (context, index) {
-                                final music = allMusic[index];
+                                final music = controller.allMusic[index];
                                 return MusicCard(
                                   title: music.title,
                                   singer: music.singer,

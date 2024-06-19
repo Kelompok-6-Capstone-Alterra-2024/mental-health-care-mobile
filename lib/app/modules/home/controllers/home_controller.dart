@@ -1,16 +1,19 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mindease/app/modules/home/data/model/allmusic_model.dart';
 
+import '../../navigation/controllers/navigation_controller.dart';
+import '../data/services/profile_services.dart';
 import '../mood_track/data/model/mood_model.dart';
 import '../mood_track/data/services/mood_service.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
   final _currentDate = DateTime.now().obs;
   final _selectedDate = DateTime.now().obs;
   final _selectedMood = 0.obs; // Tambahkan mood yang dipilih
   final _daysInWeek = <DateTime>[].obs;
   RxList<Mood> moods = <Mood>[].obs; // Menyimpan data mood
+  RxList<DataMusic> allMusic = <DataMusic>[].obs;
 
   DateTime get currentDate => _currentDate.value;
   DateTime get selectedDate => _selectedDate.value;
@@ -18,11 +21,20 @@ class HomeController extends GetxController {
       _selectedMood.value; // Tambahkan getter untuk mood yang dipilih
   List<DateTime> get daysInWeek => _daysInWeek;
 
+  RxString name = ''.obs;
+
+  Future<void> getProfile() async {
+    await ProfileServices().getProfile().then((profile) {
+      name.value = profile.data.username;
+    });
+  }
+
   @override
   void onInit() {
     super.onInit();
     updateDaysInWeek();
     loadMoods();
+    getProfile();
   }
 
   void updateDaysInWeek() {
@@ -58,15 +70,18 @@ class HomeController extends GetxController {
   }
 
   String getMoodForDate(DateTime date) {
-    Mood? mood = moods.firstWhereOrNull(
-      (mood) => isSameDate(mood.date, date)
-    );
+    Mood? mood = moods.firstWhereOrNull((mood) => isSameDate(mood.date, date));
     return mood?.moodType.id.toString() ?? '';
   }
 
   bool isSameDate(DateTime date1, DateTime date2) {
     return date1.year == date2.year &&
-           date1.month == date2.month &&
-           date1.day == date2.day;
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
+
+  void changeIndex(int index) {
+    final navigationController = Get.put(NavigationController());
+    navigationController.changeIndex(index);
   }
 }
