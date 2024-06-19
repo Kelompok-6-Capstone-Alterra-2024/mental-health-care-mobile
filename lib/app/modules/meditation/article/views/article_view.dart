@@ -31,7 +31,7 @@ class ArticleView extends GetView<ArticleController> {
           highlightColor: Neutral.transparent,
         ),
         title: Text(
-          'Artikel Meditation',
+          'Artikel Meditasi',
           style: medium.copyWith(fontSize: 16, color: Primary.darker),
         ),
         centerTitle: true,
@@ -58,24 +58,33 @@ class ArticleView extends GetView<ArticleController> {
                   ),
                 ),
                 const Gap(16),
-                Text(
-                  controller.title.value,
-                  style: semiBold.copyWith(
-                    fontSize: 16,
-                    color: Neutral.dark1,
-                  ),
-                ),
-                const Gap(8),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      controller.date.value,
-                      style: regular.copyWith(
-                        fontSize: 12,
-                        color: Primary.mainColor,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.title.value,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: semiBold.copyWith(
+                              fontSize: 16,
+                              color: Neutral.dark1,
+                            ),
+                          ),
+                          Text(
+                            controller.date.value,
+                            style: regular.copyWith(
+                              fontSize: 12,
+                              color: Primary.mainColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    const Gap(8), // Adjust gap between text and icon if needed
                     GestureDetector(
                       onTap: () {
                         controller.toggleLikeStatus();
@@ -84,7 +93,7 @@ class ArticleView extends GetView<ArticleController> {
                         controller.isLiked.value
                             ? 'assets/icons/Union.svg'
                             : 'assets/icons/Heart.svg',
-                        width: 18,
+                        width: 24,
                       ),
                     ),
                   ],
@@ -92,6 +101,8 @@ class ArticleView extends GetView<ArticleController> {
                 const Gap(16),
                 Text(
                   controller.content.value,
+                  textAlign: TextAlign.justify,
+                  textDirection: TextDirection.ltr,
                   style: regular.copyWith(
                     fontSize: 12,
                     color: Neutral.dark1,

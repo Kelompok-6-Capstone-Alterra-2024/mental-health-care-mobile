@@ -83,38 +83,49 @@ class StoryView extends GetView<StoryController> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  controller.title.value,
-                                  textAlign: TextAlign.left,
-                                  style: semiBold.copyWith(
-                                    fontSize: 16,
-                                    color: Neutral.dark1,
-                                  ),
-                                ),
-                                Gap(8),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'By: ${controller.author.value}',
-                                          style: regular.copyWith(
-                                            fontSize: 12,
-                                            color: Primary.mainColor,
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            controller.title.value,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: semiBold.copyWith(
+                                              fontSize: 16,
+                                              color: Neutral.dark1,
+                                            ),
                                           ),
-                                        ),
-                                        Gap(10),
-                                        Text(
-                                          controller.date.value,
-                                          style: regular.copyWith(
-                                            fontSize: 12,
-                                            color: Primary.mainColor,
+                                          Gap(8),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'By: ${controller.author.value}',
+                                                style: regular.copyWith(
+                                                  fontSize: 12,
+                                                  color: Primary.mainColor,
+                                                ),
+                                              ),
+                                              Text(
+                                                controller.date.value,
+                                                style: regular.copyWith(
+                                                  fontSize: 12,
+                                                  color: Primary.mainColor,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
+                                    Gap(20),
                                     GestureDetector(
                                       onTap: () {
                                         controller.toggleLikeStatus();
@@ -123,7 +134,7 @@ class StoryView extends GetView<StoryController> {
                                         controller.isLiked.value
                                             ? 'assets/icons/Union.svg'
                                             : 'assets/icons/Heart.svg',
-                                        width: 18,
+                                        width: 24,
                                       ),
                                     ),
                                   ],
@@ -131,6 +142,8 @@ class StoryView extends GetView<StoryController> {
                                 Gap(16),
                                 Text(
                                   controller.content.value,
+                                  textAlign: TextAlign.justify,
+                                  textDirection: TextDirection.ltr,
                                   style: regular.copyWith(
                                     fontSize: 15,
                                     color: Neutral.dark1,

@@ -78,7 +78,7 @@ class StoryCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              author,
+                              'By : ${author}',
                               style: regular.copyWith(
                                 fontSize: 10,
                                 color: Neutral.dark3,
