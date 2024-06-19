@@ -117,8 +117,7 @@ class StoryView extends GetView<StoryController> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        controller.isLiked.value =
-                                            !controller.isLiked.value;
+                                        controller.toggleLikeStatus();
                                       },
                                       child: SvgPicture.asset(
                                         controller.isLiked.value

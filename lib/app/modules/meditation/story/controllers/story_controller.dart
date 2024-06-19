@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 
+import '../../data/services/story_service.dart';
+
 class StoryController extends GetxController {
+  final StoryService _storyService = StoryService();
+
   RxInt storyID = 0.obs;
   RxString title = ''.obs;
   RxString image = ''.obs;
@@ -9,10 +13,36 @@ class StoryController extends GetxController {
   RxString date = ''.obs;
   RxBool isLiked = false.obs;
 
-  final arg = Get.arguments;
+  Future<void> toggleLikeStatus() async {
+    try {
+      bool success = await _storyService.toggleLikeStatus(storyID.value);
+      if (success) {
+        isLiked.value = !isLiked.value;
+        Get.snackbar(
+          'Success',
+          'Like status updated successfully',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Failed to update like status',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+    } catch (e) {
+      print('Error: $e');
+      Get.snackbar(
+        'Error',
+        'Failed to update like status',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
 
   @override
   void onInit() {
+    final arg = Get.arguments;
     storyID.value = arg['idStory'];
     title.value = arg['title'];
     image.value = arg['image'];

@@ -77,17 +77,16 @@ class MusicView extends GetView<MusicController> {
                       ),
                     ],
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      'assets/icons/Heart.svg',
+                  GestureDetector(
+                    onTap: () {
+                      controller.toggleLikeStatus();
+                    },
+                    child: SvgPicture.asset(
+                      controller.isLiked.value
+                          ? 'assets/icons/Union.svg'
+                          : 'assets/icons/Heart.svg',
+                      width: 18,
                     ),
-                    padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(
-                      minWidth: 50,
-                    ),
-                    iconSize: 18,
-                    alignment: Alignment.centerRight,
                   ),
                 ],
               ),

@@ -78,7 +78,7 @@ class ArticleView extends GetView<ArticleController> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        controller.isLiked.value = !controller.isLiked.value;
+                        controller.toggleLikeStatus();
                       },
                       child: SvgPicture.asset(
                         controller.isLiked.value

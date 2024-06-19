@@ -31,8 +31,7 @@ class MusicTab extends GetView<MeditationController> {
                   isLiked: musics.isLiked,
                   onLikeTap: () {
                     musics.isLiked = !musics.isLiked;
-                    controller.musics
-                        .refresh(); // Refresh the list to update UI
+                    controller.musics.refresh();
                   },
                   onTap: () {
                     Get.toNamed(Routes.MUSIC, arguments: {
@@ -41,6 +40,7 @@ class MusicTab extends GetView<MeditationController> {
                       'image': musics.imageUrl,
                       'title': musics.title,
                       'singer': musics.singer,
+                      'isLiked': musics.isLiked,
                     });
                   },
                 );

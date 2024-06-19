@@ -34,4 +34,33 @@ class StoryService {
       throw Exception('Failed to load Storys: $e');
     }
   }
+
+  Future<bool> toggleLikeStatus(int storyId) async {
+    try {
+      final response = await _dio.post(
+        '$baseUrl/stories/like',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+        ),
+        data: {
+          'story_id': storyId,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        logger.i('Like status toggled successfully: ${response.data}');
+        return true;
+      } else {
+        logger.e(
+            'Failed to toggle like status with status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      logger.e('Error toggling like status: $e');
+      return false;
+    }
+  }
 }
