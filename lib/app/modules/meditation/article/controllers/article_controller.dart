@@ -3,35 +3,52 @@ import 'package:get/get.dart';
 import '../../data/services/article_service.dart';
 
 class ArticleController extends GetxController {
-  RxInt articleID = 0.obs;
-  RxString articleTitle = ''.obs;
-  RxString articleContent = ''.obs;
-  RxString articleImage = ''.obs;
-  RxString articleCreatedAt = ''.obs;
-  RxBool isLiked = false.obs;
-  RxString doctor = ''.obs;
+  final ArticleService _articleService = ArticleService();
 
-  Future<void> fetchArticle() async {
-    final articleService = ArticleService();
-    await articleService.getArticle(articleID.value).then(
-      (value) {
-        articleTitle.value = value.data.title;
-        articleContent.value = value.data.content;
-        articleImage.value = value.data.imageUrl;
-        articleCreatedAt.value = value.data.date.toString();
-        isLiked.value = value.data.isLiked;
-        doctor.value = value.data.doctor.name;
-      },
-    );
-  }
+  RxInt articleID = 0.obs;
+  RxString title = ''.obs;
+  RxString image = ''.obs;
+  RxString content = ''.obs;
+  RxString date = ''.obs;
+  RxBool isLiked = false.obs;
 
   @override
   void onInit() {
-    final arg = Get.arguments as Map<String, dynamic>;
-    articleID.value = arg['articleID'];
-    print('Article ID: ${articleID.value}');
-    fetchArticle();
+    final arg = Get.arguments;
+    articleID.value = arg['idArticle'];
+    title.value = arg['title'];
+    image.value = arg['image'];
+    content.value = arg['content'];
+    date.value = arg['date'].toString();
+    isLiked.value = arg['like'];
     super.onInit();
+  }
+
+  Future<void> toggleLikeStatus() async {
+    try {
+      bool success = await _articleService.toggleLikeStatus(articleID.value);
+      if (success) {
+        isLiked.value = !isLiked.value;
+        Get.snackbar(
+          'Success',
+          'Like status updated successfully',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Failed to update like status',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+    } catch (e) {
+      print('Error: $e');
+      Get.snackbar(
+        'Error',
+        'Failed to update like status',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
   }
 
   @override
