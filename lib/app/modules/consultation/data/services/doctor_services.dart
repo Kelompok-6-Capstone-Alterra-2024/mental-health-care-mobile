@@ -56,7 +56,7 @@ class DoctorServices extends GetxService {
           },
         ),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         logger.i(response.data);
         Get.offNamed(Routes.FORMCONSULTATION);
         print(response.data['data']['id']);
@@ -118,11 +118,13 @@ class DoctorServices extends GetxService {
     } on DioException catch (e) {
       if (e.response != null) {
         logger.e('Error: ${e.response?.statusCode} ${e.response?.data}');
-        Get.snackbar('Error', e.response?.data['message'],backgroundColor: Colors.red.withOpacity(0.3));
+        Get.snackbar('Error', e.response?.data['message'],
+            backgroundColor: Colors.red.withOpacity(0.3));
         if (e.response?.statusCode == 500) {
           throw Exception('Internal Server Error (500)');
         } else {
-          throw Exception('Failed to create schedule: ${e.response?.statusCode}');
+          throw Exception(
+              'Failed to create schedule: ${e.response?.statusCode}');
         }
       } else {
         logger.e('Error sending request: $e');
