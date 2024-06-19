@@ -2,20 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 
 import '../../../../../../constant/constant.dart';
 import '../../../../../../utils/global_components/book_button.dart';
 
 class RoomChatCard extends StatelessWidget {
+  final String name;
+  final String specialist;
+  final bool isRejected;
+  final String status;
+  final Color bgBadgeStatus;
+  final Color textBadgeStatus;
+  final Function()? onTap;
   const RoomChatCard({
     super.key,
+    required this.name,
+    required this.specialist,
+    required this.isRejected,
+    required this.status,
+    required this.bgBadgeStatus,
+    required this.textBadgeStatus,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.CHATWITHDOCTOR),
+      onTap: onTap,
       child: Stack(
         children: [
           Padding(
@@ -56,7 +71,7 @@ class RoomChatCard extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Dr. Andy Sp.KJ',
+                                    name,
                                     style: medium.copyWith(
                                         fontSize: 16, color: Neutral.dark1),
                                   ),
@@ -68,7 +83,7 @@ class RoomChatCard extends StatelessWidget {
                                 ],
                               ),
                               Text(
-                                'Sp. Jiwa',
+                                specialist,
                                 style: regular.copyWith(
                                     fontSize: 12, color: Neutral.dark2),
                               ),
@@ -84,7 +99,7 @@ class RoomChatCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Konsultasi Berlangsung',
+                            status,
                             style: semiBold.copyWith(
                               fontSize: 12,
                               color: Neutral.dark2,
@@ -92,6 +107,8 @@ class RoomChatCard extends StatelessWidget {
                           ),
                           BookButton(
                             label: 'chat',
+                            backgroundColor: bgBadgeStatus,
+                            textColor: textBadgeStatus,
                             onTap: () {
                               Get.toNamed(Routes.CHATWITHDOCTOR);
                             },
@@ -108,7 +125,9 @@ class RoomChatCard extends StatelessWidget {
             width: double.infinity,
             height: 142,
             decoration: BoxDecoration(
-              color: Neutral.transparent, //Neutral.light4..withOpacity(0.5)
+              color: isRejected
+                  ? Neutral.light4.withOpacity(0.5)
+                  : Neutral.transparent, //Neutral.light4..withOpacity(0.5)
               borderRadius: BorderRadius.circular(8),
             ),
           ),

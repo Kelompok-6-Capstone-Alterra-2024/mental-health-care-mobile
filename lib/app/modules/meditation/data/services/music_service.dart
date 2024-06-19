@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
-import '../models/music_model.dart';
 import '../models/musics_model.dart';
 
 class MusicService {
@@ -14,7 +13,7 @@ class MusicService {
   Future<Musics> getMusics() async {
     try {
       final response = await _dio.get(
-        '$baseUrl/musics?page=1&limit=2',
+        '$baseUrl/musics?page=1&limit=20',
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +23,7 @@ class MusicService {
       );
 
       if (response.statusCode == 200) {
-        logger.i('musics response: ${response.data}');
+        logger.i(response.data);
         return Musics.fromJson(response.data);
       } else {
         throw Exception(
@@ -36,28 +35,32 @@ class MusicService {
     }
   }
 
-  Future<Music> getMusic(int id) async {
+  Future<bool> toggleLikeStatus(int musicId) async {
     try {
-      final response = await _dio.get(
-        '$baseUrl/Musics/$id',
+      final response = await _dio.post(
+        '$baseUrl/musics/like',
         options: Options(
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer $token',
           },
         ),
+        data: {
+          'music_id': musicId,
+        },
       );
 
-      if (response.statusCode == 200) {
-        logger.i('Music response: ${response.data}');
-        return Music.fromJson(response.data);
+      if (response.statusCode == 201) {
+        logger.i('Like status toggled successfully: ${response.data}');
+        return true;
       } else {
-        throw Exception(
-            'Failed to load Music with status code: ${response.statusCode}');
+        logger.e(
+            'Failed to toggle like status with status code: ${response.statusCode}');
+        return false;
       }
     } catch (e) {
-      logger.e('Error loading Music: $e');
-      throw Exception('Failed to load Music: $e');
+      logger.e('Error toggling like status: $e');
+      return false;
     }
   }
 }

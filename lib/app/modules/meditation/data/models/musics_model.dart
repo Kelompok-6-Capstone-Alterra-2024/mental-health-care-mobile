@@ -39,7 +39,6 @@ class AllMusic {
   String singer;
   String musicUrl;
   String imageUrl;
-  int viewCount;
   bool isLiked;
 
   AllMusic({
@@ -48,7 +47,6 @@ class AllMusic {
     required this.singer,
     required this.musicUrl,
     required this.imageUrl,
-    required this.viewCount,
     required this.isLiked,
   });
 
@@ -58,7 +56,6 @@ class AllMusic {
         singer: json["singer"],
         musicUrl: json["music_url"],
         imageUrl: json["image_url"],
-        viewCount: json["view_count"],
         isLiked: json["is_liked"],
       );
 
@@ -68,7 +65,6 @@ class AllMusic {
         "singer": singer,
         "music_url": musicUrl,
         "image_url": imageUrl,
-        "view_count": viewCount,
         "is_liked": isLiked,
       };
 }

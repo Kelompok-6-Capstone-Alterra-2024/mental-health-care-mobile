@@ -7,7 +7,7 @@ import '../../../../../constant/constant.dart';
 class DoctorSpecs extends StatelessWidget {
   final String expericence;
   final String rating;
-  final String cost;
+  final int cost;
   final String university;
   final String location;
   const DoctorSpecs({
@@ -57,7 +57,7 @@ class DoctorSpecs extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  cost,
+                  cost.toString(),
                   style:
                       semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
                 ),
@@ -74,7 +74,7 @@ class DoctorSpecs extends StatelessWidget {
           'Tentang Psikiater',
           style: semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
         ),
-        const Gap(16),
+        const Gap(8),
         Row(
           children: [
             Container(
