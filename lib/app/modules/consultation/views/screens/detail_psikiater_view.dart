@@ -45,9 +45,9 @@ class DetailPsikiaterView extends GetView<ConsultationController> {
               children: [
                 Container(
                   height: 356,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/photo1.png'),
+                      image: NetworkImage(controller.imageDoctor.value),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -91,7 +91,7 @@ class DetailPsikiaterView extends GetView<ConsultationController> {
                             ],
                           ),
                           const Gap(16),
-                           DoctorSpecs(
+                          DoctorSpecs(
                             expericence: controller.experienceDoctor.value,
                             rating: controller.rateDoctor.value,
                             cost: controller.feeDoctor.value,

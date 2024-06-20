@@ -41,6 +41,9 @@ class DoctorServices extends GetxService {
 
   Future<ConsultationByIdModel> postSchedule(
       int doctorId, String date, String time) async {
+    print('doctorId: $doctorId');
+    print('date: $date');
+    print('time: $time');
     try {
       final response = await dio.post(
         '$baseUrl/consultations',
@@ -56,10 +59,8 @@ class DoctorServices extends GetxService {
           },
         ),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         logger.i(response.data);
-        Get.offNamed(Routes.FORMCONSULTATION);
-        print(response.data['data']['id']);
         return ConsultationByIdModel.fromJson(response.data);
       } else {
         throw Exception('Failed to create schedule');
@@ -98,7 +99,7 @@ class DoctorServices extends GetxService {
         '$baseUrl/payments/gateway',
         data: {
           'consultation_id': consultationId,
-          'price': 10,
+          'price': price,
         },
         options: Options(
           headers: {
@@ -107,7 +108,7 @@ class DoctorServices extends GetxService {
           },
         ),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         logger.i(response.data);
         print(response.data['payment_link']);
         return TransactionModel.fromJson(response.data);
@@ -118,11 +119,13 @@ class DoctorServices extends GetxService {
     } on DioException catch (e) {
       if (e.response != null) {
         logger.e('Error: ${e.response?.statusCode} ${e.response?.data}');
-        Get.snackbar('Error', e.response?.data['message'],backgroundColor: Colors.red.withOpacity(0.3));
+        Get.snackbar('Error', e.response?.data['message'],
+            backgroundColor: Colors.red.withOpacity(0.3));
         if (e.response?.statusCode == 500) {
           throw Exception('Internal Server Error (500)');
         } else {
-          throw Exception('Failed to create schedule: ${e.response?.statusCode}');
+          throw Exception(
+              'Failed to create schedule: ${e.response?.statusCode}');
         }
       } else {
         logger.e('Error sending request: $e');

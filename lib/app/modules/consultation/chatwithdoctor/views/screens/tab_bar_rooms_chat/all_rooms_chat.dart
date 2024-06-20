@@ -41,10 +41,14 @@ class AllRoomsChat extends StatelessWidget {
                   name: info.doctor.name,
                   specialist: info.doctor.specialist,
                   isRejected: info.isRejected,
-                  status: statusRoomChat(info.status),
+                  status:
+                      statusRoomChat(info.status, isRejected: info.isRejected),
                   bgBadgeStatus: bgBadgeStatus(info.status),
                   textBadgeStatus: textBadgeStatus(info.status),
-                  onTap: controller.onChatStatus(info.status),
+                  onTap: controller.onChatStatus(info.status,
+                      isRejected: info.isRejected,
+                      roomChatId: info.id,
+                      endTime: info.endTime),
                 );
               } else {
                 return const Center(

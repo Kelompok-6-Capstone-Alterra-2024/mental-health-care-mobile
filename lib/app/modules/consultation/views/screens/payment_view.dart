@@ -20,14 +20,14 @@ class PaymentView extends GetView<ConsultationController> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/Chevron.svg',
-              width: 26,
-            ),
-            onPressed: () {
-              Get.back();
-            },
+          icon: SvgPicture.asset(
+            'assets/icons/Chevron.svg',
+            width: 26,
           ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         title: Text(
           'Detail Pembayaran',
           style: medium.copyWith(fontSize: 16, color: Primary.mainColor),
@@ -81,12 +81,12 @@ class PaymentView extends GetView<ConsultationController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Dr. Andy Sp.KJ',
+                                controller.nameDoctor.value,
                                 style: semiBold.copyWith(
                                     fontSize: 18, color: Neutral.dark1),
                               ),
                               Text(
-                                'Sp. Jiwa',
+                                controller.specialistDoctor.value,
                                 style: regular.copyWith(
                                     fontSize: 16, color: Neutral.dark2),
                               ),
@@ -134,7 +134,7 @@ class PaymentView extends GetView<ConsultationController> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    'Rp. 150.000',
+                                    controller.feeDoctor.toString(),
                                     style: bold.copyWith(
                                         fontSize: 16, color: Primary.mainColor),
                                   ),
@@ -146,7 +146,7 @@ class PaymentView extends GetView<ConsultationController> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    'Rp. 152.000',
+                                    controller.totalFee.toString(),
                                     style: bold.copyWith(
                                         fontSize: 16, color: Primary.mainColor),
                                   ),

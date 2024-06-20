@@ -1,6 +1,11 @@
+// To parse this JSON data, do
+//
+//     final chatRoomsModel = chatRoomsModelFromJson(jsonString);
+
 import 'dart:convert';
 
-ChatRoomsModel chatRoomsModelFromJson(String str) => ChatRoomsModel.fromJson(json.decode(str));
+ChatRoomsModel chatRoomsModelFromJson(String str) =>
+    ChatRoomsModel.fromJson(json.decode(str));
 
 String chatRoomsModelToJson(ChatRoomsModel data) => json.encode(data.toJson());
 
@@ -32,6 +37,7 @@ class Info {
   int id;
   String status;
   bool isRejected;
+  String endTime;
   LatestMessage latestMessage;
   Doctor doctor;
 
@@ -39,6 +45,7 @@ class Info {
     required this.id,
     required this.status,
     required this.isRejected,
+    required this.endTime,
     required this.latestMessage,
     required this.doctor,
   });
@@ -47,6 +54,7 @@ class Info {
         id: json["id"],
         status: json["status"],
         isRejected: json["isrejected"],
+        endTime: json["end_time"],
         latestMessage: LatestMessage.fromJson(json["latest_message"]),
         doctor: Doctor.fromJson(json["doctor"]),
       );
@@ -55,6 +63,7 @@ class Info {
         "id": id,
         "status": status,
         "isrejected": isRejected,
+        "end_time": endTime,
         "latest_message": latestMessage.toJson(),
         "doctor": doctor.toJson(),
       };

@@ -19,7 +19,8 @@ mixin FormConsultationMixin on GetxController {
   }
 
   void setGender(bool value) {
-    gender.value = value;}
+    gender.value = value;
+  }
 
   void setAge(String value) {
     age.value = value;
@@ -34,15 +35,20 @@ mixin FormConsultationMixin on GetxController {
   }
 
   void createComplaint(int consultationId) async {
+    print('Consultation ID: $consultationId');
+    print('Name: ${name.value}');
+    print('Old: ${age.value}');
+    print('message ${message.value}');
+    print('Medical History: ${medicalHistory.value}');
     // isLoading.value = false;
     try {
       final response = await DoctorServices().postComplaint(
-        consultationId,
-        name.value,
-        int.parse(age.value),
-        gender.value == true ? 'wanita' : 'pria',
-        message.value,
-        medicalHistory.value);
+          consultationId,
+          name.value,
+          int.parse(age.value),
+          gender.value == true ? 'wanita' : 'pria',
+          message.value,
+          medicalHistory.value);
       if (response.statusCode == 201) {
         Get.toNamed(Routes.PAYMENT);
         Logger().i(response.data);
@@ -50,9 +56,11 @@ mixin FormConsultationMixin on GetxController {
       } else {
         print('Failed');
         Logger().e(response.data);
+        Get.snackbar('Gagal', 'Gagal membuat keluhan');
       }
     } catch (e) {
       Logger().e(e.toString());
+      Get.snackbar('Gagal', e.toString());
     }
     // isLoading.value = false;
     // print('Consultation ID: $consultationId');

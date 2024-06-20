@@ -82,39 +82,61 @@ class ConsultationView extends GetView<ConsultationController> {
                           return const Center(
                             child: Text('Terjadi kesalahan'),
                           );
-                        } else if (!snapshot.hasData || snapshot.data == null || snapshot.data!.data == null || snapshot.data!.data.isEmpty) {
+                        } else if (!snapshot.hasData ||
+                            snapshot.data == null ||
+                            snapshot.data!.data == null ||
+                            snapshot.data!.data.isEmpty) {
                           return const Center(
                             child: Text('Data kosong'),
                           );
                         } else {
-                        final doctorList = snapshot.data!.data.toList();
-                        controller.doctorsList.value = doctorList;
+                          final doctorList = snapshot.data!.data.toList();
+                          controller.doctorsList.value = doctorList;
                           return ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: controller.doctorsList.length,
                             itemBuilder: (BuildContext context, int index) {
                               final doctor = controller.doctorsList[index];
                               return DoctorCard(
-                                image: 'assets/images/Avatar1.png',
-                                name: doctor.name,
-                                title: doctor.specialist,
-                                yearsofservice: doctor.experience.toString(),
-                                rating: '90',
-                                price: doctor.fee.toString(),
-                                like: () {},
-                                onTapCard: () {
-                                    Get.toNamed(Routes.DETAILPSIKIATER,);
+                                  image: doctor.profilePicture ==
+                                              'http://gambar.com' ||
+                                          doctor.profilePicture ==
+                                              'ini link fotonya'
+                                      ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                                      : doctor.profilePicture,
+                                  name: doctor.name,
+                                  title: doctor.specialist,
+                                  yearsofservice: doctor.experience.toString(),
+                                  rating: '${doctor.ratingPrecentage}%',
+                                  price: doctor.fee.toString(),
+                                  like: () {},
+                                  onTapCard: () {
+                                    Get.toNamed(
+                                      Routes.DETAILPSIKIATER,
+                                    );
+                                    print('Doctor ID: ${doctor.id}');
                                     controller.idDoctor.value = doctor.id;
                                     controller.nameDoctor.value = doctor.name;
-                                    controller.specialistDoctor.value = doctor.specialist;
-                                    controller.experienceDoctor.value = doctor.experience.toString();
+                                    controller.specialistDoctor.value =
+                                        doctor.specialist;
+                                    controller.experienceDoctor.value =
+                                        doctor.experience.toString();
                                     controller.feeDoctor.value = doctor.fee;
-                                    controller.imageDoctor.value = 'assets/images/Avatar1.png';
-                                    controller.rateDoctor.value = '90';
-                                    controller.locationDoctor.value = doctor.address;
-                                    controller.educationDoctor.value = doctor.almamater;
-                            });
+                                    controller.imageDoctor.value = doctor
+                                                    .profilePicture ==
+                                                'http://gambar.com' ||
+                                            doctor.profilePicture ==
+                                                'ini link fotonya'
+                                        ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                                        : doctor.profilePicture;
+                                    controller.rateDoctor.value =
+                                        '${doctor.ratingPrecentage}%';
+                                    controller.locationDoctor.value =
+                                        doctor.address;
+                                    controller.educationDoctor.value =
+                                        doctor.bachelorAlmamater;
+                                  });
                             },
                           );
                         }
