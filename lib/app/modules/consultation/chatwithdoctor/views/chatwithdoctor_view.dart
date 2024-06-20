@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../controllers/chatwithdoctor_controller.dart';
 import '../../../../../constant/constant.dart';
 import 'components/chat_item.dart';
@@ -65,6 +66,11 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
                             DateTime.parse(controller.endChatTime.value)),
                         time: DateFormat.Hm().format(
                             DateTime.parse(controller.endChatTime.value)),
+                        onTap: () async {
+                          await controller.getConsultationNoteData(
+                              controller.idRoomChat.value);
+                          Get.toNamed(Routes.DETAILNOTE);
+                        },
                       )
                     ],
                   )

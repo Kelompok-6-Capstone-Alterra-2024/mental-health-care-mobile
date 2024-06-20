@@ -19,7 +19,6 @@ mixin MessageMixin on GetxController {
       final messageHistory = await messageService.getAllMessages(chatId);
       if (messageHistory.status) {
         allMessages.addAll(messageHistory.data);
-        print('allMessages: ${allMessages.length}');
       } else {
         Get.snackbar('Error', 'Failed to load messages');
       }

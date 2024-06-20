@@ -7,7 +7,6 @@ import 'package:logger/logger.dart';
 import 'package:mindease/app/modules/consultation/data/models/consultation_by_id.dart';
 
 import '../../../../data/api/api.dart';
-import '../../../../routes/app_pages.dart';
 import '../models/doctor_model.dart';
 import '../models/transaction_model.dart';
 
@@ -20,7 +19,7 @@ class DoctorServices extends GetxService {
   Future<DoctorModel> getAllDoctor() async {
     try {
       final response = await dio.get(
-        '$baseUrl/doctors?page=1&limit=3',
+        '$baseUrl/doctors?page=1&limit=10',
         options: Options(
           headers: {
             'Content-Type': 'application/json',

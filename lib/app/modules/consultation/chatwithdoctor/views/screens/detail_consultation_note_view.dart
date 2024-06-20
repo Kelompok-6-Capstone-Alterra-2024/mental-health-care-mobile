@@ -6,7 +6,6 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:mindease/app/routes/app_pages.dart';
-import 'package:mindease/utils/global_components/main_button.dart';
 import 'package:mindease/utils/global_components/main_button_without_padding.dart';
 
 import '../../../../../../constant/constant.dart';
@@ -20,14 +19,14 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/Chevron.svg',
-              width: 26,
-            ),
-            onPressed: () {
-              Get.back();
-            },
+          icon: SvgPicture.asset(
+            'assets/icons/Chevron.svg',
+            width: 26,
           ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         title: Text(
           'Catatan Konsultasi',
           style: medium.copyWith(fontSize: 16, color: Primary.mainColor),
@@ -62,13 +61,13 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Dr. Andy Sp.KJ',
+                            controller.doctorName.value,
                             style: medium.copyWith(
                                 fontSize: 16, color: Neutral.dark1),
                           ),
                           InkWell(
                             onTap: () {
-                              Get.toNamed(Routes.DETAILPSIKIATER);
+                              // Get.toNamed(Routes.DETAILPSIKIATER);
                             },
                             borderRadius: BorderRadius.circular(100),
                             child: Container(
@@ -92,7 +91,7 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
                         ],
                       ),
                       Text(
-                        'Sp. Jiwa',
+                        controller.doctorSpecialist.value,
                         style: regular.copyWith(
                             fontSize: 12, color: Neutral.dark2),
                       ),
@@ -120,20 +119,20 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
-                        const OtherServiceCards(
+                        OtherServiceCards(
                           image: 'assets/images/mood_profile.png',
                           featureName: 'Mood Tracker',
-                          title: 'Lacak suasana Hati',
+                          title: controller.moodTrack.value,
                         ),
-                        const OtherServiceCards(
+                        OtherServiceCards(
                           image: 'assets/images/meditasi_profile.png',
                           featureName: 'Meditasi Audio',
-                          title: 'Suara Lautan',
+                          title: controller.musicTitle.value,
                         ),
-                        const OtherServiceCards(
+                        OtherServiceCards(
                           image: 'assets/images/forum_profile.png',
                           featureName: 'Forum dan Komunitas',
-                          title: 'TalkLife',
+                          title: controller.forumName.value,
                         ),
                       ],
                     ),
@@ -154,7 +153,7 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Rasa cemas terus menerus',
+                  controller.firstPoint.value,
                   style: semiBold.copyWith(
                     fontSize: 16,
                     color: Neutral.dark1,
@@ -174,7 +173,7 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Konsultasi 3 minggu kedepan',
+                  controller.secondPoint.value,
                   style: semiBold.copyWith(
                     fontSize: 16,
                     color: Neutral.dark1,
@@ -194,7 +193,7 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Istirahat lebih cepat',
+                  controller.thirdPoint.value,
                   style: semiBold.copyWith(
                     fontSize: 16,
                     color: Neutral.dark1,

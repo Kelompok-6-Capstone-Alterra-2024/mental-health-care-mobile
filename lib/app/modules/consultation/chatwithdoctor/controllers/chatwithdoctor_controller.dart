@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mindease/app/modules/consultation/chatwithdoctor/data/models/chat_rooms_model.dart';
+import 'package:mindease/app/modules/consultation/chatwithdoctor/mixins/consultation_note_mixin.dart';
 import 'package:mindease/app/modules/consultation/chatwithdoctor/mixins/message_mixin.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../data/services/chat_rooms_service.dart';
 
-class ChatwithdoctorController extends GetxController with MessageMixin {
+class ChatwithdoctorController extends GetxController
+    with MessageMixin, ConsultationNoteMixin {
   final ChatRoomsService _chatRoomsService = ChatRoomsService();
   RxList<Doctor> doctorRoomList = <Doctor>[].obs;
   RxList<Info> infoList = <Info>[].obs;
@@ -86,7 +88,8 @@ class ChatwithdoctorController extends GetxController with MessageMixin {
     refreshData();
   }
 
-  Function() onChatStatus(String status, {bool? isRejected, int? roomChatId, String? endTime}) {
+  Function() onChatStatus(String status,
+      {bool? isRejected, int? roomChatId, String? endTime}) {
     switch (status) {
       case 'active':
         return () {
@@ -97,14 +100,18 @@ class ChatwithdoctorController extends GetxController with MessageMixin {
       case 'completed':
         //jadi jika statusnya completed dan isRejected false maka akan diarahkan ke chat with doctor
         //dan status chat akan diubah menjadi completed yang berfunsinya untuk menampilkan catatan konsultasi
-        if (isRejected == true) {
+        if (isRejected == false) {
           //jangan lupa ganti false buat ngakses chat
           return () {
-            Get.toNamed(Routes.CHATWITHDOCTOR,);
+            Get.toNamed(
+              Routes.CHATWITHDOCTOR,
+            );
             changeStatusChat('completed');
             setIdRoomChat(roomChatId!);
-            loadMessages(roomChatId);
-            setEndTime(endTime!);
+            loadMessages(roomChatId); //get message chat from doctor
+            //buat logic untuk polling data by lastmessage id
+            setEndTime(endTime!); //set end time chat for consultation note
+            print(roomChatId);
           };
         } else {
           return () {};
