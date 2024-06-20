@@ -19,11 +19,14 @@ class RatingDoctorView extends GetView<ChatwithdoctorController> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: SvgPicture.asset('assets/icons/Back_Left.svg'),
-        ),
+            icon: SvgPicture.asset(
+              'assets/icons/Chevron.svg',
+              width: 26,
+            ),
+            onPressed: () {
+              Get.back();
+            },
+          ),
         title: Text(
           'Rating & Review',
           style: medium.copyWith(fontSize: 16, color: Primary.mainColor),

@@ -4,34 +4,39 @@
 
 import 'dart:convert';
 
-TransactionModel transactionModelFromJson(String str) => TransactionModel.fromJson(json.decode(str));
+TransactionModel transactionModelFromJson(String str) =>
+    TransactionModel.fromJson(json.decode(str));
 
-String transactionModelToJson(TransactionModel data) => json.encode(data.toJson());
+String transactionModelToJson(TransactionModel data) =>
+    json.encode(data.toJson());
 
 class TransactionModel {
-    String id;
-    Consultation consultation;
-    int price;
-    String paymentType;
-    String paymentLink;
-    String bank;
-    String status;
-    String createdAt;
-    String updatedAt;
+  String id;
+  Consultation consultation;
+  int price;
+  String paymentType;
+  String paymentLink;
+  String bank;
+  String status;
+  int pointSpend;
+  String createdAt;
+  String updatedAt;
 
-    TransactionModel({
-        required this.id,
-        required this.consultation,
-        required this.price,
-        required this.paymentType,
-        required this.paymentLink,
-        required this.bank,
-        required this.status,
-        required this.createdAt,
-        required this.updatedAt,
-    });
+  TransactionModel({
+    required this.id,
+    required this.consultation,
+    required this.price,
+    required this.paymentType,
+    required this.paymentLink,
+    required this.bank,
+    required this.status,
+    required this.pointSpend,
+    required this.createdAt,
+    required this.updatedAt,
+  });
 
-    factory TransactionModel.fromJson(Map<String, dynamic> json) => TransactionModel(
+  factory TransactionModel.fromJson(Map<String, dynamic> json) =>
+      TransactionModel(
         id: json["id"],
         consultation: Consultation.fromJson(json["consultation"]),
         price: json["price"],
@@ -39,11 +44,12 @@ class TransactionModel {
         paymentLink: json["payment_link"],
         bank: json["bank"],
         status: json["status"],
+        pointSpend: json["point_spend"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "consultation": consultation.toJson(),
         "price": price,
@@ -51,101 +57,104 @@ class TransactionModel {
         "payment_link": paymentLink,
         "bank": bank,
         "status": status,
+        "point_spend": pointSpend,
         "created_at": createdAt,
         "updated_at": updatedAt,
-    };
+      };
 }
 
 class Consultation {
-    int id;
-    Doctor doctor;
-    String status;
-    String paymentStatus;
-    bool isAccepted;
-    bool isActive;
-    DateTime date;
-    String time;
+  int id;
+  Doctor doctor;
+  String status;
+  String paymentStatus;
+  bool isAccepted;
+  bool isActive;
+  String startDate;
+  String endDate;
 
-    Consultation({
-        required this.id,
-        required this.doctor,
-        required this.status,
-        required this.paymentStatus,
-        required this.isAccepted,
-        required this.isActive,
-        required this.date,
-        required this.time,
-    });
+  Consultation({
+    required this.id,
+    required this.doctor,
+    required this.status,
+    required this.paymentStatus,
+    required this.isAccepted,
+    required this.isActive,
+    required this.startDate,
+    required this.endDate,
+  });
 
-    factory Consultation.fromJson(Map<String, dynamic> json) => Consultation(
+  factory Consultation.fromJson(Map<String, dynamic> json) => Consultation(
         id: json["id"],
-        doctor: Doctor.fromJson(json["Doctor"]),
-        status: json["Status"],
-        paymentStatus: json["PaymentStatus"],
-        isAccepted: json["IsAccepted"],
-        isActive: json["IsActive"],
-        date: DateTime.parse(json["Date"]),
-        time: json["Time"],
-    );
+        doctor: Doctor.fromJson(json["doctor"]),
+        status: json["status"],
+        paymentStatus: json["payment_status"],
+        isAccepted: json["is_accepted"],
+        isActive: json["is_active"],
+        startDate: json["start_date"],
+        endDate: json["end_date"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
-        "Doctor": doctor.toJson(),
-        "Status": status,
-        "PaymentStatus": paymentStatus,
-        "IsAccepted": isAccepted,
-        "IsActive": isActive,
-        "Date": "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
-        "Time": time,
-    };
+        "doctor": doctor.toJson(),
+        "status": status,
+        "payment_status": paymentStatus,
+        "is_accepted": isAccepted,
+        "is_active": isActive,
+        "start_date": startDate,
+        "end_date": endDate,
+      };
 }
 
 class Doctor {
-    int id;
-    String username;
-    String email;
-    String name;
-    String address;
-    String phoneNumber;
-    String gender;
-    bool isAvailable;
-    String profilePicture;
-    int balance;
-    int experience;
-    String almamater;
-    int graduationYear;
-    String practiceLocation;
-    String practiceCity;
-    String practiceProvince;
-    String strNumber;
-    int fee;
-    String specialist;
-    int amount;
+  int id;
+  String username;
+  String email;
+  String name;
+  String address;
+  String phoneNumber;
+  String gender;
+  bool isAvailable;
+  String profilePicture;
+  int balance;
+  int experience;
+  String bachelorAlmamater;
+  int bachelorGraduationYear;
+  String masterAlmamater;
+  int masterGraduationYear;
+  String practiceLocation;
+  String practiceCity;
+  int fee;
+  String specialist;
+  int amount;
+  int ratingPrecentage;
 
-    Doctor({
-        required this.id,
-        required this.username,
-        required this.email,
-        required this.name,
-        required this.address,
-        required this.phoneNumber,
-        required this.gender,
-        required this.isAvailable,
-        required this.profilePicture,
-        required this.balance,
-        required this.experience,
-        required this.almamater,
-        required this.graduationYear,
-        required this.practiceLocation,
-        required this.practiceCity,
-        required this.practiceProvince,
-        required this.strNumber,
-        required this.fee,
-        required this.specialist,
-        required this.amount,
-    });
+  Doctor({
+    required this.id,
+    required this.username,
+    required this.email,
+    required this.name,
+    required this.address,
+    required this.phoneNumber,
+    required this.gender,
+    required this.isAvailable,
+    required this.profilePicture,
+    required this.balance,
+    required this.experience,
+    required this.bachelorAlmamater,
+    required this.bachelorGraduationYear,
+    required this.masterAlmamater,
+    required this.masterGraduationYear,
+    required this.practiceLocation,
+    required this.practiceCity,
+    required this.fee,
+    required this.specialist,
+    required this.amount,
+    required this.ratingPrecentage,
+  });
 
-    factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
+  factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
         id: json["id"],
         username: json["username"],
         email: json["email"],
@@ -157,18 +166,19 @@ class Doctor {
         profilePicture: json["profile_picture"],
         balance: json["balance"],
         experience: json["experience"],
-        almamater: json["almamater"],
-        graduationYear: json["graduation_year"],
+        bachelorAlmamater: json["bachelor_almamater"],
+        bachelorGraduationYear: json["bachelor_graduation_year"],
+        masterAlmamater: json["master_almamater"],
+        masterGraduationYear: json["master_graduation_year"],
         practiceLocation: json["practice_location"],
         practiceCity: json["practice_city"],
-        practiceProvince: json["practice_province"],
-        strNumber: json["str_number"],
         fee: json["fee"],
         specialist: json["specialist"],
         amount: json["amount"],
-    );
+        ratingPrecentage: json["rating_precentage"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "username": username,
         "email": email,
@@ -180,14 +190,15 @@ class Doctor {
         "profile_picture": profilePicture,
         "balance": balance,
         "experience": experience,
-        "almamater": almamater,
-        "graduation_year": graduationYear,
+        "bachelor_almamater": bachelorAlmamater,
+        "bachelor_graduation_year": bachelorGraduationYear,
+        "master_almamater": masterAlmamater,
+        "master_graduation_year": masterGraduationYear,
         "practice_location": practiceLocation,
         "practice_city": practiceCity,
-        "practice_province": practiceProvince,
-        "str_number": strNumber,
         "fee": fee,
         "specialist": specialist,
         "amount": amount,
-    };
+        "rating_precentage": ratingPrecentage,
+      };
 }

@@ -48,15 +48,16 @@ class Doctor {
     String profilePicture;
     int balance;
     int experience;
-    String almamater;
-    int graduationYear;
+    String bachelorAlmamater;
+    int bachelorGraduationYear;
+    String masterAlmamater;
+    int masterGraduationYear;
     String practiceLocation;
     String practiceCity;
-    String practiceProvince;
-    String strNumber;
     int fee;
     String specialist;
     int amount;
+    int ratingPrecentage;
 
     Doctor({
         required this.id,
@@ -70,15 +71,16 @@ class Doctor {
         required this.profilePicture,
         required this.balance,
         required this.experience,
-        required this.almamater,
-        required this.graduationYear,
+        required this.bachelorAlmamater,
+        required this.bachelorGraduationYear,
+        required this.masterAlmamater,
+        required this.masterGraduationYear,
         required this.practiceLocation,
         required this.practiceCity,
-        required this.practiceProvince,
-        required this.strNumber,
         required this.fee,
         required this.specialist,
         required this.amount,
+        required this.ratingPrecentage,
     });
 
     factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
@@ -93,15 +95,16 @@ class Doctor {
         profilePicture: json["profile_picture"],
         balance: json["balance"],
         experience: json["experience"],
-        almamater: json["almamater"],
-        graduationYear: json["graduation_year"],
+        bachelorAlmamater: json["bachelor_almamater"],
+        bachelorGraduationYear: json["bachelor_graduation_year"],
+        masterAlmamater: json["master_almamater"],
+        masterGraduationYear: json["master_graduation_year"],
         practiceLocation: json["practice_location"],
         practiceCity: json["practice_city"],
-        practiceProvince: json["practice_province"],
-        strNumber: json["str_number"],
         fee: json["fee"],
         specialist: json["specialist"],
         amount: json["amount"],
+        ratingPrecentage: json["rating_precentage"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -116,15 +119,16 @@ class Doctor {
         "profile_picture": profilePicture,
         "balance": balance,
         "experience": experience,
-        "almamater": almamater,
-        "graduation_year": graduationYear,
+        "bachelor_almamater": bachelorAlmamater,
+        "bachelor_graduation_year": bachelorGraduationYear,
+        "master_almamater": masterAlmamater,
+        "master_graduation_year": masterGraduationYear,
         "practice_location": practiceLocation,
         "practice_city": practiceCity,
-        "practice_province": practiceProvince,
-        "str_number": strNumber,
         "fee": fee,
         "specialist": specialist,
         "amount": amount,
+        "rating_precentage": ratingPrecentage,
     };
 }
 

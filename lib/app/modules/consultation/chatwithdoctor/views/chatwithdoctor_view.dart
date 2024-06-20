@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../controllers/chatwithdoctor_controller.dart';
 import '../../../../../constant/constant.dart';
 import 'components/chat_item.dart';
@@ -22,6 +24,7 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
           ),
           onPressed: () {
             Get.back();
+            controller.allMessages.clear();
           },
         ),
         title: Text(
@@ -33,44 +36,55 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
       body: Column(
         children: [
           Expanded(
-            child: ListView(
-              children: const [
-                ChatItem(
-                  isSender: true,
-                  chat: 'Rorem ipsum dolor sit adipiscing elit.',
-                ),
-                ChatItem(
-                  isSender: false,
-                  chat: 'Rorem ipsum dolor sit adipiscing elit.',
-                ),
-                ChatItem(
-                  isSender: true,
-                  chat: 'Rorem ipsum dolor sit adipiscing elit.',
-                ),
-                ChatItem(
-                  isSender: false,
-                  chat:
-                      'Rorem ipsum dolor sit adipiscing elit.Rorem ipsum dolor sit adipiscing elit.Rorem ipsum dolor sit adipiscing elit.',
-                ),
-                SessionCompleted(
-                  time: '09:38',
-                ),
-                NoteItem(
-                  date: '04 Mei 2024',
-                  time: '09:38',
-                )
-              ],
-            ),
+            child: Obx(() {
+              if (controller.isLoading.value) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                return ListView.builder(
+                  itemCount: controller.allMessages.length,
+                  itemBuilder: (context, index) {
+                    var message = controller.allMessages[index];
+                    return ChatItem(
+                      isSender: message.role == 'user',
+                      chat: message.message,
+                    );
+                  },
+                );
+              }
+            }),
+          ),
+          Obx(
+            () => controller.statusChat.value == 'completed'
+                ? Column(
+                    children: [
+                      SessionCompleted(
+                        time: DateFormat.Hm().format(
+                            DateTime.parse(controller.endChatTime.value)),
+                      ),
+                      NoteItem(
+                        date: DateFormat.yMMMd().format(
+                            DateTime.parse(controller.endChatTime.value)),
+                        time: DateFormat.Hm().format(
+                            DateTime.parse(controller.endChatTime.value)),
+                        onTap: () async {
+                          await controller.getConsultationNoteData(
+                              controller.idRoomChat.value);
+                          Get.toNamed(Routes.DETAILNOTE);
+                        },
+                      )
+                    ],
+                  )
+                : const SizedBox(),
           ),
           Container(
-            height: 100,
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
                   child: TextField(
+                    controller: controller.messageController,
                     decoration: primary.copyWith(
                       hintText: 'Tulis pesan',
                       hintStyle:
@@ -84,7 +98,9 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
                   color: Primary.mainColor,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(100),
-                    onTap: () {},
+                    onTap: () {
+                      controller.sendMessage(controller.idRoomChat.value);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: SvgPicture.asset('assets/icons/Send-icon.svg'),
@@ -99,3 +115,20 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
     );
   }
 }
+
+
+// Obx(
+//                   () => controller.statusChat.value == 'completed'
+//                       ? const Column(
+//                           children: [
+//                             SessionCompleted(
+//                               time: '09:38',
+//                             ),
+//                             NoteItem(
+//                               date: '04 Mei 2024',
+//                               time: '09:38',
+//                             )
+//                           ],
+//                         )
+//                       : const SizedBox(),
+//                 )

@@ -33,7 +33,7 @@ class DoctorCard extends StatelessWidget {
       onTap: onTapCard,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           boxShadow: [blur8, blur4],
           color: Colors.white,
@@ -46,8 +46,12 @@ class DoctorCard extends StatelessWidget {
               width: 148,
               height: 148,
               decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  bottomLeft: Radius.circular(8),
+                ),
                 image: DecorationImage(
-                  image: AssetImage(image),
+                  image: NetworkImage(image),
                   fit: BoxFit.cover,
                 ),
               ),

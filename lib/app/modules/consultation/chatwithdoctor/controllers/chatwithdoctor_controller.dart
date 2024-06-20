@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:mindease/app/modules/consultation/chatwithdoctor/data/models/chat_rooms_model.dart';
+import 'package:mindease/app/modules/consultation/chatwithdoctor/mixins/consultation_note_mixin.dart';
+import 'package:mindease/app/modules/consultation/chatwithdoctor/mixins/message_mixin.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../data/services/chat_rooms_service.dart';
 
-class ChatwithdoctorController extends GetxController {
+class ChatwithdoctorController extends GetxController
+    with MessageMixin, ConsultationNoteMixin {
   final ChatRoomsService _chatRoomsService = ChatRoomsService();
   RxList<Doctor> doctorRoomList = <Doctor>[].obs;
   RxList<Info> infoList = <Info>[].obs;
   RxBool isLoadingMore = false.obs;
   RxBool hasMoreData = true.obs;
   RxString filter = ''.obs;
+  RxString statusChat = ''.obs;
   int page = 1;
   int limit = 10;
+  RxString endChatTime = ''.obs;
 
   ScrollController scrollController = ScrollController();
-
-  
 
   void onScroll() {
     double maxScroll = scrollController.position.maxScrollExtent;
@@ -86,31 +88,55 @@ class ChatwithdoctorController extends GetxController {
     refreshData();
   }
 
-  Function() onChatStatus(String status) {
+  Function() onChatStatus(String status,
+      {bool? isRejected, int? roomChatId, String? endTime}) {
     switch (status) {
-    case 'active':
-      return () {
-        Get.toNamed(Routes.CHATWITHDOCTOR);
-      };
-    case 'process':
-      return () {
-       
-      };
-    case 'completed':
-      return () {
-        Get.toNamed(Routes.CHATWITHDOCTOR, arguments: {'status': status});
-      };
-    default:
-      return () {
-       
-      };
+      case 'active':
+        return () {
+          Get.toNamed(Routes.CHATWITHDOCTOR);
+        };
+      case 'process':
+        return () {};
+      case 'completed':
+        //jadi jika statusnya completed dan isRejected false maka akan diarahkan ke chat with doctor
+        //dan status chat akan diubah menjadi completed yang berfunsinya untuk menampilkan catatan konsultasi
+        if (isRejected == false) {
+          //jangan lupa ganti false buat ngakses chat
+          return () {
+            Get.toNamed(
+              Routes.CHATWITHDOCTOR,
+            );
+            changeStatusChat('completed');
+            setIdRoomChat(roomChatId!);
+            loadMessages(roomChatId); //get message chat from doctor
+            //buat logic untuk polling data by lastmessage id
+            setEndTime(endTime!); //set end time chat for consultation note
+            print(roomChatId);
+          };
+        } else {
+          return () {};
+        }
+      default:
+        return () {};
+    }
   }
+
+  void changeStatusChat(String status) {
+    statusChat.value = status;
+  }
+
+  void setIdRoomChat(int roomChatId) {
+    idRoomChat.value = roomChatId;
+  }
+
+  void setEndTime(String endTime) {
+    endChatTime.value = endTime;
   }
 
   @override
   void onInit() {
     super.onInit();
-    loadInitialData();
+    loadInitialData(); //all data doctor
     scrollController.addListener(onScroll);
   }
 
