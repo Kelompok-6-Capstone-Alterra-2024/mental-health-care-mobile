@@ -29,11 +29,20 @@ class StoryTab extends GetView<MeditationController> {
                   image: storys.imageUrl,
                   title: storys.title,
                   author: storys.doctor.name,
-                  time: storys.date.toString(),
+                  time: controller.formatDateTime(storys.date),
                   onTap: () {
-                    Get.toNamed(Routes.STORY,
-                        arguments: {'storyID': storys.id});
-                    print('Story ID: ${storys.id}');
+                    Get.toNamed(
+                      Routes.STORY,
+                      arguments: {
+                        'idStory': storys.id,
+                        'title': storys.title,
+                        'image': storys.imageUrl,
+                        'content': storys.content,
+                        'author': storys.doctor.name,
+                        'date': controller.formatDateTime(storys.date),
+                        'like': storys.isLiked,
+                      },
+                    );
                   },
                   like: () => 'like',
                 );

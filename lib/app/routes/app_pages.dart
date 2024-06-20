@@ -37,6 +37,7 @@ import '../modules/home/views/home_view.dart';
 import '../modules/meditation/article/bindings/article_binding.dart';
 import '../modules/meditation/article/views/article_view.dart';
 import '../modules/meditation/bindings/meditation_binding.dart';
+import '../modules/meditation/music/bindings/music_binding.dart';
 import '../modules/meditation/music/views/music_view.dart';
 import '../modules/meditation/story/bindings/story_binding.dart';
 import '../modules/meditation/story/views/story_view.dart';
@@ -172,7 +173,7 @@ class AppPages {
         GetPage(
           name: _Paths.MUSIC,
           page: () => const MusicView(),
-          binding: MeditationBinding(),
+          binding: MusicBinding(),
         ),
         GetPage(
           name: _Paths.ARTICLE,

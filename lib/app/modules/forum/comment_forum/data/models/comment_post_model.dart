@@ -1,32 +1,35 @@
 // To parse this JSON data, do
 //
-//     final postsModel = postsModelFromJson(jsonString);
+//     final commentPostModel = commentPostModelFromJson(jsonString);
 
 import 'dart:convert';
 
-PostsModel postsModelFromJson(String str) =>
-    PostsModel.fromJson(json.decode(str));
+CommentPostModel commentPostModelFromJson(String str) =>
+    CommentPostModel.fromJson(json.decode(str));
 
-String postsModelToJson(PostsModel data) => json.encode(data.toJson());
+String commentPostModelToJson(CommentPostModel data) =>
+    json.encode(data.toJson());
 
-class PostsModel {
+class CommentPostModel {
   bool status;
   String message;
   Metadata metadata;
-  List<AllPost> data;
+  List<AllComment> data;
 
-  PostsModel({
+  CommentPostModel({
     required this.status,
     required this.message,
     required this.metadata,
     required this.data,
   });
 
-  factory PostsModel.fromJson(Map<String, dynamic> json) => PostsModel(
+  factory CommentPostModel.fromJson(Map<String, dynamic> json) =>
+      CommentPostModel(
         status: json["status"],
         message: json["message"],
         metadata: Metadata.fromJson(json["metadata"]),
-        data: List<AllPost>.from(json["data"].map((x) => AllPost.fromJson(x))),
+        data: List<AllComment>.from(
+            json["data"].map((x) => AllComment.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,61 +40,61 @@ class PostsModel {
       };
 }
 
-class AllPost {
+class AllComment {
   int id;
   String content;
-  String imageUrl;
-  int totalComments;
-  bool isLiked;
+  int postId;
+  DateTime createdAt;
   User user;
 
-  AllPost({
+  AllComment({
     required this.id,
     required this.content,
-    required this.imageUrl,
-    required this.totalComments,
-    required this.isLiked,
+    required this.postId,
+    required this.createdAt,
     required this.user,
   });
 
-  factory AllPost.fromJson(Map<String, dynamic> json) => AllPost(
+  factory AllComment.fromJson(Map<String, dynamic> json) => AllComment(
         id: json["id"],
         content: json["content"],
-        imageUrl: json["image_url"],
-        totalComments: json["total_comments"],
-        isLiked: json["is_liked"],
-        user: User.fromJson(json["user"]),
+        postId: json["post_id"],
+        createdAt: DateTime.parse(json["created_at"]),
+        user: User.fromJson(json["User"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "content": content,
-        "image_url": imageUrl,
-        "total_comments": totalComments,
-        "is_liked": isLiked,
-        "user": user.toJson(),
+        "post_id": postId,
+        "created_at": createdAt.toIso8601String(),
+        "User": user.toJson(),
       };
 }
 
 class User {
   int id;
+  String name;
   String username;
   String profilePicture;
 
   User({
     required this.id,
+    required this.name,
     required this.username,
     required this.profilePicture,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
+        name: json["name"],
         username: json["username"],
         profilePicture: json["profile_picture"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "name": name,
         "username": username,
         "profile_picture": profilePicture,
       };

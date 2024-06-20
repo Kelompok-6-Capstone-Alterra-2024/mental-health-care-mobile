@@ -3,14 +3,14 @@ import 'package:gap/gap.dart';
 
 import '../../../../../constant/constant.dart';
 
-class StoryCard extends StatelessWidget {
+class InspirationalstoriesCard extends StatelessWidget {
   final String image;
   final String title;
   final String author;
   final String time;
   final Function()? like;
   final Function()? onTap;
-  const StoryCard({
+  const InspirationalstoriesCard({
     super.key,
     required this.image,
     required this.title,
@@ -78,7 +78,7 @@ class StoryCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'By : ${author}',
+                              author,
                               style: regular.copyWith(
                                 fontSize: 10,
                                 color: Neutral.dark3,

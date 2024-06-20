@@ -1,28 +1,33 @@
+// To parse this JSON data, do
+//
+//     final allStories = allStoriesFromJson(jsonString);
+
 import 'dart:convert';
 
-Musics musicsFromJson(String str) => Musics.fromJson(json.decode(str));
+AllStories allStoriesFromJson(String str) =>
+    AllStories.fromJson(json.decode(str));
 
-String musicsToJson(Musics data) => json.encode(data.toJson());
+String allStoriesToJson(AllStories data) => json.encode(data.toJson());
 
-class Musics {
+class AllStories {
   bool status;
   String message;
   Metadata metadata;
-  List<AllMusic> data;
+  List<DataStory> data;
 
-  Musics({
+  AllStories({
     required this.status,
     required this.message,
     required this.metadata,
     required this.data,
   });
 
-  factory Musics.fromJson(Map<String, dynamic> json) => Musics(
+  factory AllStories.fromJson(Map<String, dynamic> json) => AllStories(
         status: json["status"],
         message: json["message"],
         metadata: Metadata.fromJson(json["metadata"]),
-        data:
-            List<AllMusic>.from(json["data"].map((x) => AllMusic.fromJson(x))),
+        data: List<DataStory>.from(
+            json["data"].map((x) => DataStory.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,39 +38,63 @@ class Musics {
       };
 }
 
-class AllMusic {
+class DataStory {
   int id;
   String title;
-  String singer;
-  String musicUrl;
+  String content;
+  DateTime date;
   String imageUrl;
   bool isLiked;
+  Doctor doctor;
 
-  AllMusic({
+  DataStory({
     required this.id,
     required this.title,
-    required this.singer,
-    required this.musicUrl,
+    required this.content,
+    required this.date,
     required this.imageUrl,
     required this.isLiked,
+    required this.doctor,
   });
 
-  factory AllMusic.fromJson(Map<String, dynamic> json) => AllMusic(
+  factory DataStory.fromJson(Map<String, dynamic> json) => DataStory(
         id: json["id"],
         title: json["title"],
-        singer: json["singer"],
-        musicUrl: json["music_url"],
+        content: json["content"],
+        date: DateTime.parse(json["date"]),
         imageUrl: json["image_url"],
         isLiked: json["is_liked"],
+        doctor: Doctor.fromJson(json["doctor"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "singer": singer,
-        "music_url": musicUrl,
+        "content": content,
+        "date": date.toIso8601String(),
         "image_url": imageUrl,
         "is_liked": isLiked,
+        "doctor": doctor.toJson(),
+      };
+}
+
+class Doctor {
+  int id;
+  String name;
+
+  Doctor({
+    required this.id,
+    required this.name,
+  });
+
+  factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
       };
 }
 

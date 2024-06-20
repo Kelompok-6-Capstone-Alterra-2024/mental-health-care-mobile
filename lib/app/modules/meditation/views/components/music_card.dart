@@ -8,14 +8,16 @@ class MusicCard extends StatelessWidget {
   final String image;
   final String title;
   final String artist;
-  final Function()? like;
+  final bool isLiked;
+  final Function()? onLikeTap;
   final Function()? onTap;
   const MusicCard({
     super.key,
     required this.image,
     required this.title,
     required this.artist,
-    this.like,
+    required this.isLiked,
+    this.onLikeTap,
     this.onTap,
   });
 
@@ -49,8 +51,7 @@ class MusicCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                      image: NetworkImage(image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -81,15 +82,12 @@ class MusicCard extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    //
-                  },
-                  child: IconButton(
-                    icon: SvgPicture.asset(
-                      'assets/icons/Heart.svg',
-                      width: 20,
-                    ),
-                    onPressed: like,
+                  onTap: onLikeTap,
+                  child: SvgPicture.asset(
+                    isLiked
+                        ? 'assets/icons/Union.svg'
+                        : 'assets/icons/Heart.svg',
+                    width: 20,
                   ),
                 ),
               ],
