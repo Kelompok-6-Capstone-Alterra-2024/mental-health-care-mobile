@@ -72,13 +72,24 @@ class CommentForumController extends GetxController {
     }
   }
 
+  Future<void> unlikePost(int postId) async {
+    try {
+      await _postByIdService.unlikePost(postId);
+      isLiked.value = false;
+      Get.find<DetailForumController>().updatePostLikedStatus(postId, false);
+    } catch (e) {
+      print('Error unliking post: $e');
+    }
+  }
+
   void toggleCommentButton() {
     isCommentClicked.value = !isCommentClicked.value;
   }
 
   void toggleLikeButton() {
-    isLiked.value = !isLiked.value;
     if (isLiked.value) {
+      unlikePost(post.value!.data.id);
+    } else {
       likePost(post.value!.data.id);
     }
   }

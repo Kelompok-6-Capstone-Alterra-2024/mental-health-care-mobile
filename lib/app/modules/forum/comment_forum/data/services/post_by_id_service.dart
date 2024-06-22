@@ -58,4 +58,31 @@ class PostByIdService {
       throw Exception('Error liking post: $e');
     }
   }
+
+  Future<void> unlikePost(int postId) async {
+    try {
+      final String url = '$baseUrl/posts/like';
+      final Response response = await _dio.post(
+        url,
+        data: {
+          'post_id': postId,
+        },
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+
+      if (response.statusCode == 201) {
+        print('Post unliked successfully');
+      } else {
+        throw Exception(
+            'Failed to unlike post with status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error unliking post: $e');
+    }
+  }
 }

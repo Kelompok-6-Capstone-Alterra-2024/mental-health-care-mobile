@@ -71,7 +71,12 @@ class PostCard extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    controller.likePost(postData.id);
+                    // controller.likePost(postData.id);
+                    if (controller.isPostLiked(postData.id)) {
+                      controller.unlikePost(postData.id);
+                    } else {
+                      controller.likePost(postData.id);
+                    }
                   },
                   child: Obx(
                     () => Row(
