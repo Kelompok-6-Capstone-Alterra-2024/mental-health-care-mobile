@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/utils/global_components/main_button.dart';
 import 'package:mindease/utils/global_components/main_button_without_padding.dart';
@@ -18,6 +19,7 @@ class PaymentView extends GetView<ConsultationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
           icon: SvgPicture.asset(
@@ -52,9 +54,15 @@ class PaymentView extends GetView<ConsultationController> {
                 ),
                 Container(
                   height: 356,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/photo1.png'),
+                      image: NetworkImage(
+                        controller.imageDoctor.value == 'http://gambar.com' ||
+                                controller.imageDoctor.value ==
+                                    'ini link fotonya'
+                            ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                            : controller.imageDoctor.value,
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -134,8 +142,12 @@ class PaymentView extends GetView<ConsultationController> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    controller.feeDoctor.toString(),
-                                    style: bold.copyWith(
+                                    NumberFormat.currency(
+                                            locale: 'id_ID',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0)
+                                        .format(controller.feeDoctor.value),
+                                    style: semiBold.copyWith(
                                         fontSize: 16, color: Primary.mainColor),
                                   ),
                                   const SizedBox(height: 8),
@@ -146,8 +158,12 @@ class PaymentView extends GetView<ConsultationController> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    controller.totalFee.toString(),
-                                    style: bold.copyWith(
+                                    NumberFormat.currency(
+                                            locale: 'id_ID',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0)
+                                        .format(controller.totalFee),
+                                    style: semiBold.copyWith(
                                         fontSize: 16, color: Primary.mainColor),
                                   ),
                                 ],

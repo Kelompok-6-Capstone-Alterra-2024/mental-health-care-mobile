@@ -38,13 +38,21 @@ class ProcessRoomsChat extends StatelessWidget {
               if (index < controller.infoList.length) {
                 final info = controller.infoList[index];
                 return RoomChatCard(
+                  urlImage: info.doctor.imageUrl == 'http://gambar.com' ||
+                          info.doctor.imageUrl == 'ini link fotonya' ||
+                          info.doctor.imageUrl == ''
+                      ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                      : info.doctor.imageUrl,
                   name: info.doctor.name,
                   specialist: info.doctor.specialist,
                   isRejected: info.isRejected,
                   status: statusRoomChat(info.status),
                   bgBadgeStatus: bgBadgeStatus(info.status),
                   textBadgeStatus: textBadgeStatus(info.status),
-                  onTap: controller.onChatStatus(info.status),
+                  onTap: controller.onChatStatus(info.status,
+                      isRejected: info.isRejected,
+                      roomChatId: info.id,
+                      endTime: info.endTime),
                 );
               } else {
                 return const Center(

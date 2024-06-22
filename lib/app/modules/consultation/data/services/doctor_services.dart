@@ -16,10 +16,10 @@ class DoctorServices extends GetxService {
   final token = GetStorage().read('token');
   final baseUrl = BaseUrl;
 
-  Future<DoctorModel> getAllDoctor() async {
+  Future<DoctorModel> getAllDoctor({int page = 1, int limit = 10}) async {
     try {
       final response = await dio.get(
-        '$baseUrl/doctors?page=1&limit=10',
+        '$baseUrl/doctors?page=$page&limit=$limit',
         options: Options(
           headers: {
             'Content-Type': 'application/json',

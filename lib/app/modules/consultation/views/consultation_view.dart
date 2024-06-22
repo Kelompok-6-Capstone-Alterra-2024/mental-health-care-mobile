@@ -7,10 +7,12 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mindease/app/modules/consultation/data/models/doctor_model.dart';
 import 'package:mindease/app/modules/consultation/data/services/doctor_services.dart';
 import 'package:mindease/app/routes/app_pages.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/consultation_controller.dart';
 import '../../../../constant/constant.dart';
 import 'components/doctor_card.dart';
+import 'components/loading_screen.dart';
 
 class ConsultationView extends GetView<ConsultationController> {
   const ConsultationView({super.key});
@@ -43,12 +45,12 @@ class ConsultationView extends GetView<ConsultationController> {
         ],
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: CustomScrollView(
+          controller: controller.scrollController,
+          slivers: [
+            SliverToBoxAdapter(
               child: Column(
                 children: [
                   TextField(
@@ -69,81 +71,86 @@ class ConsultationView extends GetView<ConsultationController> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  FutureBuilder<DoctorModel>(
-                      future: DoctorServices().getAllDoctor(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<DoctorModel> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else if (snapshot.hasError) {
-                          return const Center(
-                            child: Text('Terjadi kesalahan'),
-                          );
-                        } else if (!snapshot.hasData ||
-                            snapshot.data == null ||
-                            snapshot.data!.data == null ||
-                            snapshot.data!.data.isEmpty) {
-                          return const Center(
-                            child: Text('Data kosong'),
-                          );
-                        } else {
-                          final doctorList = snapshot.data!.data.toList();
-                          controller.doctorsList.value = doctorList;
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.doctorsList.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final doctor = controller.doctorsList[index];
-                              return DoctorCard(
-                                  image: doctor.profilePicture ==
-                                              'http://gambar.com' ||
-                                          doctor.profilePicture ==
-                                              'ini link fotonya'
-                                      ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
-                                      : doctor.profilePicture,
-                                  name: doctor.name,
-                                  title: doctor.specialist,
-                                  yearsofservice: doctor.experience.toString(),
-                                  rating: '${doctor.ratingPrecentage}%',
-                                  price: doctor.fee.toString(),
-                                  like: () {},
-                                  onTapCard: () {
-                                    Get.toNamed(
-                                      Routes.DETAILPSIKIATER,
-                                    );
-                                    print('Doctor ID: ${doctor.id}');
-                                    controller.idDoctor.value = doctor.id;
-                                    controller.nameDoctor.value = doctor.name;
-                                    controller.specialistDoctor.value =
-                                        doctor.specialist;
-                                    controller.experienceDoctor.value =
-                                        doctor.experience.toString();
-                                    controller.feeDoctor.value = doctor.fee;
-                                    controller.imageDoctor.value = doctor
-                                                    .profilePicture ==
-                                                'http://gambar.com' ||
-                                            doctor.profilePicture ==
-                                                'ini link fotonya'
-                                        ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
-                                        : doctor.profilePicture;
-                                    controller.rateDoctor.value =
-                                        '${doctor.ratingPrecentage}%';
-                                    controller.locationDoctor.value =
-                                        doctor.address;
-                                    controller.educationDoctor.value =
-                                        doctor.bachelorAlmamater;
-                                  });
-                            },
-                          );
-                        }
-                      })
                 ],
               ),
             ),
+            Obx(() {
+              if (controller.isLoadingMore.value) {
+                return SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              } else if (controller.doctorsList.isEmpty) {
+                return SliverToBoxAdapter(
+                  child: Skeletonizer(
+                    ignoreContainers: false,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return DoctorCard(
+                            image:
+                                'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg',
+                            name: 'name',
+                            title: 'title',
+                            yearsofservice: ' years',
+                            rating: 'rating',
+                            price: 'price');
+                      },
+                    ),
+                  ),
+                );
+              } else {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      if (index < controller.doctorsList.length) {
+                        final doctor = controller.doctorsList[index];
+                        return DoctorCard(
+                          image: doctor.profilePicture == 'http://gambar.com' ||
+                                  doctor.profilePicture == 'ini link fotonya'
+                              ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                              : doctor.profilePicture,
+                          name: doctor.name,
+                          title: doctor.specialist,
+                          yearsofservice: doctor.experience.toString(),
+                          rating: '${doctor.ratingPrecentage}%',
+                          price: doctor.fee.toString(),
+                          like: () {},
+                          onTapCard: () {
+                            Get.toNamed(
+                              Routes.DETAILPSIKIATER,
+                            );
+                            controller.idDoctor.value = doctor.id;
+                            controller.nameDoctor.value = doctor.name;
+                            controller.specialistDoctor.value =
+                                doctor.specialist;
+                            controller.experienceDoctor.value =
+                                doctor.experience.toString();
+                            controller.feeDoctor.value = doctor.fee;
+                            controller.imageDoctor.value = doctor
+                                            .profilePicture ==
+                                        'http://gambar.com' ||
+                                    doctor.profilePicture == 'ini link fotonya'
+                                ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                                : doctor.profilePicture;
+                            controller.rateDoctor.value =
+                                '${doctor.ratingPrecentage}%';
+                            controller.locationDoctor.value = doctor.address;
+                            controller.educationDoctor.value =
+                                doctor.bachelorAlmamater;
+                          },
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
+                    childCount: controller.hasMoreData.value
+                        ? controller.doctorsList.length + 1
+                        : controller.doctorsList.length,
+                  ),
+                );
+              }
+            }),
           ],
         ),
       ),

@@ -6,10 +6,12 @@ import '../../../../../constant/constant.dart';
 class ProfileFormDoctor extends StatelessWidget {
   final String name;
   final String specialist;
+  final String urlImage;
   const ProfileFormDoctor({
     super.key,
     required this.name,
     required this.specialist,
+    required this.urlImage,
   });
 
   @override
@@ -20,10 +22,10 @@ class ProfileFormDoctor extends StatelessWidget {
         Container(
           height: 63,
           width: 63,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
             image: DecorationImage(
-              image: AssetImage('assets/images/Avatar1.png'),
+              image: NetworkImage(urlImage),
               fit: BoxFit.cover,
             ),
           ),

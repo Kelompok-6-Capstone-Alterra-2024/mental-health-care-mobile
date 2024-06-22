@@ -4,19 +4,22 @@ import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../../data/api/api.dart';
-import '../models/chat_rooms_model.dart';
 
-class ChatRoomsService extends GetxService {
+class FeedbackServices extends GetxService {
   final dio = Dio();
   final logger = Logger();
   final token = GetStorage().read('token');
   final baseUrl = BaseUrl;
 
-  Future<ChatRoomsModel> getChatRooms(
-      {String filter = '', int page = 1, int limit = 10}) async {
+  Future<void> postFeedback(int doctorId, int rate, String message) async {
     try {
-      final response = await dio.get(
-        '$baseUrl/chats?page=$page&limit=$limit$filter',
+      final response = await dio.post(
+        '$baseUrl/feedbacks',
+        data: {
+          'doctor_id': doctorId,
+          'rate': rate,
+          'message': message,
+        },
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -24,11 +27,11 @@ class ChatRoomsService extends GetxService {
           },
         ),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         logger.i(response.data);
-        return ChatRoomsModel.fromJson(response.data);
+        return response.data;
       } else {
-        throw Exception('Failed to load data');
+        throw Exception('Failed to post feedback');
       }
     } catch (e) {
       throw Exception(e.toString());

@@ -60,4 +60,26 @@ class MessageService {
       throw Exception(e.toString());
     }
   }
+
+  Future<MessageHistory> getNewMessages(int chatId, int lastMessageId) async {
+    try {
+      final response = await dio.get(
+        '$baseUrl/chats/$chatId/messages?page=1&limit=5&last_message_id=$lastMessageId',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        logger.i(response.data);
+        return MessageHistory.fromJson(response.data);
+      } else {
+        throw Exception('Failed to load new messages');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

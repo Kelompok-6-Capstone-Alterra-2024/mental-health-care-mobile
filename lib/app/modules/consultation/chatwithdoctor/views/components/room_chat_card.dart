@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-
-import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
-import 'package:mindease/app/routes/app_pages.dart';
 
 import '../../../../../../constant/constant.dart';
 import '../../../../../../utils/global_components/book_button.dart';
@@ -15,6 +12,7 @@ class RoomChatCard extends StatelessWidget {
   final String status;
   final Color bgBadgeStatus;
   final Color textBadgeStatus;
+  final String urlImage;
   final Function()? onTap;
   const RoomChatCard({
     super.key,
@@ -24,6 +22,7 @@ class RoomChatCard extends StatelessWidget {
     required this.status,
     required this.bgBadgeStatus,
     required this.textBadgeStatus,
+    required this.urlImage,
     this.onTap,
   });
 
@@ -53,10 +52,10 @@ class RoomChatCard extends StatelessWidget {
                         Container(
                           height: 63,
                           width: 63,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             image: DecorationImage(
-                              image: AssetImage('assets/images/Avatar1.png'),
+                              image: NetworkImage(urlImage),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -110,7 +109,7 @@ class RoomChatCard extends StatelessWidget {
                             backgroundColor: bgBadgeStatus,
                             textColor: textBadgeStatus,
                             onTap: () {
-                              Get.toNamed(Routes.CHATWITHDOCTOR);
+                              // Get.toNamed(Routes.CHATWITHDOCTOR);
                             },
                           ),
                         ],
