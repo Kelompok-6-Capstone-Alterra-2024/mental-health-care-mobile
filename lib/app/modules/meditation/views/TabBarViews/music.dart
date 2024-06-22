@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../routes/app_pages.dart';
 import '../../controllers/meditation_controller.dart';
 import '../components/music_card.dart';
@@ -11,12 +12,9 @@ class MusicTab extends GetView<MeditationController> {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
-        } else if (controller.errorMessage.isNotEmpty) {
-          return Center(child: Text('Error: ${controller.errorMessage}'));
-        } else {
-          return Container(
+        return Skeletonizer(
+          enabled: controller.isLoading.value,
+          child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: ListView.builder(
               itemCount: controller.musics.length,
@@ -27,6 +25,7 @@ class MusicTab extends GetView<MeditationController> {
                   title: musics.title,
                   artist: musics.singer,
                   isLiked: musics.isLiked,
+                  isLoading: controller.isLoading.value,
                   onLikeTap: () {
                     controller.toggleLikeStatus(index);
                   },
@@ -43,8 +42,8 @@ class MusicTab extends GetView<MeditationController> {
                 );
               },
             ),
-          );
-        }
+          ),
+        );
       },
     );
   }
