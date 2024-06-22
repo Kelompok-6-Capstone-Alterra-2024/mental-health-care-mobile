@@ -9,6 +9,7 @@ class MusicCard extends StatelessWidget {
   final String title;
   final String artist;
   final bool isLiked;
+  final bool isLoading;
   final Function()? onLikeTap;
   final Function()? onTap;
   const MusicCard({
@@ -17,6 +18,7 @@ class MusicCard extends StatelessWidget {
     required this.title,
     required this.artist,
     required this.isLiked,
+    this.isLoading = false,
     this.onLikeTap,
     this.onTap,
   });
@@ -56,7 +58,7 @@ class MusicCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Gap(20),
+                const Gap(20),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +71,7 @@ class MusicCard extends StatelessWidget {
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Gap(8),
+                      const Gap(8),
                       Text(
                         artist,
                         style: regular.copyWith(
@@ -83,12 +85,18 @@ class MusicCard extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: onLikeTap,
-                  child: SvgPicture.asset(
-                    isLiked
-                        ? 'assets/icons/Union.svg'
-                        : 'assets/icons/Heart.svg',
-                    width: 20,
-                  ),
+                  child: isLoading
+                      ? Container(
+                          width: 20,
+                          height: 20,
+                          color: Colors.grey.shade300,
+                        )
+                      : SvgPicture.asset(
+                          isLiked
+                              ? 'assets/icons/Union.svg'
+                              : 'assets/icons/Heart.svg',
+                          width: 20,
+                        ),
                 ),
               ],
             ),
