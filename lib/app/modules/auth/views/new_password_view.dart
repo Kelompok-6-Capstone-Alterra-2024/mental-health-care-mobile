@@ -60,7 +60,7 @@ class NewPasswordView extends GetView<AuthController> {
                   padding: const EdgeInsets.symmetric(horizontal: 22),
                   child: InputField(
                     title: 'Ketikkan Password',
-                    onChanged: controller.setPassword,
+                    onChanged: controller.setPasswordR,
                     obscureText: controller.obscureText.value,
                     validator: (pwd) => controller.validatePassword(pwd),
                     icon: GestureDetector(
@@ -98,7 +98,7 @@ class NewPasswordView extends GetView<AuthController> {
                   padding: const EdgeInsets.symmetric(horizontal: 22),
                   child: InputField(
                     title: 'Ketikkan konfirmasi password',
-                    onChanged: controller.setConfirmPassword,
+                    onChanged: controller.setConfirmPasswordR,
                     obscureText: controller.obscureText.value,
                     validator: (pwd) => controller.validateConfirmPassword(pwd),
                     icon: GestureDetector(

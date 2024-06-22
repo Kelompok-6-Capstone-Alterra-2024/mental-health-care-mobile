@@ -14,6 +14,7 @@ import '../controllers/auth_controller.dart';
 
 class RegisterView extends GetView<AuthController> {
   const RegisterView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,8 @@ class RegisterView extends GetView<AuthController> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -40,7 +42,8 @@ class RegisterView extends GetView<AuthController> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Daftar untuk Memulai Perjalanan Menuju Kesehatan Mental yang Lebih Baik',
-                      style: regular.copyWith(fontSize: 16, color: Neutral.dark3),
+                      style:
+                          regular.copyWith(fontSize: 16, color: Neutral.dark3),
                     ),
                   ),
                 ),
@@ -51,7 +54,8 @@ class RegisterView extends GetView<AuthController> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Email',
-                      style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
+                      style:
+                          medium.copyWith(fontSize: 16, color: Neutral.dark1),
                     ),
                   ),
                 ),
@@ -61,7 +65,7 @@ class RegisterView extends GetView<AuthController> {
                   child: InputField(
                     title: 'Ketikkan Email',
                     validator: (email) => controller.validateEmail(email),
-                    onChanged: controller.setEmail,
+                    onChanged: controller.setEmailR,
                   ),
                 ),
                 const Gap(16),
@@ -71,7 +75,8 @@ class RegisterView extends GetView<AuthController> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Username',
-                      style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
+                      style:
+                          medium.copyWith(fontSize: 16, color: Neutral.dark1),
                     ),
                   ),
                 ),
@@ -82,7 +87,7 @@ class RegisterView extends GetView<AuthController> {
                     title: 'Ketikkan Username',
                     validator: (username) =>
                         controller.validateUsername(username),
-                    onChanged: controller.setUserName,
+                    onChanged: controller.setUserNameR,
                   ),
                 ),
                 const Gap(16),
@@ -92,7 +97,8 @@ class RegisterView extends GetView<AuthController> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Password',
-                      style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
+                      style:
+                          medium.copyWith(fontSize: 16, color: Neutral.dark1),
                     ),
                   ),
                 ),
@@ -102,7 +108,7 @@ class RegisterView extends GetView<AuthController> {
                     padding: const EdgeInsets.symmetric(horizontal: 22),
                     child: InputField(
                       title: 'Ketikkan Password',
-                      onChanged: controller.setPassword,
+                      onChanged: controller.setPasswordR,
                       obscureText: controller.obscureText.value,
                       validator: (pwd) => controller.validatePassword(pwd),
                       icon: GestureDetector(
@@ -130,7 +136,8 @@ class RegisterView extends GetView<AuthController> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Konfirmasi Password',
-                      style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
+                      style:
+                          medium.copyWith(fontSize: 16, color: Neutral.dark1),
                     ),
                   ),
                 ),
@@ -140,9 +147,10 @@ class RegisterView extends GetView<AuthController> {
                     padding: const EdgeInsets.symmetric(horizontal: 22),
                     child: InputField(
                       title: 'Ketikkan konfirmasi password',
-                      onChanged: controller.setConfirmPassword,
+                      onChanged: controller.setConfirmPasswordR,
                       obscureText: controller.obscureText.value,
-                      validator: (pwd) => controller.validateConfirmPassword(pwd),
+                      validator: (pwd) =>
+                          controller.validateConfirmPassword(pwd),
                       icon: GestureDetector(
                         onTap: () {
                           controller.obscureText.value =
@@ -162,11 +170,14 @@ class RegisterView extends GetView<AuthController> {
                   ),
                 ),
                 const Gap(22),
-                MainButton(
-                  label: 'Daftar',
-                  onTap: () {
-                    controller.doRegister();
-                  },
+                Obx(
+                  () => MainButton(
+                    label: 'Daftar',
+                    isEnabled: controller.isFormValid.value,
+                    onTap: () {
+                      controller.doRegister();
+                    },
+                  ),
                 ),
                 const Gap(20),
                 Text(
@@ -202,7 +213,8 @@ class RegisterView extends GetView<AuthController> {
                   children: [
                     Text(
                       'Sudah punya akun? ',
-                      style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
+                      style:
+                          medium.copyWith(fontSize: 16, color: Neutral.dark1),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -210,8 +222,8 @@ class RegisterView extends GetView<AuthController> {
                       },
                       child: Text(
                         'Masuk',
-                        style:
-                            bold.copyWith(fontSize: 16, color: Primary.mainColor),
+                        style: bold.copyWith(
+                            fontSize: 16, color: Primary.mainColor),
                       ),
                     ),
                   ],

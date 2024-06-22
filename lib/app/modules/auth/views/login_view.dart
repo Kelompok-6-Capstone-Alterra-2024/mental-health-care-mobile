@@ -14,6 +14,7 @@ import 'components/auth_button.dart';
 
 class LoginView extends GetView<AuthController> {
   const LoginView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,8 @@ class LoginView extends GetView<AuthController> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -63,7 +65,7 @@ class LoginView extends GetView<AuthController> {
                   title: 'Ketikkan Username',
                   validator: (username) =>
                       controller.validateUsername(username),
-                  onChanged: controller.setUserName,
+                  onChanged: controller.setUserNameL,
                 ),
               ),
               const Gap(16),
@@ -83,7 +85,7 @@ class LoginView extends GetView<AuthController> {
                   padding: const EdgeInsets.symmetric(horizontal: 22),
                   child: InputField(
                     title: 'Ketikkan Password',
-                    onChanged: controller.setPassword,
+                    onChanged: controller.setPasswordL,
                     obscureText: controller.obscureText.value,
                     validator: (pwd) => controller.validatePassword(pwd),
                     icon: GestureDetector(
@@ -127,11 +129,16 @@ class LoginView extends GetView<AuthController> {
                 ),
               ),
               const Gap(50),
-              MainButton(
-                label: 'Masuk',
-                onTap: () {
-                  controller.doLogin();
-                },
+              Obx(
+                () => MainButton(
+                  label: 'Masuk',
+                  isEnabled: controller.isFormValid.value,
+                  onTap: controller.isFormValid.value
+                      ? () {
+                          controller.doLogin();
+                        }
+                      : null,
+                ),
               ),
               const Gap(32),
               Text(
@@ -169,7 +176,8 @@ class LoginView extends GetView<AuthController> {
                   children: [
                     Text(
                       'Belum punya akun? ',
-                      style: medium.copyWith(fontSize: 16, color: Neutral.dark1),
+                      style:
+                          medium.copyWith(fontSize: 16, color: Neutral.dark1),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -177,8 +185,8 @@ class LoginView extends GetView<AuthController> {
                       },
                       child: Text(
                         'Daftar',
-                        style:
-                            bold.copyWith(fontSize: 16, color: Primary.mainColor),
+                        style: bold.copyWith(
+                            fontSize: 16, color: Primary.mainColor),
                       ),
                     ),
                   ],
