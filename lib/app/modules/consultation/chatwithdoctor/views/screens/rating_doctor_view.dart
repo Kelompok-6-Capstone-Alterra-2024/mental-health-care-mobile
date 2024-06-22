@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
@@ -17,16 +18,17 @@ class RatingDoctorView extends GetView<ChatwithdoctorController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/Chevron.svg',
-              width: 26,
-            ),
-            onPressed: () {
-              Get.back();
-            },
+          icon: SvgPicture.asset(
+            'assets/icons/Chevron.svg',
+            width: 26,
           ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         title: Text(
           'Rating & Review',
           style: medium.copyWith(fontSize: 16, color: Primary.mainColor),
@@ -39,7 +41,7 @@ class RatingDoctorView extends GetView<ChatwithdoctorController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Gap(8),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,23 +49,27 @@ class RatingDoctorView extends GetView<ChatwithdoctorController> {
                   Container(
                     width: 222,
                     height: 222,
-                    decoration: const BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/Avatar1.png'),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(controller.doctorImgUrl.value == ''
+                            ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                            : controller.doctorImgUrl.value),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   const Gap(16),
                   Text(
-                    'Dr. Andy Sp.KJ',
+                    controller.doctorName.value,
                     style: bold.copyWith(
                       fontSize: 16,
                       color: Primary.mainColor,
                     ),
                   ),
                   Text(
-                    'Sp. Jiwa',
+                    controller.doctorSpecialist.value == ''
+                        ? 'Doctor Specialist'
+                        : controller.doctorSpecialist.value,
                     style: medium.copyWith(
                       fontSize: 12,
                       color: Neutral.dark3,
@@ -72,18 +78,23 @@ class RatingDoctorView extends GetView<ChatwithdoctorController> {
                 ],
               ),
             ),
-            const Gap(32),
-            SizedBox(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 240,
-                    height: 40,
-                    color: Colors.amber,
-                  ),
-                ],
+            const Gap(20),
+            Center(
+              child: RatingBar.builder(
+                initialRating: 1,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: false,
+                itemCount: 5,
+                unratedColor: Neutral.dark4,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Warning.mainColor,
+                ),
+                onRatingUpdate: (rating) {
+                  controller.setRate(rating.toInt());
+                },
               ),
             ),
             const Gap(32),
@@ -97,8 +108,11 @@ class RatingDoctorView extends GetView<ChatwithdoctorController> {
                     color: Neutral.dark1,
                   ),
                 ),
-                Gap(10),
+                const Gap(10),
                 TextField(
+                  onChanged: (value) {
+                    controller.setMessage(value);
+                  },
                   maxLines: 5,
                   decoration: textBoxStyle.copyWith(
                     hintText: 'Masukan pesan untuk psikiater',
@@ -108,11 +122,15 @@ class RatingDoctorView extends GetView<ChatwithdoctorController> {
                 ),
               ],
             ),
+            // ignore: prefer_const_constructors
             Gap(32),
             MainButton(
               label: 'Kirim',
               onTap: () {
-                Get.offAllNamed(Routes.CONSULTATION);
+                controller.createFeedback(
+                  controller.rate.value,
+                  controller.message.value,
+                );
               },
             ),
           ],

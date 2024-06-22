@@ -44,10 +44,12 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
                 Container(
                   height: 63,
                   width: 63,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     image: DecorationImage(
-                      image: AssetImage('assets/images/Avatar1.png'),
+                      image: NetworkImage(controller.doctorImgUrl.value == ''
+                          ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                          : controller.doctorImgUrl.value),
                       fit: BoxFit.cover,
                     ),
                   ),

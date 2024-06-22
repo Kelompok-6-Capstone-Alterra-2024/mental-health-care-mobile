@@ -34,7 +34,6 @@ class ChatwithdoctorController extends GetxController
   }
 
   Future loadInitialData() async {
-    print('filter use = ${filter.value}');
     try {
       final chatRooms = await _chatRoomsService.getChatRooms(
           page: page, limit: limit, filter: filter.value);
@@ -109,7 +108,7 @@ class ChatwithdoctorController extends GetxController
             changeStatusChat('completed');
             setIdRoomChat(roomChatId!);
             loadMessages(roomChatId); //get message chat from doctor
-            //buat logic untuk polling data by lastmessage id
+            // startPolling(roomChatId); //start polling message chat
             setEndTime(endTime!); //set end time chat for consultation note
             print(roomChatId);
           };
@@ -142,7 +141,9 @@ class ChatwithdoctorController extends GetxController
 
   @override
   void onClose() {
-    scrollController.dispose();
+    // scrollController.dispose();
+    stopLoadingMessages();
+    lastMessageId.value = 0;
     super.onClose();
   }
 }

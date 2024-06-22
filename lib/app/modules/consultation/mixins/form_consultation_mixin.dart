@@ -34,12 +34,12 @@ mixin FormConsultationMixin on GetxController {
     medicalHistory.value = value;
   }
 
-  void createComplaint(int consultationId) async {
-    print('Consultation ID: $consultationId');
-    print('Name: ${name.value}');
-    print('Old: ${age.value}');
-    print('message ${message.value}');
-    print('Medical History: ${medicalHistory.value}');
+  Future<void> createComplaint(int consultationId) async {
+    // print('Consultation ID: $consultationId');
+    // print('Name: ${name.value}');
+    // print('Old: ${age.value}');
+    // print('message ${message.value}');
+    // print('Medical History: ${medicalHistory.value}');
     // isLoading.value = false;
     try {
       final response = await DoctorServices().postComplaint(
@@ -54,7 +54,6 @@ mixin FormConsultationMixin on GetxController {
         Logger().i(response.data);
         return response.data;
       } else {
-        print('Failed');
         Logger().e(response.data);
         Get.snackbar('Gagal', 'Gagal membuat keluhan');
       }

@@ -25,6 +25,7 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
           onPressed: () {
             Get.back();
             controller.allMessages.clear();
+            controller.onClose();
           },
         ),
         title: Text(
@@ -39,7 +40,10 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
             child: Obx(() {
               if (controller.isLoading.value) {
                 return Center(child: CircularProgressIndicator());
+              } else if (controller.errorMessage.isNotEmpty) {
+                return Center(child: Text(controller.errorMessage.value));
               } else {
+                print('Displaying messages: ${controller.allMessages.length}');
                 return ListView.builder(
                   itemCount: controller.allMessages.length,
                   itemBuilder: (context, index) {
@@ -67,8 +71,8 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
                         time: DateFormat.Hm().format(
                             DateTime.parse(controller.endChatTime.value)),
                         onTap: () async {
-                          await controller.getConsultationNoteData(
-                              controller.idRoomChat.value);
+                          // await controller.getConsultationNoteData(
+                          //     controller.idRoomChat.value);
                           Get.toNamed(Routes.DETAILNOTE);
                         },
                       )
@@ -76,40 +80,47 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
                   )
                 : const SizedBox(),
           ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: TextField(
-                    controller: controller.messageController,
-                    decoration: primary.copyWith(
-                      hintText: 'Tulis pesan',
-                      hintStyle:
-                          regular.copyWith(fontSize: 16, color: Neutral.dark3),
+          Obx(() {
+            if (controller.statusChat.value == 'completed') {
+              return const SizedBox();
+            } else {
+              return Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: TextField(
+                        controller: controller.messageController,
+                        decoration: primary.copyWith(
+                          hintText: 'Tulis pesan',
+                          hintStyle: regular.copyWith(
+                              fontSize: 16, color: Neutral.dark3),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const Gap(16),
-                Material(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Primary.mainColor,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(100),
-                    onTap: () {
-                      controller.sendMessage(controller.idRoomChat.value);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: SvgPicture.asset('assets/icons/Send-icon.svg'),
+                    const Gap(16),
+                    Material(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Primary.mainColor,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(100),
+                        onTap: () {
+                          controller.sendMessage(controller.idRoomChat.value);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: SvgPicture.asset('assets/icons/Send-icon.svg'),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              );
+            }
+          })
         ],
       ),
     );

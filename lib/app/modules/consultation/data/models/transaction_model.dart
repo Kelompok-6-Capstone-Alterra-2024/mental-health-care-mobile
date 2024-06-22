@@ -117,7 +117,6 @@ class Doctor {
   String gender;
   bool isAvailable;
   String profilePicture;
-  int balance;
   int experience;
   String bachelorAlmamater;
   int bachelorGraduationYear;
@@ -127,7 +126,7 @@ class Doctor {
   String practiceCity;
   int fee;
   String specialist;
-  int amount;
+  int balance;
   int ratingPrecentage;
 
   Doctor({
@@ -140,7 +139,6 @@ class Doctor {
     required this.gender,
     required this.isAvailable,
     required this.profilePicture,
-    required this.balance,
     required this.experience,
     required this.bachelorAlmamater,
     required this.bachelorGraduationYear,
@@ -150,7 +148,7 @@ class Doctor {
     required this.practiceCity,
     required this.fee,
     required this.specialist,
-    required this.amount,
+    required this.balance,
     required this.ratingPrecentage,
   });
 
@@ -164,7 +162,6 @@ class Doctor {
         gender: json["gender"],
         isAvailable: json["is_available"],
         profilePicture: json["profile_picture"],
-        balance: json["balance"],
         experience: json["experience"],
         bachelorAlmamater: json["bachelor_almamater"],
         bachelorGraduationYear: json["bachelor_graduation_year"],
@@ -174,7 +171,7 @@ class Doctor {
         practiceCity: json["practice_city"],
         fee: json["fee"],
         specialist: json["specialist"],
-        amount: json["amount"],
+        balance: json["balance"],
         ratingPrecentage: json["rating_precentage"],
       );
 
@@ -188,7 +185,6 @@ class Doctor {
         "gender": gender,
         "is_available": isAvailable,
         "profile_picture": profilePicture,
-        "balance": balance,
         "experience": experience,
         "bachelor_almamater": bachelorAlmamater,
         "bachelor_graduation_year": bachelorGraduationYear,
@@ -198,7 +194,7 @@ class Doctor {
         "practice_city": practiceCity,
         "fee": fee,
         "specialist": specialist,
-        "amount": amount,
+        "balance": balance,
         "rating_precentage": ratingPrecentage,
       };
 }

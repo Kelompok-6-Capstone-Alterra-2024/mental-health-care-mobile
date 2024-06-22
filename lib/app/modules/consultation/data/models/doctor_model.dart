@@ -4,86 +4,85 @@
 
 import 'dart:convert';
 
-DoctorModel doctorModelFromJson(String str) => DoctorModel.fromJson(json.decode(str));
+DoctorModel doctorModelFromJson(String str) =>
+    DoctorModel.fromJson(json.decode(str));
 
 String doctorModelToJson(DoctorModel data) => json.encode(data.toJson());
 
 class DoctorModel {
-    bool status;
-    String message;
-    Metadata metadata;
-    List<Doctor> data;
+  bool status;
+  String message;
+  Metadata metadata;
+  List<Doctor> data;
 
-    DoctorModel({
-        required this.status,
-        required this.message,
-        required this.metadata,
-        required this.data,
-    });
+  DoctorModel({
+    required this.status,
+    required this.message,
+    required this.metadata,
+    required this.data,
+  });
 
-    factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
+  factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
         status: json["status"],
         message: json["message"],
         metadata: Metadata.fromJson(json["metadata"]),
         data: List<Doctor>.from(json["data"].map((x) => Doctor.fromJson(x))),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
         "metadata": metadata.toJson(),
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
-    };
+      };
 }
 
 class Doctor {
-    int id;
-    String username;
-    String email;
-    String name;
-    String address;
-    String phoneNumber;
-    String gender;
-    bool isAvailable;
-    String profilePicture;
-    int balance;
-    int experience;
-    String bachelorAlmamater;
-    int bachelorGraduationYear;
-    String masterAlmamater;
-    int masterGraduationYear;
-    String practiceLocation;
-    String practiceCity;
-    int fee;
-    String specialist;
-    int amount;
-    int ratingPrecentage;
+  int id;
+  String username;
+  String email;
+  String name;
+  String address;
+  String phoneNumber;
+  String gender;
+  bool isAvailable;
+  String profilePicture;
+  int experience;
+  String bachelorAlmamater;
+  int bachelorGraduationYear;
+  String masterAlmamater;
+  int masterGraduationYear;
+  String practiceLocation;
+  String practiceCity;
+  int fee;
+  String specialist;
+  int balance;
+  int ratingPrecentage;
 
-    Doctor({
-        required this.id,
-        required this.username,
-        required this.email,
-        required this.name,
-        required this.address,
-        required this.phoneNumber,
-        required this.gender,
-        required this.isAvailable,
-        required this.profilePicture,
-        required this.balance,
-        required this.experience,
-        required this.bachelorAlmamater,
-        required this.bachelorGraduationYear,
-        required this.masterAlmamater,
-        required this.masterGraduationYear,
-        required this.practiceLocation,
-        required this.practiceCity,
-        required this.fee,
-        required this.specialist,
-        required this.amount,
-        required this.ratingPrecentage,
-    });
+  Doctor({
+    required this.id,
+    required this.username,
+    required this.email,
+    required this.name,
+    required this.address,
+    required this.phoneNumber,
+    required this.gender,
+    required this.isAvailable,
+    required this.profilePicture,
+    required this.experience,
+    required this.bachelorAlmamater,
+    required this.bachelorGraduationYear,
+    required this.masterAlmamater,
+    required this.masterGraduationYear,
+    required this.practiceLocation,
+    required this.practiceCity,
+    required this.fee,
+    required this.specialist,
+    required this.balance,
+    required this.ratingPrecentage,
+  });
 
-    factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
+  factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
         id: json["id"],
         username: json["username"],
         email: json["email"],
@@ -93,7 +92,6 @@ class Doctor {
         gender: json["gender"],
         isAvailable: json["is_available"],
         profilePicture: json["profile_picture"],
-        balance: json["balance"],
         experience: json["experience"],
         bachelorAlmamater: json["bachelor_almamater"],
         bachelorGraduationYear: json["bachelor_graduation_year"],
@@ -103,11 +101,11 @@ class Doctor {
         practiceCity: json["practice_city"],
         fee: json["fee"],
         specialist: json["specialist"],
-        amount: json["amount"],
+        balance: json["balance"],
         ratingPrecentage: json["rating_precentage"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "username": username,
         "email": email,
@@ -117,7 +115,6 @@ class Doctor {
         "gender": gender,
         "is_available": isAvailable,
         "profile_picture": profilePicture,
-        "balance": balance,
         "experience": experience,
         "bachelor_almamater": bachelorAlmamater,
         "bachelor_graduation_year": bachelorGraduationYear,
@@ -127,27 +124,27 @@ class Doctor {
         "practice_city": practiceCity,
         "fee": fee,
         "specialist": specialist,
-        "amount": amount,
+        "balance": balance,
         "rating_precentage": ratingPrecentage,
-    };
+      };
 }
 
 class Metadata {
-    int page;
-    int limit;
+  int page;
+  int limit;
 
-    Metadata({
-        required this.page,
-        required this.limit,
-    });
+  Metadata({
+    required this.page,
+    required this.limit,
+  });
 
-    factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
+  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
         page: json["page"],
         limit: json["limit"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "page": page,
         "limit": limit,
-    };
+      };
 }
