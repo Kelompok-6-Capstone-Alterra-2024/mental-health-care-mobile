@@ -9,13 +9,16 @@ import '../mixins/verification_code_mixin.dart';
 
 class AuthController extends GetxController
     with VerificationCodeMixin, ForgetPasswordMixin {
-  RxString username = ''.obs;
-  RxString email = ''.obs;
-  RxString password = ''.obs;
-  RxString confirmPassword = ''.obs;
+  RxString usernameL = ''.obs;
+  RxString usernameR = ''.obs;
+  RxString emailR = ''.obs;
+  RxString passwordL = ''.obs;
+  RxString passwordR = ''.obs;
+  RxString confirmPasswordR = ''.obs;
   RxBool obscureText = true.obs;
   RxString icon = ''.obs;
   RxString passwordError = ''.obs;
+  RxBool isFormValid = false.obs;
 
   final formKey = GlobalKey<FormState>();
   final registerFormKey = GlobalKey<FormState>();
@@ -42,26 +45,48 @@ class AuthController extends GetxController
   }
 
   validateConfirmPassword(String? pwd) {
-    if (pwd != password.value) {
-      return 'Password yang kamu masukan berbeda!';
+    if (pwd != passwordR.value) {
+      return 'Password yang kamu masukkan berbeda!';
     }
     return null;
   }
 
-  void setUserName(String value) {
-    username.value = value;
+  void setUserNameL(String value) {
+    usernameL.value = value;
+    validateForm();
   }
 
-  void setEmail(String value) {
-    email.value = value;
+  void setPasswordL(String value) {
+    passwordL.value = value;
+    validateForm();
   }
 
-  void setPassword(String value) {
-    password.value = value;
+  void setEmailR(String value) {
+    emailR.value = value;
+    validateRegisterForm();
   }
 
-  void setConfirmPassword(String value) {
-    confirmPassword.value = value;
+  void setUserNameR(String value) {
+    usernameR.value = value;
+    validateRegisterForm();
+  }
+
+  void setPasswordR(String value) {
+    passwordR.value = value;
+    validateRegisterForm();
+  }
+
+  void setConfirmPasswordR(String value) {
+    confirmPasswordR.value = value;
+    validateRegisterForm();
+  }
+
+  void validateForm() {
+    isFormValid.value = formKey.currentState?.validate() ?? false;
+  }
+
+  void validateRegisterForm() {
+    isFormValid.value = registerFormKey.currentState?.validate() ?? false;
   }
 
   Future<void> doLogin() async {
@@ -71,8 +96,8 @@ class AuthController extends GetxController
     }
 
     bool isSuccess = await AuthService().login(
-      username: username.value,
-      password: password.value,
+      username: usernameL.value,
+      password: passwordL.value,
     );
 
     if (!isSuccess) {
@@ -96,9 +121,9 @@ class AuthController extends GetxController
     }
 
     bool isSuccess = await AuthService().register(
-      username: username.value,
-      password: password.value,
-      email: email.value,
+      username: usernameR.value,
+      password: passwordR.value,
+      email: emailR.value,
     );
 
     if (!isSuccess) {
