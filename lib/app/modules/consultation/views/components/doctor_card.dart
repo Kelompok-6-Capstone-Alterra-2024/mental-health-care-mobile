@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../constant/constant.dart';
 import '../../../../../utils/global_components/book_button.dart';
@@ -77,7 +78,7 @@ class DoctorCard extends StatelessWidget {
                         'assets/icons/Suitcase-1.svg',
                       ),
                       Text(
-                        yearsofservice,
+                        '$yearsofservice tahun',
                         style: semiBold.copyWith(
                             fontSize: 12, color: Primary.mainColor),
                       ),
@@ -92,8 +93,11 @@ class DoctorCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const Gap(8),
                   Text(
-                    price,
+                    NumberFormat.currency(
+                            locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0)
+                        .format(int.parse(price)),
                     style:
                         semiBold.copyWith(fontSize: 16, color: Neutral.dark2),
                   ),

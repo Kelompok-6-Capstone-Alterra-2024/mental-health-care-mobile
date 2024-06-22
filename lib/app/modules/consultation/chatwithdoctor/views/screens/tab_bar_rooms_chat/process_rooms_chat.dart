@@ -49,6 +49,7 @@ class ProcessRoomsChat extends StatelessWidget {
                   status: statusRoomChat(info.status),
                   bgBadgeStatus: bgBadgeStatus(info.status),
                   textBadgeStatus: textBadgeStatus(info.status),
+                  endTime: info.latestMessage.date,
                   onTap: controller.onChatStatus(info.status,
                       isRejected: info.isRejected,
                       roomChatId: info.id,

@@ -54,6 +54,7 @@ class ComplectedRoomsChat extends StatelessWidget {
                   status: statusRoomChat(info.status),
                   bgBadgeStatus: bgBadgeStatus(info.status),
                   textBadgeStatus: textBadgeStatus(info.status),
+                  endTime: info.endTime,
                   onTap: controller.onChatStatus(info.status,
                       isRejected: info.isRejected,
                       roomChatId: info.id,
