@@ -28,7 +28,7 @@ class ChatItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: isSender ? Primary.mainColor : Neutral.light2,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 19, vertical: 14),
+              padding: const EdgeInsets.all(10),
               child: Text(
                 chat,
                 style: regular.copyWith(

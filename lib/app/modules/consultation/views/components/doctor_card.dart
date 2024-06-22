@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../constant/constant.dart';
 import '../../../../../utils/global_components/book_button.dart';
@@ -31,47 +33,39 @@ class DoctorCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTapCard,
       child: Container(
-        padding: EdgeInsets.only(bottom: 10),
+        width: double.infinity,
+        padding: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           boxShadow: [blur8, blur4],
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              width: 154.4127,
+              width: 148,
               height: 148,
               decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  bottomLeft: Radius.circular(8),
+                ),
                 image: DecorationImage(
-                  image: AssetImage(image),
+                  image: NetworkImage(image),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(10),
+            Gap(10),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        width: 160,
-                        child: Text(
-                          name,
-                          style: semiBold.copyWith(
-                              fontSize: 16, color: Neutral.dark1),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: like,
-                        child: SvgPicture.asset(
-                          'assets/icons/Heart.svg',
-                        ),
-                      ),
-                    ],
+                  Text(
+                    name,
+                    style:
+                        semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
                   ),
                   Text(
                     title,
@@ -84,7 +78,7 @@ class DoctorCard extends StatelessWidget {
                         'assets/icons/Suitcase-1.svg',
                       ),
                       Text(
-                        yearsofservice,
+                        '$yearsofservice tahun',
                         style: semiBold.copyWith(
                             fontSize: 12, color: Primary.mainColor),
                       ),
@@ -99,16 +93,24 @@ class DoctorCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  const Gap(8),
                   Text(
-                    price,
+                    NumberFormat.currency(
+                            locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0)
+                        .format(int.parse(price)),
                     style:
                         semiBold.copyWith(fontSize: 16, color: Neutral.dark2),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 115, top: 5),
-                    child: BookButton(label: 'Book',backgroundColor: Primary.mainColor, textColor: Neutral.light4, onTap: () {}),
-                  )
+                  Container(
+                    padding: EdgeInsets.only(right: 10),
+                    alignment: Alignment.bottomRight,
+                    child: BookButton(
+                      label: 'Book',
+                      backgroundColor: Primary.mainColor,
+                      textColor: Colors.white,
+                      onTap: () {},
+                    ),
+                  ),
                 ],
               ),
             ),

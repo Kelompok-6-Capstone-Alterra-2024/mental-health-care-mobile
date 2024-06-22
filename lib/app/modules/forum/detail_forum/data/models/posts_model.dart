@@ -42,6 +42,7 @@ class AllPost {
   String content;
   String imageUrl;
   int totalComments;
+  bool isLiked;
   User user;
 
   AllPost({
@@ -49,6 +50,7 @@ class AllPost {
     required this.content,
     required this.imageUrl,
     required this.totalComments,
+    required this.isLiked,
     required this.user,
   });
 
@@ -57,6 +59,7 @@ class AllPost {
         content: json["content"],
         imageUrl: json["image_url"],
         totalComments: json["total_comments"],
+        isLiked: json["is_liked"],
         user: User.fromJson(json["user"]),
       );
 
@@ -65,6 +68,7 @@ class AllPost {
         "content": content,
         "image_url": imageUrl,
         "total_comments": totalComments,
+        "is_liked": isLiked,
         "user": user.toJson(),
       };
 }

@@ -12,7 +12,8 @@ class ChatRoomsService extends GetxService {
   final token = GetStorage().read('token');
   final baseUrl = BaseUrl;
 
-  Future<ChatRoomsModel> getChatRooms({String filter = '', int page = 1, int limit = 10}) async {
+  Future<ChatRoomsModel> getChatRooms(
+      {String filter = '', int page = 1, int limit = 10}) async {
     try {
       final response = await dio.get(
         '$baseUrl/chats?page=$page&limit=$limit$filter',

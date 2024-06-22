@@ -43,11 +43,17 @@ class FormConsultationView extends GetView<ConsultationController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Gap(10),
-              const ProfileFormDoctor(
-                name: 'Dr. Stella Kane',
-                specialist: 'Psikiater',
+              ProfileFormDoctor(
+                name: controller.nameDoctor.value,
+                specialist: controller.specialistDoctor.value,
+                urlImage: controller.imageDoctor.value ==
+                                                  'http://gambar.com' ||
+                                              controller.imageDoctor.value ==
+                                                  'ini link fotonya'
+                                          ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                                          : controller.imageDoctor.value,
               ),
-              const SizedBox(height: 16),
+              const Gap(16),
               Text(
                 'Lengkapi formulir berikut : ',
                 style:
@@ -90,13 +96,13 @@ class FormConsultationView extends GetView<ConsultationController> {
               ),
               const Gap(16),
               MainButtonWithoutPadding(
-                        label: 'Kirim Formulir',
-                        onTap: () {
-                          controller.createComplaint(
-                            controller.consultationId.value,
-                          );
-                        },
-                      ),
+                label: 'Kirim Formulir',
+                onTap: () {
+                  controller.createComplaint(
+                    controller.consultationId.value,
+                  );
+                },
+              ),
               // Obx(
               //   () => controller.isLoading.value == true
               //       ? Center(child: CircularProgressIndicator())

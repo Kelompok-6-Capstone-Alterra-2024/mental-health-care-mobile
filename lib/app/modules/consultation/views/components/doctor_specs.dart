@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../constant/constant.dart';
 
@@ -17,7 +18,6 @@ class DoctorSpecs extends StatelessWidget {
     required this.cost,
     required this.university,
     required this.location,
-
   });
 
   @override
@@ -29,9 +29,10 @@ class DoctorSpecs extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  expericence,
+                  '$expericence Tahun',
                   style:
                       semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
                 ),
@@ -42,6 +43,7 @@ class DoctorSpecs extends StatelessWidget {
               ],
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   rating,
@@ -55,9 +57,12 @@ class DoctorSpecs extends StatelessWidget {
               ],
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  cost.toString(),
+                  NumberFormat.currency(
+                          locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0)
+                      .format(cost),
                   style:
                       semiBold.copyWith(fontSize: 16, color: Primary.mainColor),
                 ),
@@ -91,18 +96,22 @@ class DoctorSpecs extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  university,
-                  style: medium.copyWith(fontSize: 16, color: Neutral.dark2),
-                ),
-                Text(
-                  "Alumnus",
-                  style: regular.copyWith(fontSize: 12, color: Neutral.dark2),
-                )
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    university,
+                    style: medium.copyWith(fontSize: 16, color: Neutral.dark2),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  Text(
+                    "Alumnus",
+                    style: regular.copyWith(fontSize: 12, color: Neutral.dark2),
+                  )
+                ],
+              ),
             ),
           ],
         ),
@@ -123,18 +132,22 @@ class DoctorSpecs extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  location,
-                  style: medium.copyWith(fontSize: 16, color: Neutral.dark2),
-                ),
-                Text(
-                  "Lokasi Praktik",
-                  style: regular.copyWith(fontSize: 12, color: Neutral.dark2),
-                )
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    location,
+                    style: medium.copyWith(fontSize: 16, color: Neutral.dark2),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    "Lokasi Praktik",
+                    style: regular.copyWith(fontSize: 12, color: Neutral.dark2),
+                  )
+                ],
+              ),
             ),
           ],
         ),
