@@ -25,11 +25,11 @@ class TransactionService {
   }
 
   Future<List<Transaction>?> getSuccessTransactions() async {
-    return await getTransactionsByStatus('sucess');
+    return await getTransactionsByStatus('success');
   }
 
   Future<List<Transaction>?> getRejectedTransactions() async {
-    return await getTransactionsByStatus('rejected');
+    return await getTransactionsByStatus('deny');
   }
 
   Future<List<Transaction>?> getTransactionsByStatus(String status) async {
@@ -47,8 +47,13 @@ class TransactionService {
       );
 
       if (response.statusCode == 200) {
-        List<dynamic> jsonList = response.data;
-        return jsonList.map((json) => Transaction.fromJson(json)).toList();
+        if (response.data != null && response.data is List) {
+          List<dynamic> jsonList = response.data;
+          return jsonList.map((json) => Transaction.fromJson(json)).toList();
+        } else {
+          logger.e('Invalid response data format');
+          return null;
+        }
       } else {
         logger.e('Failed to load transactions: ${response.statusCode}');
         return null;

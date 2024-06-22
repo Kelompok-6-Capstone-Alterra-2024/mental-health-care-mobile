@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../../constant/constant.dart';
 import '../../../routes/app_pages.dart';
@@ -114,6 +115,14 @@ class ProfileView extends GetView<ProfileController> {
                 title: 'Pusat Bantuan',
                 onTap: () {
                   Get.toNamed(Routes.CUSTOMER_SERVICES);
+                },
+              ),
+              CustomSettingCard(
+                icon: 'assets/icons/logout.svg',
+                title: 'Logout',
+                onTap: () {
+                  GetStorage().erase();
+                  Get.offAllNamed(Routes.LOGIN);
                 },
               ),
               const Divider(

@@ -204,7 +204,7 @@ class AppPages {
         ),
         GetPage(
           name: _Paths.CHANGE_EMAIL,
-          page: () => const ChangeEmailView(),
+          page: () => ChangeEmailView(),
           binding: ProfileBinding(),
         ),
         GetPage(

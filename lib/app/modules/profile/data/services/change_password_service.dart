@@ -34,11 +34,13 @@ class PasswordService {
       );
 
       if (response.statusCode == 200) {
+        
         return {"status": true, "message": "Success Change Password"};
       } else {
         logger.e('Failed to change password: ${response.statusCode}');
         return {"status": false, "message": "Failed to change password"};
       }
+    // ignore: deprecated_member_use
     } on DioError catch (e) {
       if (e.response?.statusCode == 400) {
         return {"status": false, "message": e.response?.data['message'] ?? "New password and confirmation do not match"};

@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import '../../data/models/transaction_model.dart';
 import '../../data/services/transaction_service.dart';
 
-class TransactionController extends GetxController with SingleGetTickerProviderMixin {
+class TransactionController extends GetxController
+    with SingleGetTickerProviderMixin {
   late TabController tabController;
   bool isInitialized = false;
 
@@ -59,16 +60,17 @@ class TransactionController extends GetxController with SingleGetTickerProviderM
   void fetchPendingTransactions() async {
     try {
       isLoading(true);
-      var fetchedTransactions = await _transactionService.getPendingTransactions();
+      var fetchedTransactions =
+          await _transactionService.getPendingTransactions();
       if (fetchedTransactions != null) {
         pendingTransactions.assignAll(fetchedTransactions);
         isPendingEmpty.value = fetchedTransactions.isEmpty;
       } else {
-        Get.snackbar('Error', 'Failed to load pending transactions');
+        // Get.snackbar('Error', 'Failed to load pending transactions');
         isPendingEmpty.value = true;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load pending transactions: $e');
+      // Get.snackbar('Error', 'Failed to load pending transactions: $e');
       isPendingEmpty.value = true;
     } finally {
       isLoading(false);
@@ -78,16 +80,17 @@ class TransactionController extends GetxController with SingleGetTickerProviderM
   void fetchSuccessTransactions() async {
     try {
       isLoading(true);
-      var fetchedTransactions = await _transactionService.getSuccessTransactions();
+      var fetchedTransactions =
+          await _transactionService.getSuccessTransactions();
       if (fetchedTransactions != null) {
         successTransactions.assignAll(fetchedTransactions);
         isSuccessEmpty.value = fetchedTransactions.isEmpty;
       } else {
-        Get.snackbar('Error', 'Failed to load success transactions');
+        // Get.snackbar('Error', 'Failed to load success transactions');
         isSuccessEmpty.value = true;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load success transactions: $e');
+      // Get.snackbar('Error', 'Failed to load success transactions: $e');
       isSuccessEmpty.value = true;
     } finally {
       isLoading(false);
@@ -97,16 +100,17 @@ class TransactionController extends GetxController with SingleGetTickerProviderM
   void fetchRejectedTransactions() async {
     try {
       isLoading(true);
-      var fetchedTransactions = await _transactionService.getRejectedTransactions();
+      var fetchedTransactions =
+          await _transactionService.getRejectedTransactions();
       if (fetchedTransactions != null) {
         rejectedTransactions.assignAll(fetchedTransactions);
         isRejectedEmpty.value = fetchedTransactions.isEmpty;
       } else {
-        Get.snackbar('Error', 'Failed to load rejected transactions');
+        // Get.snackbar('Error', 'Failed to load rejected transactions');
         isRejectedEmpty.value = true;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load rejected transactions: $e');
+      // Get.snackbar('Error', 'Failed to load rejected transactions: $e');
       isRejectedEmpty.value = true;
     } finally {
       isLoading(false);
