@@ -408,8 +408,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
-<<<<<<< HEAD
-=======
   rxdart:
     dependency: transitive
     description:
@@ -418,7 +416,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
->>>>>>> 8132796628a68585948d070b9506612b2624b28e
   skeletonizer:
     dependency: "direct main"
     description:
