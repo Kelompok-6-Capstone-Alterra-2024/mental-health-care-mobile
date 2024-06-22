@@ -6,7 +6,7 @@ import '../../data/services/music_service.dart';
 
 class WishlistController extends GetxController {
   final MusicService _musicService = MusicService();
-  RxString selectedCategory = 'music'.obs;
+  RxString selectedCategory = 'musik'.obs;
   RxList likedmusics = <AllMusic>[].obs;
   MeditationController meditasiC = Get.find<MeditationController>();
 

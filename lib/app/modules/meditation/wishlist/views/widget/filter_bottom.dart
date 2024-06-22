@@ -32,11 +32,11 @@ class FilterBottomSheet extends GetView<WishlistController> {
               const Gap(16),
               Row(
                 children: [
-                  CategoryButton(category: 'music'),
+                  CategoryButton(category: 'musik'),
                   const Gap(8),
-                  CategoryButton(category: 'articles'),
+                  CategoryButton(category: 'artikel'),
                   const Gap(8),
-                  CategoryButton(category: 'storys'),
+                  CategoryButton(category: 'cerita inspiratif'),
                 ],
               ),
               const Gap(16),

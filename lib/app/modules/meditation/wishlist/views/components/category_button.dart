@@ -19,18 +19,20 @@ class CategoryButton extends GetView<WishlistController> {
         () => Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: controller.selectedCategory.value == category
-                ? Primary.mainColor
-                : Neutral.light3,
+            color: Neutral.transparent,
             borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: Neutral.dark2),
+            border: Border.all(
+              color: controller.selectedCategory.value == category
+                  ? Primary.mainColor
+                  : Neutral.dark2,
+            ),
           ),
           child: Text(
             category,
             style: medium.copyWith(
               fontSize: 12,
               color: controller.selectedCategory.value == category
-                  ? Neutral.light4
+                  ? Primary.mainColor
                   : Neutral.dark2,
             ),
           ),

@@ -56,11 +56,12 @@ class WishlistView extends GetView<WishlistController> {
       body: Center(
         child: Obx(
           () {
-            if (controller.selectedCategory.value == 'music') {
+            if (controller.selectedCategory.value == 'musik') {
               return const MusicWidget();
-            } else if (controller.selectedCategory.value == 'articles') {
+            } else if (controller.selectedCategory.value == 'artikel') {
               return const ArticleWidget();
-            } else if (controller.selectedCategory.value == 'storys') {
+            } else if (controller.selectedCategory.value ==
+                'cerita inspiratif') {
               return const StoryWidget();
             } else {
               return Text(
