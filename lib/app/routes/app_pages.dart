@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:mindease/app/modules/forum/detail_forum/views/post_forum_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/forgot_password_view.dart';
@@ -8,7 +7,13 @@ import '../modules/auth/views/new_password_view.dart';
 import '../modules/auth/views/register_view.dart';
 import '../modules/auth/views/verification_code_view.dart';
 import '../modules/consultation/bindings/consultation_binding.dart';
+import '../modules/consultation/chatwithdoctor/bindings/chatwithdoctor_binding.dart';
+import '../modules/consultation/chatwithdoctor/views/chatwithdoctor_view.dart';
+import '../modules/consultation/chatwithdoctor/views/screens/chat_list_view.dart';
+import '../modules/consultation/chatwithdoctor/views/screens/detail_consultation_note_view.dart';
+import '../modules/consultation/chatwithdoctor/views/screens/rating_doctor_view.dart';
 import '../modules/consultation/views/consultation_view.dart';
+import '../modules/consultation/views/screens/detail_psikiater_view.dart';
 import '../modules/consultation/views/screens/form_consultation_view.dart';
 import '../modules/consultation/views/screens/payment_view.dart';
 import '../modules/forum/bindings/forum_binding.dart';
@@ -16,16 +21,10 @@ import '../modules/forum/comment_forum/bindings/comment_forum_binding.dart';
 import '../modules/forum/comment_forum/views/comment_forum_view.dart';
 import '../modules/forum/detail_forum/bindings/detail_forum_binding.dart';
 import '../modules/forum/detail_forum/views/detail_forum_view.dart';
+import '../modules/forum/detail_forum/views/post_forum_view.dart';
 import '../modules/forum/views/forum_view.dart';
 import '../modules/home/ai_chat/bindings/ai_chat_binding.dart';
 import '../modules/home/ai_chat/views/ai_chat_view.dart';
-
-import '../modules/consultation/chatwithdoctor/bindings/chatwithdoctor_binding.dart';
-import '../modules/consultation/chatwithdoctor/views/screens/chat_list_view.dart';
-import '../modules/consultation/chatwithdoctor/views/chatwithdoctor_view.dart';
-import '../modules/consultation/chatwithdoctor/views/screens/detail_consultation_note_view.dart';
-import '../modules/consultation/chatwithdoctor/views/screens/rating_doctor_view.dart';
-import '../modules/consultation/views/screens/detail_psikiater_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/mood_track/add_mood/bindings/add_mood_binding.dart';
 import '../modules/home/mood_track/add_mood/views/add_mood_view.dart';
@@ -48,6 +47,8 @@ import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/welcome_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/customer_services/bindings/customer_services_binding.dart';
+import '../modules/profile/customer_services/views/customer_services_view.dart';
 import '../modules/profile/poin/bindings/poin_binding.dart';
 import '../modules/profile/poin/views/poin_view.dart';
 import '../modules/profile/transaction/bindings/transaction_binding.dart';
@@ -193,12 +194,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
       children: [
         GetPage(
           name: _Paths.EDIT_PROFILE,
-          page: () => const EditProfileView(),
+          page: () => EditProfileView(),
           binding: ProfileBinding(),
         ),
         GetPage(
@@ -213,20 +214,25 @@ class AppPages {
           children: [
             GetPage(
               name: _Paths.CHANGE_PASSWORD,
-              page: () => const ChangePasswordView(),
+              page: () => ChangePasswordView(),
               binding: ProfileBinding(),
             ),
           ],
         ),
         GetPage(
           name: _Paths.TRANSACTION,
-          page: () => const TransactionView(),
+          page: () => TransactionView(),
           binding: TransactionBinding(),
         ),
         GetPage(
           name: _Paths.POIN,
-          page: () => const PoinView(),
+          page: () => PoinView(),
           binding: PoinBinding(),
+        ),
+        GetPage(
+          name: _Paths.CUSTOMER_SERVICES,
+          page: () => const CustomerServicesView(),
+          binding: CustomerServicesBinding(),
         ),
       ],
     ),

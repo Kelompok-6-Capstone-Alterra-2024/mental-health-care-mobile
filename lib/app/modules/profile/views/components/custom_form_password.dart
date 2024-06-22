@@ -8,12 +8,14 @@ class CustomFormPassword extends StatelessWidget {
   final Function(String)? onChanged;
   final bool obsecure;
   final obsecureIcon;
+  final controller;
   const CustomFormPassword({
     super.key,
     required this.title,
     this.onChanged,
     required this.obsecure,
     this.obsecureIcon,
+    required this.controller,
   });
 
   @override
@@ -31,6 +33,7 @@ class CustomFormPassword extends StatelessWidget {
           TextFormField(
             onChanged: onChanged,
             obscureText: obsecure,
+            controller: controller,
             decoration: primary.copyWith(
               suffixIcon: obsecureIcon,
               contentPadding:

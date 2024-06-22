@@ -5,11 +5,15 @@ import '../../../../../constant/constant.dart';
 
 class CustomFormProfile extends StatelessWidget {
   final String title;
+  final String hinttext;
   final Function(String)? onChanged;
-  const CustomFormProfile({
+  final TextEditingController controller;
+   CustomFormProfile({
     super.key,
     required this.title,
+    required this.hinttext,
     this.onChanged,
+    required this.controller,
   });
 
   @override
@@ -26,7 +30,14 @@ class CustomFormProfile extends StatelessWidget {
           const Gap(6),
           TextFormField(
             onChanged: onChanged,
+            controller: controller,
             decoration: primary.copyWith(
+              
+              hintText: hinttext,
+              hintStyle: regular.copyWith(
+                fontSize: 16,
+                color: Neutral.dark3,
+              ),
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             ),
