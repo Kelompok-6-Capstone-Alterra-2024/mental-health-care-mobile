@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../../constant/constant.dart';
+import '../../controllers/meditation_controller.dart';
 import '../../views/TabBarViews/story.dart';
 import '../controllers/story_controller.dart';
 
@@ -11,6 +12,7 @@ class StoryView extends GetView<StoryController> {
   const StoryView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final meditasiC = Get.put(MeditationController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -22,6 +24,7 @@ class StoryView extends GetView<StoryController> {
             minWidth: 50,
           ),
           onPressed: () {
+            meditasiC.fetchStorys();
             Get.back();
           },
           padding: const EdgeInsets.only(

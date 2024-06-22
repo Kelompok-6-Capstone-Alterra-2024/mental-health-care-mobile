@@ -2,13 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../data/api/api.dart';
 import '../models/articles_model.dart';
 
 class ArticleService {
   final Dio _dio = Dio();
   final logger = Logger();
   final String token = GetStorage().read('token') ?? '';
-  final baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
+  final baseUrl = BaseUrl;
 
   Future<Articles> getArticles() async {
     try {
@@ -35,22 +36,39 @@ class ArticleService {
     }
   }
 
-  Future<bool> toggleLikeStatus(int articleId) async {
+  Future<bool> toggleLikeStatus(int articleId, bool isLiked) async {
     try {
-      final response = await _dio.post(
-        '$baseUrl/articles/like',
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $token',
-          },
-        ),
-        data: {
-          'article_id': articleId,
-        },
-      );
+      Response response;
 
-      if (response.statusCode == 201) {
+      if (isLiked) {
+        response = await _dio.delete(
+          '$baseUrl/articles/like',
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $token',
+            },
+          ),
+          data: {
+            'article_id': articleId,
+          },
+        );
+      } else {
+        response = await _dio.post(
+          '$baseUrl/articles/like',
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $token',
+            },
+          ),
+          data: {
+            'article_id': articleId,
+          },
+        );
+      }
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
         logger.i('Like status toggled successfully: ${response.data}');
         return true;
       } else {

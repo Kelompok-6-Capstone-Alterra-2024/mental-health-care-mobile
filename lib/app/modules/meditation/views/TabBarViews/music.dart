@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../../../routes/app_pages.dart';
 import '../../controllers/meditation_controller.dart';
@@ -30,8 +28,7 @@ class MusicTab extends GetView<MeditationController> {
                   artist: musics.singer,
                   isLiked: musics.isLiked,
                   onLikeTap: () {
-                    musics.isLiked = !musics.isLiked;
-                    controller.musics.refresh();
+                    controller.toggleLikeStatus(index);
                   },
                   onTap: () {
                     Get.toNamed(Routes.MUSIC, arguments: {

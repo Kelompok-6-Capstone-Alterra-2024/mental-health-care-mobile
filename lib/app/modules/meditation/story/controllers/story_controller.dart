@@ -15,18 +15,21 @@ class StoryController extends GetxController {
 
   Future<void> toggleLikeStatus() async {
     try {
-      bool success = await _storyService.toggleLikeStatus(storyID.value);
+      bool success =
+          await _storyService.toggleLikeStatus(storyID.value, isLiked.value);
       if (success) {
         isLiked.value = !isLiked.value;
         Get.snackbar(
           'Success',
-          'Like status updated successfully',
+          isLiked.value
+              ? 'Like added successfully'
+              : 'Like removed successfully',
           snackPosition: SnackPosition.BOTTOM,
         );
       } else {
         Get.snackbar(
           'Error',
-          'Failed to update like status',
+          'Failed to toggle like status',
           snackPosition: SnackPosition.BOTTOM,
         );
       }

@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../constant/constant.dart';
+import '../../controllers/meditation_controller.dart';
 import '../controllers/music_controller.dart';
 
 class MusicView extends GetView<MusicController> {
   const MusicView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final meditasiC = Get.put(MeditationController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -17,6 +19,7 @@ class MusicView extends GetView<MusicController> {
             width: 26,
           ),
           onPressed: () {
+            meditasiC.fetchMusics();
             Get.back();
           },
         ),

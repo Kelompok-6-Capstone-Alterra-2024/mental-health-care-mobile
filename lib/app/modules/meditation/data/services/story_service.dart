@@ -2,13 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../data/api/api.dart';
 import '../models/storys_model.dart';
 
 class StoryService {
   final Dio _dio = Dio();
   final logger = Logger();
   final String token = GetStorage().read('token') ?? '';
-  final baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
+  final baseUrl = BaseUrl;
 
   Future<Storys> getStorys() async {
     try {
@@ -22,7 +23,7 @@ class StoryService {
         ),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         logger.i(response.data);
         return Storys.fromJson(response.data);
       } else {
@@ -35,22 +36,39 @@ class StoryService {
     }
   }
 
-  Future<bool> toggleLikeStatus(int storyId) async {
+  Future<bool> toggleLikeStatus(int storyId, bool isLiked) async {
     try {
-      final response = await _dio.post(
-        '$baseUrl/stories/like',
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $token',
-          },
-        ),
-        data: {
-          'story_id': storyId,
-        },
-      );
+      Response response;
 
-      if (response.statusCode == 201) {
+      if (isLiked) {
+        response = await _dio.delete(
+          '$baseUrl/stories/like',
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $token',
+            },
+          ),
+          data: {
+            'story_id': storyId,
+          },
+        );
+      } else {
+        response = await _dio.post(
+          '$baseUrl/stories/like',
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $token',
+            },
+          ),
+          data: {
+            'story_id': storyId,
+          },
+        );
+      }
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
         logger.i('Like status toggled successfully: ${response.data}');
         return true;
       } else {
@@ -59,7 +77,7 @@ class StoryService {
         return false;
       }
     } catch (e) {
-      logger.e('Error toggling like status: $e');
+      logger.e('Failed to toggle like status: $e');
       return false;
     }
   }
