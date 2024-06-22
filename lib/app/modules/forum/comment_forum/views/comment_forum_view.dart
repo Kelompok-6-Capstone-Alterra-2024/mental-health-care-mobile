@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 
 import '../../../../../constant/constant.dart';
 import '../controllers/comment_forum_controller.dart';
+import 'components/comment_card.dart';
 
 class CommentForumView extends GetView<CommentForumController> {
   const CommentForumView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController commentController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -91,6 +93,8 @@ class CommentForumView extends GetView<CommentForumController> {
                             GestureDetector(
                               onTap: () {
                                 controller.toggleLikeButton();
+                                controller
+                                    .likePost(controller.post.value!.data.id);
                               },
                               child: Obx(() {
                                 return Row(
@@ -185,6 +189,28 @@ class CommentForumView extends GetView<CommentForumController> {
               }
             }),
             Obx(() {
+              if (controller.isLoadingComments.value) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (controller.comments.value == null) {
+                return Center(
+                  child: Text(
+                    'Belum ada komentar untuk post ini',
+                    style: medium.copyWith(fontSize: 16, color: Neutral.dark2),
+                  ),
+                );
+              } else {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.comments.value!.data.length,
+                  itemBuilder: (context, index) {
+                    final comment = controller.comments.value!.data[index];
+                    return CommentCard(commentData: comment);
+                  },
+                );
+              }
+            }),
+            Obx(() {
               if (controller.isCommentClicked.value) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -192,7 +218,7 @@ class CommentForumView extends GetView<CommentForumController> {
                     children: [
                       Expanded(
                         child: TextField(
-                          // controller: controller.messageController,
+                          controller: commentController,
                           decoration: primary.copyWith(
                             hintText: 'Tulis pesan',
                             hintStyle: regular.copyWith(
@@ -205,8 +231,14 @@ class CommentForumView extends GetView<CommentForumController> {
                       const Gap(8),
                       GestureDetector(
                         onTap: () {
-                          // controller.sendMessage(controller.messageController.text);
-                          print('Kirim');
+                          final content = commentController.text.trim();
+                          if (content.isNotEmpty) {
+                            controller.postComment(
+                                controller.post.value!.data.id, content);
+                            commentController.clear();
+                          } else {
+                            print('Komentar tidak boleh kosong!');
+                          }
                         },
                         child: Container(
                           padding: const EdgeInsets.all(12),

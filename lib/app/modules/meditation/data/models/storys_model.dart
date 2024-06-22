@@ -39,7 +39,6 @@ class AllStory {
   String content;
   DateTime date;
   String imageUrl;
-  int viewCount;
   bool isLiked;
   Doctor doctor;
 
@@ -49,7 +48,6 @@ class AllStory {
     required this.content,
     required this.date,
     required this.imageUrl,
-    required this.viewCount,
     required this.isLiked,
     required this.doctor,
   });
@@ -60,7 +58,6 @@ class AllStory {
         content: json["content"],
         date: DateTime.parse(json["date"]),
         imageUrl: json["image_url"],
-        viewCount: json["view_count"],
         isLiked: json["is_liked"],
         doctor: Doctor.fromJson(json["doctor"]),
       );
@@ -71,7 +68,6 @@ class AllStory {
         "content": content,
         "date": date.toIso8601String(),
         "image_url": imageUrl,
-        "view_count": viewCount,
         "is_liked": isLiked,
         "doctor": doctor.toJson(),
       };

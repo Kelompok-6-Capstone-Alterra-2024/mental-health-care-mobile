@@ -1,28 +1,33 @@
+// To parse this JSON data, do
+//
+//     final allMusicModel = allMusicModelFromJson(jsonString);
+
 import 'dart:convert';
 
-Musics musicsFromJson(String str) => Musics.fromJson(json.decode(str));
+AllMusicModel allMusicModelFromJson(String str) =>
+    AllMusicModel.fromJson(json.decode(str));
 
-String musicsToJson(Musics data) => json.encode(data.toJson());
+String allMusicModelToJson(AllMusicModel data) => json.encode(data.toJson());
 
-class Musics {
+class AllMusicModel {
   bool status;
   String message;
   Metadata metadata;
-  List<AllMusic> data;
+  List<DataMusic> data;
 
-  Musics({
+  AllMusicModel({
     required this.status,
     required this.message,
     required this.metadata,
     required this.data,
   });
 
-  factory Musics.fromJson(Map<String, dynamic> json) => Musics(
+  factory AllMusicModel.fromJson(Map<String, dynamic> json) => AllMusicModel(
         status: json["status"],
         message: json["message"],
         metadata: Metadata.fromJson(json["metadata"]),
-        data:
-            List<AllMusic>.from(json["data"].map((x) => AllMusic.fromJson(x))),
+        data: List<DataMusic>.from(
+            json["data"].map((x) => DataMusic.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,7 +38,7 @@ class Musics {
       };
 }
 
-class AllMusic {
+class DataMusic {
   int id;
   String title;
   String singer;
@@ -41,7 +46,7 @@ class AllMusic {
   String imageUrl;
   bool isLiked;
 
-  AllMusic({
+  DataMusic({
     required this.id,
     required this.title,
     required this.singer,
@@ -50,7 +55,7 @@ class AllMusic {
     required this.isLiked,
   });
 
-  factory AllMusic.fromJson(Map<String, dynamic> json) => AllMusic(
+  factory DataMusic.fromJson(Map<String, dynamic> json) => DataMusic(
         id: json["id"],
         title: json["title"],
         singer: json["singer"],

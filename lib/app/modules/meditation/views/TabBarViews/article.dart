@@ -26,12 +26,20 @@ class ArticleTab extends GetView<MeditationController> {
                 return ArticleCard(
                   image: articles.imageUrl,
                   title: articles.title,
-                  time: articles.date.toString(),
+                  time: controller.formatDateTime(articles.date),
                   readTime: 'bacaan ${articles.content.length ~/ 10} menit',
                   onTap: () {
-                    Get.toNamed(Routes.ARTICLE,
-                        arguments: {'articleID': articles.id, 'title': articles.title});
-                    print('Article ID: ${articles.id}');
+                    Get.toNamed(
+                      Routes.ARTICLE,
+                      arguments: {
+                        'idArticle': articles.id,
+                        'title': articles.title,
+                        'image': articles.imageUrl,
+                        'content': articles.content,
+                        'date': controller.formatDateTime(articles.date),
+                        'like': articles.isLiked,
+                      },
+                    );
                   },
                 );
               },
