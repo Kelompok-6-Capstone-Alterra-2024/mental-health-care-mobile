@@ -121,6 +121,15 @@ class DetailForumController extends GetxController {
     }
   }
 
+  void unlikePost(int postId) async {
+    try {
+      await _postService.unlikePost(postId);
+      updatePostLikedStatus(postId, false);
+    } catch (e) {
+      print('Error unliking post: $e');
+    }
+  }
+
   @override
   void onClose() {
     super.onClose();
