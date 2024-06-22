@@ -25,6 +25,8 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     controller;
     return Scaffold(
+      extendBody: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

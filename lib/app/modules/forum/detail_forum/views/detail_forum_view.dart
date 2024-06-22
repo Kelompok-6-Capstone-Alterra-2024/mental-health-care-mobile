@@ -192,6 +192,7 @@ class DetailForumView extends GetView<DetailForumController> {
                             'Belum ada post di forum ini. Yuk buat post pertama!',
                             style: medium.copyWith(
                                 fontSize: 16, color: Neutral.dark2),
+                            textAlign: TextAlign.center,
                           ),
                         );
                       } else if (snapshot.data == null) {
@@ -200,6 +201,7 @@ class DetailForumView extends GetView<DetailForumController> {
                             'Belum ada post di forum ini. Yuk buat post pertama!',
                             style: medium.copyWith(
                                 fontSize: 16, color: Neutral.dark2),
+                            textAlign: TextAlign.center,
                           ),
                         );
                       } else {

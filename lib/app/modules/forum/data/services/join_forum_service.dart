@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:mindease/app/data/api/api.dart';
 
 class JoinForumService {
   final Dio _dio = Dio();
   final logger = Logger();
   final String token = GetStorage().read('token') ?? '';
-  final baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
+  final baseUrl = BaseUrl;
 
   Future<void> joinForum(int forumId) async {
     try {

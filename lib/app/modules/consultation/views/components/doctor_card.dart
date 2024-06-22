@@ -13,7 +13,7 @@ class DoctorCard extends StatelessWidget {
   final String title;
   final String yearsofservice;
   final String rating;
-  final String price;
+  final int price;
   final Function()? like;
   final Function()? onTapCard;
   const DoctorCard({
@@ -97,7 +97,7 @@ class DoctorCard extends StatelessWidget {
                   Text(
                     NumberFormat.currency(
                             locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0)
-                        .format(int.parse(price)),
+                        .format(int.parse(price.toString())),
                     style:
                         semiBold.copyWith(fontSize: 16, color: Neutral.dark2),
                   ),

@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:mindease/app/data/api/api.dart';
 
 import '../models/post_by_id_model.dart';
 
 class PostByIdService {
   final Dio _dio = Dio();
   final String token = GetStorage().read('token') ?? '';
-  final String baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
+  final String baseUrl = BaseUrl;
 
   Future<PostByIdModel> getPostById(int postId) async {
     try {

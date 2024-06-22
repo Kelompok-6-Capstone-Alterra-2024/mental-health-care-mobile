@@ -96,7 +96,7 @@ class ConsultationView extends GetView<ConsultationController> {
                             title: 'title',
                             yearsofservice: ' years',
                             rating: 'rating',
-                            price: 'price');
+                            price: 1000);
                       },
                     ),
                   ),
@@ -116,7 +116,7 @@ class ConsultationView extends GetView<ConsultationController> {
                           title: doctor.specialist,
                           yearsofservice: doctor.experience.toString(),
                           rating: '${doctor.ratingPrecentage}%',
-                          price: doctor.fee.toString(),
+                          price: doctor.fee,
                           like: () {},
                           onTapCard: () {
                             Get.toNamed(

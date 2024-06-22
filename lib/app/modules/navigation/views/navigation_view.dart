@@ -13,6 +13,7 @@ class NavigationView extends GetView<NavigationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SizedBox(
         height: 70,
@@ -100,7 +101,6 @@ class NavigationView extends GetView<NavigationController> {
                       label: 'Profil',
                     ),
                   ],
-                  
                 ),
               ),
             ),

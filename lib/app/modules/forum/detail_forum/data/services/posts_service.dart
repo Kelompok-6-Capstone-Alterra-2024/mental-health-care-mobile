@@ -3,12 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:logger/logger.dart';
+import '../../../../../data/api/api.dart';
 import '../models/posts_model.dart';
 
 class PostService {
   final Dio _dio = Dio();
   final Logger _logger = Logger();
-  final String _baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
+  final String _baseUrl = BaseUrl;
   final String? _token = GetStorage().read('token');
 
   Future<void> createPost({

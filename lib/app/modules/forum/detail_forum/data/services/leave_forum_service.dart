@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../../data/api/api.dart';
+
 class LeaveForumService {
   final Dio _dio = Dio();
   final String _token = GetStorage().read('token') ?? '';
-  final String _baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
+  final String _baseUrl = BaseUrl;
 
   final logger = Logger();
 

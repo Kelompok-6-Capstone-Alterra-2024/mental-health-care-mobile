@@ -50,7 +50,6 @@ class DoctorAvail {
   String gender;
   bool isAvailable;
   String profilePicture;
-  int balance;
   int experience;
   String bachelorAlmamater;
   int bachelorGraduationYear;
@@ -60,7 +59,7 @@ class DoctorAvail {
   String practiceCity;
   int fee;
   String specialist;
-  int amount;
+  int balance;
   int ratingPrecentage;
 
   DoctorAvail({
@@ -73,7 +72,6 @@ class DoctorAvail {
     required this.gender,
     required this.isAvailable,
     required this.profilePicture,
-    required this.balance,
     required this.experience,
     required this.bachelorAlmamater,
     required this.bachelorGraduationYear,
@@ -83,7 +81,7 @@ class DoctorAvail {
     required this.practiceCity,
     required this.fee,
     required this.specialist,
-    required this.amount,
+    required this.balance,
     required this.ratingPrecentage,
   });
 
@@ -97,7 +95,6 @@ class DoctorAvail {
         gender: json["gender"],
         isAvailable: json["is_available"],
         profilePicture: json["profile_picture"],
-        balance: json["balance"],
         experience: json["experience"],
         bachelorAlmamater: json["bachelor_almamater"],
         bachelorGraduationYear: json["bachelor_graduation_year"],
@@ -107,7 +104,7 @@ class DoctorAvail {
         practiceCity: json["practice_city"],
         fee: json["fee"],
         specialist: json["specialist"],
-        amount: json["amount"],
+        balance: json["balance"],
         ratingPrecentage: json["rating_precentage"],
       );
 
@@ -121,7 +118,6 @@ class DoctorAvail {
         "gender": gender,
         "is_available": isAvailable,
         "profile_picture": profilePicture,
-        "balance": balance,
         "experience": experience,
         "bachelor_almamater": bachelorAlmamater,
         "bachelor_graduation_year": bachelorGraduationYear,
@@ -131,7 +127,7 @@ class DoctorAvail {
         "practice_city": practiceCity,
         "fee": fee,
         "specialist": specialist,
-        "amount": amount,
+        "balance": balance,
         "rating_precentage": ratingPrecentage,
       };
 }
