@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:mindease/app/modules/forum/detail_forum/views/post_forum_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/forgot_password_view.dart';
@@ -8,7 +7,13 @@ import '../modules/auth/views/new_password_view.dart';
 import '../modules/auth/views/register_view.dart';
 import '../modules/auth/views/verification_code_view.dart';
 import '../modules/consultation/bindings/consultation_binding.dart';
+import '../modules/consultation/chatwithdoctor/bindings/chatwithdoctor_binding.dart';
+import '../modules/consultation/chatwithdoctor/views/chatwithdoctor_view.dart';
+import '../modules/consultation/chatwithdoctor/views/screens/chat_list_view.dart';
+import '../modules/consultation/chatwithdoctor/views/screens/detail_consultation_note_view.dart';
+import '../modules/consultation/chatwithdoctor/views/screens/rating_doctor_view.dart';
 import '../modules/consultation/views/consultation_view.dart';
+import '../modules/consultation/views/screens/detail_psikiater_view.dart';
 import '../modules/consultation/views/screens/form_consultation_view.dart';
 import '../modules/consultation/views/screens/payment_view.dart';
 import '../modules/forum/bindings/forum_binding.dart';
@@ -16,16 +21,10 @@ import '../modules/forum/comment_forum/bindings/comment_forum_binding.dart';
 import '../modules/forum/comment_forum/views/comment_forum_view.dart';
 import '../modules/forum/detail_forum/bindings/detail_forum_binding.dart';
 import '../modules/forum/detail_forum/views/detail_forum_view.dart';
+import '../modules/forum/detail_forum/views/post_forum_view.dart';
 import '../modules/forum/views/forum_view.dart';
 import '../modules/home/ai_chat/bindings/ai_chat_binding.dart';
 import '../modules/home/ai_chat/views/ai_chat_view.dart';
-
-import '../modules/consultation/chatwithdoctor/bindings/chatwithdoctor_binding.dart';
-import '../modules/consultation/chatwithdoctor/views/screens/chat_list_view.dart';
-import '../modules/consultation/chatwithdoctor/views/chatwithdoctor_view.dart';
-import '../modules/consultation/chatwithdoctor/views/screens/detail_consultation_note_view.dart';
-import '../modules/consultation/chatwithdoctor/views/screens/rating_doctor_view.dart';
-import '../modules/consultation/views/screens/detail_psikiater_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/mood_track/add_mood/bindings/add_mood_binding.dart';
 import '../modules/home/mood_track/add_mood/views/add_mood_view.dart';
@@ -42,7 +41,8 @@ import '../modules/meditation/music/views/music_view.dart';
 import '../modules/meditation/story/bindings/story_binding.dart';
 import '../modules/meditation/story/views/story_view.dart';
 import '../modules/meditation/views/meditation_view.dart';
-import '../modules/meditation/views/wishlist_view.dart';
+import '../modules/meditation/wishlist/bindings/wishlist_binding.dart';
+import '../modules/meditation/wishlist/views/wishlist_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
 import '../modules/navigation/views/navigation_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
@@ -185,12 +185,12 @@ class AppPages {
           page: () => const StoryView(),
           binding: StoryBinding(),
         ),
+        GetPage(
+          name: _Paths.WISHLIST,
+          page: () => const WishlistView(),
+          binding: WishlistBinding(),
+        ),
       ],
-    ),
-    GetPage(
-      name: _Paths.WISHLIST,
-      page: () => const WishlistView(),
-      binding: MeditationBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE,

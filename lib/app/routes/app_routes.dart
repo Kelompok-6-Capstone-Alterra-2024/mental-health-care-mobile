@@ -5,7 +5,6 @@ abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
   static const MEDITATION = _Paths.MEDITATION;
-  static const WISHLIST = _Paths.WISHLIST;
   static const MUSIC = _Paths.MEDITATION + _Paths.MUSIC;
   static const NAVIGATION = _Paths.NAVIGATION;
   static const NOTIFICATION = _Paths.HOME + _Paths.NOTIFICATION;
@@ -38,10 +37,12 @@ abstract class Routes {
   static const DETAILPSIKIATER = _Paths.CONSULTATION + _Paths.DETAILPSIKIATER;
   static const FORMCONSULTATION = _Paths.CONSULTATION + _Paths.FORMCONSULTATION;
   static const PAYMENT = _Paths.CONSULTATION + _Paths.PAYMENT;
-  static const CHATWITHDOCTOR = _Paths.CONSULTATION + _Paths.CHATLIST + _Paths.CHATWITHDOCTOR;
+  static const CHATWITHDOCTOR =
+      _Paths.CONSULTATION + _Paths.CHATLIST + _Paths.CHATWITHDOCTOR;
   static const DETAILNOTE = _Paths.CONSULTATION + _Paths.DETAILNOTE;
   static const RATINGDOCTOR = _Paths.CONSULTATION + _Paths.RATINGDOCTOR;
   static const CHATLIST = _Paths.CONSULTATION + _Paths.CHATLIST;
+  static const WISHLIST = _Paths.MEDITATION + _Paths.WISHLIST;
 }
 
 abstract class _Paths {

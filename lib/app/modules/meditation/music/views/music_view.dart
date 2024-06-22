@@ -1,14 +1,18 @@
+// ignore_for_file: use_super_parameters
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../constant/constant.dart';
+import '../../controllers/meditation_controller.dart';
 import '../controllers/music_controller.dart';
 
 class MusicView extends GetView<MusicController> {
   const MusicView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final meditasiC = Get.put(MeditationController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -17,6 +21,7 @@ class MusicView extends GetView<MusicController> {
             width: 26,
           ),
           onPressed: () {
+            meditasiC.fetchMusics();
             Get.back();
           },
         ),
@@ -28,7 +33,7 @@ class MusicView extends GetView<MusicController> {
       ),
       body: Obx(() {
         return Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 92,
             left: 25,
             right: 25,
@@ -56,7 +61,7 @@ class MusicView extends GetView<MusicController> {
                       'assets/icons/Share 3.svg',
                     ),
                     padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 50,
                     ),
                     iconSize: 18,
@@ -92,8 +97,10 @@ class MusicView extends GetView<MusicController> {
               ),
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
-                  overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
+                  thumbShape:
+                      const RoundSliderThumbShape(enabledThumbRadius: 0.0),
+                  overlayShape:
+                      const RoundSliderOverlayShape(overlayRadius: 0.0),
                   thumbColor: Colors.transparent,
                   overlayColor: Colors.transparent,
                   trackHeight: 3,
@@ -129,7 +136,7 @@ class MusicView extends GetView<MusicController> {
                       'assets/icons/Shuffle Arrow.svg',
                     ),
                     padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 50,
                     ),
                     iconSize: 16,
@@ -143,7 +150,7 @@ class MusicView extends GetView<MusicController> {
                           'assets/icons/skip-previous.svg',
                         ),
                         padding: EdgeInsets.zero,
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           minWidth: 50,
                         ),
                         iconSize: 16,
@@ -152,7 +159,7 @@ class MusicView extends GetView<MusicController> {
                       IconButton(
                         onPressed: controller.handlePlayPause,
                         icon: CircleAvatar(
-                          backgroundColor: Color(0xFFC7C9D9),
+                          backgroundColor: const Color(0xFFC7C9D9),
                           radius: 40,
                           child: Icon(
                             controller.player.playing
@@ -170,7 +177,7 @@ class MusicView extends GetView<MusicController> {
                           'assets/icons/skip-next.svg',
                         ),
                         padding: EdgeInsets.zero,
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           minWidth: 50,
                         ),
                         iconSize: 16,
@@ -184,7 +191,7 @@ class MusicView extends GetView<MusicController> {
                       'assets/icons/pepicons-pop_repeat.svg',
                     ),
                     padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 50,
                     ),
                     iconSize: 16,

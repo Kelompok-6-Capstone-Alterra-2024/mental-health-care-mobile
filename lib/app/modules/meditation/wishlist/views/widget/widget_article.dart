@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../routes/app_pages.dart';
-import '../../controllers/meditation_controller.dart';
+import '../../../../../routes/app_pages.dart';
+import '../../../controllers/meditation_controller.dart';
 import '../components/article_card.dart';
 
-class ArticleTab extends GetView<MeditationController> {
-  const ArticleTab({Key? key});
-
+class ArticleWidget extends StatelessWidget {
+  const ArticleWidget({super.key});
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<MeditationController>();
     return Obx(
       () {
-        return Skeletonizer(
-          enabled: controller.isLoading.value,
-          child: Container(
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else if (controller.errorMessage.isNotEmpty) {
+          return Center(child: Text('Error: ${controller.errorMessage}'));
+        } else {
+          final likedArticle =
+              controller.articles.where((article) => article.isLiked).toList();
+
+          if (likedArticle.isEmpty) {
+            return Center(child: Text('No liked articles found.'));
+          }
+          return Container(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: ListView.builder(
-              itemCount: controller.articles.length,
+              itemCount: likedArticle.length,
               itemBuilder: (context, index) {
-                final articles = controller.articles[index];
+                final articles = likedArticle[index];
                 return ArticleCard(
                   image: articles.imageUrl,
                   title: articles.title,
@@ -42,8 +50,8 @@ class ArticleTab extends GetView<MeditationController> {
                 );
               },
             ),
-          ),
-        );
+          );
+        }
       },
     );
   }

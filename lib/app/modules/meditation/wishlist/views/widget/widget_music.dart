@@ -1,32 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import '../../../../routes/app_pages.dart';
-import '../../controllers/meditation_controller.dart';
+import 'package:mindease/app/modules/meditation/wishlist/controllers/wishlist_controller.dart';
+import '../../../../../routes/app_pages.dart';
+import '../../../controllers/meditation_controller.dart';
 import '../components/music_card.dart';
 
-class MusicTab extends GetView<MeditationController> {
-  const MusicTab({super.key});
+class MusicWidget extends GetView<WishlistController> {
+  const MusicWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final meditasiC = Get.find<MeditationController>();
     return Obx(
       () {
-        return Skeletonizer(
-          enabled: controller.isLoading.value,
-          child: Container(
+        if (meditasiC.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else if (meditasiC.errorMessage.isNotEmpty) {
+          return Center(child: Text('Error: ${meditasiC.errorMessage}'));
+        } else {
+          final likedMusics = controller.likedmusics;
+
+          if (likedMusics.isEmpty) {
+            return Center(child: Text('No liked musics found.'));
+          }
+
+          return Container(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: ListView.builder(
-              itemCount: controller.musics.length,
+              itemCount: likedMusics.length,
               itemBuilder: (context, index) {
-                final musics = controller.musics[index];
+                final musics = likedMusics[index];
                 return MusicCard(
                   image: musics.imageUrl,
                   title: musics.title,
                   artist: musics.singer,
                   isLiked: musics.isLiked,
-                  isLoading: controller.isLoading.value,
                   onLikeTap: () {
+                    print(musics.id);
                     controller.toggleLikeStatus(index);
                   },
                   onTap: () {
@@ -42,8 +52,8 @@ class MusicTab extends GetView<MeditationController> {
                 );
               },
             ),
-          ),
-        );
+          );
+        }
       },
     );
   }

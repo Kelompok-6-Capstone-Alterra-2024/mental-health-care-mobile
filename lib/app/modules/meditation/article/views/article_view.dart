@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../../constant/constant.dart';
+import '../../controllers/meditation_controller.dart';
 import '../controllers/article_controller.dart';
 
 class ArticleView extends GetView<ArticleController> {
@@ -11,6 +12,7 @@ class ArticleView extends GetView<ArticleController> {
 
   @override
   Widget build(BuildContext context) {
+    final meditasiC = Get.put(MeditationController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -22,6 +24,7 @@ class ArticleView extends GetView<ArticleController> {
             minWidth: 50,
           ),
           onPressed: () {
+            meditasiC.fetchArticles();
             Get.back();
           },
           padding: const EdgeInsets.only(
@@ -84,7 +87,7 @@ class ArticleView extends GetView<ArticleController> {
                         ],
                       ),
                     ),
-                    const Gap(8), // Adjust gap between text and icon if needed
+                    const Gap(8),
                     GestureDetector(
                       onTap: () {
                         controller.toggleLikeStatus();

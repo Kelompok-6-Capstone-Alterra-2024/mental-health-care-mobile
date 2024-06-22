@@ -4,13 +4,15 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../../constant/constant.dart';
-import '../../views/TabBarViews/story.dart';
+import '../../controllers/meditation_controller.dart';
 import '../controllers/story_controller.dart';
+import 'widget/widget_detail_story.dart';
 
 class StoryView extends GetView<StoryController> {
-  const StoryView({Key? key}) : super(key: key);
+  const StoryView({super.key});
   @override
   Widget build(BuildContext context) {
+    final meditasiC = Get.put(MeditationController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -22,6 +24,7 @@ class StoryView extends GetView<StoryController> {
             minWidth: 50,
           ),
           onPressed: () {
+            meditasiC.fetchStorys();
             Get.back();
           },
           padding: const EdgeInsets.only(
@@ -31,7 +34,7 @@ class StoryView extends GetView<StoryController> {
           highlightColor: Neutral.transparent,
         ),
         title: Text(
-          'Story Meditation',
+          'Cerita Inspiratif',
           style: medium.copyWith(fontSize: 16, color: Primary.darker),
         ),
         centerTitle: true,
@@ -79,7 +82,7 @@ class StoryView extends GetView<StoryController> {
                                 ),
                               ),
                             ),
-                            Gap(16),
+                            const Gap(16),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -101,7 +104,7 @@ class StoryView extends GetView<StoryController> {
                                               color: Neutral.dark1,
                                             ),
                                           ),
-                                          Gap(8),
+                                          const Gap(8),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -125,7 +128,7 @@ class StoryView extends GetView<StoryController> {
                                         ],
                                       ),
                                     ),
-                                    Gap(20),
+                                    const Gap(20),
                                     GestureDetector(
                                       onTap: () {
                                         controller.toggleLikeStatus();
@@ -139,7 +142,7 @@ class StoryView extends GetView<StoryController> {
                                     ),
                                   ],
                                 ),
-                                Gap(16),
+                                const Gap(16),
                                 Text(
                                   controller.content.value,
                                   textAlign: TextAlign.justify,
@@ -154,7 +157,7 @@ class StoryView extends GetView<StoryController> {
                           ],
                         ),
                       ),
-                      Gap(32),
+                      const Gap(32),
                       Text(
                         'Temukan Cerita Inspirasi lainnya',
                         style: semiBold.copyWith(
@@ -162,15 +165,15 @@ class StoryView extends GetView<StoryController> {
                           color: Primary.darker,
                         ),
                       ),
-                      Gap(16),
+                      const Gap(16),
                     ],
                   ),
                 ),
                 ConstrainedBox(
                   constraints: const BoxConstraints(
-                    maxHeight: 400, // Set a max height for the list view
+                    maxHeight: 400,
                   ),
-                  child: StoryTab(),
+                  child: const WidgetDetailStory(),
                 ),
               ],
             ),
