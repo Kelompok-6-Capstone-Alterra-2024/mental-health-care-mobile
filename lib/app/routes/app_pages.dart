@@ -36,11 +36,13 @@ import '../modules/home/views/home_view.dart';
 import '../modules/meditation/article/bindings/article_binding.dart';
 import '../modules/meditation/article/views/article_view.dart';
 import '../modules/meditation/bindings/meditation_binding.dart';
+import '../modules/meditation/music/bindings/music_binding.dart';
 import '../modules/meditation/music/views/music_view.dart';
 import '../modules/meditation/story/bindings/story_binding.dart';
 import '../modules/meditation/story/views/story_view.dart';
 import '../modules/meditation/views/meditation_view.dart';
-import '../modules/meditation/views/wishlist_view.dart';
+import '../modules/meditation/wishlist/bindings/wishlist_binding.dart';
+import '../modules/meditation/wishlist/views/wishlist_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
 import '../modules/navigation/views/navigation_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
@@ -173,7 +175,7 @@ class AppPages {
         GetPage(
           name: _Paths.MUSIC,
           page: () => const MusicView(),
-          binding: MeditationBinding(),
+          binding: MusicBinding(),
         ),
         GetPage(
           name: _Paths.ARTICLE,
@@ -185,12 +187,12 @@ class AppPages {
           page: () => const StoryView(),
           binding: StoryBinding(),
         ),
+        GetPage(
+          name: _Paths.WISHLIST,
+          page: () => const WishlistView(),
+          binding: WishlistBinding(),
+        ),
       ],
-    ),
-    GetPage(
-      name: _Paths.WISHLIST,
-      page: () => const WishlistView(),
-      binding: MeditationBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE,

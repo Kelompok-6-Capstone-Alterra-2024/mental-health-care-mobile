@@ -66,44 +66,41 @@ class MeditationView extends GetView<MeditationController> {
             ),
           ),
           const Gap(26),
-          Container(
-            padding: const EdgeInsets.only(left: 25),
-            child: Obx(
-              () => TabBar(
-                controller: controller.tabController,
-                labelColor: Primary.mainColor,
-                labelPadding: const EdgeInsets.only(right: 32),
-                unselectedLabelColor: Neutral.dark2,
-                dividerColor: Neutral.transparent,
-                tabAlignment: TabAlignment.start,
-                overlayColor: MaterialStateProperty.all(Neutral.transparent),
-                isScrollable: true,
-                indicatorColor: Primary.mainColor,
-                onTap: (index) {
-                  controller.tabController.animateTo(index);
-                },
-                tabs: List.generate(
-                  controller.tabs.length,
-                  (index) => Tab(
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          controller.getTabIcon(index),
-                          width: 24,
-                          height: 24,
-                          color: controller.currentTab.value == index
-                              ? Primary.mainColor
-                              : Neutral.dark2,
+          Obx(
+            () => TabBar(
+              controller: controller.tabController,
+              labelColor: Primary.mainColor,
+              labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+              unselectedLabelColor: Neutral.dark2,
+              dividerColor: Neutral.transparent,
+              tabAlignment: TabAlignment.center,
+              overlayColor: MaterialStateProperty.all(Neutral.transparent),
+              // isScrollable: true,
+              indicatorColor: Primary.mainColor,
+              onTap: (index) {
+                controller.tabController.animateTo(index);
+              },
+              tabs: List.generate(
+                controller.tabs.length,
+                (index) => Tab(
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        controller.getTabIcon(index),
+                        width: 24,
+                        height: 24,
+                        color: controller.currentTab.value == index
+                            ? Primary.mainColor
+                            : Neutral.dark2,
+                      ),
+                      const Gap(10),
+                      Text(
+                        '${controller.tabs[index]}',
+                        style: medium.copyWith(
+                          fontSize: 16,
                         ),
-                        const Gap(10),
-                        Text(
-                          '${controller.tabs[index]}',
-                          style: medium.copyWith(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

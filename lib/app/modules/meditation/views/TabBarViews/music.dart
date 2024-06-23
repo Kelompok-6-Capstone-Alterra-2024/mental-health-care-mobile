@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../routes/app_pages.dart';
 import '../../controllers/meditation_controller.dart';
 import '../components/music_card.dart';
@@ -13,12 +12,9 @@ class MusicTab extends GetView<MeditationController> {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
-        } else if (controller.errorMessage.isNotEmpty) {
-          return Center(child: Text('Error: ${controller.errorMessage}'));
-        } else {
-          return Container(
+        return Skeletonizer(
+          enabled: controller.isLoading.value,
+          child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: ListView.builder(
               itemCount: controller.musics.length,
@@ -28,16 +24,26 @@ class MusicTab extends GetView<MeditationController> {
                   image: musics.imageUrl,
                   title: musics.title,
                   artist: musics.singer,
+                  isLiked: musics.isLiked,
+                  isLoading: controller.isLoading.value,
+                  onLikeTap: () {
+                    controller.toggleLikeStatus(index);
+                  },
                   onTap: () {
-                    Get.toNamed(Routes.MUSIC,
-                        arguments: {'musicID': musics.id});
-                    print('Music ID: ${musics.id}');
+                    Get.toNamed(Routes.MUSIC, arguments: {
+                      'musicID': musics.id,
+                      'url': musics.musicUrl,
+                      'image': musics.imageUrl,
+                      'title': musics.title,
+                      'singer': musics.singer,
+                      'isLiked': musics.isLiked,
+                    });
                   },
                 );
               },
             ),
-          );
-        }
+          ),
+        );
       },
     );
   }

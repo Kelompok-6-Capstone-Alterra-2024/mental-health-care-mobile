@@ -8,10 +8,12 @@ import '../../../../../../constant/constant.dart';
 class NoteItem extends StatelessWidget {
   final String date;
   final String time;
+  final Function()? onTap;
   const NoteItem({
     super.key,
     required this.date,
     required this.time,
+    this.onTap,
   });
 
   @override
@@ -76,9 +78,7 @@ class NoteItem extends StatelessWidget {
                       },
                     ),
                   ),
-                  onPressed: () {
-                    Get.toNamed(Routes.DETAILNOTE);
-                  },
+                  onPressed: onTap,
                   child: Text(
                     'Lihat Detail >',
                     style: semiBold.copyWith(

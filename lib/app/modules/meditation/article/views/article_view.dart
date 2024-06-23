@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../../constant/constant.dart';
+import '../../controllers/meditation_controller.dart';
 import '../controllers/article_controller.dart';
 
 class ArticleView extends GetView<ArticleController> {
@@ -11,6 +12,7 @@ class ArticleView extends GetView<ArticleController> {
 
   @override
   Widget build(BuildContext context) {
+    final meditasiC = Get.put(MeditationController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -22,6 +24,7 @@ class ArticleView extends GetView<ArticleController> {
             minWidth: 50,
           ),
           onPressed: () {
+            meditasiC.fetchArticles();
             Get.back();
           },
           padding: const EdgeInsets.only(
@@ -31,7 +34,7 @@ class ArticleView extends GetView<ArticleController> {
           highlightColor: Neutral.transparent,
         ),
         title: Text(
-          'Article View',
+          'Artikel Meditasi',
           style: medium.copyWith(fontSize: 16, color: Primary.darker),
         ),
         centerTitle: true,
@@ -42,9 +45,6 @@ class ArticleView extends GetView<ArticleController> {
           vertical: 32,
         ),
         child: Obx(() {
-          if (controller.articleTitle.isEmpty) {
-            return Center(child: CircularProgressIndicator());
-          }
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,47 +55,57 @@ class ArticleView extends GetView<ArticleController> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                      image: NetworkImage(controller.image.value),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 const Gap(16),
-                Text(
-                  controller.articleTitle.value,
-                  style: semiBold.copyWith(
-                    fontSize: 16,
-                    color: Neutral.dark1,
-                  ),
-                ),
-                const Gap(8),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      controller.articleCreatedAt.value,
-                      style: regular.copyWith(
-                        fontSize: 12,
-                        color: Primary.mainColor,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.title.value,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: semiBold.copyWith(
+                              fontSize: 16,
+                              color: Neutral.dark1,
+                            ),
+                          ),
+                          Text(
+                            controller.date.value,
+                            style: regular.copyWith(
+                              fontSize: 12,
+                              color: Primary.mainColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    const Gap(8),
                     GestureDetector(
                       onTap: () {
-                        controller.isLiked.value = !controller.isLiked.value;
+                        controller.toggleLikeStatus();
                       },
                       child: SvgPicture.asset(
                         controller.isLiked.value
-                            ? 'assets/icons/Heart_filled.svg'
+                            ? 'assets/icons/Union.svg'
                             : 'assets/icons/Heart.svg',
-                        width: 18,
+                        width: 24,
                       ),
                     ),
                   ],
                 ),
                 const Gap(16),
                 Text(
-                  controller.articleContent.value,
+                  controller.content.value,
+                  textAlign: TextAlign.justify,
+                  textDirection: TextDirection.ltr,
                   style: regular.copyWith(
                     fontSize: 12,
                     color: Neutral.dark1,

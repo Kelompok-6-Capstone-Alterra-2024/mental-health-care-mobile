@@ -129,9 +129,52 @@ class ProfileView extends GetView<ProfileController> {
                 thickness: 1,
                 color: Neutral.dark4,
               ),
-              const Gap(24),
-            ],
-          ),
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/UserCircle.svg',
+              title: 'Pengaturan dan Privasi',
+              onTap: () {
+                Get.toNamed(Routes.SETTING);
+              },
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/PaymentCard.svg',
+              title: 'Transaksi',
+              onTap: () {
+                Get.toNamed(Routes.TRANSACTION);
+              },
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/DollarCoin.svg',
+              title: 'Poin',
+              onTap: () {
+                Get.toNamed(Routes.POIN);
+              },
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/Email.svg',
+              title: 'Ubah Email',
+              onTap: () {
+                Get.toNamed(Routes.CHANGE_EMAIL);
+              },
+            ),
+            const Divider(
+              thickness: 1,
+              color: Neutral.dark4,
+            ),
+            CustomSettingCard(
+              icon: 'assets/icons/Help.svg',
+              title: 'Pusat Bantuan',
+              onTap: () {
+                print('Hapus Token : ${GetStorage().erase()}');
+              },
+            ),
+            const Divider(
+              thickness: 1,
+              color: Neutral.dark4,
+            ),
+            const Gap(24),
+          ],
         ),
       ),
     );

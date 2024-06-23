@@ -3,8 +3,10 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/utils/global_components/main_button.dart';
+import 'package:mindease/utils/global_components/main_button_without_padding.dart';
 
 import '../../controllers/consultation_controller.dart';
 import '../../../../../constant/constant.dart';
@@ -17,16 +19,17 @@ class PaymentView extends GetView<ConsultationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/Chevron.svg',
-              width: 26,
-            ),
-            onPressed: () {
-              Get.back();
-            },
+          icon: SvgPicture.asset(
+            'assets/icons/Chevron.svg',
+            width: 26,
           ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         title: Text(
           'Detail Pembayaran',
           style: medium.copyWith(fontSize: 16, color: Primary.mainColor),
@@ -51,9 +54,15 @@ class PaymentView extends GetView<ConsultationController> {
                 ),
                 Container(
                   height: 356,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/photo1.png'),
+                      image: NetworkImage(
+                        controller.imageDoctor.value == 'http://gambar.com' ||
+                                controller.imageDoctor.value ==
+                                    'ini link fotonya'
+                            ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                            : controller.imageDoctor.value,
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -80,12 +89,12 @@ class PaymentView extends GetView<ConsultationController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Dr. Andy Sp.KJ',
+                                controller.nameDoctor.value,
                                 style: semiBold.copyWith(
                                     fontSize: 18, color: Neutral.dark1),
                               ),
                               Text(
-                                'Sp. Jiwa',
+                                controller.specialistDoctor.value,
                                 style: regular.copyWith(
                                     fontSize: 16, color: Neutral.dark2),
                               ),
@@ -133,8 +142,12 @@ class PaymentView extends GetView<ConsultationController> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    'Rp. 150.000',
-                                    style: bold.copyWith(
+                                    NumberFormat.currency(
+                                            locale: 'id_ID',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0)
+                                        .format(controller.feeDoctor.value),
+                                    style: semiBold.copyWith(
                                         fontSize: 16, color: Primary.mainColor),
                                   ),
                                   const SizedBox(height: 8),
@@ -145,8 +158,12 @@ class PaymentView extends GetView<ConsultationController> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    'Rp. 152.000',
-                                    style: bold.copyWith(
+                                    NumberFormat.currency(
+                                            locale: 'id_ID',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0)
+                                        .format(controller.totalFee),
+                                    style: semiBold.copyWith(
                                         fontSize: 16, color: Primary.mainColor),
                                   ),
                                 ],
@@ -247,9 +264,11 @@ class PaymentView extends GetView<ConsultationController> {
                             ),
                           ),
                           const SizedBox(height: 60),
-                          MainButton(
+                          MainButtonWithoutPadding(
                             label: 'Buat Jadwal',
-                            onTap: () => Get.toNamed(Routes.PAYMENTPROCESSED),
+                            onTap: () {
+                              controller.createPayment();
+                            },
                           ),
                         ],
                       ),

@@ -50,7 +50,8 @@ class ArticleCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                       image: DecorationImage(
                         image: NetworkImage(
-                            "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                          image,
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -75,7 +76,7 @@ class ArticleCard extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  time,
+                                  (time),
                                   style: regular.copyWith(
                                     fontSize: 10,
                                     color: Neutral.dark3,

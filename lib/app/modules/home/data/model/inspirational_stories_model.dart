@@ -1,61 +1,68 @@
+// To parse this JSON data, do
+//
+//     final allStories = allStoriesFromJson(jsonString);
+
 import 'dart:convert';
 
-Story storyFromJson(String str) => Story.fromJson(json.decode(str));
+AllStories allStoriesFromJson(String str) =>
+    AllStories.fromJson(json.decode(str));
 
-String storyToJson(Story data) => json.encode(data.toJson());
+String allStoriesToJson(AllStories data) => json.encode(data.toJson());
 
-class Story {
+class AllStories {
   bool status;
   String message;
-  Data data;
+  Metadata metadata;
+  List<DataStory> data;
 
-  Story({
+  AllStories({
     required this.status,
     required this.message,
+    required this.metadata,
     required this.data,
   });
 
-  factory Story.fromJson(Map<String, dynamic> json) => Story(
+  factory AllStories.fromJson(Map<String, dynamic> json) => AllStories(
         status: json["status"],
         message: json["message"],
-        data: Data.fromJson(json["data"]),
+        metadata: Metadata.fromJson(json["metadata"]),
+        data: List<DataStory>.from(
+            json["data"].map((x) => DataStory.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "data": data.toJson(),
+        "metadata": metadata.toJson(),
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 }
 
-class Data {
+class DataStory {
   int id;
   String title;
   String content;
   DateTime date;
   String imageUrl;
-  int viewCount;
   bool isLiked;
   Doctor doctor;
 
-  Data({
+  DataStory({
     required this.id,
     required this.title,
     required this.content,
     required this.date,
     required this.imageUrl,
-    required this.viewCount,
     required this.isLiked,
     required this.doctor,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory DataStory.fromJson(Map<String, dynamic> json) => DataStory(
         id: json["id"],
         title: json["title"],
         content: json["content"],
         date: DateTime.parse(json["date"]),
         imageUrl: json["image_url"],
-        viewCount: json["view_count"],
         isLiked: json["is_liked"],
         doctor: Doctor.fromJson(json["doctor"]),
       );
@@ -66,7 +73,6 @@ class Data {
         "content": content,
         "date": date.toIso8601String(),
         "image_url": imageUrl,
-        "view_count": viewCount,
         "is_liked": isLiked,
         "doctor": doctor.toJson(),
       };
@@ -89,5 +95,25 @@ class Doctor {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+      };
+}
+
+class Metadata {
+  int page;
+  int limit;
+
+  Metadata({
+    required this.page,
+    required this.limit,
+  });
+
+  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
+        page: json["page"],
+        limit: json["limit"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "page": page,
+        "limit": limit,
       };
 }

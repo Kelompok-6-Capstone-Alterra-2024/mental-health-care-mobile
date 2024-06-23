@@ -8,14 +8,18 @@ class MusicCard extends StatelessWidget {
   final String image;
   final String title;
   final String artist;
-  final Function()? like;
+  final bool isLiked;
+  final bool isLoading;
+  final Function()? onLikeTap;
   final Function()? onTap;
   const MusicCard({
     super.key,
     required this.image,
     required this.title,
     required this.artist,
-    this.like,
+    required this.isLiked,
+    this.isLoading = false,
+    this.onLikeTap,
     this.onTap,
   });
 
@@ -49,13 +53,12 @@ class MusicCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                      image: NetworkImage(image),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                Gap(20),
+                const Gap(20),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +71,7 @@ class MusicCard extends StatelessWidget {
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Gap(8),
+                      const Gap(8),
                       Text(
                         artist,
                         style: regular.copyWith(
@@ -81,16 +84,19 @@ class MusicCard extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    //
-                  },
-                  child: IconButton(
-                    icon: SvgPicture.asset(
-                      'assets/icons/Heart.svg',
-                      width: 20,
-                    ),
-                    onPressed: like,
-                  ),
+                  onTap: onLikeTap,
+                  child: isLoading
+                      ? Container(
+                          width: 20,
+                          height: 20,
+                          color: Colors.grey.shade300,
+                        )
+                      : SvgPicture.asset(
+                          isLiked
+                              ? 'assets/icons/Union.svg'
+                              : 'assets/icons/Heart.svg',
+                          width: 20,
+                        ),
                 ),
               ],
             ),

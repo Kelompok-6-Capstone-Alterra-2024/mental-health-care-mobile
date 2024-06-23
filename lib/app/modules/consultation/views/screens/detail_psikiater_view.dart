@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:mindease/app/routes/app_pages.dart';
 import 'package:mindease/utils/global_components/main_button_without_padding.dart';
 
@@ -10,8 +11,7 @@ import '../../../../../constant/constant.dart';
 import '../components/doctor_specs.dart';
 
 class DetailPsikiaterView extends GetView<ConsultationController> {
-  DetailPsikiaterView({Key? key}) : super(key: key);
-  final ChipController chipController = Get.put(ChipController());
+  const DetailPsikiaterView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +45,9 @@ class DetailPsikiaterView extends GetView<ConsultationController> {
               children: [
                 Container(
                   height: 356,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/photo1.png'),
+                      image: NetworkImage(controller.imageDoctor.value),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -73,30 +73,85 @@ class DetailPsikiaterView extends GetView<ConsultationController> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Dr. Andy Sp.KJ',
-                                style: semiBold.copyWith(
-                                    fontSize: 18, color: Neutral.dark1),
+                              Obx(
+                                () => Text(
+                                  controller.nameDoctor.value,
+                                  style: semiBold.copyWith(
+                                      fontSize: 18, color: Neutral.dark1),
+                                ),
                               ),
-                              Text(
-                                'Sp. Jiwa',
-                                style: regular.copyWith(
-                                    fontSize: 16, color: Neutral.dark2),
+                              Obx(
+                                () => Text(
+                                  controller.specialistDoctor.value,
+                                  style: regular.copyWith(
+                                      fontSize: 16, color: Neutral.dark2),
+                                ),
                               ),
                               Divider(),
                             ],
                           ),
                           const Gap(16),
-                          const DoctorSpecs(
-                            expericence: '5 Tahun',
-                            rating: '90%',
-                            cost: 'Rp 200.000',
-                            university: 'Universitas Nusantara 1945',
-                            location: 'Klinik Jiwa Sehat',
+                          DoctorSpecs(
+                            expericence: controller.experienceDoctor.value,
+                            rating: controller.rateDoctor.value,
+                            cost: controller.feeDoctor.value,
+                            university: controller.educationDoctor.value,
+                            location: controller.locationDoctor.value,
                           ),
                           const Gap(16),
                           Text(
                             'Tanggal',
+                            style: semiBold.copyWith(
+                                fontSize: 16, color: Primary.mainColor),
+                          ),
+                          Gap(8),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 40,
+                            child: GetBuilder<ConsultationController>(
+                                id: 'date',
+                                builder: (context) {
+                                  return ListView.builder(
+                                    itemCount: 7,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      final day = controller.daysInWeek[index];
+                                      return GestureDetector(
+                                        onTap: () {
+                                          controller.selectDate(day);
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          margin: EdgeInsets.only(right: 8),
+                                          width: 90,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color:
+                                                controller.selectedDate == day
+                                                    ? Primary.mainColor
+                                                    : Neutral.light1,
+                                          ),
+                                          child: Text(
+                                            DateFormat('E dd').format(day),
+                                            style: semiBold.copyWith(
+                                                fontSize: 16,
+                                                color:
+                                                    controller.selectedDate ==
+                                                            day
+                                                        ? Neutral.light4
+                                                        : Neutral.dark4),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }),
+                          ),
+                          const Gap(8),
+                          Text(
+                            'Waktu',
                             style: semiBold.copyWith(
                                 fontSize: 16, color: Primary.mainColor),
                           ),
@@ -105,55 +160,8 @@ class DetailPsikiaterView extends GetView<ConsultationController> {
                             height: 60,
                             child: Obx(
                               () {
-                                int selectedDate =
-                                    chipController.selectedChipDate.value;
-                                return ListView.builder(
-                                  itemCount: 6,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: GestureDetector(
-                                        onTap: () => chipController
-                                            .selectChipDate(index),
-                                        child: Chip(
-                                          label: Text(
-                                            'Sen 12',
-                                            style: semiBold.copyWith(
-                                                fontSize: 16,
-                                                color: selectedDate == index
-                                                    ? Neutral.light4
-                                                    : Neutral.dark4),
-                                          ),
-                                          backgroundColor: selectedDate == index
-                                              ? Primary.mainColor
-                                              : Neutral.light1,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                            side: const BorderSide(
-                                                color: Colors.transparent),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                          Text(
-                            'Waktu',
-                            style: semiBold.copyWith(
-                                fontSize: 16, color: Primary.mainColor),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 60,
-                            child: Obx(
-                              () {
                                 int selectedTime =
-                                    chipController.selectedChipTime.value;
+                                    controller.selectedChipTime.value;
                                 return ListView.builder(
                                   itemCount: 6,
                                   scrollDirection: Axis.horizontal,
@@ -161,11 +169,11 @@ class DetailPsikiaterView extends GetView<ConsultationController> {
                                     return Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: GestureDetector(
-                                        onTap: () => chipController
-                                            .selectChipTime(index),
+                                        onTap: () =>
+                                            controller.selectChipTime(index),
                                         child: Chip(
                                           label: Text(
-                                            '14:00',
+                                            '${index + 12}:00',
                                             style: semiBold.copyWith(
                                                 fontSize: 16,
                                                 color: selectedTime == index
@@ -193,7 +201,12 @@ class DetailPsikiaterView extends GetView<ConsultationController> {
                           MainButtonWithoutPadding(
                             label: 'Buat Jadwal',
                             onTap: () {
-                              Get.toNamed(Routes.FORMCONSULTATION);
+                              controller.createSchedule(
+                                controller.idDoctor.value,
+                                DateFormat('yyyy-MM-dd')
+                                    .format(controller.selectedDate),
+                                '${controller.selectedChipTime.value + 12}:00',
+                              );
                             },
                           ),
                         ],

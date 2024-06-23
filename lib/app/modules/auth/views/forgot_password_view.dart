@@ -59,7 +59,7 @@ class ForgotPasswordView extends GetView<AuthController> {
                 child: InputField(
                   title: 'Ketikkan Email',
                   validator: (email) => controller.validateEmail(email),
-                  onChanged: controller.setEmail,
+                  onChanged: controller.setEmailR,
                 ),
               ),
               const Gap(32),

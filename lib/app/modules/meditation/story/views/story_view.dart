@@ -4,13 +4,15 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../../constant/constant.dart';
-import '../../views/TabBarViews/story.dart';
+import '../../controllers/meditation_controller.dart';
 import '../controllers/story_controller.dart';
+import 'widget/widget_detail_story.dart';
 
 class StoryView extends GetView<StoryController> {
-  const StoryView({Key? key}) : super(key: key);
+  const StoryView({super.key});
   @override
   Widget build(BuildContext context) {
+    final meditasiC = Get.put(MeditationController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -22,6 +24,7 @@ class StoryView extends GetView<StoryController> {
             minWidth: 50,
           ),
           onPressed: () {
+            meditasiC.fetchStorys();
             Get.back();
           },
           padding: const EdgeInsets.only(
@@ -31,16 +34,13 @@ class StoryView extends GetView<StoryController> {
           highlightColor: Neutral.transparent,
         ),
         title: Text(
-          'Story Meditation',
+          'Cerita Inspiratif',
           style: medium.copyWith(fontSize: 16, color: Primary.darker),
         ),
         centerTitle: true,
       ),
       body: Obx(
         () {
-          if (controller.storyTitle.isEmpty) {
-            return Center(child: CircularProgressIndicator());
-          }
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -76,66 +76,77 @@ class StoryView extends GetView<StoryController> {
                               width: 347,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                image: const DecorationImage(
-                                  image: NetworkImage(
-                                      "https://cdn-2.tstatic.net/bali/foto/bank/images/ilustrasi-meditasi.jpg"),
+                                image: DecorationImage(
+                                  image: NetworkImage(controller.image.value),
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                            Gap(16),
+                            const Gap(16),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  controller.storyTitle.value,
-                                  textAlign: TextAlign.left,
-                                  style: semiBold.copyWith(
-                                    fontSize: 16,
-                                    color: Neutral.dark1,
-                                  ),
-                                ),
-                                Gap(8),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'By: ${controller.doctor.value}',
-                                          style: regular.copyWith(
-                                            fontSize: 12,
-                                            color: Primary.mainColor,
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            controller.title.value,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: semiBold.copyWith(
+                                              fontSize: 16,
+                                              color: Neutral.dark1,
+                                            ),
                                           ),
-                                        ),
-                                        Gap(10),
-                                        Text(
-                                          controller.storyCreatedAt.value,
-                                          style: regular.copyWith(
-                                            fontSize: 12,
-                                            color: Primary.mainColor,
+                                          const Gap(8),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'By: ${controller.author.value}',
+                                                style: regular.copyWith(
+                                                  fontSize: 12,
+                                                  color: Primary.mainColor,
+                                                ),
+                                              ),
+                                              Text(
+                                                controller.date.value,
+                                                style: regular.copyWith(
+                                                  fontSize: 12,
+                                                  color: Primary.mainColor,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
+                                    const Gap(20),
                                     GestureDetector(
                                       onTap: () {
-                                        controller.isLiked.value =
-                                            !controller.isLiked.value;
+                                        controller.toggleLikeStatus();
                                       },
                                       child: SvgPicture.asset(
                                         controller.isLiked.value
-                                            ? 'assets/icons/Heart_filled.svg'
+                                            ? 'assets/icons/Union.svg'
                                             : 'assets/icons/Heart.svg',
-                                        width: 18,
+                                        width: 24,
                                       ),
                                     ),
                                   ],
                                 ),
-                                Gap(16),
+                                const Gap(16),
                                 Text(
-                                  controller.storyContent.value,
+                                  controller.content.value,
+                                  textAlign: TextAlign.justify,
+                                  textDirection: TextDirection.ltr,
                                   style: regular.copyWith(
                                     fontSize: 15,
                                     color: Neutral.dark1,
@@ -146,7 +157,7 @@ class StoryView extends GetView<StoryController> {
                           ],
                         ),
                       ),
-                      Gap(32),
+                      const Gap(32),
                       Text(
                         'Temukan Cerita Inspirasi lainnya',
                         style: semiBold.copyWith(
@@ -154,15 +165,15 @@ class StoryView extends GetView<StoryController> {
                           color: Primary.darker,
                         ),
                       ),
-                      Gap(16),
+                      const Gap(16),
                     ],
                   ),
                 ),
                 ConstrainedBox(
                   constraints: const BoxConstraints(
-                    maxHeight: 400, // Set a max height for the list view
+                    maxHeight: 400,
                   ),
-                  child: StoryTab(),
+                  child: const WidgetDetailStory(),
                 ),
               ],
             ),
