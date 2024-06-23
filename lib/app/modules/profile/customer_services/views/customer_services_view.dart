@@ -37,7 +37,7 @@ class CustomerServicesView extends GetView<CustomerServicesController> {
               },
               icon: Icon(
                 Icons.delete,
-                color: Error.mainColor,
+                color: Neutral.dark1,
               ))
         ],
       ),

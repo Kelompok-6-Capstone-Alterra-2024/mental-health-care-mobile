@@ -29,9 +29,14 @@ class AiChatView extends GetView<AiChatController> {
         ),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {
-            controller.clearMessages();
-          }, icon: Icon(Icons.delete, color: Error.mainColor,))
+          IconButton(
+              onPressed: () {
+                controller.clearMessages();
+              },
+              icon: Icon(
+                Icons.delete,
+                color: Neutral.dark1,
+              ))
         ],
       ),
       body: Column(
@@ -79,19 +84,18 @@ class AiChatView extends GetView<AiChatController> {
                     child: Container(
                       constraints: BoxConstraints(maxWidth: Get.width * 0.8),
                       padding: const EdgeInsets.all(8.0),
-                      margin: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
+                      margin: const EdgeInsets.only(
+                          bottom: 16, left: 24, right: 24),
                       decoration: BoxDecoration(
-                        color: message.isMine
-                            ? Primary.mainColor
-                            : Neutral.light3,
+                        color:
+                            message.isMine ? Primary.mainColor : Neutral.light3,
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Text(
                         message.text,
                         style: regular.copyWith(
-                            color: message.isMine
-                                ? Neutral.light1
-                                : Neutral.dark1,
+                            color:
+                                message.isMine ? Neutral.light1 : Neutral.dark1,
                             fontSize: 12),
                       ),
                     ),
@@ -138,7 +142,8 @@ class AiChatView extends GetView<AiChatController> {
                       'assets/icons/Send1.svg',
                       width: 24,
                     ),
-                  ),)
+                  ),
+                )
               ],
             ),
           ),

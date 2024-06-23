@@ -95,7 +95,17 @@ class ChatwithdoctorController extends GetxController
           Get.toNamed(Routes.CHATWITHDOCTOR);
         };
       case 'process':
-        return () {};
+        return () {
+          Get.toNamed(
+            Routes.CHATWITHDOCTOR,
+          );
+          changeStatusChat('completed');
+          setIdRoomChat(roomChatId!);
+          loadMessages(roomChatId); //get message chat from doctor
+          // startPolling(roomChatId); //start polling message chat
+          setEndTime(endTime!); //set end time chat for consultation note
+          print(roomChatId);
+        };
       case 'completed':
         //jadi jika statusnya completed dan isRejected false maka akan diarahkan ke chat with doctor
         //dan status chat akan diubah menjadi completed yang berfunsinya untuk menampilkan catatan konsultasi

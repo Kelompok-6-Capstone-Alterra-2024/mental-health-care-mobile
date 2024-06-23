@@ -81,7 +81,7 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
                 : const SizedBox(),
           ),
           Obx(() {
-            if (controller.statusChat.value == 'completed') {
+            if (controller.statusChat.value == 'complete') {
               return const SizedBox();
             } else {
               return Container(

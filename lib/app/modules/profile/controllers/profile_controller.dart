@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mindease/app/modules/profile/mixins/change_password_mixin.dart';
@@ -23,6 +26,9 @@ class ProfileController extends GetxController with ChangePasswordMixin {
       )).obs;
 
   var isLoading = true.obs;
+
+  Rx<File?> filepath = Rx<File?>(null);
+  RxString fileName = 'Tambahkan Foto'.obs;
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -50,16 +56,29 @@ class ProfileController extends GetxController with ChangePasswordMixin {
     }
   }
 
+  void pickFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'jpeg', 'png'],
+    );
+    if (result != null) {
+      filepath.value = File(result.files.single.path!);
+      fileName.value = result.files.first.name;
+    }
+  }
+
   Future<void> updateProfile() async {
     print(usernameController.text);
     print(phoneNumberController.text);
     print(genderController.text);
     print(addressController.text);
+    print(filepath.value);
     await _profileService.postProfile(
-        usernameController.text,
-        phoneNumberController.text,
-        genderController.text,
-        addressController.text);
+        username: usernameController.text,
+        phoneNumber: phoneNumberController.text,
+        gender: genderController.text,
+        address: addressController.text,
+        file: filepath.value);
   }
 
   // void updateProfile(

@@ -2,12 +2,13 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:mindease/app/data/api/api.dart';
 
 class AuthService extends GetxService {
   static String? token;
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'https://dev-capstone.practiceproject.tech/v1',
+      baseUrl: BaseUrl,
       headers: {'Content-Type': 'application/json'},
     ),
   );
@@ -20,7 +21,7 @@ class AuthService extends GetxService {
   }) async {
     try {
       final response = await _dio.post(
-        '/users/login',
+        '/login',
         data: {
           "username": username,
           "password": password,
@@ -49,9 +50,12 @@ class AuthService extends GetxService {
     required String password,
     required String email,
   }) async {
+    print('ini username: $username');
+    print('ini password: $password');
+    print('ini email: $email');
     try {
       final response = await _dio.post(
-        '/users/register',
+        '$BaseUrl/register',
         data: {
           "username": username,
           "password": password,

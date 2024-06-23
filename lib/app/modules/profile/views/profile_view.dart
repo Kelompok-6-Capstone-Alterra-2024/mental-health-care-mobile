@@ -13,7 +13,6 @@ import 'components/custom_settings_card.dart';
 class ProfileView extends GetView<ProfileController> {
   ProfileView({Key? key}) : super(key: key);
 
-  final ProfileController profileController = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,18 +31,21 @@ class ProfileView extends GetView<ProfileController> {
                 child: Column(
                   children: [
                     const Gap(16),
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 50,
-                      backgroundImage:
-                          AssetImage('assets/images/dummy-profile.jpg'),
+                      backgroundImage: NetworkImage(controller
+                                  .profile.value.data.profilePicture ==
+                              ''
+                          ? 'https://static.miraheze.org/windowswallpaperwiki/0/00/User_%28Windows_10_2004%29.png'
+                          : controller.profile.value.data.profilePicture),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      profileController.profile.value.data.name,
+                      controller.profile.value.data.username,
                       style: semiBold.copyWith(fontSize: 24),
                     ),
                     Text(
-                      profileController.profile.value.data.email,
+                      controller.profile.value.data.email,
                       style:
                           regular.copyWith(fontSize: 16, color: Neutral.dark3),
                     ),
@@ -129,52 +131,9 @@ class ProfileView extends GetView<ProfileController> {
                 thickness: 1,
                 color: Neutral.dark4,
               ),
-            ),
-            CustomSettingCard(
-              icon: 'assets/icons/UserCircle.svg',
-              title: 'Pengaturan dan Privasi',
-              onTap: () {
-                Get.toNamed(Routes.SETTING);
-              },
-            ),
-            CustomSettingCard(
-              icon: 'assets/icons/PaymentCard.svg',
-              title: 'Transaksi',
-              onTap: () {
-                Get.toNamed(Routes.TRANSACTION);
-              },
-            ),
-            CustomSettingCard(
-              icon: 'assets/icons/DollarCoin.svg',
-              title: 'Poin',
-              onTap: () {
-                Get.toNamed(Routes.POIN);
-              },
-            ),
-            CustomSettingCard(
-              icon: 'assets/icons/Email.svg',
-              title: 'Ubah Email',
-              onTap: () {
-                Get.toNamed(Routes.CHANGE_EMAIL);
-              },
-            ),
-            const Divider(
-              thickness: 1,
-              color: Neutral.dark4,
-            ),
-            CustomSettingCard(
-              icon: 'assets/icons/Help.svg',
-              title: 'Pusat Bantuan',
-              onTap: () {
-                print('Hapus Token : ${GetStorage().erase()}');
-              },
-            ),
-            const Divider(
-              thickness: 1,
-              color: Neutral.dark4,
-            ),
-            const Gap(24),
-          ],
+              const Gap(24),
+            ],
+          ),
         ),
       ),
     );

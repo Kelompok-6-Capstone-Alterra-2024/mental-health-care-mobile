@@ -112,6 +112,7 @@ class ChangeEmailView extends GetView<EmailOTPController> {
                                           backgroundColor: Neutral.light4,
                                           surfaceTintColor: Neutral.transparent,
                                           child: Container(
+                                            width: double.infinity,
                                             padding: const EdgeInsets.all(19),
                                             decoration: BoxDecoration(
                                               borderRadius:
@@ -134,9 +135,12 @@ class ChangeEmailView extends GetView<EmailOTPController> {
                                                             .center,
                                                     children: [
                                                       Text(
-                                                        'Kode sudah dikirim ke',
+                                                        'Kode sudah dikirim ke email anda',
                                                         style: medium.copyWith(
                                                             fontSize: 16),
+                                                        maxLines: 1,
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
                                                       Text(
                                                         _email.text,
@@ -166,41 +170,29 @@ class ChangeEmailView extends GetView<EmailOTPController> {
                                                             verificationCode;
                                                       },
                                                     ),
-                                                    const Gap(20),
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          'Tidak menerima email?',
-                                                          style:
-                                                              regular.copyWith(
-                                                            fontSize: 14,
-                                                            color:
-                                                                Neutral.dark1,
-                                                          ),
+                                                    const Gap(10),
+                                                    Text(
+                                                      'Tidak menerima email?',
+                                                      style: regular.copyWith(
+                                                        fontSize: 14,
+                                                        color: Neutral.dark1,
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        emailOTPController
+                                                            .sendOtp(
+                                                                _email.text);
+                                                      },
+                                                      child: Text(
+                                                        'Kirim ulang',
+                                                        style:
+                                                            semiBold.copyWith(
+                                                          fontSize: 14,
+                                                          color:
+                                                              Primary.mainColor,
                                                         ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            emailOTPController
-                                                                .sendOtp(_email
-                                                                    .text);
-                                                          },
-                                                          child: Text(
-                                                            'Kirim ulang',
-                                                            style: semiBold
-                                                                .copyWith(
-                                                              fontSize: 14,
-                                                              color: Primary
-                                                                  .mainColor,
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
+                                                      ),
                                                     ),
                                                     const Gap(20),
                                                     Row(
@@ -221,21 +213,17 @@ class ChangeEmailView extends GetView<EmailOTPController> {
                                                                 Primary
                                                                     .mainColor,
                                                           ),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Text(
-                                                              'Batalkan',
-                                                              style: semiBold
-                                                                  .copyWith(
-                                                                fontSize: 16,
-                                                                color: Neutral
-                                                                    .light4,
-                                                              ),
+                                                          child: Text(
+                                                            'Batalkan',
+                                                            style: semiBold
+                                                                .copyWith(
+                                                              fontSize: 16,
+                                                              color: Neutral
+                                                                  .light4,
                                                             ),
                                                           ),
                                                         ),
+                                                        Gap(5),
                                                         ElevatedButton(
                                                           onPressed: () {
                                                             final email =
@@ -246,8 +234,10 @@ class ChangeEmailView extends GetView<EmailOTPController> {
                                                                 .changeEmail(
                                                                     email,
                                                                     code);
-                                                            Get.toNamed(
-                                                                Routes.PROFILE);
+                                                            Get.toNamed(Routes
+                                                                .NAVIGATION);
+                                                            profileController
+                                                                .fetchProfile();
                                                           },
                                                           style: ElevatedButton
                                                               .styleFrom(

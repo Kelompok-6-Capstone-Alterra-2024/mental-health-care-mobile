@@ -4,60 +4,61 @@
 
 import 'dart:convert';
 
-ProfileModel profileModelFromJson(String str) => ProfileModel.fromJson(json.decode(str));
+ProfileModel profileModelFromJson(String str) =>
+    ProfileModel.fromJson(json.decode(str));
 
 String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
-    bool status;
-    String message;
-    Data data;
+  bool status;
+  String message;
+  Data data;
 
-    ProfileModel({
-        required this.status,
-        required this.message,
-        required this.data,
-    });
+  ProfileModel({
+    required this.status,
+    required this.message,
+    required this.data,
+  });
 
-    factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
+  factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         status: json["status"],
         message: json["message"],
         data: Data.fromJson(json["data"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
         "data": data.toJson(),
-    };
+      };
 }
 
 class Data {
-    int id;
-    String email;
-    String name;
-    String username;
-    String address;
-    String bio;
-    String phoneNumber;
-    String gender;
-    int age;
-    String profilePicture;
+  int id;
+  String email;
+  String name;
+  String username;
+  String address;
+  String bio;
+  String phoneNumber;
+  String gender;
+  int age;
+  String profilePicture;
 
-    Data({
-        required this.id,
-        required this.email,
-        required this.name,
-        required this.username,
-        required this.address,
-        required this.bio,
-        required this.phoneNumber,
-        required this.gender,
-        required this.age,
-        required this.profilePicture,
-    });
+  Data({
+    required this.id,
+    required this.email,
+    required this.name,
+    required this.username,
+    required this.address,
+    required this.bio,
+    required this.phoneNumber,
+    required this.gender,
+    required this.age,
+    required this.profilePicture,
+  });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         email: json["email"],
         name: json["name"],
@@ -68,9 +69,9 @@ class Data {
         gender: json["gender"],
         age: json["age"],
         profilePicture: json["profile_picture"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "email": email,
         "name": name,
@@ -81,5 +82,5 @@ class Data {
         "gender": gender,
         "age": age,
         "profile_picture": profilePicture,
-    };
+      };
 }

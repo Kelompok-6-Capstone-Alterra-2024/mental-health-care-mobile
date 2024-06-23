@@ -139,7 +139,7 @@ class ConsultationView extends GetView<ConsultationController> {
                                 '${doctor.ratingPrecentage}%';
                             controller.locationDoctor.value = doctor.address;
                             controller.educationDoctor.value =
-                                doctor.bachelorAlmamater;
+                                doctor.masterAlmamater;
                           },
                         );
                       } else {

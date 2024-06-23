@@ -7,10 +7,14 @@ InputDecoration primary = InputDecoration(
     borderRadius: BorderRadius.circular(30),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide:  BorderSide(color: Neutral.dark1),
+    borderSide: BorderSide(color: Neutral.dark1),
     borderRadius: BorderRadius.circular(30),
   ),
   errorBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Error.subtle),
+    borderRadius: BorderRadius.circular(30),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
     borderSide: BorderSide(color: Error.subtle),
     borderRadius: BorderRadius.circular(30),
   ),
@@ -19,11 +23,11 @@ InputDecoration primary = InputDecoration(
 InputDecoration searchStyle = InputDecoration(
   isDense: true,
   enabledBorder: OutlineInputBorder(
-    borderSide:  BorderSide(color: Neutral.dark5, width: 2),
+    borderSide: BorderSide(color: Neutral.dark5, width: 2),
     borderRadius: BorderRadius.circular(20),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide:  BorderSide(color: Neutral.dark1, width: 2),
+    borderSide: BorderSide(color: Neutral.dark1, width: 2),
     borderRadius: BorderRadius.circular(20),
   ),
   errorBorder: OutlineInputBorder(
@@ -43,6 +47,10 @@ InputDecoration textBoxStyle = InputDecoration(
     borderRadius: BorderRadius.circular(8),
   ),
   errorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Error.subtle, width: 1),
+    borderRadius: BorderRadius.circular(8),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
     borderSide: const BorderSide(color: Error.subtle, width: 1),
     borderRadius: BorderRadius.circular(8),
   ),

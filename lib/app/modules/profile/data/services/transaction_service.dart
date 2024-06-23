@@ -2,13 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../data/api/api.dart';
 import '../models/transaction_model.dart';
 
 class TransactionService {
   final Dio _dio = Dio();
   final logger = Logger();
   final String token = GetStorage().read('token') ?? '';
-  final String baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
+  final String baseUrl = BaseUrl;
 
   TransactionService() {
     _dio.interceptors.add(LogInterceptor(

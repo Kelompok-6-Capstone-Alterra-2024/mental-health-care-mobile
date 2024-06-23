@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../data/api/api.dart';
 import '../models/send_otp_model.dart';
 
 class EmailOTPService extends GetxService {
   final Dio _dio = Dio();
   final logger = Logger();
-  final String baseUrl = 'https://dev-capstone.practiceproject.tech/v1/users';
+  final String baseUrl = BaseUrl;
   final storage = GetStorage();
   
   @override

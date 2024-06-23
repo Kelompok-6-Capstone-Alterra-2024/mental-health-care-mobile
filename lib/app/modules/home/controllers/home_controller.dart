@@ -31,10 +31,10 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
+    getProfile();
     updateDaysInWeek();
     loadMoods();
-    getProfile();
+    super.onInit();
   }
 
   void updateDaysInWeek() {

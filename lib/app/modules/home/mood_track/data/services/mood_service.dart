@@ -48,6 +48,7 @@ class MoodService extends GetxService {
             : null,
         'date': date
       });
+      print(file);
 
       final response = await dio.post(
         '$baseUrl/moods',

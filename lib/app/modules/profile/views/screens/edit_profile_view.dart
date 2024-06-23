@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,7 @@ import '../../../../../constant/constant.dart';
 import '../../controllers/profile_controller.dart';
 
 class EditProfileView extends GetView<ProfileController> {
-  EditProfileView({Key? key}) : super(key: key);
+  EditProfileView({super.key});
 
   String name = "";
   String bio = "";
@@ -58,11 +59,23 @@ class EditProfileView extends GetView<ProfileController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Gap(16),
-                  const Center(
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage:
-                          AssetImage('assets/images/dummy-profile.jpg'),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        controller.pickFile();
+                      },
+                      child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Neutral.light2,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            size: 50,
+                            Icons.camera_alt,
+                            color: Neutral.dark3,
+                          )),
                     ),
                   ),
                   const Gap(50),
