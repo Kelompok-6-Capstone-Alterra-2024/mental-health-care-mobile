@@ -7,10 +7,20 @@ import 'package:mindease/utils/global_components/main_button_without_padding.dar
 
 import '../../../../../constant/constant.dart';
 import '../../../../../utils/global_components/main_button.dart';
+import '../../controllers/change_password_controller.dart';
 import '../../controllers/profile_controller.dart';
+import '../../data/services/change_password_service.dart';
 
 class ChangePasswordView extends GetView<ProfileController> {
-  const ChangePasswordView({Key? key}) : super(key: key);
+  ChangePasswordView({Key? key}) : super(key: key);
+
+  final PasswordController passwordController =
+      Get.put(PasswordController(PasswordService()));
+
+  final TextEditingController oldPasswordController = TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +54,7 @@ class ChangePasswordView extends GetView<ProfileController> {
             Obx(
               () => CustomFormPassword(
                 title: 'Masukkan Kata Sandi Lama',
+                controller: oldPasswordController,
                 obsecure: controller.isVisibleOldPassword.value,
                 obsecureIcon: IconButton(
                   icon: SvgPicture.asset(
@@ -61,6 +72,7 @@ class ChangePasswordView extends GetView<ProfileController> {
             Obx(
               () => CustomFormPassword(
                 title: 'Masukkan Kata Sandi Baru',
+                controller: newPasswordController,
                 obsecure: controller.isVisible.value,
                 obsecureIcon: IconButton(
                   icon: SvgPicture.asset(
@@ -77,6 +89,7 @@ class ChangePasswordView extends GetView<ProfileController> {
             Obx(
               () => CustomFormPassword(
                 title: 'Konfirmasi Kata Sandi Baru',
+                controller: confirmPasswordController,
                 obsecure: controller.isVisible.value,
                 obsecureIcon: IconButton(
                   icon: SvgPicture.asset(
@@ -93,7 +106,19 @@ class ChangePasswordView extends GetView<ProfileController> {
             Spacer(),
             MainButtonWithoutPadding(
               label: 'Simpan Password',
-              onTap: () {},
+              onTap: () {
+                final oldPassword = oldPasswordController.text;
+                final newPassword = newPasswordController.text;
+                final confirmPassword = confirmPasswordController.text;
+                if (newPassword != confirmPassword) {
+                  passwordController.statusMessage.value =
+                      "New password and confirmation do not match";
+                } else {
+                  passwordController.resetPassword(
+                      oldPassword, newPassword, confirmPassword);
+                  Get.back();
+                }
+              },
             )
           ],
         ),

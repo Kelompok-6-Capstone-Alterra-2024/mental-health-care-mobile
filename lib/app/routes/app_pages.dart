@@ -49,6 +49,8 @@ import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/welcome_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/customer_services/bindings/customer_services_binding.dart';
+import '../modules/profile/customer_services/views/customer_services_view.dart';
 import '../modules/profile/poin/bindings/poin_binding.dart';
 import '../modules/profile/poin/views/poin_view.dart';
 import '../modules/profile/transaction/bindings/transaction_binding.dart';
@@ -194,17 +196,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
       children: [
         GetPage(
           name: _Paths.EDIT_PROFILE,
-          page: () => const EditProfileView(),
+          page: () => EditProfileView(),
           binding: ProfileBinding(),
         ),
         GetPage(
           name: _Paths.CHANGE_EMAIL,
-          page: () => const ChangeEmailView(),
+          page: () => ChangeEmailView(),
           binding: ProfileBinding(),
         ),
         GetPage(
@@ -214,20 +216,25 @@ class AppPages {
           children: [
             GetPage(
               name: _Paths.CHANGE_PASSWORD,
-              page: () => const ChangePasswordView(),
+              page: () => ChangePasswordView(),
               binding: ProfileBinding(),
             ),
           ],
         ),
         GetPage(
           name: _Paths.TRANSACTION,
-          page: () => const TransactionView(),
+          page: () => TransactionView(),
           binding: TransactionBinding(),
         ),
         GetPage(
           name: _Paths.POIN,
-          page: () => const PoinView(),
+          page: () => PoinView(),
           binding: PoinBinding(),
+        ),
+        GetPage(
+          name: _Paths.CUSTOMER_SERVICES,
+          page: () => const CustomerServicesView(),
+          binding: CustomerServicesBinding(),
         ),
       ],
     ),

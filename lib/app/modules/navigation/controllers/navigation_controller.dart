@@ -15,7 +15,7 @@ class NavigationController extends GetxController {
     const ForumView(),
     const SizedBox(),
     const MeditationView(),
-    const ProfileView(),
+     ProfileView(),
   ];
 
   final currentScreen = HomeView();

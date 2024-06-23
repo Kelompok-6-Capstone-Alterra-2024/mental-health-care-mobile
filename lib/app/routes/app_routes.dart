@@ -37,11 +37,15 @@ abstract class Routes {
   static const DETAILPSIKIATER = _Paths.CONSULTATION + _Paths.DETAILPSIKIATER;
   static const FORMCONSULTATION = _Paths.CONSULTATION + _Paths.FORMCONSULTATION;
   static const PAYMENT = _Paths.CONSULTATION + _Paths.PAYMENT;
+  static const PAYMENTSUCCESS = _Paths.CONSULTATION + _Paths.PAYMENTSUCCESS;
+  static const PAYMENTDECLINED = _Paths.CONSULTATION + _Paths.PAYMENTDECLINED;
+  static const PAYMENTPROCESSED = _Paths.CONSULTATION + _Paths.PAYMENTPROCESSED;
   static const CHATWITHDOCTOR =
       _Paths.CONSULTATION + _Paths.CHATLIST + _Paths.CHATWITHDOCTOR;
   static const DETAILNOTE = _Paths.CONSULTATION + _Paths.DETAILNOTE;
   static const RATINGDOCTOR = _Paths.CONSULTATION + _Paths.RATINGDOCTOR;
   static const CHATLIST = _Paths.CONSULTATION + _Paths.CHATLIST;
+  static const CUSTOMER_SERVICES = _Paths.PROFILE + _Paths.CUSTOMER_SERVICES;
   static const WISHLIST = _Paths.MEDITATION + _Paths.WISHLIST;
 }
 
@@ -85,4 +89,5 @@ abstract class _Paths {
   static const DETAILNOTE = '/detailnote';
   static const RATINGDOCTOR = '/ratingdoctor';
   static const CHATLIST = '/chatlist';
+  static const CUSTOMER_SERVICES = '/customer-services';
 }
