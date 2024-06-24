@@ -48,8 +48,9 @@ class AllRoomsChat extends StatelessWidget {
                       : info.doctor.imageUrl,
                   name: info.doctor.name,
                   specialist: info.doctor.specialist,
-                  isRejected: info.isRejected,
-                  status: statusRoomChat(info.status),
+                  isRejected: info.status,
+                  status:
+                      statusRoomChat(info.status, isRejected: info.isRejected),
                   bgBadgeStatus: bgBadgeStatus(info.status),
                   textBadgeStatus: textBadgeStatus(info.status),
                   endTime: info.endTime,

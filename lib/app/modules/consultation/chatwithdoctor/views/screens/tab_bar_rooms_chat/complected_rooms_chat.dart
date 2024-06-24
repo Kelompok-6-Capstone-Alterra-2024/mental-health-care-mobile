@@ -45,13 +45,15 @@ class ComplectedRoomsChat extends StatelessWidget {
                 final info = controller.infoList[index];
                 return RoomChatCard(
                   urlImage: info.doctor.imageUrl == 'http://gambar.com' ||
-                          info.doctor.imageUrl == 'ini link fotonya'|| info.doctor.imageUrl == ''
+                          info.doctor.imageUrl == 'ini link fotonya' ||
+                          info.doctor.imageUrl == ''
                       ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
                       : info.doctor.imageUrl,
                   name: info.doctor.name,
                   specialist: info.doctor.specialist,
-                  isRejected: info.isRejected,
-                  status: statusRoomChat(info.status),
+                  isRejected: info.status,
+                  status:
+                      statusRoomChat(info.status, isRejected: info.isRejected),
                   bgBadgeStatus: bgBadgeStatus(info.status),
                   textBadgeStatus: textBadgeStatus(info.status),
                   endTime: info.endTime,

@@ -93,18 +93,23 @@ class ChatwithdoctorController extends GetxController
       case 'active':
         return () {
           Get.toNamed(Routes.CHATWITHDOCTOR);
-        };
-      case 'process':
-        return () {
-          Get.toNamed(
-            Routes.CHATWITHDOCTOR,
-          );
-          changeStatusChat('completed');
           setIdRoomChat(roomChatId!);
           loadMessages(roomChatId); //get message chat from doctor
           // startPolling(roomChatId); //start polling message chat
           setEndTime(endTime!); //set end time chat for consultation note
           print(roomChatId);
+        };
+      case 'process':
+        return () {
+          // Get.toNamed(
+          //   Routes.CHATWITHDOCTOR,
+          // );
+          // changeStatusChat('completed');
+          // setIdRoomChat(roomChatId!);
+          // loadMessages(roomChatId); //get message chat from doctor
+          // // startPolling(roomChatId); //start polling message chat
+          // setEndTime(endTime!); //set end time chat for consultation note
+          // print(roomChatId);
         };
       case 'completed':
         //jadi jika statusnya completed dan isRejected false maka akan diarahkan ke chat with doctor
@@ -117,10 +122,10 @@ class ChatwithdoctorController extends GetxController
             );
             changeStatusChat('completed');
             setIdRoomChat(roomChatId!);
-            loadMessages(roomChatId); //get message chat from doctor
-            // startPolling(roomChatId); //start polling message chat
-            setEndTime(endTime!); //set end time chat for consultation note
-            print(roomChatId);
+            loadMessages(roomChatId);
+
+            setEndTime(endTime!);
+            // print(roomChatId);
           };
         } else {
           return () {};

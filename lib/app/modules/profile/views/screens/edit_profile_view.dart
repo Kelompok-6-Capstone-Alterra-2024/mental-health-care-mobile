@@ -85,11 +85,6 @@ class EditProfileView extends GetView<ProfileController> {
                     hinttext: controller.profile.value.data.username,
                   ),
                   CustomFormProfile(
-                    title: 'Email',
-                    controller: controller.emailController,
-                    hinttext: controller.profile.value.data.email,
-                  ),
-                  CustomFormProfile(
                     title: 'Nomor Telepon',
                     controller: controller.phoneNumberController,
                     hinttext: controller.profile.value.data.phoneNumber,

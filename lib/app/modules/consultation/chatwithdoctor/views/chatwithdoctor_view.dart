@@ -28,9 +28,11 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
             controller.onClose();
           },
         ),
-        title: Text(
-          'Dr. Andy Sp.KJ',
-          style: medium.copyWith(fontSize: 16, color: Primary.mainColor),
+        title: Obx(
+          () => Text(
+            controller.doctorName.value,
+            style: medium.copyWith(fontSize: 16, color: Primary.darker),
+          ),
         ),
         centerTitle: true,
       ),
@@ -71,8 +73,8 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
                         time: DateFormat.Hm().format(
                             DateTime.parse(controller.endChatTime.value)),
                         onTap: () async {
-                          // await controller.getConsultationNoteData(
-                          //     controller.idRoomChat.value);
+                          await controller.getConsultationNoteData(
+                              controller.idRoomChat.value);
                           Get.toNamed(Routes.DETAILNOTE);
                         },
                       )
@@ -81,7 +83,7 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
                 : const SizedBox(),
           ),
           Obx(() {
-            if (controller.statusChat.value == 'complete') {
+            if (controller.statusChat.value == 'completed') {
               return const SizedBox();
             } else {
               return Container(

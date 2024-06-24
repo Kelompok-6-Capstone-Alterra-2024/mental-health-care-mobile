@@ -9,7 +9,7 @@ import '../../../../../../utils/global_components/book_button.dart';
 class RoomChatCard extends StatelessWidget {
   final String name;
   final String specialist;
-  final bool isRejected;
+  final String isRejected;
   final String status;
   final Color bgBadgeStatus;
   final Color textBadgeStatus;
@@ -129,7 +129,7 @@ class RoomChatCard extends StatelessWidget {
             width: double.infinity,
             height: 142,
             decoration: BoxDecoration(
-              color: isRejected
+              color: isRejected == 'completed'
                   ? Neutral.light4.withOpacity(0.5)
                   : Neutral.transparent, //Neutral.light4..withOpacity(0.5)
               borderRadius: BorderRadius.circular(8),

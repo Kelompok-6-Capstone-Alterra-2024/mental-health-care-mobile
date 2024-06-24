@@ -82,7 +82,7 @@ class PoinView extends GetView<PoinController> {
                   ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 10,
+                    itemCount: 0,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: const EdgeInsets.only(bottom: 24),
