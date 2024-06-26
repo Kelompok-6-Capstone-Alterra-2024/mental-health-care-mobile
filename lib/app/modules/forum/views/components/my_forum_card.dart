@@ -52,9 +52,15 @@ class MyForumCard extends StatelessWidget {
             const Gap(10),
             Row(
               children: [
-                Text(
-                  title,
-                  style: semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
+                Container(
+                  width: 200,
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style:
+                        semiBold.copyWith(fontSize: 16, color: Neutral.dark1),
+                  ),
                 ),
                 const Gap(10),
                 Stack(

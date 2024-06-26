@@ -76,10 +76,14 @@ class DetailForumView extends GetView<DetailForumController> {
                               ),
                             ),
                             const Gap(20),
-                            Text(
-                              forum.name,
-                              style: semiBold.copyWith(
-                                  fontSize: 24, color: Neutral.dark1),
+                            Expanded(
+                              child: Text(
+                                forum.name,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: semiBold.copyWith(
+                                    fontSize: 24, color: Neutral.dark1),
+                              ),
                             ),
                           ],
                         ),
