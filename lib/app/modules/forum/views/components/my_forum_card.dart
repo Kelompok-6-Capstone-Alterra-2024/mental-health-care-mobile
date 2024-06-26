@@ -22,6 +22,7 @@ class MyForumCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
           color: Neutral.light4,
           borderRadius: BorderRadius.circular(20),

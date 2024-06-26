@@ -33,192 +33,194 @@ class DetailConsultationNoteView extends GetView<ChatwithdoctorController> {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 63,
-                  width: 63,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    image: DecorationImage(
-                      image: NetworkImage(controller.doctorImgUrl.value == ''
-                          ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
-                          : controller.doctorImgUrl.value),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 15),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            controller.doctorName.value,
-                            style: medium.copyWith(
-                                fontSize: 16, color: Neutral.dark1),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              // Get.toNamed(Routes.DETAILPSIKIATER);
-                            },
-                            borderRadius: BorderRadius.circular(100),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Primary.mainColor),
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 3,
-                              ),
-                              child: Text(
-                                'Lihat Profile',
-                                style: medium.copyWith(
-                                  fontSize: 12,
-                                  color: Primary.mainColor,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      Text(
-                        controller.doctorSpecialist.value,
-                        style: regular.copyWith(
-                            fontSize: 12, color: Neutral.dark2),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            const Gap(32),
-            SizedBox(
-              width: 405,
-              height: 236,
-              child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Rekomendasi Layanan',
-                    style: semiBold.copyWith(
-                      fontSize: 16,
-                      color: Primary.mainColor,
+                  Container(
+                    height: 63,
+                    width: 63,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      image: DecorationImage(
+                        image: NetworkImage(controller.doctorImgUrl.value == ''
+                            ? 'https://wallpapers.com/images/hd/doctor-pictures-l5y1qs2998u7rf0x.jpg'
+                            : controller.doctorImgUrl.value),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                  const Gap(8),
+                  const SizedBox(width: 15),
                   Expanded(
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        OtherServiceCards(
-                          image: 'assets/images/mood_profile.png',
-                          featureName: 'Mood Tracker',
-                          title: controller.moodTrack.value,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              controller.doctorName.value,
+                              style: medium.copyWith(
+                                  fontSize: 16, color: Neutral.dark1),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                // Get.toNamed(Routes.DETAILPSIKIATER);
+                              },
+                              borderRadius: BorderRadius.circular(100),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Primary.mainColor),
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 3,
+                                ),
+                                child: Text(
+                                  'Lihat Profile',
+                                  style: medium.copyWith(
+                                    fontSize: 12,
+                                    color: Primary.mainColor,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                        OtherServiceCards(
-                          image: 'assets/images/meditasi_profile.png',
-                          featureName: 'Meditasi Audio',
-                          title: controller.musicTitle.value,
-                        ),
-                        OtherServiceCards(
-                          image: 'assets/images/forum_profile.png',
-                          featureName: 'Forum dan Komunitas',
-                          title: controller.forumName.value,
+                        Text(
+                          controller.doctorSpecialist.value,
+                          style: regular.copyWith(
+                              fontSize: 12, color: Neutral.dark2),
                         ),
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
-            ),
-            const Gap(32),
-            Text(
-              'Rangkuman Konsultasi',
-              style: semiBold.copyWith(
-                fontSize: 16,
-                color: Primary.mainColor,
+              const Gap(32),
+              SizedBox(
+                width: 405,
+                height: 236,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Rekomendasi Layanan',
+                      style: semiBold.copyWith(
+                        fontSize: 16,
+                        color: Primary.mainColor,
+                      ),
+                    ),
+                    const Gap(8),
+                    Expanded(
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          OtherServiceCards(
+                            image: 'assets/images/mood_profile.png',
+                            featureName: 'Mood Tracker',
+                            title: controller.moodTrack.value,
+                          ),
+                          OtherServiceCards(
+                            image: 'assets/images/meditasi_profile.png',
+                            featureName: 'Meditasi Audio',
+                            title: controller.musicTitle.value,
+                          ),
+                          OtherServiceCards(
+                            image: 'assets/images/forum_profile.png',
+                            featureName: 'Forum dan Komunitas',
+                            title: controller.forumName.value,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const Gap(16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  controller.firstPoint.value,
-                  style: semiBold.copyWith(
-                    fontSize: 16,
-                    color: Neutral.dark1,
-                  ),
+              const Gap(32),
+              Text(
+                'Rangkuman Konsultasi',
+                style: semiBold.copyWith(
+                  fontSize: 16,
+                  color: Primary.mainColor,
                 ),
-                Text(
-                  'Poin Diskusi Utama',
-                  style: regular.copyWith(
-                    fontSize: 12,
-                    color: Neutral.dark3,
+              ),
+              const Gap(16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.firstPoint.value,
+                    style: semiBold.copyWith(
+                      fontSize: 16,
+                      color: Neutral.dark1,
+                    ),
                   ),
-                ),
-                const Divider(),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  controller.secondPoint.value,
-                  style: semiBold.copyWith(
-                    fontSize: 16,
-                    color: Neutral.dark1,
+                  Text(
+                    'Poin Diskusi Utama',
+                    style: regular.copyWith(
+                      fontSize: 12,
+                      color: Neutral.dark3,
+                    ),
                   ),
-                ),
-                Text(
-                  'Langkah Selanjutnya',
-                  style: regular.copyWith(
-                    fontSize: 12,
-                    color: Neutral.dark3,
+                  const Divider(),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.secondPoint.value,
+                    style: semiBold.copyWith(
+                      fontSize: 16,
+                      color: Neutral.dark1,
+                    ),
                   ),
-                ),
-                const Divider(),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  controller.thirdPoint.value,
-                  style: semiBold.copyWith(
-                    fontSize: 16,
-                    color: Neutral.dark1,
+                  Text(
+                    'Langkah Selanjutnya',
+                    style: regular.copyWith(
+                      fontSize: 12,
+                      color: Neutral.dark3,
+                    ),
                   ),
-                ),
-                Text(
-                  'Tambahan',
-                  style: regular.copyWith(
-                    fontSize: 12,
-                    color: Neutral.dark3,
+                  const Divider(),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.thirdPoint.value,
+                    style: semiBold.copyWith(
+                      fontSize: 16,
+                      color: Neutral.dark1,
+                    ),
                   ),
-                ),
-                const Divider(),
-              ],
-            ),
-            const Gap(32),
-            MainButtonWithoutPadding(
-              label: 'Tambahakan Review',
-              onTap: () {
-                Get.toNamed(Routes.RATINGDOCTOR);
-              },
-            ),
-          ],
+                  Text(
+                    'Tambahan',
+                    style: regular.copyWith(
+                      fontSize: 12,
+                      color: Neutral.dark3,
+                    ),
+                  ),
+                  const Divider(),
+                ],
+              ),
+              const Gap(32),
+              MainButtonWithoutPadding(
+                label: 'Tambahakan Review',
+                onTap: () {
+                  Get.toNamed(Routes.RATINGDOCTOR);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -137,6 +137,7 @@ class ChatwithdoctorController extends GetxController
 
   void changeStatusChat(String status) {
     statusChat.value = status;
+    
   }
 
   void setIdRoomChat(int roomChatId) {
@@ -159,6 +160,7 @@ class ChatwithdoctorController extends GetxController
     // scrollController.dispose();
     stopLoadingMessages();
     lastMessageId.value = 0;
+    statusChat.value = '';
     super.onClose();
   }
 }

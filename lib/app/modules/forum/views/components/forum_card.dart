@@ -23,6 +23,7 @@ class ForumCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+      margin: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Neutral.light4,
         borderRadius: BorderRadius.circular(20),

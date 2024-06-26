@@ -26,6 +26,7 @@ class ChatwithdoctorView extends GetView<ChatwithdoctorController> {
             Get.back();
             controller.allMessages.clear();
             controller.onClose();
+            print(controller.statusChat.value);
           },
         ),
         title: Obx(
